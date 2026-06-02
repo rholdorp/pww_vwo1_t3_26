@@ -1,0 +1,13 @@
+{
+  "name": "@pww/trainer-engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generieke trainer-engines per categorie (Cat 1 vocab, Cat 2 wiskunde, Cat 3 begrip, Cat 4 tekst). Zie SPEC.md §5.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "echo 'TODO: tsc' && exit 0",
+    "lint": "echo 'TODO: eslint' && exit 0",
+    "test": "echo 'TODO: vitest' && exit 0"
+  }
+}

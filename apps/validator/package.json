@@ -1,0 +1,14 @@
+{
+  "name": "@pww/validator",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "CLI-validator: vergelijkt trainer-content met raw screenshots. Zie SPEC.md §6.",
+  "bin": {
+    "pww-validate": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "lint": "echo 'TODO: eslint' && exit 0"
+  }
+}

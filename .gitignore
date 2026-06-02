@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# build output
+dist/
+build/
+*.tsbuildinfo
+.vite/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+.firebase/
+firebase-debug.log
+*-debug.log
+service-account*.json
+
+# editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# coverage / test artefacts
+coverage/
+.nyc_output/
+
+# validator output (regenerated, niet committen tenzij expliciet)
+apps/validator/reports/
+
+# local progress data (productie staat in Firestore)
+progress/local/

@@ -1,0 +1,13 @@
+{
+  "name": "@pww/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Gedeelde types en utils tussen apps en packages.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "echo 'TODO: tsc' && exit 0",
+    "lint": "echo 'TODO: eslint' && exit 0",
+    "test": "echo 'TODO: vitest' && exit 0"
+  }
+}

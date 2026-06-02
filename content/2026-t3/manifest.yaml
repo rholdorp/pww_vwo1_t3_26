@@ -1,0 +1,69 @@
+editie: "2026-t3"
+beschrijving: "Proefwerkweek trimester 3, klas 1 Atheneum, juni/juli 2026"
+
+leerperiode:
+  start: 2026-06-08
+  eerste_ronde_einde: 2026-06-21
+  herhaal_week_start: 2026-06-22
+  herhaal_week_einde: 2026-06-26
+
+pww:
+  - datum: 2026-06-29
+    dag: maandag
+    vakken: [engels]
+  - datum: 2026-06-30
+    dag: dinsdag
+    vakken: [biologie]
+  - datum: 2026-07-01
+    dag: woensdag
+    vakken: [nederlands]
+  - datum: 2026-07-02
+    dag: donderdag
+    vakken: [wiskunde, aardrijkskunde]
+  - datum: 2026-07-03
+    dag: vrijdag
+    vakken: [frans, geschiedenis]
+
+vakken:
+  wiskunde:
+    primaire_categorie: 2
+    secundaire_categorie: null
+    moeilijkheid: 3
+    methode: "Getal & Ruimte"
+    scope: TBD # hoofdstukken/paragrafen — Ralph vult later
+  frans:
+    primaire_categorie: 1
+    secundaire_categorie: 4
+    moeilijkheid: 3
+    methode: TBD
+    scope: TBD
+  nederlands:
+    primaire_categorie: 4
+    secundaire_categorie: 1
+    moeilijkheid: 3
+    methode: TBD
+    scope: TBD
+  engels:
+    primaire_categorie: 1
+    secundaire_categorie: 4
+    moeilijkheid: 2
+    methode: TBD
+    scope: TBD
+  geschiedenis:
+    primaire_categorie: 3
+    secundaire_categorie: 1
+    moeilijkheid: 2
+    methode: TBD
+    scope: TBD
+  biologie:
+    primaire_categorie: 3
+    secundaire_categorie: 1
+    moeilijkheid: 1
+    methode: TBD
+    scope: TBD
+  aardrijkskunde:
+    primaire_categorie: 3
+    secundaire_categorie: 1
+    moeilijkheid: 1
+    methode: TBD
+    scope: TBD

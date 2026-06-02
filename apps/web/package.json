@@ -1,0 +1,13 @@
+{
+  "name": "@pww/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Webapp (React + Vite + Tailwind, GitHub Pages target). Zie SPEC.md §10–11.",
+  "scripts": {
+    "dev": "echo 'TODO: vite' && exit 0",
+    "build": "echo 'TODO: vite build' && exit 0",
+    "preview": "echo 'TODO: vite preview' && exit 0",
+    "lint": "echo 'TODO: eslint' && exit 0"
+  }
+}

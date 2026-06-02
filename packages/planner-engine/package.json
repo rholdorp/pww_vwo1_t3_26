@@ -1,0 +1,13 @@
+{
+  "name": "@pww/planner-engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Planning-algoritme: backward scheduling vanaf PWW, sessieblokken, moeilijkheidsgewichten. Zie SPEC.md §7.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "echo 'TODO: tsc' && exit 0",
+    "lint": "echo 'TODO: eslint' && exit 0",
+    "test": "echo 'TODO: vitest' && exit 0"
+  }
+}
