@@ -93,8 +93,40 @@ Per vak verschilt het extractieformaat:
 Vier generieke trainer-engines, elke met eigen leeralgoritme. Elk vak gebruikt één of meer engines.
 
 ### Categorie 1 — Vocabulaire & feitenkennis
-**Methode:** Leitner spaced repetition (5 bakjes), beide richtingen, korte sessies van ~15 min.
-**Logica:** fout → bakje 1, goed → één bakje omhoog, bakjes 2..5 op intervallen van 1/3/7/14 dagen. Aan einde sessie: kleine eindronde van fout-beantwoorde kaarten.
+**Methode:** **Actief intypen** van het antwoord (geen "weet ik / wist ik niet"-knop). Combinatie van getypte productie + Leitner spaced repetition (5 bakjes), beide richtingen, korte sessies van ~15 min.
+
+**Stap-voor-stap interactie:**
+1. Vraag op scherm: bv. *"Vertaal: huis"* (NL→FR) of *"What does 'maison' mean?"* (FR→NL).
+2. Stijn typt het antwoord in een tekstveld en drukt Enter.
+3. Engine vergelijkt (zie normalisatie hieronder) en geeft directe feedback:
+   - **Goed**: groen vinkje + door naar volgende item.
+   - **Fout**: rood kruis + correcte antwoord zichtbaar + 2 sec pauze voor mentale registratie.
+   - **Bijna goed** (1–2 tekens verschil bij niet-strikte modus): oranje "bijna! je had X getypt, het is Y" — geldt als fout maar minder bestraffend visueel.
+
+**Snelle herhaling van fouten (binnen sessie):**
+- Goed antwoord → item uit huidige queue, bakje +1.
+- Fout antwoord → item terug naar bakje 1 én **opnieuw aan de beurt na 3 andere items** in dezelfde sessie (i.p.v. pas in de eindronde).
+- Als hetzelfde item 2× in 1 sessie fout gaat: extra hint-modus (eerste letter / aantal letters) bij volgende beurt.
+- Eindronde sessie: alle items die in deze sessie nog steeds fout staan komen terug tot ze 1× goed zijn.
+
+**Leitner-intervallen:**
+| Bakje | Frequentie |
+|---|---|
+| 1 | Elke sessie |
+| 2 | Elke 2 dagen |
+| 3 | Elke 4 dagen |
+| 4 | Elke 7 dagen |
+| 5 | Elke 14 dagen (vrijwel "klaar") |
+
+**Normalisatie / vergelijking** (per vak configureerbaar):
+- Altijd: trim whitespace, case-insensitive (`Maison` = `maison`).
+- Frans: **accenten strikt vereist** (`été` ≠ `ete`) — maar typo's van 1 teken triggeren "bijna goed".
+- Engels/topografie/jaartallen: accenten optioneel, getallen exact.
+- Begrippen (bio/AK/gesch): toleranter — losse leestekens negeren, lidwoorden optioneel (`de cel` = `cel`).
+- Per vraag mag een lijst `acceptedAnswers: [...]` staan voor synoniemen.
+
+**Mastery-score per vak/onderwerp:** percentage items in bakje 3+, ondergrens per item: minstens 1× goed beantwoord in laatste sessie.
+
 **Gebruikt door:** Frans (woordjes/vervoegingen), Engels (woordjes), topografie (AK), vaktermen (bio), jaartallen (gesch).
 
 ### Categorie 2 — Procedureel oefenen (wiskunde)
@@ -246,21 +278,63 @@ Activiteit deze week is primair Cat. 1 + Cat. 2 (sommen-automatisering). Cat. 3/
 4. **Verdeel over dagen** met spaced repetition principe: elk onderwerp komt minimaal 3× terug verspreid over de periode.
 5. **Dagblok-opbouw**: max 3 blokken per dag, afwisselend vak/categorie om sleur te voorkomen. Pauzes (5 min) tussen blokken, na 2 blokken een langere pauze (15 min).
 
-### Output: dagweergave
+### Output: dagweergave (Vandaag-scherm — app opent hierop)
+
 ```
-Dinsdag 10 juni — 1u30 studiebudget
-┌─────────────────────────────────────────┐
-│ 18:30  Frans woordjes (15 min)    [cat1]│  ✓ klaar
-│ 18:50  Wiskunde §3.2 (30 min)     [cat2]│  ▶ bezig
-│ 19:25  PAUZE                            │
-│ 19:40  Biologie cellen (25 min)   [cat3]│  ○
-└─────────────────────────────────────────┘
+Dinsdag 10 juni — 1u15 PWW + 30 min HW
+┌────────────────────────────────────────────────┐
+│ 17:00  Huiswerk (30 min)                  ○   │
+│ 17:30  Frans woordjes Hfst 5 (15 min) [cat1]   │
+│        ▶ START                            ○    │
+│ 17:45  ── eten ──                              │
+│ 20:00  Wiskunde §3.2 lin. verg. (25 min) [cat2]│
+│        ▶ START                            ✓    │
+│ 20:30  Biologie celdeling (25 min)       [cat3]│
+│        ▶ START                            ▶    │
+└────────────────────────────────────────────────┘
+   ↑ tap "START" → opent trainer met juiste content geladen
 ```
 
-### Voortgang
-- Per blok: aangevangen / afgerond / overgeslagen.
-- Per onderwerp: mastery-score (uit trainer-engine) als percentage of bakje-verdeling.
-- Per vak: "% klaar voor PWW" als geaggregeerde mastery.
+### Blok-data-model
+
+Elke planner-blok is een object met daarin alle informatie die de trainer nodig heeft om direct te beginnen:
+
+```typescript
+type Blok = {
+  id: string;                    // bv. "2026-06-10-blok-2"
+  datum: string;                 // ISO date
+  starttijd: string;             // "17:30"
+  duurMinuten: 15 | 25 | 30;
+  type: "pww" | "huiswerk" | "pauze";
+  vak?: Vak;                     // bij pww
+  categorie?: 1 | 2 | 3 | 4;     // bij pww — bepaalt welke trainer-engine
+  onderwerpen?: string[];        // filter op trainer-content, bv. ["hfst5-woordjes"]
+  trainerDeeplink?: string;      // bv. "/trainer/frans/cat1?onderwerp=hfst5-woordjes&blok=..."
+  status: "open" | "bezig" | "klaar" | "overgeslagen";
+};
+```
+
+### Direct linken: planner → trainer
+
+- **App opent default op `/vandaag`** (geen tussenstap, geen menu).
+- Elk blok heeft een prominente **START-knop** die naar `trainerDeeplink` navigeert.
+- De trainer ontvangt blok-id en filtert de content-pool meteen op de geconfigureerde `onderwerpen` — geen "kies hoofdstuk"-scherm tussen.
+- Trainer kent `duurMinuten` en toont een **subtiel timer-balkje**. Bij 90% van de tijd → "Nog ~3 min, ronde afsluiten?". Bij 100% → afronding-modal met sessie-resultaat en knop "terug naar Vandaag".
+- Bij terugkeer naar `/vandaag` is het blok automatisch op `klaar` (mastery vastgelegd op blok-id) en zit Stijn klaar voor het volgende blok.
+
+### Voortgang (`/voortgang` — apart scherm)
+
+- Per vak een rij: **% klaar voor PWW** (geaggregeerde mastery) + sparkline van laatste 7 dagen.
+- Per onderwerp: bakje-verdeling (Cat. 1) of mastery-percentage (Cat. 2/3/4), rood/oranje/groen.
+- Per blok-historie: wanneer gedaan, hoeveel items, score.
+- Filter "toon alleen rood" → snel zien wat extra aandacht nodig heeft.
+
+### Navigatie
+
+- **Bottom-nav (mobile) / sidebar (desktop)** met 3 items:
+  1. **Vandaag** (default)
+  2. **Voortgang**
+  3. **Mijn instellingen** (rooster, voorkeuren, beloningen — voor Ralph: admin-tab)
 
 ## 8. Beloningssysteem & gamification
 
@@ -328,10 +402,16 @@ progress/<user-id>/
 ## 10. UI / UX (P7)
 
 - **Mobile-first** maar volledig responsive richting desktop.
-- **Twee primaire schermen:**
-  1. **Vandaag** — dagweergave met blokken, één tap om te starten.
+- **App opent default op `/vandaag`** — geen tussenstap, geen menu. Doel: van scherm-aan tot oefenen in 1 tap.
+- **Drie primaire schermen** (bottom-nav op mobile, sidebar op desktop):
+  1. **Vandaag** (default) — dagweergave met blokken, prominente START-knop per blok die direct in de juiste trainer + content opent (zie §7).
   2. **Voortgang** — per vak een rij, % klaar, welke onderwerpen rood/oranje/groen.
-- **Trainerscherm:** groot, één vraag/kaart per keer, swipe/tap voor "weet ik" of "moeite mee".
+  3. **Instellingen** — rooster, voorkeuren, beloningen.
+- **Trainerscherm:**
+  - Cat. 1: tekstveld voor typen, grote feedback (groen/rood/oranje), hint-modus bij herhaalde fouten.
+  - Cat. 2: opgave + werkvlak + invulveld; bij fout uitleg + 2 vergelijkbare sommen.
+  - Cat. 3/4: textarea voor open antwoord, daarna AI-rubric-feedback óf flashcard-fallback (zie §11).
+  - Subtiel timer-balkje per sessie (geen wegtellende klok in beeld — alleen markering bij 90% en einde).
 - **Lage cognitive load:** weinig kleuren, duidelijke knoppen, geen afleidende notificaties.
 - **Beloning zichtbaar maar subtiel:** punten-balkje op Vandaag-scherm, niet dominant.
 - **Tech:** React + Vite + Tailwind + shadcn/ui (zie §11).
