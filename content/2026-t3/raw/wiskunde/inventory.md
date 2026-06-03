@@ -93,3 +93,22 @@ Voor §8.1 (Herleiden) één onderdeel zichtbaar:
 - **§8.5a** — Machten vermenigvuldigen (Theorie A, `a^m · a^n = a^(m+n)`)
 - **§8.5b** — Som en verschil van machten (Theorie B, `a^m + a^n` ≠ `a^(m+n)`)
 - **§8.5c** — Delen van machten (Theorie C, `a^m / a^n = a^(m-n)`)
+
+---
+
+## Batch 4 (foto's 31-40, originele timestamps 14:18:33 – 14:19:37)
+
+H8-afsluiting: gemengde opgaven, samenvatting, diagnostische toets, herhaling. Geen nieuwe theorie of onderdelen — wel veel extra oefenopgaven gekoppeld aan de bestaande §8.1-§8.5 onderdelen.
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h08-p132.jpg` | 132 | Gemengde opgaven | praktijk | Mixed opg ~84+, alle paragrafen door elkaar + fig 8.17 |
+| `wiskunde-h08-p133.jpg` | 133 | Gemengde opgaven | praktijk | Vervolg gemengde opg + panda-illustratie |
+| `wiskunde-h08-p134.jpg` | 134 | Samenvatting | samenvatting | Samenvatting §8.1 Herleiden + §8.2 Haakjes wegwerken + §8.3 Machten |
+| `wiskunde-h08-p135.jpg` | 135 | Samenvatting | samenvatting | Samenvatting §8.4 Wetenschappelijke notatie + §8.5 Machten en letters |
+| `wiskunde-h08-p136.jpg` | 136 | Diagnostische toets | toets | Diagn. toets §8.1 + §8.2 (+ mogelijk §8.3) |
+| `wiskunde-h08-p137.jpg` | 137 | Diagnostische toets | toets | Diagn. toets §8.4 + §8.5 |
+| `wiskunde-h08-p138.jpg` | 138 | Herhaling | opgaven | Herhaling §8.1 Herleiden + §8.2 Haakjes wegwerken |
+| `wiskunde-h08-p139.jpg` | 139 | Herhaling | opgaven | Herhaling §8.3 Machten + fig 8.19 |
+| `wiskunde-h08-p140.jpg` | 140 | Herhaling | opgaven | Herhaling §8.4 Wetenschappelijke notatie |
+| `wiskunde-h08-p141.jpg` | 141 | Herhaling | opgaven | Herhaling §8.5 Machten en letters |
