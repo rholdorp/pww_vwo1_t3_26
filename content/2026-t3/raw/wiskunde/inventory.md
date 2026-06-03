@@ -69,3 +69,27 @@ Voor §8.1 (Herleiden) één onderdeel zichtbaar:
 §8.4 (Wetenschappelijke notatie) — eerste twee theorieën zichtbaar:
 - **§8.4a** — Machten berekenen met rekenmachine (Theorie A)
 - **§8.4b** — Wetenschappelijke notatie schrijven/lezen (Theorie B)
+
+---
+
+## Batch 3 (foto's 21-30, originele timestamps 14:17:26 – 14:18:24)
+
+| Bestand | Pagina | Paragraaf | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h08-p123.jpg` | 123 | §8.4 | opgaven | §8.4 Theorie B vervolg — opg "schrijf in wetenschappelijke notatie" |
+| `wiskunde-h08-p124.jpg` | 124 | §8.4 | opgaven | §8.4 opg vervolg — diverse omzettingen + Check |
+| `wiskunde-h08-p125.jpg` | 125 | §8.5 | theorie | §8.5 "Machten en letters" — Theorie A "Machten vermenigvuldigen" |
+| `wiskunde-h08-p126.jpg` | 126 | §8.5 | opgaven | §8.5 vervolg — voorbeeld + opg (machten vermenigvuldigen) |
+| `wiskunde-h08-p127.jpg` | 127 | §8.5 | theorie+opgaven | §8.5 — Theorie B "Som en verschil van machten" + opg |
+| `wiskunde-h08-p128.jpg` | 128 | §8.5 | opgaven | §8.5 opg — "Let op het verschil tussen vermenigvuldigen en optellen" |
+| `wiskunde-h08-p129.jpg` | 129 | §8.5 | opgaven | §8.5 — Check-blok + opg (controle vermenigvuldigen/optellen machten) |
+| `wiskunde-h08-p130.jpg` | 130 | §8.5 | theorie+opgaven | §8.5 — Theorie C "Het delen van machten" + voorbeeld + opg |
+| `wiskunde-h08-p130-2.jpg` | 130 | §8.5 | theorie+opgaven | **duplicaat van p130** (2s later geschoten) |
+| `wiskunde-h08-p131.jpg` | 131 | §8.5 | opgaven | §8.5 vervolg delen van machten — opg + Check-tabel |
+
+### Onderdelen uit batch 3
+
+§8.5 (Machten en letters):
+- **§8.5a** — Machten vermenigvuldigen (Theorie A, `a^m · a^n = a^(m+n)`)
+- **§8.5b** — Som en verschil van machten (Theorie B, `a^m + a^n` ≠ `a^(m+n)`)
+- **§8.5c** — Delen van machten (Theorie C, `a^m / a^n = a^(m-n)`)
