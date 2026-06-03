@@ -76,36 +76,73 @@ pww_vwo1_t3_26/
 
 ## 4. Content pipeline
 
+### Doel
+
+Eén herbruikbaar proces dat ruwe screenshots → goedgekeurde trainer-content omzet, met ingebouwde quality stack en één menselijke review-stap vóór deploy. Volgend jaar = nieuwe folder, zelfde proces, **geen code wijzigen**.
+
+### Overzicht — 6 stages
+
 ```
-[fysiek boek]
-     │  foto/screenshot
-     ▼
-content/2026-t3/raw/<vak>/hoofdstuk-X-pagina-Y.jpg
-     │  vision-extractie + (voor Cat. 3) samenvatting-generatie
-     ▼
-content/2026-t3/trainers/<vak>/<type>.json | <onderwerp>.md
-     │  validatie (apps/validator)
-     ▼
-[goedgekeurde trainer-content] ──► trainer in webapp
+Stage 0  Capture       Foto/scan → content/<editie>/raw/<vak>/...
+            │           (handmatig)
+            ▼
+Stage 1  Classify      Vision: vak (cross-check folder), cat 1-4, content-type
+            │           confidence < 0.85 → review-queue
+            ▼
+Stage 2  Extract       Multi-pass extractie (Pass A + Pass B + self-critique)
+            │           - Cat. 3: ook samenvatting-generatie
+            │           - Wiskunde: math-solver met confidence (Stage 2.5)
+            ▼
+Stage 3  Convert       Map naar canonieke trainer-formats, stable IDs, dedupe
+            │
+            ▼
+Stage 4  Validate      Bidirectional raw ↔ trainer check (zie §6)
+            │
+            ▼
+Stage 5  Review        Mens-in-the-loop: review-queue (markdown + CLI)
+            │           verplicht leeg vóór Stage 6 (voor strikte content-types)
+            ▼
+Stage 6  Deploy        Approved content → Firestore (atomic per vak)
 ```
 
-> Voor Cat. 3-vakken (bio/AK/gesch) genereert de pipeline naast de vragenset óók een `samenvatting/<onderwerp>.md` per hoofdstuk/paragraaf. De validator checkt dat alle kernbegrippen uit de raw aanwezig zijn en niets verzonnen.
+Stages 0-4 zijn (semi-)geautomatiseerd; Stage 5 is verplicht-handmatig vóór Stage 6.
 
-Per vak verschilt het extractieformaat:
+### Stage 0 — Capture
 
-- **Frans/Engels**: `{ "nl": "huis", "fr": "maison", "context": "...", "hoofdstuk": 5 }`
-- **Wiskunde** (Getal & Ruimte): `{ "hoofdstuk": "3", "paragraaf": "3.2", "onderdeel": "3.2a", "isSynthese": false, "opgavenummer": "12a", "vraag": "...", "antwoord": "...", "acceptedForms": ["x=5","5"], "uitleg_md": "...", "type": "lineaire vergelijking", "bron": "raw/wiskunde/h3-p84.jpg" }`
-  - Getal & Ruimte structuur: hoofdstuk → paragraaf → **onderdeel** (concept-cluster, bv. `3.2a`) → opgaven. Synthese-onderdelen worden expliciet gemarkeerd zodat de trainer ze pas vrijspeelt na de individuele onderdelen.
-  - Validator gebruikt `paragraaf.opgavenummer` als sleutel om raw ↔ trainer te matchen.
-- **Biologie/AK/Geschiedenis** (Cat. 3): gemengd:
-  - `samenvatting/<onderwerp>.md` — door pipeline gegenereerde leesstof, **verplichte lees-fase** in trainer
-  - `flashcards.json` — begrippen/feiten (Cat. 1 secundair)
-  - `oefenvragen.json` — open vragen met rubric voor de vraag-fase
-- **Nederlands/Engels Cat. 4**: `teksten/<id>.md` (de oefentekst) + `vragen/<id>.json` (meerkeuze + open vragen).
+Handmatig. Foto met telefoon of scan, dropt in `content/<editie>/raw/<vak>/`. Bestandsnaam-conventie (optioneel maar handig):
 
-> **Voor elke Cat. 3 / Cat. 4 vraag verplicht:** een `modelAntwoord`-veld met het uitgewerkte goede antwoord (uit de raw screenshots). Dit is nodig voor (1) de validator en (2) de flashcard-fallback wanneer het LLM-budget op is — zie §11.
+```
+<vak>-h<hoofdstuk>-p<pagina>[-<n>].jpg
+bv. frans-h5-p47.jpg, wiskunde-h3-p84-2.jpg
+```
 
-### Wiskunde-antwoord-verificatie (apart script)
+Folder bepaalt vak; Stage 1 cross-checkt.
+
+### Stage 1 — Classify
+
+Per nieuw of gewijzigd bestand één Opus vision-call:
+- **Vak** detecteren en cross-checken met folder (mismatch → review)
+- **Content-type**: woordenlijst / opgaven / theorie / oefentekst / antwoordpagina / overig
+- **Primaire categorie** (1-4) op basis van content-type
+
+Output: `<bestand>.classify.json` als metadata-stub naast de raw file. Confidence < 0.85 → review-queue.
+
+### Stage 2 — Extract (multi-pass + self-critique)
+
+Per geclassificeerd bestand, **categorie-specifieke prompt**:
+
+1. **Pass A** — vision extraheert gestructureerde data (zie format per vak in Stage 3).
+2. **Pass B** — onafhankelijke vision-call met **andere prompt-formulering**, zelfde input.
+3. **Self-critique pass** — vision controleert eigen output: *"kijk opnieuw naar het plaatje en bevestig: heb je ALLE items? Heb je iets verzonnen?"*
+4. **Compare A vs B** — items die in **beide** passes verschijnen → high confidence. Items in alleen één → **review-queue**.
+5. **Voor Cat. 3** — extra pass genereert `samenvatting/<onderwerp>.md` (~300-600 woorden, kernbegrippen vetgedrukt, kruisverbanden expliciet). Wordt in Stage 4 ge-cross-checked op compleetheid van kernbegrippen.
+6. **Voor Wiskunde** — opgave-tekst en metadata uit raw; **antwoorden NIET uit raw** (zie Stage 2.5).
+
+Output: `<bestand>.extract.json` per bestand, met per item een confidence en `passes: ["A","B"]` herkomst.
+
+### Stage 2.5 — Wiskunde-antwoord-verificatie (apart script)
+
+Wiskunde-antwoorden staan **niet** in het leerlingboek (Getal & Ruimte heeft alleen antwoorden in de docentenversie of het antwoordenboek). De pipeline moet ze dus zelf afleiden — maar met expliciete confidence en menselijke review bij twijfel, omdat een fout antwoord een verkeerde reflex traint.
 
 Wiskunde-antwoorden staan **niet** in het leerlingboek (Getal & Ruimte heeft alleen antwoorden in de docentenversie of het antwoordenboek). De pipeline moet ze dus zelf afleiden — maar met expliciete confidence en menselijke review bij twijfel, omdat een fout antwoord een verkeerde reflex traint.
 
@@ -169,6 +206,124 @@ Wiskunde-antwoorden staan **niet** in het leerlingboek (Getal & Ruimte heeft all
 **Budget:** elke opgave kost ~€0.05-0.10 (twee Opus-calls + tool-execution). 30-50 wiskunde-opgaven per editie = €1.50-5. Volledig in dev-budget — kwaliteit gaat hier ruim boven kosten.
 
 **Validator-koppeling (§6):** voor wiskunde-content valideert §6 of (a) opgave-tekst matcht met raw, (b) `verifiedBy` is gezet (geen onverified antwoord mag deployen), (c) als `verifiedBy: "solver"` dan `confidence ≥ 0.70`. Anders → blokkeren tot Ralph reviewt.
+
+### Stage 3 — Convert naar canoniek trainer-format
+
+Map de geverifieerde extract-data naar de stabiele trainer-formats. **Dit is het contract** waar de trainer-engines op draaien — wijzigingen vereisen SPEC-update + version-bump.
+
+Stable IDs: `<vak>-h<hoofdstuk>-<onderdeel>-<n>` (bv. `frans-h5-vocab-012`). Dedupe op id. Merge met bestaande content (idempotent).
+
+**Per-vak formats:**
+
+- **Frans / Engels (Cat. 1)** — `vocab.json`:
+  ```json
+  { "id": "frans-h5-vocab-012", "nl": "huis", "vreemd": "maison",
+    "context": "...", "hoofdstuk": "5", "acceptedAnswers": ["maison","la maison"],
+    "bron": "raw/frans/h5-p47.jpg", "confidence": 0.97 }
+  ```
+- **Wiskunde (Cat. 2)** — `opgaven.json`:
+  ```json
+  { "id": "wi-h3p2-12a", "hoofdstuk": "3", "paragraaf": "3.2", "onderdeel": "3.2a",
+    "isSynthese": false, "opgavenummer": "12a", "vraag_md": "Los op: $3x+7=22$",
+    "antwoord": "5", "acceptedForms": ["x=5","5"], "uitleg_md": "...",
+    "type": "lineaire vergelijking", "bron": "raw/wiskunde/h3-p84.jpg",
+    "confidence": 0.96, "verifiedBy": "solver", "verifiedAt": "..." }
+  ```
+- **Biologie / AK / Geschiedenis (Cat. 3)** — gemengd:
+  - `samenvatting/<onderwerp>.md` — verplichte lees-fase
+  - `flashcards.json` — begrippen/feiten (Cat. 1 secundair)
+  - `oefenvragen.json` — open vragen met `modelAntwoord` en `rubric[]`
+- **Nederlands / Engels (Cat. 4)** — `teksten/<id>.md` (oefentekst) + `vragen/<id>.json` (meerkeuze + open met `modelAntwoord`).
+
+> **Cat. 3 / Cat. 4 vereisen `modelAntwoord` per open vraag** — voor validator én voor flashcard-fallback bij budget op (§11).
+
+### Stage 4 — Validate
+
+Hand-off naar de validator (zie §6 voor strengheid-regels per content-type). Output: `apps/validator/reports/<vak>-validation.md` met pass/fail vlag per vak.
+
+### Stage 5 — Review queue
+
+**Alle review-items komen samen in één markdown-rapport per vak**, opgebouwd uit:
+- Stage 1 classify-onzekerheid
+- Stage 2 Pass A↔B disagreement of self-critique flag
+- Stage 2.5 LOW-confidence wiskunde-solver
+- Stage 4 validator missings/hallucinations/mismatches
+
+Ralph runt `npm run review -- --vak=<vak>` of `npm run review -- --all`. CLI loopt per item:
+- toont vraag/opgave/woord + raw-bron (`open <pad>` opent screenshot in Preview)
+- toont de conflicterende informatie (Pass A vs B, of solver-pogingen, of mismatch)
+- biedt acties: **[a]ccept A** / **[b]ccept B** / **[e]dit** (eigen invul) / **[r]eject** (item droppen) / **[s]kip** (voor later)
+
+Bevestigde items worden opgeslagen in `content/<editie>/cache/verified/` met fingerprint + `verifiedBy: "ralph"` + datum. Volgende pipeline-run skipt deze.
+
+> **Stage 6 is geblokkeerd zolang er review-items open staan voor *strikte* content-types** (wiskunde, cat. 1; zie §6 strengheid-tabel). Soft-content mag deployen met openstaande review-items via `--allow-soft-fail` flag.
+
+### Stage 6 — Deploy
+
+Goedgekeurde trainer-content → Firestore in **atomic batch per vak**:
+- Pad: `editions/<editie>/<vak>/<type>/<id>`
+- **Versionering per editie**: nieuwe editie = nieuwe top-level subcollection. Oude edities blijven als read-only archief.
+- **Atomic**: of de hele vak-batch lukt, of niets — geen half-deployed staat tijdens lopende trainer-sessies.
+- Trainer-engines in de app pakken automatisch de nieuwste editie op (te overrulen via app-instellingen → handig voor v.l.k. testen oude editie).
+
+### Idempotency & caching
+
+Elke stage berekent een **fingerprint** van zijn input:
+- Stage 0: SHA256 van bestandsinhoud per screenshot
+- Stage 1-2: prompt-versie + input-hash
+- Stage 2.5: opgave-tekst-hash
+- Stage 5: gehasht ralph-approval blijft permanent gecached
+
+Cache hits skippen LLM-calls volledig. Eén ongewijzigde screenshot in `raw/` triggert niets. Eén nieuwe of vervangen → alleen die file door de pipeline.
+
+Cache live in `content/<editie>/cache/` (`.gitignore`d behalve `verified/`, dat wordt gecommit zodat Ralphs goedkeuringen niet verloren gaan).
+
+### Tooling — Claude Code skill + Node CLI
+
+Eén set prompt-templates in `apps/validator/prompts/`, twee invocaties:
+
+| Invocatie | Wanneer | Voorbeeld |
+|---|---|---|
+| **Claude Code skill** | Incidenteel, exploratief, prompt-debugging | `/extract-content frans h5` |
+| **Node CLI** | Reproduceerbaar, batch, Stijn zelf | `npm run pipeline -- --vak=frans` |
+
+Beide gebruiken dezelfde prompts en produceren bit-identieke output bij gelijke input. Geen prompt-drift mogelijk tussen modi.
+
+### Confidence-drempels per stage (review-trigger)
+
+| Stage | Drempel | Boven → | Onder → |
+|---|---|---|---|
+| 1 Classify | 0.85 | Auto-door | Review |
+| 2 Extract A↔B | Exacte match per item | Auto-door | Review |
+| 2 Self-critique | "geen fouten" | Auto-door | Re-extract |
+| 2.5 Math-solver HIGH | ≥0.95 | Auto-door | Zie volgende |
+| 2.5 Math-solver MEDIUM | 0.70-0.94 | Auto-door + note | Zie volgende |
+| 2.5 Math-solver LOW | <0.70 | — | Review |
+| 4 Validate | per type (zie §6) | Deploy | Blokkeren / soft-fail |
+
+### Volgend jaar — reuse (zero code changes)
+
+```bash
+# 1. nieuwe editie folder
+mkdir -p content/2027-t1/raw/{frans,engels,nederlands,wiskunde,aardrijkskunde,biologie,geschiedenis}
+
+# 2. drop screenshots in juiste folders
+
+# 3. config: kopieer manifest.yaml-template en vul vakken + scope in
+cp content/_template/manifest.yaml content/2027-t1/manifest.yaml
+# edit content/2027-t1/manifest.yaml
+
+# 4. run pipeline
+npm run pipeline -- --editie=2027-t1
+
+# 5. review eventueel
+npm run review -- --editie=2027-t1
+
+# 6. deploy
+npm run pipeline -- --editie=2027-t1 --stage=6
+```
+
+Geen code-aanpassingen, geen nieuwe trainer-engines, geen nieuwe SPEC-secties.
 
 ## 5. Trainer-categorieën
 
@@ -694,7 +849,7 @@ Cloud Function logt elke runtime-LLM-call met cost-estimate naar `usage/runtime/
 
 ## 12. Open punten — eerstvolgende iteratie
 
-> **Status:** alle architectuur- en planning-vragen zijn beantwoord. Twee resterende items zijn Ralph-inputs die niet blokkerend zijn voor het bouwen van de app — ze worden gevuld via de admin-UI (beloningen) of via content-upload (scope).
+> **Status:** alle architectuur-, planning-, trainer-, beloning-, content-pipeline- en budget-vragen zijn beantwoord. Twee resterende items zijn Ralph-inputs die niet blokkerend zijn voor het bouwen van de app — ze worden gevuld via de admin-UI (beloningen) of via content-upload (scope).
 
 Deze moeten we de komende iteraties oplossen voordat we kunnen bouwen:
 
