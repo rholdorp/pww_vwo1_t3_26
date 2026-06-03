@@ -24,46 +24,76 @@ pww:
     dag: vrijdag
     vakken: [frans, geschiedenis]
 
+# SCOPE-CHECKLIST (completeness-gate, zie SPEC §4 + P8)
+# Een vak is pas `compleet` (en wordt pas als vertrouwd in de app getoond) als ELK
+# scope-item alle drie de vinkjes heeft: gefotografeerd + geextraheerd + gevalideerd.
+# De scope-lijst (welke stof toetsbaar is) komt van Stijn/docent.
+# >>> Grotendeels TBD — vastleggen in sessie met Stijn op do 2026-06-04. <<<
+# Reeds geseede items zijn afgeleid uit de huidige screenshots en moeten do bevestigd worden.
+
 vakken:
   wiskunde:
     primaire_categorie: 2
     secundaire_categorie: null
     moeilijkheid: 3
     methode: "Getal & Ruimte"
-    scope: TBD # hoofdstukken/paragrafen — Ralph vult later
+    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+
   frans:
     primaire_categorie: 1
     secundaire_categorie: 4
     moeilijkheid: 3
     methode: TBD
-    scope: TBD
+    scope:
+      # geseed uit huidige screenshots — bevestigen + aanvullen do 2026-06-04
+      - id: h5-phrases-cles
+        bron: "Chapitre 5, p.42"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h5-grammaire-adjectieven
+        bron: "Chapitre 5, p.37"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+
   nederlands:
     primaire_categorie: 4
     secundaire_categorie: 1
     moeilijkheid: 3
     methode: TBD
-    scope: TBD
+    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+
   engels:
     primaire_categorie: 1
     secundaire_categorie: 4
     moeilijkheid: 2
     methode: TBD
-    scope: TBD
+    scope: []  # TBD do 2026-06-04 — nog geen screenshots (let op: Engels = PWW ma 29/6, vroegste deadline)
+
   geschiedenis:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 2
     methode: TBD
-    scope: TBD
+    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+
   biologie:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 1
     methode: TBD
-    scope: TBD
+    scope:
+      # geseed uit huidige screenshots — bevestigen + aanvullen do 2026-06-04
+      - id: h1-skelet
+        bron: "Hoofdstuk 1 — Het skelet"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+
   aardrijkskunde:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 1
     methode: TBD
-    scope: TBD
+    scope: []  # TBD do 2026-06-04 — nog geen screenshots

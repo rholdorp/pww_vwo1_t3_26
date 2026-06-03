@@ -2,7 +2,7 @@
 
 **Doelgebruiker (initieel):** Stijn, klas 1 Atheneum, trimester 3 proefwerkweek 2026
 **Status:** Concept / in iteratie
-**Laatste update:** 2026-06-02
+**Laatste update:** 2026-06-03
 
 ---
 
@@ -24,6 +24,7 @@ Een webapp die scholieren helpt om zich gericht en in haalbare stukjes voor te b
 | P5 | **Klaar vóór de laatste week** | Eerste leerronde afgerond vóór de week direct vóór de PWW. Die laatste week is alleen herhalen + automatiseren. |
 | P6 | **Multi-user / deelbaar** | Klasgenoten kunnen meedoen en hun eigen voortgang bijhouden op dezelfde content. |
 | P7 | **Mobile-first responsive** | Bruikbaar op telefoon (avond op de bank) én PC (achter bureau). |
+| P8 | **Volledigheid boven snelheid** | De tool is Stijns *single source of truth*. Een vak gaat pas live als de scope 100% gedekt én gevalideerd is; anders toont de app "leer uit boek". Een onvolledige tool is gevaarlijker dan geen tool — eerder is gemiste stof precies op de toets gekomen. Deadline is ondergeschikt aan volledigheid. |
 
 ## 3. Monorepo folderstructuur
 
@@ -49,14 +50,18 @@ pww_vwo1_t3_26/
 │       │   │   ├── samenvatting/
 │       │   │   │   └── cellen.md
 │       │   │   ├── flashcards.json
-│       │   │   └── oefenvragen.json
+│       │   │   ├── oefenvragen.json
+│       │   │   └── diagram.json   # gelabelde diagrammen (Cat. 1 met beeld-prompt)
 │       │   ├── nederlands/       # Cat. 4 = tekst + vragen
 │       │   │   ├── teksten/
 │       │   │   │   └── tekst-1.md
 │       │   │   └── vragen/
 │       │   │       └── tekst-1.json
 │       │   └── ...
-│       └── manifest.yaml         # welke vakken, welke hoofdstukken, welke toetsdatums
+│       ├── assets/               # afbeeldingen/diagrammen, uitgesneden uit raw — reizen mee met editie (P1)
+│       │   ├── biologie/
+│       │   └── wiskunde/
+│       └── manifest.yaml         # vakken, toetsdatums + scope-checklist per vak (completeness-gate, §4)
 │
 ├── apps/
 │   ├── web/                      # de webapp (UI + planner + trainers)
@@ -106,6 +111,37 @@ Stage 6  Deploy        Approved content → Firestore (atomic per vak)
 ```
 
 Stages 0-4 zijn (semi-)geautomatiseerd; Stage 5 is verplicht-handmatig vóór Stage 6.
+
+### Twee lagen van volledigheid (completeness-gate) — P8
+
+De tool is Stijns single source of truth. "Volledig" betekent **twee** dingen, en de pipeline borgt ze apart:
+
+| Laag | Vraag | Geborgd door |
+|---|---|---|
+| **(a) Scope-coverage** | Zijn álle toetsbare onderdelen (hoofdstukken/§/woordenlijsten) überhaupt vastgelegd? | **Scope-checklist in `manifest.yaml`** — de validator ziet dit NIET |
+| **(b) Extractie-fideliteit** | Is alles uit de aanwezige screenshots correct + compleet overgenomen? | Validator (§6, bidirectionele diff) |
+
+> Een perfecte validator (laag b) voorkomt geen gemiste stof als een pagina nooit gefotografeerd is (laag a). De eerder gemiste content die op de toets kwam, was vrijwel zeker laag (a). **Beide moeten 100% zijn voordat een vak als compleet/vertrouwd live gaat.**
+
+**Scope-checklist per vak (in `manifest.yaml`):** elk in-scope onderdeel krijgt een regel met drie vinkjes:
+
+```yaml
+vakken:
+  frans:
+    scope:
+      - id: h5-phrases-cles
+        bron: "Chapitre 5, p.42"
+        gefotografeerd: true      # (i) raw aanwezig
+        geextraheerd: true        # (ii) trainer-content gegenereerd
+        gevalideerd: true         # (iii) validator pass
+      - id: h5-grammaire-adjectieven
+        bron: "Chapitre 5, p.37"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+```
+
+**Completeness-gate:** een vak is pas `compleet` als **elk** scope-item alle drie de vinkjes heeft. Niet-complete vakken → de app toont expliciet *"nog niet volledig — leer dit vak uit het boek"* (P8). De scope-lijst zelf (welke stof toetsbaar is) komt van Stijn/docent en is daarmee een **verplichte, completeness-kritische input** — niet optioneel, niet deferred.
 
 ### Stage 0 — Capture
 
@@ -225,17 +261,41 @@ Stable IDs: `<vak>-h<hoofdstuk>-<onderdeel>-<n>` (bv. `frans-h5-vocab-012`). Ded
   ```json
   { "id": "wi-h3p2-12a", "hoofdstuk": "3", "paragraaf": "3.2", "onderdeel": "3.2a",
     "isSynthese": false, "opgavenummer": "12a", "vraag_md": "Los op: $3x+7=22$",
+    "afbeelding": "assets/wiskunde/h3-opg12a.png",
     "antwoord": "5", "acceptedForms": ["x=5","5"], "uitleg_md": "...",
     "type": "lineaire vergelijking", "bron": "raw/wiskunde/h3-p84.jpg",
     "confidence": 0.96, "verifiedBy": "solver", "verifiedAt": "..." }
   ```
+  (`afbeelding` optioneel — bv. meetkundefiguur bij de opgave.)
 - **Biologie / AK / Geschiedenis (Cat. 3)** — gemengd:
   - `samenvatting/<onderwerp>.md` — verplichte lees-fase
   - `flashcards.json` — begrippen/feiten (Cat. 1 secundair)
   - `oefenvragen.json` — open vragen met `modelAntwoord` en `rubric[]`
 - **Nederlands / Engels (Cat. 4)** — `teksten/<id>.md` (oefentekst) + `vragen/<id>.json` (meerkeuze + open met `modelAntwoord`).
+- **Gelabeld diagram (Cat. 1 met beeld-prompt)** — `<vak>/diagram.json`, een lijst diagrammen:
+  ```json
+  { "id": "bio-h1-skelet-diagram", "titel": "Schedel",
+    "afbeelding": "assets/biologie/schedel.png",
+    "regios": [
+      { "id": "jukbeen", "shape": "rect", "coords": [120, 210, 60, 40],
+        "vraag": "Welk bot is dit?", "antwoord": "jukbeen",
+        "acceptedAnswers": ["jukbeen", "os zygomaticum"],
+        "bron": "raw/biologie/h1-p9.jpg" }
+    ] }
+  ```
+  Een diagram draait op de **Cat. 1-leerlogica** (typen + Leitner + normalisatie); alleen de *vraag* is een hotspot i.p.v. tekst. Nul subject-specifieke code (P1) — elk nieuw diagram is enkel een JSON-bestand.
 
 > **Cat. 3 / Cat. 4 vereisen `modelAntwoord` per open vraag** — voor validator én voor flashcard-fallback bij budget op (§11).
+
+#### Afbeeldingen & assets
+
+Afbeeldingen (diagrammen, meetkundefiguren, illustraties) leven in `content/<editie>/assets/<vak>/` en **reizen mee met de editie** (P1). Ze worden uit de raw screenshots gesneden — een content-prep-stap (handmatig of in Stage 2). Referenties zijn relatieve paden vanaf de editie-root.
+
+Twee gebruiksvormen:
+- **Passief** — optioneel `afbeelding`-veld op elk content-item (wiskunde-opgave met meetkundefiguur, flashcard-voorkant, vraag-context). Renderer toont de afbeelding; geen interactie, geen extra engine.
+- **Interactief** — `diagram.json` hierboven: klikbare regio's gevoed door Cat. 1-logica. **Fallback zonder hotspot-werk:** laat `coords` weg en de trainer stelt de labels als gewone Cat. 1-vragen met de afbeelding als referentie ernaast. De klikbare hotspot-versie is een upgrade, geen voorwaarde.
+
+Deploy (Stage 6): assets gaan mee naar Firebase Cloud Storage onder `editions/<editie>/assets/...`; de statische build (GitHub Pages) kan ze ook direct serveren.
 
 ### Stage 4 — Validate
 
@@ -258,13 +318,14 @@ Bevestigde items worden opgeslagen in `content/<editie>/cache/verified/` met fin
 
 > **Stage 6 is geblokkeerd zolang er review-items open staan voor *strikte* content-types** (wiskunde, cat. 1; zie §6 strengheid-tabel). Soft-content mag deployen met openstaande review-items via `--allow-soft-fail` flag.
 
-### Stage 6 — Deploy
+### Stage 6 — Publish
 
-Goedgekeurde trainer-content → Firestore in **atomic batch per vak**:
-- Pad: `editions/<editie>/<vak>/<type>/<id>`
-- **Versionering per editie**: nieuwe editie = nieuwe top-level subcollection. Oude edities blijven als read-only archief.
-- **Atomic**: of de hele vak-batch lukt, of niets — geen half-deployed staat tijdens lopende trainer-sessies.
-- Trainer-engines in de app pakken automatisch de nieuwste editie op (te overrulen via app-instellingen → handig voor v.l.k. testen oude editie).
+Goedgekeurde trainer-content wordt **static gepubliceerd**: de JSON/MD in `content/<editie>/trainers/` (+ `assets/`) gaat mee in de web-bundle en wordt geserveerd via GitHub Pages. Geen runtime-database voor content nodig.
+
+- **Versionering per editie**: folder-naam ís de editie; oude edities blijven in de repo als archief. App kiest de nieuwste (te overrulen via app-instellingen).
+- **Update = commit + push**: Pages herbouwt; geen half-deployed-state-probleem (een lopende sessie heeft de oude JSON al geladen).
+
+> **Firestore = uitsluitend voortgang, niet content** (besluit 2026-06-03). Content-in-Firestore (atomic per-vak batch, signed-URL-toegang) is alleen nodig als (a) content privé moet — de repo is nu publiek, dus schoolboek-materiaal staat openbaar; bewust geaccepteerd, hosting/privacy lossen we later op — of (b) je content live wilt updaten zonder redeploy. Beide niet urgent → **geparkeerd**.
 
 ### Idempotency & caching
 
@@ -287,7 +348,7 @@ Eén set prompt-templates in `apps/validator/prompts/`, twee invocaties:
 | **Claude Code skill** | Incidenteel, exploratief, prompt-debugging | `/extract-content frans h5` |
 | **Node CLI** | Reproduceerbaar, batch, Stijn zelf | `npm run pipeline -- --vak=frans` |
 
-Beide gebruiken dezelfde prompts en produceren bit-identieke output bij gelijke input. Geen prompt-drift mogelijk tussen modi.
+Beide gebruiken dezelfde prompt-templates (zelfde versie) → **geen prompt-drift tussen modi**. Let op: vision-LLM-calls zijn niet-deterministisch, dus "bit-identieke output" is geen garantie. Reproduceerbaarheid komt uit de **fingerprint-cache** (zie *Idempotency & caching*): een ongewijzigde input levert het gecachete, identieke resultaat — een LLM-call wordt alleen opnieuw gedaan als input of prompt-versie wijzigt.
 
 ### Confidence-drempels per stage (review-trigger)
 
@@ -364,7 +425,9 @@ Vier generieke trainer-engines, elke met eigen leeralgoritme. Elk vak gebruikt �
 
 **Mastery-score per vak/onderwerp:** percentage items in bakje 3+, ondergrens per item: minstens 1× goed beantwoord in laatste sessie.
 
-**Gebruikt door:** Frans (woordjes/vervoegingen), Engels (woordjes), topografie (AK), vaktermen (bio), jaartallen (gesch).
+**Beeld-prompt variant (gelabelde diagrammen):** dezelfde leerlogica werkt ook wanneer de vraag een plek op een afbeelding is i.p.v. tekst (skelet-botten, topografie-kaart, celonderdelen). De trainer toont de afbeelding met klikbare hotspots — of, als fallback zonder hotspot-werk, het label als gewone tekstvraag met de afbeelding ernaast. Content-schema: `diagram.json` in §4. Geen aparte engine — puur een render-laag boven Cat. 1.
+
+**Gebruikt door:** Frans (woordjes/vervoegingen), Engels (woordjes), topografie (AK), vaktermen (bio), jaartallen (gesch), gelabelde diagrammen (bio skelet/cel, AK topografie).
 
 ### Categorie 2 — Procedureel oefenen (wiskunde) — gefaseerd + pen-en-papier
 
@@ -402,7 +465,7 @@ Onderdeel 3.2d  (synthese unlocked)  [opg 1: …]           …
 3. Trainer-veld: *"Wat is je eindantwoord?"* — Stijn typt alleen het antwoord (getal, breuk, expressie).
 4. Vergelijking: numeriek tot rounding-tolerantie; voor symbolische antwoorden meerdere `acceptedForms` (`x=5`, `5`, `x = 5`).
 5. **Goed** → groen + door.
-6. **Fout** → boek-uitwerking tonen in een vouwblok + *"Probeer nu deze vergelijkbare som"* (retry, telt voor mastery).
+6. **Fout** → de **solver-gegenereerde uitleg** (`uitleg_md`) tonen in een vouwblok + *"Probeer nu deze vergelijkbare som"* (retry, telt voor mastery). NB: deze uitleg is afgeleid — niet uit het boek (Getal & Ruimte heeft geen uitwerkingen in de leerlingversie) — en valt dus onder dezelfde vertrouwens-eis als het antwoord (`verifiedBy`; bij LOW-confidence mee-reviewen, zie §4).
 7. **Fout op retry ook** → extra uitleg + 2 sommen extra op dit onderdeel toevoegen.
 
 **Logica:** opgavenpool gegroepeerd per onderdeel; engine houdt mastery-score per onderdeel bij; sessie eindigt zodra alle in-scope onderdelen ≥ ✓ of tijd om is.
@@ -415,7 +478,7 @@ Onderdeel 3.2d  (synthese unlocked)  [opg 1: …]           …
 
 **Fase 1 — Samenvatting lezen (verplicht voor coverage):**
 - Trainer toont een door de content-pipeline gegenereerde **samenvatting** (markdown, scrollable, ~300-600 woorden per onderwerp), met de kernbegrippen vetgedrukt en kruisverbanden expliciet ("zie ook: …").
-- Onderaan een **"Klaar met lezen"-knop** die pas actief wordt zodra Stijn tot ~80% van de tekst gescrold is (geen wegklikken).
+- Onderaan een **"Klaar met lezen"-knop** als coverage-*nudge*: actief zodra Stijn tot ~80% gescrold is, of direct als de tekst in één scherm past, eventueel met een minimale leestijd. Bewust licht — niet fraudebestendig; de mastery uit fase 2 is het echte coverage-signaal.
 - Pas dán komt fase 2 beschikbaar.
 - Samenvatting is afgeleid uit de raw screenshots; validator controleert dat geen kernbegrip ontbreekt en niets is verzonnen.
 
@@ -438,7 +501,7 @@ Onderdeel 3.2d  (synthese unlocked)  [opg 1: …]           …
 
 **Fase 1 — Tekst lezen (verplicht voor coverage):**
 - Trainer toont de oefentekst (uit raw screenshots, of een door Stijn aangereikte tekst).
-- "Klaar met lezen"-knop wordt actief na ~80% scroll.
+- "Klaar met lezen"-knop als coverage-nudge: actief na ~80% scroll, of direct als de tekst in beeld past (zelfde lichte aanpak als Cat. 3 — de vragen zijn het echte coverage-signaal).
 
 **Fase 2 — Vragen (telt voor mastery):**
 - Meerkeuze-vragen over hoofdgedachte/structuur/signaalwoorden — geen LLM nodig.
@@ -576,12 +639,31 @@ Activiteit deze week is primair Cat. 1 + Cat. 2 (sommen-automatisering). Cat. 3/
 
 **Blok-regels:** max 30 min per blok (cat. 1 mag 15 min), 5 min pauze tussen blokken, na 2 blokken 15 min pauze.
 
-### Algoritme (schets)
-1. **Backward planning vanaf PWW.** Reserveer de laatste week (22–28 juni) voor herhalen/automatiseren.
-2. **Eerste leerronde** loopt van ma 8 juni t/m zo 21 juni (2 weken).
-3. **Per vak**: schat benodigde studietijd op basis van hoeveelheid trainer-content × categorie-coëfficiënt (cat 1 sneller per item dan cat 3).
-4. **Verdeel over dagen** met spaced repetition principe: elk onderwerp komt minimaal 3× terug verspreid over de periode.
-5. **Dagblok-opbouw**: max 3 blokken per dag, afwisselend vak/categorie om sleur te voorkomen. Pauzes (5 min) tussen blokken, na 2 blokken een langere pauze (15 min).
+### Algoritme (schets) — incrementeel & re-runbaar
+
+De planner is een **pure functie** van (vak-content die nú `compleet` is + manifest-datums + Stijns rooster/voorkeurstijden + gemeten voortgang) en wordt **opnieuw gedraaid** telkens als content binnenkomt of voortgang verandert — geen vastgevroren one-shot plan. **Tijdslots liggen vast** (Stijns routine, P4); alleen de *invulling* van de slots herbalanceert, zodat het "Vandaag"-scherm voorspelbaar blijft.
+
+1. **Backward planning vanaf PWW.** De laatste week (22–26 juni) is **gereserveerde buffer** voor herhalen/automatiseren — én vangnet voor uitloop van de eerste ronde.
+2. **Eerste leerronde** loopt ma 8 juni t/m zo 21 juni.
+3. **Alleen complete vakken worden ingepland.** Een nog niet compleet vak (scope < 100% gedekt/gevalideerd, P8) verschijnt als **"leer uit boek"-placeholder**, niet als trainer-blok. Wordt het vak compleet → de volgende run vouwt het in.
+4. **Studietijd-schatting per vak**: hoeveelheid trainer-content × categorie-coëfficiënt (cat 1 sneller per item dan cat 3). Schatting kan pas zodra content bestaat; tot dan provisorisch.
+5. **Spaced repetition**: elk onderwerp komt minimaal 3× terug, verspreid. Een onderdeel dat niet ✓ wordt afgerond (`deels`) keert terug op een **later, gespreid** moment — niet meteen — en telt mee tegen de capaciteit.
+6. **Dagblok-opbouw**: max 3 blokken per dag, afwisselend vak/categorie tegen sleur. Pauzes (5 min) tussen blokken, na 2 blokken 15 min.
+
+### Pacing & capaciteit — "haal ik het?"
+
+De daglimiet ligt vast (P4: max 1.5u PWW/dag). Werk dat niet past, móét ergens heen — daarom maakt de planner capaciteits-overflow **zichtbaar** i.p.v. stil de dag vol te proppen of content stil te laten vallen.
+
+- **Verwacht tempo** = totaal geschat werk / beschikbare slots vóór de deadline.
+- **Werkelijk tempo** = gemeten uit afgeronde blokken (behaalde mastery/coverage per slot; hoe vaak blokken als `deels` terugkeren).
+- **Projectie**: past het resterende werk bij het huidige tempo nog in de resterende slots vóór (a) elke vak-toets en (b) de start van de buffer-week?
+
+**Flags (naar admin/Ralph; subtiel naar Stijn):**
+- ⚠️ **Achterstand** — Stijn gaat langzamer dan geschat → resterend werk past niet → *"overweeg extra timeslots, extra dagen, of meer per dag."* Ralph beslist (slots horen bij de routine die Ralph/Stijn instellen).
+- ⚠️ **Buffer-aanvreten** — als de eerste ronde uitloopt in de herhaal-week (22–26 juni) gaat dat ten koste van herhaling/automatisering → signaal om scope of tempo bij te stellen.
+- ⚠️ **Te late content** — een vak dat zó laat compleet wordt dat eerste ronde + 3× spreiding niet meer vóór z'n toets passen. Vooral **Engels** (toets ma 29/6, nu nog nul screenshots).
+
+De planner lost overflow dus niet zelf op (geen stille scope-drop, geen overvolle dagen); hij maakt 'm expliciet en laat de keuze — méér tijd vs. minder scope — aan Ralph/Stijn.
 
 ### Output: dagweergave (Vandaag-scherm — app opent hierop)
 
@@ -665,6 +747,8 @@ type Blok = {
 
 **Doel:** intrinsieke motivatie ondersteunen met gemeten voortgang, gekoppeld aan externe beloningen die de ouder configureert (ijsje, extra zakgeld, nieuwe game, etc.).
 
+> **Bouwvolgorde (besluit 2026-06-03):** de **gamification-laag** (punten, streaks, mijlpalen, ouder-beloningen) is **fase-2** — niet nodig voor correct/volledig leren (P8). Wél v0.1-core: het **afvink-criterium per blok** (coverage + mastery, tabel hieronder), want de planner en "Vandaag" hebben `afgevinkt`/`deels` nodig voor re-planning. **Trainers worden mét de motivatie-laag in gedachten gebouwd:** elke trainer emit een gestructureerd blok-resultaat (coverage, mastery, ✓-status, timestamp) dat **append-only** wordt gelogd vanaf v0.1. De gamification-laag is later een **pure afgeleide view** over dat log — geen trainer hoeft punten te kennen, en er gaat geen historie verloren als beloningen pas later aangaan.
+
 ### Principes
 
 1. **Beloon kwaliteit, niet alleen aanwezigheid.** Punten komen vooral uit gemeten mastery (trainer-scores), niet uit "tijd in stoel". Anders ontstaat de prikkel om snel weg te klikken.
@@ -672,7 +756,7 @@ type Blok = {
 3. **Transparant.** Stijn ziet realtime hoeveel punten hij heeft, welke beloning de volgende mijlpaal is, en hoe ver hij nog moet.
 4. **Ouder configureert beloningen, kind ziet alleen mijlpalen.** Belonings-bedrag/object is door ouder in te stellen (niet door kind te wijzigen).
 
-### Afvink-criterium per blok (✓)
+### Afvink-criterium per blok (✓) — v0.1-core
 
 Een blok is **✓ afgevinkt** als **beide** criteria gehaald zijn. Coverage en mastery zijn cat-specifiek:
 
@@ -719,18 +803,21 @@ App toont aan Stijn: huidige punten, balkje naar volgende mijlpaal, "X dagen tot
 
 ```
 progress/<user-id>/
-├── points-log.jsonl       # append-only: timestamp, actie, punten, reden
-├── milestones.json        # geclaimde + nog niet geclaimde
-└── rewards-config.json    # ouder-instellingen
+├── blok-resultaten.jsonl  # v0.1-core, append-only: blokId, vak, categorie, coverage, mastery, afgevinkt, timestamp
+├── points-log.jsonl       # fase-2, afgeleid: timestamp, actie, punten, reden
+├── milestones.json        # fase-2: geclaimde + nog niet geclaimde
+└── rewards-config.json    # fase-2: ouder-instellingen
 ```
+
+> `blok-resultaten.jsonl` is de bron-van-waarheid die de trainers vanaf v0.1 schrijven; `points-log` en mijlpalen zijn er later een **pure functie** over (retroactief berekenbaar over de volledige historie).
 
 ## 9. Multi-user (P6)
 
 - **Verwachte schaal:** halve klas, ~10–15 gebruikers.
-- **Toegang:** **open link**. Wie de URL kent kan een account aanmaken. Aanmelden via magic-link of e-mail+wachtwoord.
+- **Toegang:** **open link, geen auth** (besluit 2026-06-03). Bij eerste gebruik vul je je **naam** in; die naam (geslugd) is je identiteit én de Firestore-document-sleutel. Geen wachtwoord, geen e-mail, geen account-flow. Dezelfde naam op een ander apparaat = dezelfde voortgang — zo werkt cross-device sync. Gevolg: de Firestore-DB staat feitelijk open en namen kunnen botsen — **bewust geaccepteerd** voor deze schaal (Stijn + klasgenoten, één editie). Een echte auth-laag is de nette upgrade als hier ooit een product van wordt.
 - **Content-eigendom:** **één gedeelde content-set** (Stijns boeken/screenshots), beheerd door Ralph. Klasgenoten gebruiken dezelfde trainers — zij kunnen geen content uploaden of wijzigen (in v1).
 - **Per gebruiker eigen:**
-  - Account
+  - Naam-gebaseerde identiteit (geen wachtwoord)
   - Planner (eigen thuiscontext, eigen rooster, eigen voorkeurstijden)
   - Voortgang & mastery
   - Punten & beloningen (eigen ouder-beloningen, of een default-set voor gebruikers zonder configurerende ouder)
@@ -750,7 +837,7 @@ progress/<user-id>/
   2. **Voortgang** — per vak een rij, % klaar, welke onderwerpen rood/oranje/groen.
   3. **Instellingen** — rooster, voorkeuren, beloningen.
 - **Trainerscherm per categorie:**
-  - **Cat. 1**: tekstveld voor typen, grote feedback (groen/rood/oranje), hint-modus bij herhaalde fouten.
+  - **Cat. 1**: tekstveld voor typen, grote feedback (groen/rood/oranje), hint-modus bij herhaalde fouten. Bij accent-talen (Frans) een **accent-helper-rij** (tikbare é è ç à ù) boven het veld — ergonomisch op mobiel, zonder de strikte accent-check los te laten.
   - **Cat. 2**: opgave-titel + reminder "pen + schrift erbij?", invulveld voor **alleen eindantwoord** + boek-uitwerking in vouwblok bij fout. Onderdeel-progressie zichtbaar als kralenketting (●●○○).
   - **Cat. 3**: twee-fase scherm — **Lees-fase** (samenvatting in markdown, "Klaar met lezen"-knop ontgrendelt na ~80% scroll) → **Vraag-fase** (textarea + AI-rubric óf flashcard-fallback).
   - **Cat. 4**: idem als Cat. 3 maar lees-fase toont oefentekst i.p.v. samenvatting; vragen-fase mengt meerkeuze (geen LLM) en open vragen (LLM-rubric / fallback).
@@ -767,8 +854,8 @@ progress/<user-id>/
 | Frontend | **React + Vite + TypeScript + Tailwind** | Statisch builden voor GitHub Pages, brede community, makkelijke AI-coding |
 | UI-componenten | **shadcn/ui** (radix + tailwind) | Mobile-first, toegankelijk, copy-paste model past bij static SPA |
 | State | **Zustand** (lokaal) + Firestore listeners (server-sync) | Simpel, voldoende voor deze schaal |
-| Auth | **Firebase Auth** (e-mail + magic-link) | Geïntegreerd met Firestore-security-rules |
-| Database | **Firestore** | Real-time, security rules per user, gratis tier voldoende voor 15 users |
+| Auth | **Geen** (v0.1) — naam-gebaseerde identiteit, naam = Firestore-doc-sleutel | Low-threshold: "naam invullen en klaar". Firebase Auth is de latere upgrade (zie §9) |
+| Database | **Firestore** (alleen voortgang) | Real-time cross-device sync; gratis tier ruim voldoende. v0.1 zonder auth → open rules (bewust, zie §9) |
 | Bestandsopslag (screenshots) | **Firebase Cloud Storage** | Beheerd door Ralph, klasgenoten alleen-lezen via signed URLs |
 | Serverless functies (LLM-proxy) | **Firebase Cloud Functions (Node.js)** | Anthropic API-sleutel server-side, rate limiting per user |
 | LLM voor beoordeling Cat 3/4 | **Claude Haiku 4.5** (snel + goedkoop) | Past in €100/maand-budget bij ~15 users |
@@ -776,6 +863,8 @@ progress/<user-id>/
 | Hosting frontend | **GitHub Pages** (vanuit `apps/web/dist`) | Gratis, ingebouwde CI via Actions |
 | Domein | `<repo>.github.io/pww` (geen custom domein) | Geen voorkeur opgegeven |
 | Budget | **Runtime: €100/maand cap. Development: ongelimiteerd (warn-only).** | Twee gescheiden potten — zie subsectie *Budget — twee gescheiden potten* hieronder |
+
+> **Bouwvolgorde (besluit 2026-06-03):** v0.1 zet alleen **Firestore** in (zónder auth — naam-gebaseerde identiteit, zie §9) voor cross-device voortgang-sync (dealbreaker). **Firebase Auth, Cloud Functions (LLM-proxy), Cloud Storage en de budget-/quota-machinerie zijn uitgesteld** tot ze nodig zijn; tot die tijd draaien Cat 3/4 in flashcard-modus zonder LLM. Content wordt static geserveerd via GitHub Pages (zie §4 Stage 6), niet uit Firestore.
 
 ### Consequenties van GitHub Pages + Firebase
 
@@ -849,7 +938,7 @@ Cloud Function logt elke runtime-LLM-call met cost-estimate naar `usage/runtime/
 
 ## 12. Open punten — eerstvolgende iteratie
 
-> **Status:** alle architectuur-, planning-, trainer-, beloning-, content-pipeline- en budget-vragen zijn beantwoord. Twee resterende items zijn Ralph-inputs die niet blokkerend zijn voor het bouwen van de app — ze worden gevuld via de admin-UI (beloningen) of via content-upload (scope).
+> **Status:** alle architectuur-, planning-, trainer-, beloning-, content-pipeline- en budget-vragen zijn beantwoord. Resterende Ralph-inputs: externe beloningen (via admin-UI, niet blokkerend) en de **scope-checklist per vak**. Die laatste is **completeness-kritisch** (P8): een vak kan niet als compleet/vertrouwd live zonder volledige scope (zie §4 completeness-gate). Wordt vastgelegd in de sessie met Stijn op **do 2026-06-04** — dan komen ook alle resterende screenshots binnen.
 
 Deze moeten we de komende iteraties oplossen voordat we kunnen bouwen:
 
@@ -868,6 +957,6 @@ Deze moeten we de komende iteraties oplossen voordat we kunnen bouwen:
 - [x] ~~Hosting & budget~~ (GitHub Pages + Firebase, €100/maand cap)
 - [x] ~~LLM-quota per gebruiker~~ (Stijn-voorrang: €40 soft / €60 hard; klasgenoten €3/€5 — zie §11)
 - [x] ~~Wiskunde-methode~~ (Getal & Ruimte)
-- [ ] **Per vak: scope** (hoofdstukken/paragrafen/woordenlijsten) — *deferred, Ralph komt erop terug*
+- [ ] **Per vak: scope-checklist** (hoofdstukken/§/woordenlijsten) — **completeness-kritisch, NIET deferred** (zie §4 completeness-gate + P8). Zonder volledige scope kan een vak niet als compleet/vertrouwd live. Komt van Stijn/docent; vastleggen in sessie do 2026-06-04.
 - [x] ~~Validatie-strengheid~~ (hybride: strikt voor wiskunde + cat. 1, soft ≤10% voor cat. 3/4 — zie §6)
 - [x] ~~Tech-stack definitief~~ (React+Vite, Firestore, Firebase Auth, Cloud Functions, Claude Haiku/Opus — zie §11)
