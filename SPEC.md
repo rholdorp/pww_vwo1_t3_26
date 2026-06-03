@@ -18,7 +18,7 @@ Een webapp die scholieren helpt om zich gericht en in haalbare stukjes voor te b
 | # | Principe | Consequentie |
 |---|---|---|
 | P1 | **Content los van code** | Volgend jaar nieuwe screenshots uploaden → nieuwe trainer zonder code wijzigen. Geen subject-specifieke logica hard-coded. |
-| P2 | **Ruwe bron is leidend** | Screenshots van fysiek boek/schrift zijn de "source of truth". Trainercontent wordt afgeleid, niet zelfstandig verzonnen. |
+| P2 | **Ruwe bron is leidend** | Screenshots van fysiek boek/schrift zijn de "source of truth". Trainercontent wordt afgeleid, niet zelfstandig verzonnen. **Uitzondering: wiskunde-antwoorden** staan niet in het leerlingboek — die worden door een aparte solver afgeleid en door Ralph bevestigd bij twijfel (zie §4). |
 | P3 | **Validatie van content** | Een aparte agent vergelijkt de gegenereerde trainercontent met de ruwe screenshots: niets gemist, niets gehallucineerd. |
 | P4 | **Korte blokken, lage drempel** | Maximaal 30 min per blok (cat. 1: 15 min), max 1.5 uur per dag, met pauzes. |
 | P5 | **Klaar vóór de laatste week** | Eerste leerronde afgerond vóór de week direct vóór de PWW. Die laatste week is alleen herhalen + automatiseren. |
@@ -39,12 +39,22 @@ pww_vwo1_t3_26/
 │       │   ├── aardrijkskunde/
 │       │   ├── biologie/
 │       │   └── geschiedenis/
-│       ├── trainers/             # Afgeleide trainer-content (JSON/YAML)
+│       ├── trainers/             # Afgeleide trainer-content (JSON/YAML/MD)
 │       │   ├── frans/
 │       │   │   ├── vocab.json    # woordenlijsten
 │       │   │   └── zinnen.json
 │       │   ├── wiskunde/
-│       │   │   └── opgaven.json  # letterlijke opgaven uit boek
+│       │   │   └── opgaven.json  # opgaven met onderdeel-tag (3.2a, 3.2b, ...)
+│       │   ├── biologie/         # Cat. 3 = samenvatting + vragen
+│       │   │   ├── samenvatting/
+│       │   │   │   └── cellen.md
+│       │   │   ├── flashcards.json
+│       │   │   └── oefenvragen.json
+│       │   ├── nederlands/       # Cat. 4 = tekst + vragen
+│       │   │   ├── teksten/
+│       │   │   │   └── tekst-1.md
+│       │   │   └── vragen/
+│       │   │       └── tekst-1.json
 │       │   └── ...
 │       └── manifest.yaml         # welke vakken, welke hoofdstukken, welke toetsdatums
 │
@@ -71,22 +81,94 @@ pww_vwo1_t3_26/
      │  foto/screenshot
      ▼
 content/2026-t3/raw/<vak>/hoofdstuk-X-pagina-Y.jpg
-     │  extractie (OCR/vision model)
+     │  vision-extractie + (voor Cat. 3) samenvatting-generatie
      ▼
-content/2026-t3/trainers/<vak>/<type>.json
+content/2026-t3/trainers/<vak>/<type>.json | <onderwerp>.md
      │  validatie (apps/validator)
      ▼
 [goedgekeurde trainer-content] ──► trainer in webapp
 ```
 
+> Voor Cat. 3-vakken (bio/AK/gesch) genereert de pipeline naast de vragenset óók een `samenvatting/<onderwerp>.md` per hoofdstuk/paragraaf. De validator checkt dat alle kernbegrippen uit de raw aanwezig zijn en niets verzonnen.
+
 Per vak verschilt het extractieformaat:
 
 - **Frans/Engels**: `{ "nl": "huis", "fr": "maison", "context": "...", "hoofdstuk": 5 }`
-- **Wiskunde** (Getal & Ruimte): `{ "hoofdstuk": "3", "paragraaf": "3.2", "opgavenummer": "12a", "vraag": "...", "antwoord": "...", "uitleg": "...", "type": "lineaire vergelijking" }`
-  - Getal & Ruimte structuur: hoofdstuk → paragraaf → opgaven (a/b/c sub-onderdelen). Validator gebruikt `H.P.opgave` als sleutel om raw ↔ trainer te matchen.
-- **Biologie/AK/Geschiedenis**: gemengd — `flashcards.json` voor begrippen/feiten + `concepten.json` voor uit te leggen processen + `oefenvragen.json` voor open vragen.
+- **Wiskunde** (Getal & Ruimte): `{ "hoofdstuk": "3", "paragraaf": "3.2", "onderdeel": "3.2a", "isSynthese": false, "opgavenummer": "12a", "vraag": "...", "antwoord": "...", "acceptedForms": ["x=5","5"], "uitleg_md": "...", "type": "lineaire vergelijking", "bron": "raw/wiskunde/h3-p84.jpg" }`
+  - Getal & Ruimte structuur: hoofdstuk → paragraaf → **onderdeel** (concept-cluster, bv. `3.2a`) → opgaven. Synthese-onderdelen worden expliciet gemarkeerd zodat de trainer ze pas vrijspeelt na de individuele onderdelen.
+  - Validator gebruikt `paragraaf.opgavenummer` als sleutel om raw ↔ trainer te matchen.
+- **Biologie/AK/Geschiedenis** (Cat. 3): gemengd:
+  - `samenvatting/<onderwerp>.md` — door pipeline gegenereerde leesstof, **verplichte lees-fase** in trainer
+  - `flashcards.json` — begrippen/feiten (Cat. 1 secundair)
+  - `oefenvragen.json` — open vragen met rubric voor de vraag-fase
+- **Nederlands/Engels Cat. 4**: `teksten/<id>.md` (de oefentekst) + `vragen/<id>.json` (meerkeuze + open vragen).
 
 > **Voor elke Cat. 3 / Cat. 4 vraag verplicht:** een `modelAntwoord`-veld met het uitgewerkte goede antwoord (uit de raw screenshots). Dit is nodig voor (1) de validator en (2) de flashcard-fallback wanneer het LLM-budget op is — zie §11.
+
+### Wiskunde-antwoord-verificatie (apart script)
+
+Wiskunde-antwoorden staan **niet** in het leerlingboek (Getal & Ruimte heeft alleen antwoorden in de docentenversie of het antwoordenboek). De pipeline moet ze dus zelf afleiden — maar met expliciete confidence en menselijke review bij twijfel, omdat een fout antwoord een verkeerde reflex traint.
+
+**Apart script:** `apps/validator/src/math-solver.ts`, draaibaar met `npm run solve-math -- --vak=wiskunde`.
+
+**Algoritme per opgave:**
+
+1. **Dubbele oplossing** — twee onafhankelijke Claude-calls (verschillende systeemprompts) lossen dezelfde opgave op. Beide krijgen toegang tot het **Code Execution tool** (Python + sympy), zodat ze symbolisch + numeriek kunnen rekenen i.p.v. uit het hoofd.
+2. **Normalisatie** — beide antwoorden in canonieke vorm (`x = 5` → `5`, breuken vereenvoudigd, lijsten gesorteerd).
+3. **Confidence-bepaling:**
+   | Confidence | Conditie | Gedrag |
+   |---|---|---|
+   | **HIGH** (≥0.95) | Beide solvers exact eens, symbolisch + numeriek | Auto-approve, opslaan in trainer-content |
+   | **MEDIUM** (0.70-0.94) | Solvers eens op afgerond numeriek antwoord maar verschillende vorm | Auto-approve met note; Ralph kan reviewen indien gewenst |
+   | **LOW** (<0.70) | Solvers oneens, of een solver gaf zelf onzekerheid aan, of opgave heeft tekst die niet geparseerd kon worden | **Flag voor Ralph review** |
+
+4. **Review-queue voor LOW-confidence** — script schrijft naar `apps/validator/reports/wiskunde-review-needed.md`:
+   ```markdown
+   ## §3.2 opgave 12a
+   Vraag: Los op: 3x + 7 = 22
+   Bron: raw/wiskunde/h3-p84.jpg
+
+   Solver A: x = 5  (confidence 0.92)
+   Solver B: x = 5  (confidence 0.93)
+
+   ## §3.5 opgave 18b
+   Vraag: [niet-leesbare tekst]
+   Bron: raw/wiskunde/h3-p91.jpg
+
+   Solver A: x = 3, y = 7  (confidence 0.40)
+   Solver B: geen oplossing gevonden  (confidence 0.30)
+
+   → Ralph: bevestig of vul juist antwoord in.
+   ```
+
+5. **Interactieve Ralph-review:** `npm run review-math` opent een CLI-prompt per LOW-item met:
+   - de opgave-tekst,
+   - link naar de raw screenshot (`open <pad>` werkt op macOS),
+   - de solver-pogingen,
+   - invulveld voor het juiste antwoord (of "accept solver A/B").
+
+6. **Persistent cache:** Ralphs bevestigingen worden opgeslagen in `content/<editie>/trainers/wiskunde/verified-answers.json` met `verifiedBy: "ralph"` en datum. Volgende pipeline-run skipt deze.
+
+**Velden op trainer-content (wiskunde):**
+
+```json
+{
+  "opgavenummer": "12a",
+  "antwoord": "5",
+  "acceptedForms": ["x=5", "5"],
+  "confidence": 0.96,
+  "verifiedBy": "solver" | "ralph",
+  "verifiedAt": "2026-06-12T18:30:00Z",
+  "solverAttempts": [
+    { "answer": "5", "confidence": 0.95 },
+    { "answer": "x = 5", "confidence": 0.97 }
+  ]
+}
+```
+
+**Budget:** elke opgave kost ~€0.05-0.10 (twee Opus-calls + tool-execution). 30-50 wiskunde-opgaven per editie = €1.50-5. Volledig in dev-budget — kwaliteit gaat hier ruim boven kosten.
+
+**Validator-koppeling (§6):** voor wiskunde-content valideert §6 of (a) opgave-tekst matcht met raw, (b) `verifiedBy` is gezet (geen onverified antwoord mag deployen), (c) als `verifiedBy: "solver"` dan `confidence ≥ 0.70`. Anders → blokkeren tot Ralph reviewt.
 
 ## 5. Trainer-categorieën
 
@@ -129,21 +211,87 @@ Vier generieke trainer-engines, elke met eigen leeralgoritme. Elk vak gebruikt �
 
 **Gebruikt door:** Frans (woordjes/vervoegingen), Engels (woordjes), topografie (AK), vaktermen (bio), jaartallen (gesch).
 
-### Categorie 2 — Procedureel oefenen (wiskunde)
-**Methode:** opklimmende moeilijkheid, interleaving van sommen-types, na fout → uitleg + 2 vergelijkbare sommen, tot 3× achter elkaar goed per type. Sluit af met mixed mini-toets.
-**Logica:** opgavenpool gegroepeerd per type; engine houdt mastery-score per type bij; pakt volgende opgave op basis van laagste mastery.
+### Categorie 2 — Procedureel oefenen (wiskunde) — gefaseerd + pen-en-papier
+
+**Werkwijze in het kort:** Stijn werkt op papier (boek + schrift), de trainer is alleen de **antwoordcontroleur** en **regisseur** van welke opgave nu aan de beurt is. Geen tussenstappen typen, alleen eindantwoorden.
+
+**Stof-structuur per paragraaf:**
+
+Stof wordt opgedeeld in **onderdelen** (concepten). Voorbeeld H3 Lineaire vergelijkingen:
+- *3.2a*: oplossen vergelijking 1 variabele
+- *3.2b*: substitueren
+- *3.2c*: woordprobleem omzetten naar vergelijking
+- *3.2d*: synthese (combineert a/b/c)
+
+Synthese-onderdelen worden pas vrijgespeeld als alle individuele onderdelen ✓ zijn.
+
+**Adaptive volgorde binnen een sessie:**
+
+```
+Onderdeel 3.2a  [opg 1: ✓] [opg 2: ✓]                    → 2/2  ✓ door
+Onderdeel 3.2b  [opg 1: ✗] [opg 2: ✓]                    → 1/2
+                [extra 3: ✓] [extra 4: ✓]                 → 3/4  ✓ door
+Onderdeel 3.2c  [opg 1: ✓] [opg 2: ✓]                    → 2/2  ✓ door
+Onderdeel 3.2d  (synthese unlocked)  [opg 1: …]           …
+```
+
+**Algoritme:** trainer pakt voor elk onderdeel **2 random opgaven** uit de pool van dat onderdeel. Resultaat:
+| 2/2 | ✓ onderdeel klaar, door naar volgende |
+| 1/2 | +2 extra opgaven; bij ≥3/4 → ✓, anders +2 |
+| 0/2 | uitleg tonen + +2 extra opgaven; herhaal tot ≥50% over de hele set |
+
+**Per opgave — pen-en-papier loop:**
+
+1. Trainer: *"Maak op papier: §3.2 opgave 12a"* + kleine reminder *"Schrift + pen erbij?"* (alleen 1× per sessie).
+2. Stijn werkt op papier.
+3. Trainer-veld: *"Wat is je eindantwoord?"* — Stijn typt alleen het antwoord (getal, breuk, expressie).
+4. Vergelijking: numeriek tot rounding-tolerantie; voor symbolische antwoorden meerdere `acceptedForms` (`x=5`, `5`, `x = 5`).
+5. **Goed** → groen + door.
+6. **Fout** → boek-uitwerking tonen in een vouwblok + *"Probeer nu deze vergelijkbare som"* (retry, telt voor mastery).
+7. **Fout op retry ook** → extra uitleg + 2 sommen extra op dit onderdeel toevoegen.
+
+**Logica:** opgavenpool gegroepeerd per onderdeel; engine houdt mastery-score per onderdeel bij; sessie eindigt zodra alle in-scope onderdelen ≥ ✓ of tijd om is.
+
 **Gebruikt door:** Wiskunde.
 
-### Categorie 3 — Begrip & verbanden
-**Methode:** trainer stelt open vragen ("leg uit waarom…", "wat gebeurt er als…"); Stijn typt antwoord in eigen woorden; LLM beoordeelt met een rubric (compleetheid, juistheid van kernbegrippen, verbanden). Mindmap-view voor kruisverbanden.
-**Logica:** vragenpool per onderwerp; rubric per vraag opgesteld bij content-extractie; mastery-score per onderwerp.
-**Fallback (budget op):** flashcard-modus met modelantwoord op de achterkant, user self-grades.
+### Categorie 3 — Begrip & verbanden — eerst samenvatting, daarna vragen
+
+**Werkwijze:** een Cat. 3 blok bestaat uit twee fases:
+
+**Fase 1 — Samenvatting lezen (verplicht voor coverage):**
+- Trainer toont een door de content-pipeline gegenereerde **samenvatting** (markdown, scrollable, ~300-600 woorden per onderwerp), met de kernbegrippen vetgedrukt en kruisverbanden expliciet ("zie ook: …").
+- Onderaan een **"Klaar met lezen"-knop** die pas actief wordt zodra Stijn tot ~80% van de tekst gescrold is (geen wegklikken).
+- Pas dán komt fase 2 beschikbaar.
+- Samenvatting is afgeleid uit de raw screenshots; validator controleert dat geen kernbegrip ontbreekt en niets is verzonnen.
+
+**Fase 2 — Open vragen (telt voor mastery):**
+- Trainer stelt open vragen ("leg uit waarom…", "wat gebeurt er als…").
+- Stijn typt antwoord in eigen woorden.
+- LLM (Haiku) beoordeelt met een rubric per vraag (compleetheid, juistheid van kernbegrippen, verbanden) en geeft korte feedback ("Goed: X, Y. Mist: Z. Probeer Z erbij te vertellen.").
+- Stijn kan herzien en opnieuw inleveren — hoogste score telt.
+- Minimaal **3 vragen per blok** om mastery telbaar te maken.
+
+**Mindmap-view (optioneel, in Voortgang-tab):** toont kruisverbanden tussen onderwerpen, gevoed door de tags in trainer-content.
+
+**Fallback (budget op):** vragen-fase valt terug op flashcard-modus met modelantwoord; samenvatting-fase blijft ongewijzigd (geen LLM nodig om bestaande markdown te tonen).
+
 **Gebruikt door:** Biologie (processen), Aardrijkskunde (systemen), Geschiedenis (oorzaak/gevolg).
 
-### Categorie 4 — Tekst & taalvaardigheid
-**Methode:** oefenteksten met meerkeuze + open vragen over hoofdgedachte/structuur/signaalwoorden; grammatica via toepassing (zinnen ontleden) i.p.v. regels uit hoofd.
-**Logica:** tekstcorpus + vragenset; LLM-beoordeling op open vragen.
-**Fallback (budget op):** flashcard-modus met modelantwoord, user self-grades. Meerkeuze-vragen blijven volledig functioneel (geen LLM nodig).
+### Categorie 4 — Tekst & taalvaardigheid — eerst tekst, daarna vragen
+
+**Werkwijze (twee fases, analoog aan Cat. 3):**
+
+**Fase 1 — Tekst lezen (verplicht voor coverage):**
+- Trainer toont de oefentekst (uit raw screenshots, of een door Stijn aangereikte tekst).
+- "Klaar met lezen"-knop wordt actief na ~80% scroll.
+
+**Fase 2 — Vragen (telt voor mastery):**
+- Meerkeuze-vragen over hoofdgedachte/structuur/signaalwoorden — geen LLM nodig.
+- Open vragen (bv. "vat de hoofdgedachte in 1 zin samen") — LLM-rubric zoals Cat. 3.
+- Grammatica via toepassing (zinnen ontleden) i.p.v. regels uit hoofd.
+
+**Fallback (budget op):** open vragen → flashcard-modus met modelantwoord; meerkeuze blijft volledig functioneel.
+
 **Gebruikt door:** Nederlands (primair), Engels (secundair).
 
 ### Mapping per vak
@@ -179,11 +327,13 @@ Naast leermethode-categorie krijgt elk vak een **moeilijkheidsgraad voor Stijn**
 
 **Wanneer draaien:** elke keer als raw of trainer-content verandert (CI-hook of `npm run validate`).
 
+**Budget:** validator-calls zijn `purpose: "development"` en tellen dus niet mee voor de runtime-pot (zie §11).
+
 ### Strengheid per content-type (hybride)
 
 | Content-type | Modus | Drempel | Reden |
 |---|---|---|---|
-| Wiskunde-opgaven (Cat 2) | **Strikt** | 0% afwijking | Klein, exact, gevaarlijk bij fout — verkeerd antwoord traint verkeerde reflex |
+| Wiskunde-opgaven (Cat 2) | **Strikt + verified** | 0% afwijking opgave-tekst; `verifiedBy` verplicht aanwezig; solver-confidence ≥ 0.70 anders Ralph-review (zie §4) | Klein, exact, gevaarlijk bij fout — verkeerd antwoord traint verkeerde reflex |
 | Cat. 1 flashcards (woordjes, topografie, jaartallen, vaktermen) | **Strikt** | 0% missing/hallucinated; **mismatch → warning** | Stijn leert exact wat erin staat — woord-mismatch (`la maison` vs `maison`) als warning loggen, niet blokkeren |
 | Cat. 3 begripsvragen + rubrics | **Soft** | ≤ 10% afwijking toegestaan | Rubric-formulering is subjectief; volledig blokkeren is contraproductief |
 | Cat. 4 tekstvragen | **Soft** | ≤ 10% afwijking toegestaan | Idem — vraagstijl-variatie is normaal |
@@ -281,6 +431,12 @@ Activiteit deze week is primair Cat. 1 + Cat. 2 (sommen-automatisering). Cat. 3/
 ### Output: dagweergave (Vandaag-scherm — app opent hierop)
 
 ```
+┌────────────────────────────────────────────────┐
+│ 🔥 4 dagen · 215 pt                            │
+│ Volgende mijlpaal: Zilver (nog 85 pt)          │
+│ Vandaag: 1/3 ✓                                 │
+└────────────────────────────────────────────────┘
+
 Dinsdag 10 juni — 1u15 PWW + 30 min HW
 ┌────────────────────────────────────────────────┐
 │ 17:00  Huiswerk (30 min)                  ○   │
@@ -290,10 +446,18 @@ Dinsdag 10 juni — 1u15 PWW + 30 min HW
 │ 20:00  Wiskunde §3.2 lin. verg. (25 min) [cat2]│
 │        ▶ START                            ✓    │
 │ 20:30  Biologie celdeling (25 min)       [cat3]│
-│        ▶ START                            ▶    │
+│        ▶ START                            ◐    │
 └────────────────────────────────────────────────┘
    ↑ tap "START" → opent trainer met juiste content geladen
+
+Legenda:  ○ open   ▶ bezig   ◐ deels (komt terug)   ✓ afgevinkt
 ```
+
+**Mini-progress widget bovenaan** is altijd zichtbaar (sticky bij scrollen). Toont:
+- 🔥 huidige streak in dagen
+- huidig puntentotaal
+- volgende mijlpaal + resterende punten
+- vandaag-voortgang `<voltooid>/<totaal> ✓`
 
 ### Blok-data-model
 
@@ -310,9 +474,15 @@ type Blok = {
   categorie?: 1 | 2 | 3 | 4;     // bij pww — bepaalt welke trainer-engine
   onderwerpen?: string[];        // filter op trainer-content, bv. ["hfst5-woordjes"]
   trainerDeeplink?: string;      // bv. "/trainer/frans/cat1?onderwerp=hfst5-woordjes&blok=..."
-  status: "open" | "bezig" | "klaar" | "overgeslagen";
+  status: "open" | "bezig" | "deels" | "afgevinkt" | "overgeslagen";
+  // resultaat (na sessie)
+  coverage?: number;             // 0-1, criterium-specifiek per cat (zie §8)
+  mastery?: number;              // 0-1, criterium-specifiek per cat
+  afgevinkt?: boolean;           // true wanneer beide drempels gehaald
 };
 ```
+
+> Een blok dat tijd-op is maar niet `afgevinkt` krijgt status `deels` en wordt door de planner-engine **opnieuw ingepland** in een volgend blok (zelfde vak/onderwerp, hoogste prioriteit). Pas bij `afgevinkt: true` is het echt klaar.
 
 ### Direct linken: planner → trainer
 
@@ -347,18 +517,35 @@ type Blok = {
 3. **Transparant.** Stijn ziet realtime hoeveel punten hij heeft, welke beloning de volgende mijlpaal is, en hoe ver hij nog moet.
 4. **Ouder configureert beloningen, kind ziet alleen mijlpalen.** Belonings-bedrag/object is door ouder in te stellen (niet door kind te wijzigen).
 
-### Puntensysteem (eerste voorstel — TBD)
+### Afvink-criterium per blok (✓)
 
-| Actie | Punten |
-|---|---|
-| Blok afgerond met mastery ≥ 80% | 10 |
-| Blok afgerond met mastery 50–79% | 5 |
-| Blok afgerond met mastery < 50% | 2 (deelname-punt) |
-| Dagdoel gehaald (alle geplande blokken) | +15 |
-| Weekstreak (7 dagen achter elkaar plan gehaald, rustdagen tellen mee) | +50 |
-| Vak "klaar voor PWW" (alle onderwerpen ≥ 80% mastery) | +75 |
+Een blok is **✓ afgevinkt** als **beide** criteria gehaald zijn. Coverage en mastery zijn cat-specifiek:
 
-> Per onderwerp telt het hoogste behaalde mastery-niveau, niet de optelsom van pogingen — opnieuw doen voor extra punten heeft geen zin (anti-grinding).
+| Cat | Coverage = | Mastery = | Mastery drempel |
+|---|---|---|---|
+| **Cat. 1** (woordjes, feiten) | Elk in-scope item ≥ 1× getoond | % items minstens 1× goed beantwoord in deze sessie | **80%** |
+| **Cat. 2** (wiskunde) | Elk onderdeel in scope ≥ 2 opgaven gepoogd | % onderdelen ✓ (2/2 of ≥3/4 na extra opgaven) | **70%** |
+| **Cat. 3** (begrip) | **Samenvatting gelezen** (klaar-knop na ~80% scroll) | Gem. rubric-score op de open vragen (min. 3 vragen beantwoord) | **60%** |
+| **Cat. 4** (tekst) | **Tekst gelezen** (klaar-knop) | % meerkeuze correct + gem. rubric op open vragen | **70%** |
+
+> Verschil per cat is bewust: Cat. 1 woordjes moet je gewoon kennen (strikt), Cat. 3 begrip is een graduele schaal (toleranter).
+
+Een blok dat de tijd haalt maar niet ✓ wordt **automatisch opnieuw ingepland** in een volgend blok (zie §7 blok-data-model `status: "deels"`).
+
+### Puntensysteem
+
+Punten zijn gekoppeld aan de ✓-status, niet aan blote "tijd in stoel":
+
+| Resultaat | Punten | Effect in UI |
+|---|---|---|
+| Blok ✓ + mastery ≥ 90% (uitmuntend) | **15** | groene vink + ★ |
+| Blok ✓ (mastery van drempel t/m 89%) | **10** | groene vink |
+| Geprobeerd, niet ✓ (deels) | **2** | half vinkje, blok keert terug |
+| Dagdoel gehaald (alle blokken ✓ vandaag) | +15 | confetti-burst (1×/dag) |
+| Weekstreak (7 dagen plan gehaald, rustdagen tellen mee, 1 freebie/week) | +50 | 🔥-icoon zichtbaar |
+| Vak "klaar voor PWW" (alle onderwerpen ≥ mastery-drempel) | +75 | vak-rij wordt groen op /voortgang |
+
+> Per onderwerp telt het hoogste behaalde mastery-niveau, niet de optelsom van pogingen — opnieuw doen voor extra punten heeft geen zin (anti-grinding). Het "niet ✓ → 2 punten + retry" pad ondervangt fairness: deelname wordt erkend, maar pas bij ✓ telt het echt.
 
 ### Mijlpalen & beloningen
 
@@ -407,11 +594,13 @@ progress/<user-id>/
   1. **Vandaag** (default) — dagweergave met blokken, prominente START-knop per blok die direct in de juiste trainer + content opent (zie §7).
   2. **Voortgang** — per vak een rij, % klaar, welke onderwerpen rood/oranje/groen.
   3. **Instellingen** — rooster, voorkeuren, beloningen.
-- **Trainerscherm:**
-  - Cat. 1: tekstveld voor typen, grote feedback (groen/rood/oranje), hint-modus bij herhaalde fouten.
-  - Cat. 2: opgave + werkvlak + invulveld; bij fout uitleg + 2 vergelijkbare sommen.
-  - Cat. 3/4: textarea voor open antwoord, daarna AI-rubric-feedback óf flashcard-fallback (zie §11).
-  - Subtiel timer-balkje per sessie (geen wegtellende klok in beeld — alleen markering bij 90% en einde).
+- **Trainerscherm per categorie:**
+  - **Cat. 1**: tekstveld voor typen, grote feedback (groen/rood/oranje), hint-modus bij herhaalde fouten.
+  - **Cat. 2**: opgave-titel + reminder "pen + schrift erbij?", invulveld voor **alleen eindantwoord** + boek-uitwerking in vouwblok bij fout. Onderdeel-progressie zichtbaar als kralenketting (●●○○).
+  - **Cat. 3**: twee-fase scherm — **Lees-fase** (samenvatting in markdown, "Klaar met lezen"-knop ontgrendelt na ~80% scroll) → **Vraag-fase** (textarea + AI-rubric óf flashcard-fallback).
+  - **Cat. 4**: idem als Cat. 3 maar lees-fase toont oefentekst i.p.v. samenvatting; vragen-fase mengt meerkeuze (geen LLM) en open vragen (LLM-rubric / fallback).
+- **Subtiel timer-balkje** per sessie (geen wegtellende klok in beeld — alleen markering bij 90% en einde).
+- **Afronding-modal** toont: ✓ of ◐, behaalde mastery, behaalde punten, knop "terug naar Vandaag".
 - **Lage cognitive load:** weinig kleuren, duidelijke knoppen, geen afleidende notificaties.
 - **Beloning zichtbaar maar subtiel:** punten-balkje op Vandaag-scherm, niet dominant.
 - **Tech:** React + Vite + Tailwind + shadcn/ui (zie §11).
@@ -431,9 +620,28 @@ progress/<user-id>/
 | LLM voor content-extractie + validator | **Claude Opus 4.8** (vision) | Eenmalig per content-update, kwaliteit boven kosten |
 | Hosting frontend | **GitHub Pages** (vanuit `apps/web/dist`) | Gratis, ingebouwde CI via Actions |
 | Domein | `<repo>.github.io/pww` (geen custom domein) | Geen voorkeur opgegeven |
-| Budget | **€100/maand cap** | Hard cap; bij overschrijding stopt LLM-routes met `429 quota_exceeded` |
+| Budget | **Runtime: €100/maand cap. Development: ongelimiteerd (warn-only).** | Twee gescheiden potten — zie subsectie *Budget — twee gescheiden potten* hieronder |
 
-### LLM-quota verdeling (Stijn-voorrang) + graceful degradation
+### Consequenties van GitHub Pages + Firebase
+
+- **Geen server-side rendering** — volledige SPA.
+- **Alle dynamische routes via Firestore + Cloud Functions** — geen Next.js API-routes.
+- **Anthropic-API key staat alleen in Cloud Functions**, nooit in frontend bundle.
+- **Routing via hash-based router** (`#/vandaag`) of `BrowserRouter` met fallback `404.html` (GitHub Pages SPA-trick).
+- **Validator (apps/validator)** draait als losse Node-CLI lokaal bij Ralph, niet in productie. Output committen naar repo. Productie-app trust de gevalideerde JSON.
+
+### Budget — twee gescheiden potten
+
+Het budget is opgesplitst in **runtime** (productie-app, gebruikers) en **development** (content-pipeline, validator, prompt-iteratie). Iedere LLM-call krijgt een `purpose`-tag (`"runtime"` of `"development"`) en wordt apart geboekt in Firestore (`usage/runtime/<month>` resp. `usage/development/<month>`).
+
+| Pot | Voor wat | Cap | Bij overschrijding |
+|---|---|---|---|
+| **Runtime** | Cat. 3/4 antwoordbeoordeling, eventuele live hints | **€100/maand hard cap** (soft warn €80) | Graceful degradation naar flashcard-modus |
+| **Development** | Content-pipeline (classify / extract / critique), validator (P3), admin-tools, prompt-iteratie | **Ongelimiteerd** | Alleen waarschuwingen, geen blokkering |
+
+> **Belangrijk:** content-extractie en validatie tellen **nooit** mee voor de runtime-pot. De pijplijn die screenshots verwerkt mag duur zijn — kwaliteit gaat boven kosten, eenmalig per editie.
+
+### Runtime-budget — quota-verdeling (Stijn-voorrang) + graceful degradation
 
 Stijn is de primaire gebruiker en krijgt voorrang. Klasgenoten delen de resterende pot.
 
@@ -463,19 +671,26 @@ Stijn is de primaire gebruiker en krijgt voorrang. Klasgenoten delen de resteren
 
 Cloud Function checkt bij elke LLM-call eerst de huidige usage in Firestore (`usage/<user-id>/current-month.json`) en retourneert bij overschrijding een `{ "mode": "flashcard-fallback" }` response in plaats van een error. Frontend rendert dan flashcard-view.
 
-### Consequenties van GitHub Pages + Firebase
+### Development-budget — waarschuwingsdrempels (geen cap)
 
-- **Geen server-side rendering** — volledige SPA.
-- **Alle dynamische routes via Firestore + Cloud Functions** — geen Next.js API-routes.
-- **Anthropic-API key staat alleen in Cloud Functions**, nooit in frontend bundle.
-- **Routing via hash-based router** (`#/vandaag`) of `BrowserRouter` met fallback `404.html` (GitHub Pages SPA-trick).
-- **Validator (apps/validator)** draait als losse Node-CLI lokaal bij Ralph, niet in productie. Output committen naar repo. Productie-app trust de gevalideerde JSON.
+Het ontwikkelbudget is ongelimiteerd, maar als het buiten proportie raakt wil Ralph een seintje. Een normale PWW-content-extractie (7 vakken × ~5 screenshots × multi-pass Opus + validator) kost rond de **€5–15 per editie**. Drempels voor waarschuwing:
 
-### Globaal budget-monitoring
+| Niveau | Drempel | Reden voor waarschuwing |
+|---|---|---|
+| Per pipeline-run (één `npm run extract …`) | **€25** | ≥3× verwachte kosten — waarschijnlijk retry-storm, looping agent, of per ongeluk dubbele/grote input |
+| Per dag totaal (development-pot) | **€50** | Normaal alleen bij stevige prompt-iteratie; daarboven check waarom |
+| Per maand totaal (development-pot) | **€150** | Een hele extra editie + flink itereren past hier nog onder; daarboven is iets structureel mis |
 
-Cloud Function logt elke LLM-call met cost-estimate naar Firestore-collection `usage`. Een dagelijkse job (of dashboard-pagina in app) toont running total per gebruiker en globaal. Cap-handhaving:
-- **Soft cap €80**: app toont waarschuwing voor Ralph.
-- **Hard cap €100**: alle LLM-calls retourneren `429` tot maand-reset.
+Waarschuwingen:
+- E-mail naar `ralph.holdorp@gmail.com`
+- Banner op admin-dashboard
+- **Geen automatische blokkering** — Ralph beslist of hij doorgaat
+
+### Runtime budget-monitoring
+
+Cloud Function logt elke runtime-LLM-call met cost-estimate naar `usage/runtime/<month>` in Firestore. Per dag-job aggregeert totalen en pusht naar admin-dashboard:
+- **Soft cap €80** (runtime/maand): waarschuwing voor Ralph.
+- **Hard cap €100** (runtime/maand): cat. 3/4 calls vallen terug op flashcard-modus (zie kwota-tabel hierboven).
 
 ## 12. Open punten — eerstvolgende iteratie
 
