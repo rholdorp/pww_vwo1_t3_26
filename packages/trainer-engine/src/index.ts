@@ -21,3 +21,6 @@ export {
 } from "./session.js";
 
 export type { SessionState } from "./session.js";
+
+export { bouwKaart } from "./kaart.js";
+export type { Kaart } from "./kaart.js";

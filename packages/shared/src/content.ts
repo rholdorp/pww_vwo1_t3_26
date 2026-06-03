@@ -17,6 +17,13 @@ export interface VocabItem {
   nl: string;
   /** Vreemde-taal-zijde (Frans/Engels). */
   vreemd: string;
+  /**
+   * Optioneel grammaticaal vorm-label (bv. "vrouwelijk", "mannelijk meervoud").
+   * Wordt in de richting nl->vreemd áchter de NL-prompt getoond om te tonen wélke
+   * vorm gevraagd wordt; het is nooit deel van het te typen antwoord. Bij
+   * vreemd->nl typt Stijn de kale `nl`-betekenis (bv. "mooi", niet "mooi (vrouwelijk)").
+   */
+  vorm?: string;
   /** Optionele context/voorbeeldzin of bron-subkop. */
   context?: string;
   /** Hoofdstuk waaruit dit item komt. */
