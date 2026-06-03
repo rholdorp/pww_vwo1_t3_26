@@ -28,8 +28,11 @@ pww:
 # Een vak is pas `compleet` (en wordt pas als vertrouwd in de app getoond) als ELK
 # scope-item alle drie de vinkjes heeft: gefotografeerd + geextraheerd + gevalideerd.
 # De scope-lijst (welke stof toetsbaar is) komt van Stijn/docent.
-# >>> Grotendeels TBD — vastleggen in sessie met Stijn op do 2026-06-04. <<<
-# Reeds geseede items zijn afgeleid uit de huidige screenshots en moeten do bevestigd worden.
+# >>> frans/geschiedenis/nederlands: scope vastgelegd uit officiële docentinfo
+#     (PWW-detailschermen). Nog open: engels, wiskunde, aardrijkskunde +
+#     screenshots maken — sessie met Stijn do 2026-06-04. <<<
+# LET OP frans: vocabulaire = Chapitre 6, maar onze screenshots/vocab.json zijn
+# Chapitre 5 (off-scope) — ch6-screenshots nog nodig.
 
 vakken:
   wiskunde:
@@ -44,16 +47,41 @@ vakken:
     secundaire_categorie: 4
     moeilijkheid: 3
     methode: TBD
+    # Officiële toetsscope (PWW 03-07, docentinfo). LET OP: de vocabulaire is
+    # Chapitre 6 (secties A/B/E). Al onze huidige screenshots + vocab.json zijn
+    # Chapitre 5 → OFF-SCOPE. Het ch5-werk blijft bewaard maar telt NIET voor de
+    # toets; ch6-screenshots (A/B/E) + grammatica-screenshots moeten nog gemaakt
+    # worden met Stijn. Grammaire = werkwoorden + vragen (niet de bn.-grammatica
+    # die we deden).
     scope:
-      # geseed uit huidige screenshots — bevestigen + aanvullen do 2026-06-04
-      - id: h5-phrases-cles
-        bron: "Chapitre 5, p.42"
-        gefotografeerd: true
+      - id: vocabulaire-ch6-abe
+        bron: "Chapitre 6, secties A/B/E (vocabulaire)"
+        gefotografeerd: false
         geextraheerd: false
         gevalideerd: false
-      - id: h5-grammaire-adjectieven
-        bron: "Chapitre 5, p.37"
-        gefotografeerd: true
+      - id: grammaire-er-werkwoorden
+        bron: "Grammaire 1: -ER-werkwoorden vertalen + in présent + passé composé plaatsen"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
+      - id: grammaire-onregelmatige-werkwoorden
+        bron: "Grammaire 2: avoir/être/aller/faire vertalen + in présent plaatsen"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
+      - id: grammaire-vraag-stellen
+        bron: "Grammaire 3: een vraag stellen in het Frans"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
+      - id: grammaire-vraagwoord-plaatsing
+        bron: "Grammaire 4: een vraagwoord op de juiste plek in de zin invoeren"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
+      - id: hoofdstukverhaal
+        bron: "Grammaire 5: hoofdstukverhaal (Chapitre 6)"
+        gefotografeerd: false
         geextraheerd: false
         gevalideerd: false
 
@@ -62,7 +90,15 @@ vakken:
     secundaire_categorie: 1
     moeilijkheid: 3
     methode: TBD
-    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+    # Officiële toetsscope (PWW 01-07, docentinfo). Productieve schrijfvaardigheid,
+    # geen extraheerbare vocab — er valt niets te fotograferen/valideren via de
+    # Cat 1-pipeline. Hoort bij Cat 4 (LLM, uitgesteld).
+    scope:
+      - id: informele-brief
+        bron: "Schrijfopdracht: informele brief aan de hoofdpersoon uit een gegeven tekstfragment"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
 
   engels:
     primaire_categorie: 1
@@ -76,7 +112,18 @@ vakken:
     secundaire_categorie: 1
     moeilijkheid: 2
     methode: TBD
-    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+    # Officiële toetsscope (PWW 03-07, docentinfo). Screenshots nog te maken.
+    scope:
+      - id: paragrafen-5.1-6.1
+        bron: "p.10-11, §5.1, 5.2, 5.3 (alleen 'De bekering van Clovis'), 5.4, 6.1"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
+      - id: vaardigheden
+        bron: "Leerdoelen/vaardigheden: tijdvakken & periodes, tijdbalk, primaire/secundaire bronnen, geschreven/ongeschreven bronnen, (beeld)bron, betrouwbaarheid van bronnen, oorzaak-gevolg, feit/mening, chronologie"
+        gefotografeerd: false
+        geextraheerd: false
+        gevalideerd: false
 
   biologie:
     primaire_categorie: 3
