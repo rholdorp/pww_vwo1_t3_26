@@ -77,3 +77,47 @@ describe("coverageVoorVak", () => {
     expect(r.gescandeImages).toBe(2);
   });
 });
+
+describe("coverageVoorVak — reverse (ongegrond/hallucinated)", () => {
+  it("alle trainer-zijden gegrond → niets ongegrond", () => {
+    const ocr = fakeOcr({
+      "img.jpg": [
+        "Met wie?", "Avec qui?",
+        "Dat is mijn neef.", "C'est mon cousin.",
+        "Hij draagt een bril.", "Il porte des lunettes.",
+      ],
+    });
+    const r = coverageVoorVak(["img.jpg"], ocr, trainer);
+    expect(r.ongegrond).toHaveLength(0);
+    expect(r.gegrond).toBe(r.trainerZijden);
+  });
+
+  it("FLAGT een trainer-zijde die tekstueel niet in de screenshots staat", () => {
+    // Trainer beweert een vertaling die nergens op de pagina voorkomt.
+    const fout = [
+      f("Met wie?", "Avec qui?"),
+      f("Ik hou van kaas.", "J'aime le fromage."),
+    ];
+    const ocr = fakeOcr({ "img.jpg": ["Met wie?", "Avec qui?"] });
+    const r = coverageVoorVak(["img.jpg"], ocr, fout);
+    const teksten = r.ongegrond.map((o) => o.tekst);
+    expect(teksten).toContain("Ik hou van kaas.");
+    expect(teksten).toContain("J'aime le fromage.");
+  });
+
+  it("LIMIET: een tekstueel nabije mismatch (ma/mon) glipt erdoor — daarvoor is --extract", () => {
+    // "C'est ma cousine" ≈ "C'est mon cousin": te dichtbij voor regel-matching.
+    // Bewust gedocumenteerd: subtiele mismatch vereist de paar-diff, niet OCR.
+    const fout = [f("Dat is mijn neef.", "C'est ma cousine.")];
+    const ocr = fakeOcr({ "img.jpg": ["Dat is mijn neef.", "C'est mon cousin."] });
+    const r = coverageVoorVak(["img.jpg"], ocr, fout);
+    expect(r.ongegrond).toHaveLength(0);
+  });
+
+  it("tolereert OCR-ruis bij het gronden van trainer-zijden", () => {
+    const ocr = fakeOcr({ "img.jpg": ["|l porte des lunettes.", "Hij draagt een bril."] });
+    const one = [f("Hij draagt een bril.", "Il porte des lunettes.")];
+    const r = coverageVoorVak(["img.jpg"], ocr, one);
+    expect(r.ongegrond).toHaveLength(0);
+  });
+});

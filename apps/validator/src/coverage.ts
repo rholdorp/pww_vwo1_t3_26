@@ -5,17 +5,27 @@ import { listRawImages } from "./rawExtractor.js";
 import { ocrImage } from "./ocr.js";
 
 /**
- * Onafhankelijke COVERAGE-laag.
+ * Onafhankelijke, KEYLESS validatie-laag o.b.v. macOS Vision OCR.
  *
- * OCR levert losse tekstregels (geen woordparen), dus dit past niet op het
- * paar-gebaseerde raw↔trainer-diff. In plaats daarvan beantwoordt deze laag een
- * andere, complementaire vraag: "staat élke regel gedrukte boektekst ook ergens
- * in de trainer-content?" Een regel die nergens matcht, is mógelijk gemiste stof
- * en wordt ter review voorgelegd (P8: liever een vals alarm dan stille gaten).
+ * OCR leest dezelfde screenshots met compleet andere technologie dan een
+ * taalmodel — een écht onafhankelijke tweede waarnemer, volledig on-device.
+ * Het levert losse tekstregels (geen NL↔vreemd-paren), dus we valideren
+ * bidirectioneel op regel-/zijde-niveau i.p.v. op paren:
  *
- * Het is bewust een review-aid, geen harde pass/fail op zichzelf: OCR pikt ook
- * koppen, paginanummers en uitlegtekst op die geen toetsbare paren zijn. De mens
- * bevestigt of een ongedekte regel echt ontbrekende stof is of slechts chrome.
+ *  - REVERSE (ongegrond): elke trainer-zijde (NL én vreemd) moet ergens in de
+ *    OCR-tekst voorkomen. Een zijde zonder match is ONGEGROND — de trainer
+ *    beweert iets dat niet zichtbaar in de screenshots staat (hallucinated).
+ *    Dit is het schone, harde FAIL-signaal.
+ *
+ *  - FORWARD (ongedekt): elke gedrukte OCR-regel hoort terug te komen in de
+ *    trainer. Een regel die nergens matcht is _mogelijk_ gemiste stof. Dit is
+ *    ruis-gevoelig (OCR pikt koppen, paginanummers en handschrift op), dus een
+ *    review-aid, geen harde gate.
+ *
+ * Samen vangen de twee richtingen het leeuwendeel van wat de paar-diff deed —
+ * zonder API-key. Wat we missen is de precieze koppeling bij een verkeerde
+ * vertaling (mismatch): die verschijnt hier als ongegrond + ongedekt los van
+ * elkaar i.p.v. als één gekoppelde mismatch.
  */
 
 const DEKKING_DREMPEL = 0.75;
@@ -29,11 +39,22 @@ export interface OngedekteRegel {
   score: number;
 }
 
+export interface OngegrondeZijde {
+  id?: string;
+  zijde: "nl" | "vreemd";
+  tekst: string;
+  besteMatch: string;
+  score: number;
+}
+
 export interface CoverageResultaat {
   gescandeImages: number;
   beschouwdeRegels: number;
   gedekt: number;
   ongedekt: OngedekteRegel[];
+  trainerZijden: number;
+  gegrond: number;
+  ongegrond: OngegrondeZijde[];
 }
 
 /** Verwijder OCR-opsommingstekens en witruimte aan het begin van een regel. */
@@ -48,42 +69,38 @@ function letterAantal(s: string): number {
   return (s.match(/\p{L}/gu) ?? []).length;
 }
 
-interface TrainerZijde {
-  tekst: string;
+interface Kandidaat {
   norm: string;
+  label: string;
 }
 
-function trainerZijden(facts: Fact[]): TrainerZijde[] {
-  const zijden: TrainerZijde[] = [];
-  for (const f of facts) {
-    zijden.push({ tekst: f.bronKey, norm: normKey(f.bronKey) });
-    zijden.push({ tekst: f.bronValue, norm: normKey(f.bronValue) });
-  }
-  return zijden;
-}
-
-/** Beste gelijkenis van een genormaliseerde regel met een trainer-zijde. */
-function besteDekking(norm: string, zijden: TrainerZijde[]): { tekst: string; score: number } {
-  let beste = { tekst: "", score: 0 };
-  for (const z of zijden) {
-    if (z.norm.length === 0) continue;
-    // Containment vangt regels die een trainer-zijde exact bevatten maar langer/
-    // korter zijn door OCR-ruis (Levenshtein-ratio zakt dan onterecht).
-    const bevat = norm.includes(z.norm) || z.norm.includes(norm);
-    const score = bevat ? Math.max(0.9, gelijkenis(norm, z.norm)) : gelijkenis(norm, z.norm);
-    if (score > beste.score) beste = { tekst: z.tekst, score };
+/**
+ * Beste gelijkenis van een genormaliseerde string met een lijst kandidaten.
+ * Containment vangt regels die een kandidaat exact bevatten maar langer/korter
+ * zijn door OCR-ruis (de Levenshtein-ratio zakt dan onterecht).
+ */
+function besteMatch(norm: string, kandidaten: Kandidaat[]): { label: string; score: number } {
+  let beste = { label: "", score: 0 };
+  for (const k of kandidaten) {
+    if (k.norm.length === 0) continue;
+    const bevat = norm.includes(k.norm) || k.norm.includes(norm);
+    const score = bevat ? Math.max(0.9, gelijkenis(norm, k.norm)) : gelijkenis(norm, k.norm);
+    if (score > beste.score) beste = { label: k.label, score };
   }
   return beste;
 }
 
-/**
- * Vergelijk de OCR van álle screenshots van een vak met de trainer-facts.
- * Distinct content-regels die geen trainer-zijde halen, komen in `ongedekt`.
- */
-export function coverageVoorVak(images: string[], ocr: (p: string) => string[], facts: Fact[]): CoverageResultaat {
-  const zijden = trainerZijden(facts);
-  const gezien = new Map<string, OngedekteRegel | null>(); // norm → ongedekt-record of null (gedekt)
+interface OcrRegel {
+  norm: string;
+  regel: string;
+  ruw: string;
+  bron: string;
+}
 
+/** Lees, schoon en dedupliceer de content-regels uit de OCR van alle screenshots. */
+function verzamelOcrRegels(images: string[], ocr: (p: string) => string[]): OcrRegel[] {
+  const gezien = new Set<string>();
+  const regels: OcrRegel[] = [];
   for (const imagePath of images) {
     const bron = basename(imagePath);
     for (const ruw of ocr(imagePath)) {
@@ -91,33 +108,73 @@ export function coverageVoorVak(images: string[], ocr: (p: string) => string[], 
       if (letterAantal(regel) < MIN_LETTERS) continue;
       const norm = normKey(regel);
       if (norm.length === 0 || gezien.has(norm)) continue;
-
-      const beste = besteDekking(norm, zijden);
-      if (beste.score >= DEKKING_DREMPEL) {
-        gezien.set(norm, null);
-      } else {
-        gezien.set(norm, { regel, ruw, bron, besteMatch: beste.tekst, score: beste.score });
-      }
+      gezien.add(norm);
+      regels.push({ norm, regel, ruw, bron });
     }
   }
+  return regels;
+}
 
+/** Bidirectionele OCR-validatie van een vak (zie module-docstring). */
+export function coverageVoorVak(
+  images: string[],
+  ocr: (p: string) => string[],
+  facts: Fact[],
+): CoverageResultaat {
+  const ocrRegels = verzamelOcrRegels(images, ocr);
+
+  const zijKandidaten: Kandidaat[] = [];
+  for (const f of facts) {
+    zijKandidaten.push({ norm: normKey(f.bronKey), label: f.bronKey });
+    zijKandidaten.push({ norm: normKey(f.bronValue), label: f.bronValue });
+  }
+  const regelKandidaten: Kandidaat[] = ocrRegels.map((r) => ({ norm: r.norm, label: r.regel }));
+
+  // FORWARD: OCR-regel → trainer-zijde.
   const ongedekt: OngedekteRegel[] = [];
   let gedekt = 0;
-  for (const record of gezien.values()) {
-    if (record === null) gedekt++;
-    else ongedekt.push(record);
+  for (const r of ocrRegels) {
+    const beste = besteMatch(r.norm, zijKandidaten);
+    if (beste.score >= DEKKING_DREMPEL) gedekt++;
+    else ongedekt.push({ regel: r.regel, ruw: r.ruw, bron: r.bron, besteMatch: beste.label, score: beste.score });
   }
   ongedekt.sort((a, b) => a.score - b.score);
 
+  // REVERSE: trainer-zijde → OCR-regel.
+  const ongegrond: OngegrondeZijde[] = [];
+  let gegrond = 0;
+  let trainerZijden = 0;
+  for (const f of facts) {
+    for (const [zijde, tekst] of [["nl", f.bronKey], ["vreemd", f.bronValue]] as const) {
+      trainerZijden++;
+      const beste = besteMatch(normKey(tekst), regelKandidaten);
+      if (beste.score >= DEKKING_DREMPEL) {
+        gegrond++;
+      } else {
+        ongegrond.push({
+          ...(f.id !== undefined ? { id: f.id } : {}),
+          zijde,
+          tekst,
+          besteMatch: beste.label,
+          score: beste.score,
+        });
+      }
+    }
+  }
+  ongegrond.sort((a, b) => a.score - b.score);
+
   return {
     gescandeImages: images.length,
-    beschouwdeRegels: gezien.size,
+    beschouwdeRegels: ocrRegels.length,
     gedekt,
     ongedekt,
+    trainerZijden,
+    gegrond,
+    ongegrond,
   };
 }
 
-/** Convenience-wrapper: lijst de screenshots en draai de OCR-coverage voor een vak. */
+/** Convenience-wrapper: lijst de screenshots en draai de OCR-validatie voor een vak. */
 export async function gatherCoverage(
   repoRoot: string,
   editie: string,

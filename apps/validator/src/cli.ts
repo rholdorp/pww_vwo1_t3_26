@@ -6,7 +6,7 @@ import type { VocabBestand } from "@pww/shared";
 import type { CompareResult, Verdict } from "./types.js";
 import { extractTrainerFacts } from "./facts.js";
 import { compareFacts } from "./compare.js";
-import { verdictCat1 } from "./verdict.js";
+import { verdictCat1, verdictCat1Ocr } from "./verdict.js";
 import { renderReport, schrijfRapport } from "./report.js";
 import { AnthropicRawExtractor, gatherRawFacts, type RawExtractor } from "./rawExtractor.js";
 import { gatherCoverage, type CoverageResultaat } from "./coverage.js";
@@ -60,63 +60,68 @@ async function main(): Promise<number> {
     extractor,
   );
 
-  // Onafhankelijke OCR-coverage (macOS Vision, geen keys). Draait altijd als de
-  // host het ondersteunt — los van de API-gebaseerde paar-extractie hierboven.
+  // PRIMAIRE, KEYLESS laag: onafhankelijke OCR-validatie (macOS Vision).
   let coverage: CoverageResultaat | undefined;
   if (ocrBeschikbaar()) {
     try {
       coverage = await gatherCoverage(repoRoot, editie, vak, trainerFacts);
     } catch (err) {
-      console.error(`OCR-coverage overgeslagen: ${err instanceof Error ? err.message : err}`);
+      console.error(`OCR-validatie overgeslagen: ${err instanceof Error ? err.message : err}`);
     }
   } else {
-    console.error("OCR-coverage niet beschikbaar op deze host (vereist macOS + clang).");
+    console.error("OCR-validatie niet beschikbaar op deze host (vereist macOS + clang).");
   }
 
-  // P8: zonder onafhankelijke extractie van álle screenshots kan completeness niet worden
-  // gegarandeerd → blokkeer en wees er eerlijk over. Zonder enige raw-extractie is de diff
-  // betekenisloos (alles zou "hallucinated" lijken), dus die slaan we dan over.
-  let result: CompareResult;
+  // OPTIONELE aanvulling: API-paar-diff. Voegt precieze mismatch-detectie toe die
+  // de regel-gebaseerde OCR-laag niet kan; nooit vereist.
+  const result: CompareResult =
+    extract && gebruikteImages > 0
+      ? compareFacts(trainerFacts, rawFacts)
+      : { missing: [], hallucinated: [], mismatches: [], matched: [] };
+
   let verdict: Verdict;
-  if (gebruikteImages === 0) {
-    result = { missing: [], hallucinated: [], mismatches: [], matched: [] };
+  if (coverage) {
+    verdict = verdictCat1Ocr(vak, coverage);
+    if (extract && gebruikteImages > 0) {
+      const pv = verdictCat1(vak, result);
+      verdict.warnings.push(...pv.warnings);
+      verdict.fouten.push(...pv.fouten.map((f) => `paar-diff: ${f}`));
+      verdict.pass = verdict.pass && pv.pass;
+    } else if (extract && ontbrekend.length > 0) {
+      verdict.warnings.push(
+        `${ontbrekend.length} screenshot(s) niet via de API geëxtraheerd (cache-miss / geen key) — OCR-laag dekt ze wel.`,
+      );
+    }
+  } else if (extract && gebruikteImages > 0) {
+    verdict = verdictCat1(vak, result);
+  } else {
     verdict = {
       vak,
       strengheid: "strikt",
       pass: false,
       fouten: [
-        `Geen onafhankelijke raw-extractie beschikbaar voor ${vak}. Draai met --extract (vereist ANTHROPIC_API_KEY).`,
+        `Geen onafhankelijke validatie beschikbaar voor ${vak}: OCR vereist macOS + clang, of draai met --extract (ANTHROPIC_API_KEY).`,
       ],
       warnings: [],
     };
-  } else {
-    result = compareFacts(trainerFacts, rawFacts);
-    verdict = verdictCat1(vak, result);
-    if (ontbrekend.length > 0) {
-      verdict.pass = false;
-      verdict.fouten.unshift(
-        `${ontbrekend.length} screenshot(s) niet onafhankelijk geëxtraheerd: ${ontbrekend.join(", ")}. Draai met --extract.`,
-      );
-    }
-  }
-
-  if (coverage && coverage.ongedekt.length > 0) {
-    verdict.warnings.push(
-      `OCR-coverage: ${coverage.ongedekt.length} regel(s) niet teruggevonden in de trainer — ` +
-        `controleer in het rapport of dit toetsbare stof is.`,
-    );
   }
 
   const inhoud = renderReport(verdict, result, { rawImages: gebruikteImages, ...(coverage ? { coverage } : {}) });
   const rapportPad = await schrijfRapport(repoRoot, vak, inhoud);
 
   const status = verdict.pass ? "PASS" : "FAIL";
-  console.log(`[${status}] ${vak} — matched ${result.matched.length}, missing ${result.missing.length}, hallucinated ${result.hallucinated.length}, mismatch ${result.mismatches.length}`);
+  console.log(`[${status}] ${vak}`);
   for (const f of verdict.fouten) console.log(`  ✗ ${f}`);
   for (const w of verdict.warnings) console.log(`  ⚠ ${w}`);
   if (coverage) {
     console.log(
-      `OCR-coverage: ${coverage.gedekt}/${coverage.beschouwdeRegels} regels gedekt, ${coverage.ongedekt.length} ter review (${coverage.gescandeImages} screenshots).`,
+      `OCR-validatie: ${coverage.gegrond}/${coverage.trainerZijden} trainer-zijden gegrond, ` +
+        `${coverage.gedekt}/${coverage.beschouwdeRegels} OCR-regels gedekt (${coverage.gescandeImages} screenshots).`,
+    );
+  }
+  if (extract && gebruikteImages > 0) {
+    console.log(
+      `Paar-diff: matched ${result.matched.length}, missing ${result.missing.length}, hallucinated ${result.hallucinated.length}, mismatch ${result.mismatches.length}.`,
     );
   }
   console.log(`Rapport: ${rapportPad}`);

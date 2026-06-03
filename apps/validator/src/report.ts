@@ -13,26 +13,37 @@ function paarRegel(p: FactPaar): string {
 }
 
 function coverageSectie(c: CoverageResultaat): string[] {
-  const pct = c.beschouwdeRegels === 0 ? 0 : Math.round((c.gedekt / c.beschouwdeRegels) * 100);
+  const dekPct = c.beschouwdeRegels === 0 ? 0 : Math.round((c.gedekt / c.beschouwdeRegels) * 100);
+  const grondPct = c.trainerZijden === 0 ? 0 : Math.round((c.gegrond / c.trainerZijden) * 100);
   const lines = [
-    "## 🔍 Onafhankelijke OCR-coverage (macOS Vision)",
+    "## 🔍 Onafhankelijke OCR-validatie (macOS Vision, keyless)",
     "",
-    "Een tweede, onafhankelijke waarnemer (on-device OCR — andere technologie dan het",
-    "extractie-LLM) leest de screenshots opnieuw. Elke gedrukte tekstregel hoort terug te",
-    "komen in de trainer-content. Ongedekte regels zijn _mogelijk_ gemiste stof en vragen om",
-    "menselijke review — koppen, paginanummers en uitleg horen hier ook bij.",
+    "Een onafhankelijke tweede waarnemer (on-device OCR — andere technologie dan een",
+    "taalmodel) leest dezelfde screenshots en valideert bidirectioneel op regel-/zijde-niveau:",
+    "",
+    "- **ongegrond** (FAIL): trainer-zijde niet terug te vinden in de screenshots — de trainer",
+    "  beweert iets zonder zichtbare bron (hallucinated).",
+    "- **ongedekt** (review): gedrukte OCR-regel niet in de trainer — _mogelijk_ gemiste stof,",
+    "  maar ruis-gevoelig (koppen, paginanummers, handschrift).",
     "",
     `- screenshots ge-OCR'd: ${c.gescandeImages}`,
-    `- beschouwde tekstregels: ${c.beschouwdeRegels}`,
-    `- gedekt door trainer-content: ${c.gedekt} (${pct}%)`,
-    `- ongedekt (review): ${c.ongedekt.length}`,
+    `- trainer-zijden gegrond: ${c.gegrond}/${c.trainerZijden} (${grondPct}%) — ongegrond: ${c.ongegrond.length}`,
+    `- OCR-regels gedekt: ${c.gedekt}/${c.beschouwdeRegels} (${dekPct}%) — ongedekt: ${c.ongedekt.length}`,
     "",
   ];
+  if (c.ongegrond.length > 0) {
+    lines.push("### ❌ Ongegrond — trainer-tekst zonder bron in de screenshots");
+    for (const o of c.ongegrond) {
+      const id = o.id ? `${o.id} · ` : "";
+      const match = o.besteMatch ? ` _(dichtstbij: ${o.besteMatch} @ ${o.score.toFixed(2)})_` : "";
+      lines.push(`- ${id}${o.zijde}: \`${o.tekst}\`${match}`);
+    }
+    lines.push("");
+  }
   if (c.ongedekt.length > 0) {
     lines.push("### Ongedekte regels — controleer of dit toetsbare stof is");
     for (const o of c.ongedekt) {
-      const score = o.score.toFixed(2);
-      const match = o.besteMatch ? ` _(dichtstbij: ${o.besteMatch} @ ${score})_` : "";
+      const match = o.besteMatch ? ` _(dichtstbij: ${o.besteMatch} @ ${o.score.toFixed(2)})_` : "";
       lines.push(`- \`${o.regel}\` — ${o.bron}${match}`);
     }
     lines.push("");
@@ -53,13 +64,23 @@ export function renderReport(
     `**Status:** ${status} · strengheid: ${v.strengheid} · gegenereerd ${new Date().toISOString()}`,
     "",
     "## Samenvatting",
-    `- screenshots vergeleken: ${opts.rawImages}`,
-    `- gekoppeld (correct): ${r.matched.length}`,
-    `- missing (ontbreekt in trainer): ${r.missing.length}`,
-    `- hallucinated (niet in screenshots): ${r.hallucinated.length}`,
-    `- mismatch (andere waarde): ${r.mismatches.length}`,
-    "",
   ];
+  if (opts.coverage) {
+    const c = opts.coverage;
+    lines.push(
+      `- OCR-validatie (keyless): ${c.gegrond}/${c.trainerZijden} trainer-zijden gegrond, ` +
+        `${c.ongegrond.length} ongegrond, ${c.ongedekt.length} OCR-regels ter review`,
+    );
+  }
+  if (opts.rawImages > 0) {
+    lines.push(
+      `- API-paar-diff: ${opts.rawImages} screenshots · matched ${r.matched.length}, ` +
+        `missing ${r.missing.length}, hallucinated ${r.hallucinated.length}, mismatch ${r.mismatches.length}`,
+    );
+  } else {
+    lines.push("- API-paar-diff: niet gedraaid (geen --extract)");
+  }
+  lines.push("");
 
   if (v.fouten.length > 0) {
     lines.push("## ❌ Blokkerende fouten", ...v.fouten.map((m) => `- ${m}`), "");
