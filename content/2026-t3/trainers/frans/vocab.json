@@ -1140,6 +1140,36 @@
       "hoofdstuk": "5",
       "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
       "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-106",
+      "nl": "mooi",
+      "vreemd": "beau",
+      "context": "Onregelmatige vorm: beau / belle / beaux / belles",
+      "hoofdstuk": "5",
+      "acceptedAnswers": ["beau", "belle", "beaux", "belles"],
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (4).jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-woord-107",
+      "nl": "nieuw",
+      "vreemd": "nouveau",
+      "context": "Onregelmatige vorm: nouveau / nouvelle / nouveaux / nouvelles",
+      "hoofdstuk": "5",
+      "acceptedAnswers": ["nouveau", "nouvelle", "nouveaux", "nouvelles"],
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (4).jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-woord-108",
+      "nl": "oud",
+      "vreemd": "vieux",
+      "context": "Onregelmatige vorm: vieux / vieille / vieux / vieilles",
+      "hoofdstuk": "5",
+      "acceptedAnswers": ["vieux", "vieille", "vieilles"],
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (4).jpeg",
+      "confidence": 0.9
     }
   ]
 }
