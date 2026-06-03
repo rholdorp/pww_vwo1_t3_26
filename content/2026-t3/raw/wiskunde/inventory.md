@@ -112,3 +112,32 @@ H8-afsluiting: gemengde opgaven, samenvatting, diagnostische toets, herhaling. G
 | `wiskunde-h08-p139.jpg` | 139 | Herhaling | opgaven | Herhaling §8.3 Machten + fig 8.19 |
 | `wiskunde-h08-p140.jpg` | 140 | Herhaling | opgaven | Herhaling §8.4 Wetenschappelijke notatie |
 | `wiskunde-h08-p141.jpg` | 141 | Herhaling | opgaven | Herhaling §8.5 Machten en letters |
+
+---
+
+## Batch 5 (foto's 41-50, originele timestamps 14:19:45 – 14:20:45)
+
+**H8 → H9 overgang gevonden op foto 45 (p146).**
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h08-p142.jpg` | 142 | Herhaling/Extra | opgaven | Laatste Herhaling-blok (vermenigvuldigen/delen machten) + hint-blok |
+| `wiskunde-h08-p143.jpg` | 143 | Onderzoek | praktijk | "Onderzoek: Het binaire stelsel" — intro + tabel machten van 2 |
+| `wiskunde-h08-p144.jpg` | 144 | Onderzoek | praktijk | Onderzoek vervolg — decimaal↔binair conversie + opg |
+| `wiskunde-h08-p145.jpg` | 145 | Onderzoek | praktijk | "Binaire puzzel" — binary sudoku-achtige puzzel + opg |
+| `wiskunde-h09-p146.jpg` | 146 | H9 opener | opener | **H9 "Symmetrie en vlakke figuren"** — chapter intro (vliegers-foto) |
+| `wiskunde-h09-p147.jpg` | 147 | Voorkennis | voorkennis | "Voorkennis Loodlijnen" — Theorie A "Loodlijnen tekenen" + opg 1-2 |
+| `wiskunde-h09-p148.jpg` | 148 | §9.1 | theorie | §9.1 "Lijnsymmetrie" — Theorie A "Spiegelen" + fig 9.3-9.5 |
+| `wiskunde-h09-p149.jpg` | 149 | §9.1 | opgaven | §9.1 opg — verkeersborden symmetrie (fig 9.6-9.7) |
+| `wiskunde-h09-p150.jpg` | 150 | §9.1 | opgaven | §9.1 opg vervolg — symmetrische figuren herkennen (fig 9.8-9.13) |
+| `wiskunde-h09-p151.jpg` | 151 | §9.1 | theorie | §9.1 — Theorie B "Spiegelbeeld tekenen" — driehoek-spiegeling |
+
+### Nieuwe `onderdelen` uit batch 5
+
+H9 §9.1 (Lijnsymmetrie):
+- **§9.1a** — Lijnsymmetrie herkennen / spiegelen (Theorie A)
+- **§9.1b** — Spiegelbeeld tekenen (Theorie B)
+
+Voorkennis H9 (Loodlijnen) telt als voorbereiding, geen eigen onderdeel.
+
+> H8-scope is hiermee **compleet** (p103-p145). Vanaf p146 begint H9.
