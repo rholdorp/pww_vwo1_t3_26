@@ -6,8 +6,16 @@
   "description": "Generieke trainer-engines per categorie (Cat 1 vocab, Cat 2 wiskunde, Cat 3 begrip, Cat 4 tekst). Zie SPEC.md §5.",
   "main": "./src/index.ts",
   "scripts": {
-    "build": "echo 'TODO: tsc' && exit 0",
+    "build": "tsc -b",
+    "typecheck": "tsc -b",
     "lint": "echo 'TODO: eslint' && exit 0",
-    "test": "echo 'TODO: vitest' && exit 0"
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pww/shared": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
   }
 }

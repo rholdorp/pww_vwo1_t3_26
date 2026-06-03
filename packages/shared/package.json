@@ -6,8 +6,12 @@
   "description": "Gedeelde types en utils tussen apps en packages.",
   "main": "./src/index.ts",
   "scripts": {
-    "build": "echo 'TODO: tsc' && exit 0",
+    "build": "tsc -b",
+    "typecheck": "tsc -b",
     "lint": "echo 'TODO: eslint' && exit 0",
-    "test": "echo 'TODO: vitest' && exit 0"
+    "test": "echo 'no tests (types only)' && exit 0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
   }
 }

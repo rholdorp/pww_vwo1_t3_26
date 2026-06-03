@@ -1,0 +1,198 @@
+{
+  "vak": "frans",
+  "hoofdstuk": "5",
+  "richtingen": ["nl->vreemd", "vreemd->nl"],
+  "normalisatie": "frans",
+  "items": [
+    {
+      "id": "frans-h5-phrases-001",
+      "nl": "Heb je een leuk weekend gehad?",
+      "vreemd": "Tu as passé un bon weekend?",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-002",
+      "nl": "Ja, ik heb mijn verjaardag gevierd.",
+      "vreemd": "Oui, j'ai fêté mon anniversaire.",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-003",
+      "nl": "Ja, wij hebben een film gekeken.",
+      "vreemd": "Oui, on a regardé un film.",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-004",
+      "nl": "Met wie?",
+      "vreemd": "Avec qui?",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-005",
+      "nl": "Met mijn vrienden en Enzo.",
+      "vreemd": "Avec mes copains et Enzo.",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-006",
+      "nl": "Wie is dat, Enzo?",
+      "vreemd": "C'est qui, Enzo?",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-007",
+      "nl": "Dat is mijn neef.",
+      "vreemd": "C'est mon cousin.",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-008",
+      "nl": "Was het leuk?",
+      "vreemd": "C'était bien?",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-009",
+      "nl": "Ja, het was super.",
+      "vreemd": "Oui, c'était génial.",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-010",
+      "nl": "Wanneer ben je jarig?",
+      "vreemd": "C'est quand ton anniversaire?",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-011",
+      "nl": "Op 4 april.",
+      "vreemd": "C'est le quatre avril.",
+      "context": "Parler de ses activités",
+      "hoofdstuk": "5",
+      "acceptedAnswers": ["C'est le quatre avril.", "C'est le 4 avril."],
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-phrases-012",
+      "nl": "Hoe ziet jouw broer eruit?",
+      "vreemd": "Ton frère est comment?",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-013",
+      "nl": "Mijn broer heeft bruin haar.",
+      "vreemd": "Mon frère a les cheveux bruns.",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-014",
+      "nl": "Hij heeft blauwe ogen.",
+      "vreemd": "Il a les yeux bleus.",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-015",
+      "nl": "Hij draagt een bril.",
+      "vreemd": "Il porte des lunettes.",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-016",
+      "nl": "Is hij groot?",
+      "vreemd": "Il est grand?",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-017",
+      "nl": "Nee, hij is klein.",
+      "vreemd": "Non, il est petit.",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-018",
+      "nl": "Is hij aardig?",
+      "vreemd": "Il est sympa?",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-019",
+      "nl": "Ja, en hij is grappig.",
+      "vreemd": "Oui, et il est drôle.",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-020",
+      "nl": "Houdt hij van sport?",
+      "vreemd": "Il aime le sport?",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-phrases-021",
+      "nl": "Ja, hij houdt van tennis.",
+      "vreemd": "Oui, il aime le tennis.",
+      "context": "Décrire quelqu'un",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
+      "confidence": 0.95
+    }
+  ]
+}

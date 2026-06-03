@@ -5,10 +5,25 @@
   "type": "module",
   "description": "CLI-validator: vergelijkt trainer-content met raw screenshots. Zie SPEC.md §6.",
   "bin": {
-    "pww-validate": "./src/index.js"
+    "pww-validate": "./src/cli.ts"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "tsx src/cli.ts",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
     "lint": "echo 'TODO: eslint' && exit 0"
+  },
+  "dependencies": {
+    "@pww/shared": "*",
+    "@pww/trainer-engine": "*"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.32.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
   }
 }

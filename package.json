@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "dev": "npm run dev --workspace=apps/web",
-    "validate": "npm run start --workspace=apps/validator",
+    "validate": "npm run start --workspace=apps/validator --",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present"
   },

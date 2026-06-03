@@ -40,5 +40,12 @@ coverage/
 # validator output (regenerated, niet committen tenzij expliciet)
 apps/validator/reports/
 
+# native OCR-binary (gecompileerd uit native/ocr.m; bron wél committen)
+apps/validator/native/ocr
+
+# content pipeline cache (regenerated); commit alleen ralph-approvals in verified/
+content/*/cache/
+!content/*/cache/verified/
+
 # local progress data (productie staat in Firestore)
 progress/local/
