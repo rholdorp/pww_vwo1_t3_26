@@ -141,3 +141,30 @@ H9 §9.1 (Lijnsymmetrie):
 Voorkennis H9 (Loodlijnen) telt als voorbereiding, geen eigen onderdeel.
 
 > H8-scope is hiermee **compleet** (p103-p145). Vanaf p146 begint H9.
+
+---
+
+## Batch 6 (foto's 51-60, originele timestamps 14:20:50 – 14:21:46)
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h09-p152.jpg` | 152 | §9.1 | opgaven | §9.1 vervolg — driehoek spiegelen om een lijn, opg |
+| `wiskunde-h09-p153.jpg` | 153 | §9.1 | opgaven | §9.1 vervolg — meer spiegelopgaven met driehoeken |
+| `wiskunde-h09-p154.jpg` | 154 | §9.2 | theorie | §9.2 "Draaisymmetrie" — Theorie A + figuren met ster/cirkel |
+| `wiskunde-h09-p155.jpg` | 155 | §9.2 | theorie+opgaven | §9.2 — Theorie B Draaiingshoek + logos (Mitsubishi/Adidas/Chanel) |
+| `wiskunde-h09-p156.jpg` | 156 | §9.2 | theorie+opgaven | §9.2 — Theorie C "Puntsymmetrie" + symmetrische symbolen (fig 9.23) |
+| `wiskunde-h09-p157.jpg` | 157 | §9.2 | opgaven | §9.2 — "Spiegelen in een punt" + driehoek opg |
+| `wiskunde-h09-p158.jpg` | 158 | §9.2 | opgaven | §9.2 vervolg — figuren spiegelen in een punt |
+| `wiskunde-h09-p159.jpg` | 159 | §9.2 | opgaven | §9.2 vervolg — diverse symbool-symmetrie (tabel met ~ @ # $ % etc.) |
+| `wiskunde-h09-p160.jpg` | 160 | §9.2 | opgaven | §9.2 vervolg — natuurfoto's (bloemen, vlinder, sneeuwvlok) + driehoek opg |
+| `wiskunde-h09-p161.jpg` | 161 | §9.3 | theorie | §9.3 "Bijzondere driehoeken" — Theorie A (gelijkbenig/gelijkzijdig/rechthoekig) |
+
+### Nieuwe `onderdelen` uit batch 6
+
+§9.2 (Draaisymmetrie + Puntsymmetrie):
+- **§9.2a** — Draaisymmetrie herkennen (Theorie A)
+- **§9.2b** — Draaiingshoek bepalen (Theorie B)
+- **§9.2c** — Puntsymmetrie herkennen + tekenen (Theorie C / "spiegelen in een punt")
+
+§9.3 (Bijzondere driehoeken):
+- **§9.3a** — Driehoeken classificeren naar zijden/hoeken (Theorie A)
