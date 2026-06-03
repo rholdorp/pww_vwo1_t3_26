@@ -193,6 +193,953 @@
       "hoofdstuk": "5",
       "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41.jpeg",
       "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-001",
+      "nl": "de bril",
+      "vreemd": "les lunettes",
+      "context": "Uiterlijk en kleuren (v mv)",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-002",
+      "nl": "het haar",
+      "vreemd": "les cheveux",
+      "context": "Uiterlijk en kleuren (m mv)",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-003",
+      "nl": "de ogen",
+      "vreemd": "les yeux",
+      "context": "Uiterlijk en kleuren (m mv)",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-004",
+      "nl": "van gemiddelde lengte",
+      "vreemd": "de taille moyenne",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-005",
+      "nl": "dragen",
+      "vreemd": "porter",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-006",
+      "nl": "hij is 1,75m lang",
+      "vreemd": "Il mesure 1m75",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-007",
+      "nl": "dik (mannelijk)",
+      "vreemd": "gros",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-008",
+      "nl": "dik (vrouwelijk)",
+      "vreemd": "grosse",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-009",
+      "nl": "duur, lieve (mannelijk)",
+      "vreemd": "cher",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-010",
+      "nl": "duur, lieve (vrouwelijk)",
+      "vreemd": "chère",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-011",
+      "nl": "dus",
+      "vreemd": "donc",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-012",
+      "nl": "misschien",
+      "vreemd": "peut-être",
+      "context": "Uiterlijk en kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-013",
+      "nl": "wit (mannelijk)",
+      "vreemd": "blanc",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-014",
+      "nl": "wit (vrouwelijk)",
+      "vreemd": "blanche",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-015",
+      "nl": "zwart (mannelijk)",
+      "vreemd": "noir",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-016",
+      "nl": "zwart (vrouwelijk)",
+      "vreemd": "noire",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-017",
+      "nl": "blauw (mannelijk)",
+      "vreemd": "bleu",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-018",
+      "nl": "blauw (vrouwelijk)",
+      "vreemd": "bleue",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-019",
+      "nl": "rood",
+      "vreemd": "rouge",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-020",
+      "nl": "geel",
+      "vreemd": "jaune",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-021",
+      "nl": "groen (mannelijk)",
+      "vreemd": "vert",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-022",
+      "nl": "groen (vrouwelijk)",
+      "vreemd": "verte",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-023",
+      "nl": "grijs (mannelijk)",
+      "vreemd": "gris",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-024",
+      "nl": "grijs (vrouwelijk)",
+      "vreemd": "grise",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-025",
+      "nl": "bruin (ogen)",
+      "vreemd": "marron",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-026",
+      "nl": "bruin (haar, mannelijk)",
+      "vreemd": "brun",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-027",
+      "nl": "bruin (haar, vrouwelijk)",
+      "vreemd": "brune",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-028",
+      "nl": "rossig (haar, mannelijk)",
+      "vreemd": "roux",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-029",
+      "nl": "rossig (haar, vrouwelijk)",
+      "vreemd": "rousse",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-030",
+      "nl": "blond (mannelijk)",
+      "vreemd": "blond",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-031",
+      "nl": "blond (vrouwelijk)",
+      "vreemd": "blonde",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-032",
+      "nl": "roze",
+      "vreemd": "rose",
+      "context": "Kleuren",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-033",
+      "nl": "alleen (mannelijk)",
+      "vreemd": "seul",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-034",
+      "nl": "alleen (vrouwelijk)",
+      "vreemd": "seule",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-035",
+      "nl": "vervelend (mannelijk)",
+      "vreemd": "embêtant",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-036",
+      "nl": "vervelend (vrouwelijk)",
+      "vreemd": "embêtante",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-037",
+      "nl": "aardig, leuk",
+      "vreemd": "sympa",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-038",
+      "nl": "sportief (mannelijk)",
+      "vreemd": "sportif",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-039",
+      "nl": "sportief (vrouwelijk)",
+      "vreemd": "sportive",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-040",
+      "nl": "samen",
+      "vreemd": "ensemble",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-041",
+      "nl": "dezelfde, hetzelfde",
+      "vreemd": "le/la même",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-042",
+      "nl": "verschillend (mannelijk)",
+      "vreemd": "différent",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-043",
+      "nl": "verschillend (vrouwelijk)",
+      "vreemd": "différente",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-044",
+      "nl": "een beetje",
+      "vreemd": "un peu",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-045",
+      "nl": "eerder, (daar)voor",
+      "vreemd": "avant",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-046",
+      "nl": "behalve",
+      "vreemd": "sauf",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-047",
+      "nl": "verlegen",
+      "vreemd": "timide",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-048",
+      "nl": "grappig (mannelijk)",
+      "vreemd": "rigolo",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-049",
+      "nl": "grappig (vrouwelijk)",
+      "vreemd": "rigolote",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-050",
+      "nl": "rustig",
+      "vreemd": "calme",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-051",
+      "nl": "serieus (mannelijk)",
+      "vreemd": "sérieux",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-052",
+      "nl": "serieus (vrouwelijk)",
+      "vreemd": "sérieuse",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-053",
+      "nl": "het grapje",
+      "vreemd": "la blague",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-054",
+      "nl": "bijna",
+      "vreemd": "presque",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-055",
+      "nl": "soms",
+      "vreemd": "parfois",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-056",
+      "nl": "moeilijk",
+      "vreemd": "difficile",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-057",
+      "nl": "delen",
+      "vreemd": "partager",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-058",
+      "nl": "vertellen",
+      "vreemd": "raconter",
+      "context": "Karakter en bijwoorden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (1).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-059",
+      "nl": "de broer",
+      "vreemd": "le frère",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-060",
+      "nl": "de zus",
+      "vreemd": "la sœur",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-woord-061",
+      "nl": "de neef",
+      "vreemd": "le cousin",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-062",
+      "nl": "de nicht",
+      "vreemd": "la cousine",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-063",
+      "nl": "de opa",
+      "vreemd": "le grand-père",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-064",
+      "nl": "de oma",
+      "vreemd": "la grand-mère",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-065",
+      "nl": "grappig",
+      "vreemd": "drôle",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-066",
+      "nl": "leuk",
+      "vreemd": "chouette",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-067",
+      "nl": "goed",
+      "vreemd": "bien",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-068",
+      "nl": "niet slecht",
+      "vreemd": "pas mal",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-069",
+      "nl": "de vriend",
+      "vreemd": "l'ami",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-070",
+      "nl": "de vriendin",
+      "vreemd": "l'amie",
+      "context": "Familie en waardering",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-071",
+      "nl": "het weekend",
+      "vreemd": "le weekend",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-072",
+      "nl": "gisteren",
+      "vreemd": "hier",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-073",
+      "nl": "de week",
+      "vreemd": "la semaine",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-074",
+      "nl": "vorig(e), laatste",
+      "vreemd": "dernier/dernière",
+      "context": "Weekend en sport (mannelijk/vrouwelijk)",
+      "hoofdstuk": "5",
+      "acceptedAnswers": ["dernier/dernière", "dernier", "dernière"],
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-woord-075",
+      "nl": "volgende",
+      "vreemd": "prochain(e)",
+      "context": "Weekend en sport (mannelijk/vrouwelijk)",
+      "hoofdstuk": "5",
+      "acceptedAnswers": ["prochain(e)", "prochain", "prochaine"],
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-woord-076",
+      "nl": "spelen",
+      "vreemd": "jouer",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-077",
+      "nl": "het doel(punt)",
+      "vreemd": "le but",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-078",
+      "nl": "het team",
+      "vreemd": "l'équipe",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-079",
+      "nl": "verloren",
+      "vreemd": "perdu",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-080",
+      "nl": "gewonnen",
+      "vreemd": "gagné",
+      "context": "Weekend en sport",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-081",
+      "nl": "januari",
+      "vreemd": "janvier",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-082",
+      "nl": "februari",
+      "vreemd": "février",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-083",
+      "nl": "maart",
+      "vreemd": "mars",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-084",
+      "nl": "april",
+      "vreemd": "avril",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-085",
+      "nl": "mei",
+      "vreemd": "mai",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-086",
+      "nl": "juni",
+      "vreemd": "juin",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-087",
+      "nl": "juli",
+      "vreemd": "juillet",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-088",
+      "nl": "augustus",
+      "vreemd": "août",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.9
+    },
+    {
+      "id": "frans-h5-woord-089",
+      "nl": "september",
+      "vreemd": "septembre",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-090",
+      "nl": "oktober",
+      "vreemd": "octobre",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-091",
+      "nl": "november",
+      "vreemd": "novembre",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-092",
+      "nl": "december",
+      "vreemd": "décembre",
+      "context": "Maanden",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-093",
+      "nl": "'s avonds",
+      "vreemd": "le soir",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-094",
+      "nl": "'s middags",
+      "vreemd": "l'après-midi",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-095",
+      "nl": "de dag",
+      "vreemd": "le jour",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-096",
+      "nl": "de verjaardag",
+      "vreemd": "l'anniversaire",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-097",
+      "nl": "vieren",
+      "vreemd": "fêter",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-098",
+      "nl": "het ding",
+      "vreemd": "la chose",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-099",
+      "nl": "vragen",
+      "vreemd": "demander",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-100",
+      "nl": "de maaltijd",
+      "vreemd": "le repas",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-101",
+      "nl": "de plaats, de plek",
+      "vreemd": "l'endroit",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-102",
+      "nl": "creatief (mannelijk)",
+      "vreemd": "créatif",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-103",
+      "nl": "creatief (vrouwelijk)",
+      "vreemd": "créative",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-104",
+      "nl": "sociaal",
+      "vreemd": "sociable",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h5-woord-105",
+      "nl": "enthousiast",
+      "vreemd": "enthousiaste",
+      "context": "Tijd en omschrijven",
+      "hoofdstuk": "5",
+      "bron": "raw/frans/WhatsApp Image 2026-05-05 at 22.04.41 (2).jpeg",
+      "confidence": 0.95
     }
   ]
 }
