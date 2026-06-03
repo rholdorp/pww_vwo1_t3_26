@@ -40,3 +40,32 @@ Voor §8.1 (Herleiden) één onderdeel zichtbaar:
 - **§8.1a** — Herleiden en rekenvolgorde (Theorie A, opg 6-11)
 
 (Onderdelen kunnen later bij Stage 3 nog opgedeeld worden als ze te breed zijn.)
+
+---
+
+## Batch 2 (foto's 11-20, originele timestamps 14:16:13 – 14:17:20)
+
+| Bestand | Pagina | Paragraaf | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h08-p113.jpg` | 113 | §8.2 einde | gemengd | §8.2 afsluitende theorie/opgaven + "Wat ben jij goed in?"-reflectie-blok |
+| `wiskunde-h08-p114.jpg` | 114 | §8.3 | theorie | §8.3 "Machten" — Theorie A "Macht, grondtal en exponent" |
+| `wiskunde-h08-p115.jpg` | 115 | §8.3 | opgaven | §8.3 opgaven (machten van 10, getal-opmaak met grote machten) |
+| `wiskunde-h08-p116.jpg` | 116 | §8.3 | theorie+opgaven | §8.3 — Theorie B "Rekenen met machten" + opg |
+| `wiskunde-h08-p117.jpg` | 117 | §8.3 | theorie+opgaven | §8.3 — Theorie C "Machten van een negatief grondtal" + opg |
+| `wiskunde-h08-p118.jpg` | 118 | §8.3 | opgaven | §8.3 vervolg — opgaven (^2/^3 met varianten) |
+| `wiskunde-h08-p119.jpg` | 119 | §8.3 | praktijk | §8.3 toepassing — kubussen (fig 8.11-8.12), Galton-board/exponentiële groei |
+| `wiskunde-h08-p120.jpg` | 120 | §8.4 | theorie | §8.4 "De wetenschappelijke notatie" — Theorie A "Machten berekenen met de rekenmachine" |
+| `wiskunde-h08-p121.jpg` | 121 | §8.4 | praktijk | §8.4 toepassing — Johan Peters stamboom (fig 8.14), exponentiële voorouders |
+| `wiskunde-h08-p122.jpg` | 122 | §8.4 | theorie+opgaven | §8.4 — Theorie B "De wetenschappelijke notatie" + opg |
+
+### Nieuwe `onderdelen` uit batch 2
+
+§8.3 (Machten):
+- **§8.3a** — Macht, grondtal, exponent (Theorie A)
+- **§8.3b** — Rekenen met machten (Theorie B)
+- **§8.3c** — Machten van negatief grondtal (Theorie C)
+- **§8.3d** — Toepassing (kubussen / exponentiële groei)
+
+§8.4 (Wetenschappelijke notatie) — eerste twee theorieën zichtbaar:
+- **§8.4a** — Machten berekenen met rekenmachine (Theorie A)
+- **§8.4b** — Wetenschappelijke notatie schrijven/lezen (Theorie B)
