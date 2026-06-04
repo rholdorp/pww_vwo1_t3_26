@@ -195,3 +195,30 @@ Voorkennis H9 (Loodlijnen) telt als voorbereiding, geen eigen onderdeel.
 §9.4 (Bijzondere vierhoeken):
 - **§9.4a** — Parallelogram herkennen + eigenschappen (Theorie A)
 - **§9.4b** — Ruit herkennen + eigenschappen (Theorie B)
+
+---
+
+## Batch 8 (foto's 71-80, originele timestamps 14:23:01 – 14:24:11)
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h09-p172.jpg` | 172 | §9.4 | opgaven | §9.4 vervolg ruit + emoji-illustraties + Bismarck-toren |
+| `wiskunde-h09-p173.jpg` | 173 | §9.4 | theorie | §9.4 — Theorie C "Trapezium en vlieger" + fig 9.51-9.52 |
+| `wiskunde-h09-p174.jpg` | 174 | §9.4 | opgaven | §9.4 vierhoeken Check + fig 9.54-9.55 + vlieger-definitie |
+| `wiskunde-h09-p175.jpg` | 175 | §9.5 | theorie | §9.5 "Z-hoeken en F-hoeken" — Theorie A Z-hoeken + fig 9.56-9.58 |
+| `wiskunde-h09-p176.jpg` | 176 | §9.5 | opgaven | §9.5 voorbeeld + opg fig 9.59-9.61 |
+| `wiskunde-h09-p177.jpg` | 177 | §9.5 | theorie+opgaven | §9.5 — Theorie B F-hoeken + fig 9.62-9.65 |
+| `wiskunde-h09-p178.jpg` | 178 | §9.5 | opgaven | §9.5 opg + Check + fig 9.66-9.69 |
+| `wiskunde-h09-p179.jpg` | 179 | §9.5 | theorie | §9.5 — Theorie C "Hoeken in figuren met evenwijdige lijnen" |
+| `wiskunde-h09-p180.jpg` | 180 | §9.5 | opgaven | §9.5 opg driehoek combinaties (fig 9.71-9.74) |
+| `wiskunde-h09-p181.jpg` | 181 | §9.5 | opgaven | §9.5 vervolg fig 9.75-9.78 (driehoek + vierhoek) |
+
+### Nieuwe `onderdelen` uit batch 8
+
+§9.4 (uitgebreid):
+- **§9.4c** — Trapezium en vlieger herkennen + eigenschappen (Theorie C)
+
+§9.5 (Z-hoeken en F-hoeken):
+- **§9.5a** — Z-hoeken herkennen (Theorie A)
+- **§9.5b** — F-hoeken herkennen (Theorie B)
+- **§9.5c** — Hoeken in figuren met evenwijdige lijnen (Theorie C)
