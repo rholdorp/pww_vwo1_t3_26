@@ -243,3 +243,54 @@ H9-staart: einde §9.5 + gemengde opgaven + samenvatting + diagnostische toets +
 | `wiskunde-h09-p191.jpg` | 191 | Herhaling | opgaven | Herhaling §9.1 + §9.2 (start) |
 
 Geen nieuwe theorie of onderdelen — alleen oefen/toets-materiaal gekoppeld aan §9.1-§9.5.
+
+---
+
+## Batch 10 (foto's 91-94, originele timestamps 14:25:13 – 14:25:32)
+
+Laatste batch — Herhaling §9.2 t/m §9.5. (4 i.p.v. verwachte 3 foto's; totaal dus 94, niet 93.)
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h09-p192.jpg` | 192 | Herhaling | opgaven | Herhaling §9.2 vervolg + §9.3 Bijzondere driehoeken |
+| `wiskunde-h09-p193.jpg` | 193 | Herhaling | opgaven | Herhaling §9.3 — gelijkbenige driehoek opg (fig 9.107) |
+| `wiskunde-h09-p194.jpg` | 194 | Herhaling | opgaven | Herhaling §9.4 — parallelogram (fig 9.109) |
+| `wiskunde-h09-p195.jpg` | 195 | Herhaling | opgaven | Herhaling §9.4/§9.5 — vervolg + fig 9.111-9.112 |
+
+> **H9-scope hiermee compleet** (p146-p195). Inventory volledig.
+
+---
+
+# Eindstatus inventory
+
+- **Totaal**: 94 foto's hernoemd (+ 1 duplicaat met `-2`-suffix)
+- **H8** "Herleiden en machten": p103-p145 (43 pagina's)
+  - Voorkennis (p104), §8.1 Herleiden (p105-106), §8.2 Haakjes (p107-113),
+    §8.3 Machten (p114-119), §8.4 Wetenschappelijke notatie (p120-124),
+    §8.5 Machten en letters (p125-131), Gemengde+Samenvatting+Diagnostische+Herhaling
+    (p132-142), Onderzoek binair (p143-145)
+- **H9** "Symmetrie en vlakke figuren": p146-p195 (50 pagina's)
+  - Voorkennis Loodlijnen (p147), §9.1 Lijnsymmetrie (p148-153),
+    §9.2 Draaisymmetrie+Puntsymmetrie (p154-160), §9.3 Bijzondere driehoeken
+    (p161-168), §9.4 Bijzondere vierhoeken (p169-174), §9.5 Z- en F-hoeken
+    (p175-184), Gemengde+Samenvatting+Diagnostische+Herhaling (p185-195)
+
+## Onderdelen-overzicht (kandidaten voor Cat. 2-trainer)
+
+**H8** — 13 onderdelen:
+- §8.1a Herleiden en rekenvolgorde
+- §8.2a/b/c/d Haakjes (a(b+c), minteken, herleiden+haakjes, toepassing)
+- §8.3a/b/c/d Machten (grondtal+exp, rekenen, negatief grondtal, toepassing)
+- §8.4a/b Wetenschappelijke notatie (rekenmachine, schrijven/lezen)
+- §8.5a/b/c Machten en letters (vermenigvuldigen, som/verschil, delen)
+
+**H9** — 14 onderdelen:
+- §9.1a/b Lijnsymmetrie (spiegelen herkennen, spiegelbeeld tekenen)
+- §9.2a/b/c Draaisymmetrie (herkennen, draaiingshoek, puntsymmetrie)
+- §9.3a/b/c Bijzondere driehoeken (classificeren, hoeken in gelijkbenige, hoeken in figuren)
+- §9.4a/b/c Bijzondere vierhoeken (parallelogram, ruit, trapezium+vlieger)
+- §9.5a/b/c Z- en F-hoeken (Z-hoeken, F-hoeken, hoeken met evenwijdige lijnen)
+
+**Totaal ~27 onderdelen** voor de Cat. 2 trainer. Bij eager-solve "alles in de pool"
+(opg per onderdeel × 2 random + 2 extra bij fout, buffer ~10-15 per onderdeel)
+→ verwacht 270-400 op te lossen opgaven via math-solver, met Ralph/Mara als review-stap.
