@@ -222,3 +222,24 @@ Voorkennis H9 (Loodlijnen) telt als voorbereiding, geen eigen onderdeel.
 - **§9.5a** — Z-hoeken herkennen (Theorie A)
 - **§9.5b** — F-hoeken herkennen (Theorie B)
 - **§9.5c** — Hoeken in figuren met evenwijdige lijnen (Theorie C)
+
+---
+
+## Batch 9 (foto's 81-90, originele timestamps 14:24:16 – 14:25:09)
+
+H9-staart: einde §9.5 + gemengde opgaven + samenvatting + diagnostische toets + start herhaling.
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h09-p182.jpg` | 182 | §9.5 | opgaven | §9.5 vervolg — hoekensom driehoek 180° + Z/F-hoeken combinaties |
+| `wiskunde-h09-p183.jpg` | 183 | §9.5 | opgaven | §9.5 opg hoeken berekenen (fig 9.80-9.81) |
+| `wiskunde-h09-p184.jpg` | 184 | §9.5 | opgaven | §9.5 vervolg "Vul in" + driehoek-combinaties (fig 9.86-9.87) |
+| `wiskunde-h09-p185.jpg` | 185 | Gemengde opgaven | praktijk | Gemengde opgaven start — sterren / symmetrie-figuren |
+| `wiskunde-h09-p186.jpg` | 186 | Gemengde opgaven | praktijk | Gemengde opg vervolg (fig 9.90-9.93) |
+| `wiskunde-h09-p187.jpg` | 187 | Samenvatting | samenvatting | Samenvatting §9.1 + §9.2 + §9.3 |
+| `wiskunde-h09-p188.jpg` | 188 | Samenvatting | samenvatting | Samenvatting §9.4 + §9.5 |
+| `wiskunde-h09-p189.jpg` | 189 | Diagnostische toets | toets | Diagn. toets §9.1 + §9.2 (Apple/Airbnb logos etc.) |
+| `wiskunde-h09-p190.jpg` | 190 | Diagnostische toets | toets | Diagn. toets §9.4 + §9.5 |
+| `wiskunde-h09-p191.jpg` | 191 | Herhaling | opgaven | Herhaling §9.1 + §9.2 (start) |
+
+Geen nieuwe theorie of onderdelen — alleen oefen/toets-materiaal gekoppeld aan §9.1-§9.5.
