@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "tsx src/cli.ts",
+    "solve-math": "tsx src/math-solver/cli.ts",
     "typecheck": "tsc -b",
     "test": "vitest run",
     "lint": "echo 'TODO: eslint' && exit 0"
