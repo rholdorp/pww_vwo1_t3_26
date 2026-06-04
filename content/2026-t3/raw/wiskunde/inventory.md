@@ -168,3 +168,30 @@ Voorkennis H9 (Loodlijnen) telt als voorbereiding, geen eigen onderdeel.
 
 §9.3 (Bijzondere driehoeken):
 - **§9.3a** — Driehoeken classificeren naar zijden/hoeken (Theorie A)
+
+---
+
+## Batch 7 (foto's 61-70, originele timestamps 14:21:52 – 14:22:55)
+
+| Bestand | Pagina | Sectie | Type | Inhoud |
+|---|---|---|---|---|
+| `wiskunde-h09-p162.jpg` | 162 | §9.3 | theorie+opgaven | §9.3 — gelijkbenig + 30°/60° driehoeken |
+| `wiskunde-h09-p163.jpg` | 163 | §9.3 | opgaven | §9.3 opg classificeren + fig 9.34 vierkant met driehoeken |
+| `wiskunde-h09-p164.jpg` | 164 | §9.3 | theorie+voorbeeld | §9.3 Theorie B "Hoeken berekenen in gelijkbenige driehoeken" + voorbeeld |
+| `wiskunde-h09-p165.jpg` | 165 | §9.3 | opgaven | §9.3 — hoeken zeshoek (fig 9.35) + Check + opg |
+| `wiskunde-h09-p166.jpg` | 166 | §9.3 | theorie+voorbeeld | §9.3 Theorie C "Hoeken in figuren van gelijkbenige driehoeken" |
+| `wiskunde-h09-p167.jpg` | 167 | §9.3 | opgaven | §9.3 — fig 9.39-9.42 driehoek-combinaties |
+| `wiskunde-h09-p168.jpg` | 168 | §9.3 | opgaven | §9.3 vervolg fig 9.43-9.45 + Check |
+| `wiskunde-h09-p169.jpg` | 169 | §9.4 | theorie | §9.4 "Bijzondere vierhoeken" — Theorie A "Parallelogram" |
+| `wiskunde-h09-p170.jpg` | 170 | §9.4 | opgaven | §9.4 opg parallelogram + fig 9.48 |
+| `wiskunde-h09-p171.jpg` | 171 | §9.4 | theorie+opgaven | §9.4 — Theorie B "Ruit" + opg |
+
+### Nieuwe `onderdelen` uit batch 7
+
+§9.3 (uitgebreid):
+- **§9.3b** — Hoeken berekenen in gelijkbenige driehoeken (Theorie B)
+- **§9.3c** — Hoeken in figuren van gelijkbenige driehoeken (Theorie C)
+
+§9.4 (Bijzondere vierhoeken):
+- **§9.4a** — Parallelogram herkennen + eigenschappen (Theorie A)
+- **§9.4b** — Ruit herkennen + eigenschappen (Theorie B)
