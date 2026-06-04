@@ -29,18 +29,88 @@ pww:
 # scope-item alle drie de vinkjes heeft: gefotografeerd + geextraheerd + gevalideerd.
 # De scope-lijst (welke stof toetsbaar is) komt van Stijn/docent.
 # >>> frans/geschiedenis/nederlands: scope vastgelegd uit officiële docentinfo
-#     (PWW-detailschermen). Nog open: engels, wiskunde, aardrijkskunde +
-#     screenshots maken — sessie met Stijn do 2026-06-04. <<<
+#     (PWW-detailschermen). wiskunde: scope vastgelegd uit foto-inventory
+#     (raw/wiskunde/inventory.md, H8+H9 compleet).
+#     Nog open: engels, aardrijkskunde + screenshots maken — sessie met Stijn do 2026-06-04. <<<
 # LET OP frans: vocabulaire = Chapitre 6, maar onze screenshots/vocab.json zijn
 # Chapitre 5 (off-scope) — ch6-screenshots nog nodig.
 
 vakken:
   wiskunde:
     primaire_categorie: 2
-    secundaire_categorie: null
+    secundaire_categorie: 1   # cat 1 voor formules/begrippen/eigenschappen (automatiseer voor cat 2 toepassing)
     moeilijkheid: 3
     methode: "Getal & Ruimte"
-    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+    # Scope: hele H8 + H9. Per paragraaf 1 scope-item; Cat. 1 (formules/begrippen)
+    # en Cat. 2 (opgaven) komen beide uit dezelfde theorie- en opgavenblokken.
+    # Detailoverzicht van onderdelen-per-paragraaf in
+    # raw/wiskunde/inventory.md (27 onderdelen totaal).
+    scope:
+      - id: h8-voorkennis
+        bron: "H8 Voorkennis 'Rekenen met letters' (p104)"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h8-paragraaf-1-herleiden
+        bron: "§8.1 Herleiden (p105-106). Onderdelen: §8.1a herleiden en rekenvolgorde."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h8-paragraaf-2-haakjes
+        bron: "§8.2 Haakjes wegwerken (p107-113). Onderdelen: a(b+c)=ab+ac, minteken, herleiden+haakjes, toepassing."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h8-paragraaf-3-machten
+        bron: "§8.3 Machten (p114-119). Onderdelen: grondtal+exponent, rekenen, negatief grondtal, toepassing."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h8-paragraaf-4-wetenschappelijke-notatie
+        bron: "§8.4 Wetenschappelijke notatie (p120-124). Onderdelen: rekenmachine, schrijven/lezen."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h8-paragraaf-5-machten-en-letters
+        bron: "§8.5 Machten en letters (p125-131). Onderdelen: vermenigvuldigen, som/verschil, delen."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h8-onderzoek-binair
+        bron: "Onderzoek 'Het binaire stelsel' (p143-145). Extensie — optioneel voor toets."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h9-voorkennis
+        bron: "H9 Voorkennis Loodlijnen (p147)"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h9-paragraaf-1-lijnsymmetrie
+        bron: "§9.1 Lijnsymmetrie (p148-153). Onderdelen: spiegelen herkennen, spiegelbeeld tekenen."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h9-paragraaf-2-draaisymmetrie
+        bron: "§9.2 Draaisymmetrie + Puntsymmetrie (p154-160). Onderdelen: draaisymmetrie, draaiingshoek, puntsymmetrie."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h9-paragraaf-3-bijzondere-driehoeken
+        bron: "§9.3 Bijzondere driehoeken (p161-168). Onderdelen: classificeren, hoeken in gelijkbenige, hoeken in figuren."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h9-paragraaf-4-bijzondere-vierhoeken
+        bron: "§9.4 Bijzondere vierhoeken (p169-174). Onderdelen: parallelogram, ruit, trapezium+vlieger."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h9-paragraaf-5-z-en-f-hoeken
+        bron: "§9.5 Z-hoeken en F-hoeken (p175-184). Onderdelen: Z-hoeken, F-hoeken, hoeken met evenwijdige lijnen."
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
 
   frans:
     primaire_categorie: 1

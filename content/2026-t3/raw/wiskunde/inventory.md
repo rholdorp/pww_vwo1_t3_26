@@ -294,3 +294,21 @@ Laatste batch — Herhaling §9.2 t/m §9.5. (4 i.p.v. verwachte 3 foto's; totaa
 **Totaal ~27 onderdelen** voor de Cat. 2 trainer. Bij eager-solve "alles in de pool"
 (opg per onderdeel × 2 random + 2 extra bij fout, buffer ~10-15 per onderdeel)
 → verwacht 270-400 op te lossen opgaven via math-solver, met Ralph/Mara als review-stap.
+
+## Cat. 1-laag (formules + begrippen + eigenschappen)
+
+Naast de Cat. 2 procedureel-pool genereert de pipeline per onderdeel ook
+**flashcards** voor automatisering. Bron: de gele/groene Theorie-kaders in
+het boek (regels + definities). Per onderdeel verwachte aantallen:
+
+| Bron | Type flashcard | Voorbeeld |
+|---|---|---|
+| Theorie-kader regel | formule | `a(b+c) = ?` → `ab + ac` |
+| Theorie-kader formule | rekenregel | `a^m · a^n = ?` → `a^(m+n)` |
+| Definities in tekst | begrip | "wat is grondtal in `3^5`?" → `3` |
+| Eigenschappen in tekst | feit | "hoekensom driehoek?" → `180°` |
+| Vorm (bv. wetenschappelijke notatie) | conventie | "wet. notatie van 12345?" → `1,2345 × 10^4` |
+
+Geschat **3-8 flashcards per onderdeel** → totaal ~100-200 Cat. 1 flashcards
+voor H8+H9. Generatie via Stage 2 extract (zelfde pipeline, andere prompt:
+"haal regels/definities/eigenschappen uit dit theorie-blok").
