@@ -118,36 +118,37 @@ vakken:
     secundaire_categorie: 4
     moeilijkheid: 3
     methode: TBD
-    # Officiële toetsscope (PWW 03-07, docentinfo). LET OP: de vocabulaire is
-    # Chapitre 6 (secties A/B/E). Al onze huidige screenshots + vocab.json zijn
-    # Chapitre 5 → OFF-SCOPE. Het ch5-werk blijft bewaard maar telt NIET voor de
-    # toets; ch6-screenshots (A/B/E) + grammatica-screenshots moeten nog gemaakt
-    # worden met Stijn. Grammaire = werkwoorden + vragen (niet de bn.-grammatica
-    # die we deden).
+    # Officiële toetsscope (PWW 03-07, docentinfo). Vocabulaire = Chapitre 6 (A/B/E).
+    # Ch6-screenshots binnen (2026-06-06, raw/frans/PXL_2026...): vocab A/B (p78), E/F
+    # (p79) + grammatica-kaders (passé composé, aller/futur proche, vraag stellen +
+    # vraagwoorden). Nog NIET geëxtraheerd naar vocab.json (huidige vocab.json is nog
+    # ch5 → OFF-SCOPE, blijft bewaard maar telt niet). LET OP: présent van avoir/être/
+    # faire en het hoofdstukverhaal staan nog niet op de foto's.
     scope:
       - id: vocabulaire-ch6-abe
-        bron: "Chapitre 6, secties A/B/E (vocabulaire)"
-        gefotografeerd: false
+        bron: "Chapitre 6, secties A/B/E (vocabulaire) — p78-79"
+        gefotografeerd: true
         geextraheerd: false
         gevalideerd: false
       - id: grammaire-er-werkwoorden
-        bron: "Grammaire 1: -ER-werkwoorden vertalen + in présent + passé composé plaatsen"
-        gefotografeerd: false
+        bron: "Grammaire 1: -ER-werkwoorden vertalen + in présent + passé composé plaatsen (GRAMMAIRE-kader passé composé)"
+        gefotografeerd: true
         geextraheerd: false
         gevalideerd: false
       - id: grammaire-onregelmatige-werkwoorden
         bron: "Grammaire 2: avoir/être/aller/faire vertalen + in présent plaatsen"
+        # DEELS: aller (futur proche, p83) gefotografeerd; présent van avoir/être/faire nog nodig.
         gefotografeerd: false
         geextraheerd: false
         gevalideerd: false
       - id: grammaire-vraag-stellen
-        bron: "Grammaire 3: een vraag stellen in het Frans"
-        gefotografeerd: false
+        bron: "Grammaire 3: een vraag stellen in het Frans (GRAMMAIRE-kader p83)"
+        gefotografeerd: true
         geextraheerd: false
         gevalideerd: false
       - id: grammaire-vraagwoord-plaatsing
-        bron: "Grammaire 4: een vraagwoord op de juiste plek in de zin invoeren"
-        gefotografeerd: false
+        bron: "Grammaire 4: een vraagwoord op de juiste plek in de zin invoeren (vraagwoorden p83)"
+        gefotografeerd: true
         geextraheerd: false
         gevalideerd: false
       - id: hoofdstukverhaal
