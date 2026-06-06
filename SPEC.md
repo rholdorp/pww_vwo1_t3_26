@@ -269,8 +269,31 @@ Stable IDs: `<vak>-h<hoofdstuk>-<onderdeel>-<n>` (bv. `frans-h5-vocab-012`). Ded
   (`afbeelding` optioneel — bv. meetkundefiguur bij de opgave.)
 - **Biologie / AK / Geschiedenis (Cat. 3)** — gemengd:
   - `samenvatting/<onderwerp>.md` — verplichte lees-fase
-  - `flashcards.json` — begrippen/feiten (Cat. 1 secundair)
-  - `oefenvragen.json` — open vragen met `modelAntwoord` en `rubric[]`
+  - `flashcards.json` — begrippen/feiten/topografie (Cat. 1 secundair):
+    ```json
+    { "vak": "aardrijkskunde", "normalisatie": "begrip", "kaarten": [
+      { "id": "aardrijkskunde-h6-begrip-007", "vraag": "Hoe heet de warme zeestroom die …?",
+        "antwoord": "Golfstroom", "onderdeel": "§6.1 Golfstroom",
+        "hoofdstuk": "6", "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg", "confidence": 0.95 },
+      { "id": "aardrijkskunde-h5-topo-003", "vraag": "Welk land is dit?", "antwoord": "Vietnam",
+        "modus": "kaart", "normalisatie": "exact", "onderdeel": "topografie 5.2",
+        "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+        "hoofdstuk": "5", "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg", "confidence": 0.98 }
+    ] }
+    ```
+    `modus` default `"typen"` (getypt + genormaliseerd); `"kaart"` = flip met referentie-`afbeelding` (topografie zonder hotspots — de klikbare versie is een latere upgrade).
+  - `oefenvragen.json` — open begripsvragen met `modelAntwoord` en `rubric[]`:
+    ```json
+    { "vak": "aardrijkskunde", "vragen": [
+      { "id": "aardrijkskunde-h6-vraag-003",
+        "vraag": "Leg uit waarom Noord-Europa milder is dan je op die breedte zou verwachten.",
+        "modelAntwoord": "Door de warme Golfstroom + aanlandige (west)wind die de warmte het land in brengt.",
+        "rubric": ["noemt de Golfstroom", "noemt de aanlandige/westenwind", "legt het verband warmte→land"],
+        "onderdeel": "§6.1 Golfstroom", "hoofdstuk": "6",
+        "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg", "confidence": 0.9 }
+    ] }
+    ```
+    Tot de LLM-proxy er is: trainer toont deze in flashcard-modus (vraag → `modelAntwoord`, geen autoscore); de `rubric` ligt al vast voor latere LLM-beoordeling.
 - **Nederlands / Engels (Cat. 4)** — `teksten/<id>.md` (oefentekst) + `vragen/<id>.json` (meerkeuze + open met `modelAntwoord`).
 - **Gelabeld diagram (Cat. 1 met beeld-prompt)** — `<vak>/diagram.json`, een lijst diagrammen:
   ```json

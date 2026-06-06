@@ -49,3 +49,81 @@ export interface VocabBestand {
 
 /** Vraagrichting voor een Cat 1-item. */
 export type Richting = "nl->vreemd" | "vreemd->nl";
+
+// ── Cat 3 (Biologie / Aardrijkskunde / Geschiedenis) ─────────────────────────
+// Contract uit SPEC §4 Stage 3 + §5 Cat 3. Een Cat 3-vak is "gemengd":
+//   - flashcards.json   → begrippen/feiten/topografie (Cat 1 secundair, strikt)
+//   - oefenvragen.json  → open begripsvragen met modelAntwoord + rubric (Cat 3, soft)
+//   - samenvatting/<onderwerp>.md → verplichte lees-fase (markdown, hier geen type)
+
+/**
+ * Eén flashcard (Cat 1 secundair): begrip, feit of topografie-label.
+ * Bestand: content/<editie>/trainers/<vak>/flashcards.json.
+ */
+export interface Flashcard {
+  /** Stabiele id: <vak>-h<hoofdstuk>-<onderdeel>-<n>, bv. "ak-h6-begrip-007". */
+  id: string;
+  /** Voorzijde / vraag (bv. een omschrijving of "Wat is …?"). */
+  vraag: string;
+  /** Achterzijde / (model)antwoord — het te kennen begrip/feit. */
+  antwoord: string;
+  /** Extra geaccepteerde vormen van het antwoord (synoniemen, met/zonder lidwoord). */
+  acceptedAnswers?: string[];
+  /**
+   * Hoe overhoord wordt:
+   *  - "typen" (default): Stijn typt het antwoord; gescoord met `normalisatie`.
+   *  - "kaart": flip-kaart met referentie-`afbeelding` (topografie zonder hotspots,
+   *    SPEC §4 — de klikbare hotspot-versie is een latere upgrade).
+   */
+  modus?: "typen" | "kaart";
+  /** Override op het normalisatieprofiel van het bestand (bv. "exact" voor topografie). */
+  normalisatie?: NormalisatieProfiel;
+  /** Optioneel onderwerp/subkop (bv. "§6.1 Golfstroom", "topografie 5.2"). */
+  onderdeel?: string;
+  /** Optionele referentie-afbeelding (relatief t.o.v. editie-root). */
+  afbeelding?: string;
+  hoofdstuk: string;
+  /** Pad naar de raw screenshot waaruit dit item is afgeleid (relatief t.o.v. editie-root). */
+  bron: string;
+  /** Extractie-confidence 0..1 (review-trigger onder drempel, SPEC §4). */
+  confidence: number;
+}
+
+/** Bestand content/<editie>/trainers/<vak>/flashcards.json. */
+export interface FlashcardBestand {
+  vak: string;
+  /** Default normalisatieprofiel voor getypte antwoorden (per kaart te overschrijven). */
+  normalisatie: NormalisatieProfiel;
+  kaarten: Flashcard[];
+}
+
+/**
+ * Eén open begripsvraag (Cat 3). Bestand: content/<editie>/trainers/<vak>/oefenvragen.json.
+ * Tot de LLM-proxy er is, toont de trainer deze in flashcard-modus: vraag → modelAntwoord
+ * (geen automatische beoordeling). De `rubric` is dan al vastgelegd voor latere LLM-scoring.
+ */
+export interface Oefenvraag {
+  /** Stabiele id: <vak>-h<hoofdstuk>-<onderdeel>-<n>, bv. "ak-h6-vraag-003". */
+  id: string;
+  /** De open vraag ("leg uit waarom…", "wat gebeurt er als…"). */
+  vraag: string;
+  /** Modelantwoord — VERPLICHT (validator + flashcard-fallback, SPEC §4). */
+  modelAntwoord: string;
+  /** Beoordelingscriteria voor de latere LLM-rubric (compleetheid, kernbegrippen, verbanden). */
+  rubric: string[];
+  /** Optioneel onderwerp/subkop. */
+  onderdeel?: string;
+  /** Optionele referentie-afbeelding (relatief t.o.v. editie-root). */
+  afbeelding?: string;
+  hoofdstuk: string;
+  /** Pad naar de raw screenshot waaruit dit item is afgeleid (relatief t.o.v. editie-root). */
+  bron: string;
+  /** Extractie-confidence 0..1. */
+  confidence: number;
+}
+
+/** Bestand content/<editie>/trainers/<vak>/oefenvragen.json. */
+export interface OefenvraagBestand {
+  vak: string;
+  vragen: Oefenvraag[];
+}
