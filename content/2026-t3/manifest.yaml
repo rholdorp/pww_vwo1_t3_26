@@ -182,16 +182,22 @@ vakken:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 2
-    methode: TBD
-    # Officiële toetsscope (PWW 03-07, docentinfo). Screenshots nog te maken.
+    methode: TBD  # methode-naam niet leesbaar op de screenshots — bevestigen met Stijn
+    # Officiële toetsscope (PWW 03-07, docentinfo). Content → trainers/geschiedenis/
+    # flashcards.json (44 kaarten: begrippen + 8 jaartallen/chronologie) + oefenvragen.json
+    # (13 Cat 3 vragen, incl. betrouwbaarheid-vaardigheid). geextraheerd via schema-check
+    # (content-cat3.test.ts). gevalideerd=false: OCR-fidelity-grounding nog niet gewired.
     scope:
       - id: paragrafen-5.1-6.1
-        bron: "p.10-11, §5.1, 5.2, 5.3 (alleen 'De bekering van Clovis'), 5.4, 6.1"
-        gefotografeerd: false
-        geextraheerd: false
+        bron: "H5 §5.1, 5.2, 5.3 (alleen 'De bekering van Clovis'), 5.4 (p92-107) + H6 §6.1 (p116-119). §5.5/verdieping/oriëntatie buiten scope."
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
       - id: vaardigheden
-        bron: "Leerdoelen/vaardigheden: tijdvakken & periodes, tijdbalk, primaire/secundaire bronnen, geschreven/ongeschreven bronnen, (beeld)bron, betrouwbaarheid van bronnen, oorzaak-gevolg, feit/mening, chronologie"
+        bron: "9 vaardigheden: tijdvakken & periodes, tijdbalk, primaire/secundaire bronnen, geschreven/ongeschreven bronnen, (beeld)bron, betrouwbaarheid, oorzaak-gevolg, feit/mening, chronologie"
+        # DEELS: betrouwbaarheid (p94) + chronologie/tijdbalk (p112) gefotografeerd+geëxtraheerd.
+        # De overige vaardigheden-definities staan in het vaardigheden-overzicht ("p10-11"
+        # docentinfo) — NIET gefotografeerd. Die pagina's nog nodig voor volledige dekking.
         gefotografeerd: false
         geextraheerd: false
         gevalideerd: false
@@ -213,7 +219,7 @@ vakken:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 1
-    methode: "BuiteNLand"
+    methode: TBD  # methode-naam niet bevestigd uit screenshots — checken met Stijn
     # Officiële toetsscope (PWW 02-07, docentinfo "aardrijkskunde A1 G1").
     # Cat 1 (begrippen/topografie) → trainers/aardrijkskunde/flashcards.json (64 kaarten);
     # Cat 3 (begripsvragen) → oefenvragen.json (13 vragen, flashcard-modus tot LLM).

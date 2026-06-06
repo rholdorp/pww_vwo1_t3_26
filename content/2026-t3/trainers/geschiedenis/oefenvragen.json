@@ -1,0 +1,187 @@
+{
+  "vak": "geschiedenis",
+  "vragen": [
+    {
+      "id": "geschiedenis-h5-vraag-001",
+      "vraag": "Hoe ontstonden er feodale verhoudingen in het Frankische Rijk?",
+      "modelAntwoord": "De koning (of een leenheer) gaf grond in leen aan een leenman, bijvoorbeeld een ridder, hertog of graaf. In ruil zwoer de leenman een eed van trouw: hij hielp zijn leenheer bij het besturen en in de oorlog. Die trouwband tussen leenheer en leenman is een feodale verhouding.",
+      "rubric": [
+        "noemt dat de koning/leenheer grond (leen) gaf",
+        "noemt de eed/belofte van trouw van de leenman",
+        "noemt de wederdienst (helpen besturen / in de oorlog)"
+      ],
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p95.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-vraag-002",
+      "vraag": "Noem twee oorzaken waardoor het Frankische Rijk na Karel de Grote uiteenviel.",
+      "modelAntwoord": "Ten eerste kregen de erfgenamen ruzie over de erfenis: in 843 werd het rijk in drie delen opgedeeld. Ten tweede vielen nieuwe invallers (Noormannen, Hongaren en Arabische zeerovers) Europa binnen, terwijl de koningen te zwak werden; hertogen en graven gingen daardoor hun eigen gang en gedroegen zich als onafhankelijke vorsten.",
+      "rubric": [
+        "noemt de verdeling/erfenisruzie (843, in drieën)",
+        "noemt de invallers (Noormannen/Hongaren/Arabieren)",
+        "noemt de verzwakkende koningsmacht / zelfstandige hertogen en graven"
+      ],
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p95.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-vraag-003",
+      "vraag": "Waardoor ontstond er in de vroege Middeleeuwen een landbouwsamenleving?",
+      "modelAntwoord": "Na de Romeinse tijd ging de handel en nijverheid sterk achteruit. Wegen en bruggen werden niet meer onderhouden en reizen werd gevaarlijk, waardoor steden kleiner en soms onbewoond werden. De meeste mensen trokken naar het platteland en gingen van de landbouw leven: een landbouwsamenleving.",
+      "rubric": [
+        "noemt het verval van handel/nijverheid na de Romeinse tijd",
+        "noemt dat steden kleiner werden / mensen naar het platteland trokken",
+        "concludeert: bijna iedereen leefde van de landbouw"
+      ],
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p97.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-vraag-004",
+      "vraag": "Wat waren de drie plichten van een horige tegenover de heer van het domein?",
+      "modelAntwoord": "Een horige moest (1) pacht betalen: een deel van zijn oogst als huur voor zijn akker en huisje; (2) een aantal dagen per jaar op de akkers van de heer werken; en (3) herendiensten doen, zoals klussen aan het kasteel of het schoonhouden van de gracht.",
+      "rubric": [
+        "noemt pacht (deel van de oogst)",
+        "noemt werken op de akkers van de heer",
+        "noemt herendiensten (klussen)"
+      ],
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p98.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-vraag-005",
+      "vraag": "Leg uit waarom een domein zelfvoorzienend was.",
+      "modelAntwoord": "Omdat de handel grotendeels was weggevallen, moest op een domein vrijwel alles wat de bewoners nodig hadden ter plekke worden gemaakt en verbouwd. Een domein had daarom zijn eigen molen, bierbrouwerij, smederij, visvijver en zelfs een kerkje: het kon in zijn eigen behoeften voorzien.",
+      "rubric": [
+        "legt uit dat handel was weggevallen",
+        "noemt dat alles op het domein zelf werd gemaakt/verbouwd",
+        "geeft minstens één voorbeeld (molen, brouwerij, smederij, kerkje)"
+      ],
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p97.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h5-vraag-006",
+      "vraag": "Waarom was de bekering van Clovis (496) belangrijk voor de macht van de Frankische koningen?",
+      "modelAntwoord": "Doordat Clovis christen werd, kreeg hij steun van de oorspronkelijke bevolking, die ook christelijk was. Vooral de steun van de machtige bisschoppen kwam goed van pas: zij hielpen de koning besturen en vertelden het volk dat de koning namens God regeerde en dus gehoorzaamd moest worden.",
+      "rubric": [
+        "noemt dat Clovis christen werd (496)",
+        "noemt de steun van de bevolking en/of de bisschoppen",
+        "legt het verband: koning regeert namens God → meer gezag"
+      ],
+      "onderdeel": "§5.3 De bekering van Clovis",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p102.jpg",
+      "confidence": 0.89
+    },
+    {
+      "id": "geschiedenis-h5-vraag-007",
+      "vraag": "Noem twee oorzaken waardoor de Arabieren na de dood van Mohammed snel grote gebieden konden veroveren.",
+      "modelAntwoord": "Ten eerste waren de Arabieren goed getraind in snelle verrassingsaanvallen met paarden en kamelen, en ze vochten fanatiek omdat wie in de jihad sneuvelde een plaats in de hemel was beloofd. Ten tweede waren hun tegenstanders, het Byzantijnse Rijk en het Perzische Rijk, door onderlinge oorlogen uitgeput en zwak.",
+      "rubric": [
+        "noemt de Arabische kracht (snelle aanvallen / fanatiek vechten / jihad-beloning)",
+        "noemt de verzwakte tegenstanders (Byzantijnse en Perzische Rijk)",
+        "legt verband met de snelle veroveringen"
+      ],
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p105.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h5-vraag-008",
+      "vraag": "Waarom mochten joden en christenen ('mensen van het boek') in de veroverde gebieden hun eigen geloof houden?",
+      "modelAntwoord": "Omdat zij net als de moslims in één god geloofden en een heilig boek hadden. Mohammed noemde hen daarom 'mensen van het boek'. Ze werden niet vervolgd, maar hadden wel minder rechten dan moslims: ze betaalden extra belasting, mochten geen nieuwe kerken of synagogen bouwen en geen wapens dragen.",
+      "rubric": [
+        "noemt: zij geloofden in één god / hadden een heilig boek",
+        "noemt dat ze niet vervolgd werden",
+        "noemt minstens één beperking (belasting / geen nieuwe gebedshuizen / geen wapens)"
+      ],
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h5-vraag-009",
+      "vraag": "Waarom liep de Arabische beschaving (bijvoorbeeld onder Haroen ar-Rashid) voor op West-Europa?",
+      "modelAntwoord": "Door hun veroveringen kwamen de Arabieren in contact met veel volken en culturen (Grieken, Perzen, Indiërs) en namen daar veel kennis van over, op het gebied van geneeskunde, wiskunde, sterrenkunde en geografie. In West-Europa was juist veel van de Klassieke kennis in de vroege Middeleeuwen verloren gegaan.",
+      "rubric": [
+        "noemt contact met andere volken/culturen door veroveringen",
+        "noemt overgenomen kennis (geneeskunde/wiskunde/sterrenkunde)",
+        "noemt dat in West-Europa kennis verloren was gegaan"
+      ],
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
+      "confidence": 0.87
+    },
+    {
+      "id": "geschiedenis-h6-vraag-001",
+      "vraag": "Leg uit hoe betere landbouw vanaf de elfde eeuw leidde tot verstedelijking.",
+      "modelAntwoord": "Door betere landbouw (meer landbouwgrond, het drieslagstelsel en een betere ploeg) werden de oogsten groter. Daardoor hoefde niet langer iedereen boer te zijn. Boeren met een overschot verkochten dat op de markt, en steeds meer mensen trokken naar de stad of stichtten nieuwe steden. Zo groeide de verstedelijking, vooral in Vlaanderen en Noord-Italië.",
+      "rubric": [
+        "noemt grotere oogsten (drieslagstelsel / meer grond / betere ploeg)",
+        "noemt dat niet iedereen meer boer hoefde te zijn / overschot verkopen",
+        "concludeert: mensen naar de stad → steden groeien (verstedelijking)"
+      ],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.89
+    },
+    {
+      "id": "geschiedenis-h6-vraag-002",
+      "vraag": "Welke taken en functies had een ambachtsgilde?",
+      "modelAntwoord": "Een ambachtsgilde bepaalde wie een beroep mocht uitoefenen: alleen leden, en om een eigen bedrijf te beginnen moest je eerst meester worden via een examen. Het gilde zorgde voor de opleiding van nieuwe vakmensen, controleerde de lonen, de prijzen en de kwaliteit van de producten, en hielp leden sociaal, bijvoorbeeld de weduwe en kinderen van een overleden gildelid.",
+      "rubric": [
+        "noemt toegang tot het beroep / meester worden via examen",
+        "noemt controle op lonen/prijzen/kwaliteit",
+        "noemt een sociale taak (steun aan leden/nabestaanden)"
+      ],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h6-vraag-003",
+      "vraag": "Wat zijn stadsrechten en waarom wilden steden die graag hebben?",
+      "modelAntwoord": "Stadsrechten gaven een stad het recht om zichzelf te besturen: eigen regels maken en eigen rechtspraak. Steden werden rijk en wilden niet langer gehoorzamen aan hun heer, dus kochten ze stadsrechten van hem, vaak in ruil voor geld of belasting. Aan het hoofd van het stadsbestuur stonden de burgemeesters.",
+      "rubric": [
+        "legt uit dat stadsrechten zelfbestuur geven (eigen regels/rechtspraak)",
+        "noemt dat steden rijk waren / niet meer wilden gehoorzamen aan de heer",
+        "noemt dat ze die rechten kochten (geld/belasting)"
+      ],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p118.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h5-vraag-010",
+      "vraag": "Vaardigheid — Met welke drie hulpvragen bepaal je hoe betrouwbaar een bron is?",
+      "modelAntwoord": "1) Wanneer is de bron gemaakt? Hoe korter na de gebeurtenis, hoe betrouwbaarder. 2) Hoe kwam de maker aan zijn informatie? Was hij er zelf bij of via anderen — hoe minder tussenstappen, hoe betrouwbaarder. 3) Wat is de bedoeling van de maker? Wil hij informeren (feiten, onpartijdig) of overtuigen (mening) — feiten en onpartijdigheid maken een bron betrouwbaarder.",
+      "rubric": [
+        "noemt 'wanneer gemaakt' (tijd tussen gebeurtenis en bron)",
+        "noemt 'hoe aan de informatie gekomen' (zelf erbij / tussenstappen)",
+        "noemt 'bedoeling van de maker' (informeren/feiten vs overtuigen/mening)"
+      ],
+      "onderdeel": "Vaardigheid: betrouwbaarheid van bronnen",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p94.jpg",
+      "confidence": 0.9
+    }
+  ]
+}

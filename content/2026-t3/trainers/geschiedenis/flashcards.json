@@ -1,0 +1,430 @@
+{
+  "vak": "geschiedenis",
+  "normalisatie": "begrip",
+  "kaarten": [
+    {
+      "id": "geschiedenis-h5-begrip-001",
+      "vraag": "Iemand die bij de adel hoort: door zijn afkomst had hij speciale rechten en bestuurde in de Middeleeuwen in naam van de koning het land.",
+      "antwoord": "edele",
+      "acceptedAnswers": ["edelman", "adel"],
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-002",
+      "vraag": "De relatie tussen een leenheer en zijn leenman, die tot stand komt door een belofte van trouw.",
+      "antwoord": "feodale verhouding",
+      "acceptedAnswers": ["feodale verhoudingen", "feodaliteit"],
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-003",
+      "vraag": "Stuk grond dat de leenman mag gebruiken, maar dat eigendom blijft van de leenheer.",
+      "antwoord": "leen",
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-004",
+      "vraag": "Vorst of edelman die in ruil voor bepaalde diensten grond in leen geeft aan een leenman.",
+      "antwoord": "leenheer",
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-005",
+      "vraag": "Ontvanger van een leen; in ruil moet hij zijn leenheer helpen bij het besturen en in de oorlog.",
+      "antwoord": "leenman",
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-006",
+      "vraag": "Kasteel gebouwd op een door mensen aangelegde heuvel (motte); kwam vanaf de tiende eeuw veel voor.",
+      "antwoord": "mottekasteel",
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p92.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-007",
+      "vraag": "Mensen die Karel de Grote op pad stuurde om te controleren of de bestuurders hun werk goed deden.",
+      "antwoord": "zendgraven",
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p94.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-008",
+      "vraag": "Zeelui uit Scandinavië (ook Vikingen genoemd) die kloosters, kerken en steden plunderden.",
+      "antwoord": "Noormannen",
+      "acceptedAnswers": ["Vikingen"],
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p99.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-009",
+      "vraag": "Landgoed van een heer.",
+      "antwoord": "domein",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-010",
+      "vraag": "Klussen die een horige voor de heer van het domein moest doen (bijvoorbeeld het kasteel repareren).",
+      "antwoord": "herendiensten",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-011",
+      "vraag": "Boer die gebonden is aan het domein waar hij woont (hij mocht het niet zonder toestemming verlaten).",
+      "antwoord": "horige",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-012",
+      "vraag": "Kenmerk van een domein: vrijwel alles wat nodig is om te leven maken en verbouwen de mensen er zelf.",
+      "antwoord": "zelfvoorzienend",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-013",
+      "vraag": "De manier waarop een domein werd bewerkt, met de landbouwgrond verdeeld in twee stukken (de grond van de heer en de akkers van de boeren).",
+      "antwoord": "hofstelsel",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p97.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-014",
+      "vraag": "Het deel van de oogst dat een horige als huur voor zijn akker en huisje aan de heer moest geven.",
+      "antwoord": "pacht",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p98.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-015",
+      "vraag": "Vroegmiddeleeuwse handelsstad aan de Rijn, in het grensgebied tussen Friezen en Franken.",
+      "antwoord": "Dorestad",
+      "onderdeel": "§5.2 Landbouwsamenleving",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p98.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-016",
+      "vraag": "Iemand die het geloof verspreidt.",
+      "antwoord": "missionaris",
+      "acceptedAnswers": ["missionarissen"],
+      "onderdeel": "§5.3 De bekering van Clovis",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "geschiedenis-h5-begrip-017",
+      "vraag": "Iemand die in dienst is van de kerk, zoals een bisschop, priester of kloosterling.",
+      "antwoord": "geestelijke",
+      "acceptedAnswers": ["geestelijken"],
+      "onderdeel": "§5.3 De bekering van Clovis",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-018",
+      "vraag": "Heilige oorlog van de moslims.",
+      "antwoord": "jihad",
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-019",
+      "vraag": "Titel van de opvolgers van Mohammed, die aan het hoofd staan van de islamitische gemeenschap.",
+      "antwoord": "kalief",
+      "acceptedAnswers": ["kaliefen"],
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-h5-begrip-020",
+      "vraag": "Het gebouw in Mekka met de heilige zwarte steen, waar mensen offers brachten aan godenbeelden.",
+      "antwoord": "Ka'aba",
+      "acceptedAnswers": ["Kaaba"],
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p104.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-021",
+      "vraag": "De ene god van de islam, volgens Mohammed.",
+      "antwoord": "Allah",
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p104.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-022",
+      "vraag": "Hoe noemde Mohammed de joden en christenen, die hun eigen geloof mochten houden omdat ze in één god geloofden en een heilig boek hadden?",
+      "antwoord": "mensen van het boek",
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h5-begrip-023",
+      "vraag": "Onder welke kalief (een tijdgenoot van Karel de Grote) bereikte de Arabische beschaving haar hoogtepunt?",
+      "antwoord": "Haroen ar-Rashid",
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-begrip-024",
+      "vraag": "Welke stad was de rijke hoofdstad van het Arabische rijk onder Haroen ar-Rashid?",
+      "antwoord": "Bagdad",
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h6-begrip-001",
+      "vraag": "Manier van landbouw waarbij de akkers afwisselend voor verschillende gewassen worden gebruikt en braak liggen.",
+      "antwoord": "drieslagstelsel",
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h6-begrip-002",
+      "vraag": "Het ontstaan en groeien van steden.",
+      "antwoord": "verstedelijking",
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h6-begrip-003",
+      "vraag": "Inwoner van een stad.",
+      "antwoord": "burger",
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h6-begrip-004",
+      "vraag": "Beroepsorganisatie van burgers met hetzelfde beroep; je mocht het beroep alleen uitoefenen als je er lid van was.",
+      "antwoord": "ambachtsgilde",
+      "acceptedAnswers": ["gilde", "ambachtsgilden"],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h6-begrip-005",
+      "vraag": "Titel die je (na een examen) moest halen om een eigen bedrijf in een ambacht te mogen beginnen.",
+      "antwoord": "meester",
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h6-begrip-006",
+      "vraag": "De rechten waarmee een stad zichzelf mocht besturen: eigen regels maken en eigen rechtspraak.",
+      "antwoord": "stadsrechten",
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p118.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h6-begrip-007",
+      "vraag": "Markt die jaarlijks en wekenlang werd gehouden en een middelpunt was van de internationale handel.",
+      "antwoord": "jaarmarkt",
+      "acceptedAnswers": ["jaarmarkten"],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p118.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h6-begrip-008",
+      "vraag": "Een soort cheque waarmee handelaren konden betalen zonder geld mee te dragen.",
+      "antwoord": "wissel",
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p118.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "geschiedenis-h6-begrip-009",
+      "vraag": "Samenwerkingsverband van handelssteden; de grootste bestond uit tientallen steden aan de Noordzee en de Oostzee.",
+      "antwoord": "hanze",
+      "acceptedAnswers": ["Hanze"],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p119.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-feit-001",
+      "vraag": "In welke periode regeerde Karel de Grote over het Frankische Rijk?",
+      "antwoord": "768-814",
+      "acceptedAnswers": ["768 tot 814", "van 768 tot 814"],
+      "onderdeel": "§5.1 Karel de Grote",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p93.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "geschiedenis-h5-feit-002",
+      "vraag": "In welk jaar stierf Mohammed (toen de meeste Arabische stammen tot de islam bekeerd waren)?",
+      "antwoord": "632",
+      "onderdeel": "§5.4 De islam",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p105.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h6-feit-001",
+      "vraag": "Tussen welke twee jaartallen ontstonden veel Europese steden?",
+      "antwoord": "1000 en 1350",
+      "acceptedAnswers": ["tussen 1000 en 1350", "1000-1350"],
+      "onderdeel": "§6.1 De middeleeuwse stad",
+      "hoofdstuk": "6",
+      "bron": "raw/geschiedenis/geschiedenis-h6-p116.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "geschiedenis-h5-jaar-001",
+      "vraag": "Welk jaartal hoort bij: de laatste West-Romeinse keizer wordt afgezet? (tijdbalk)",
+      "antwoord": "476",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-002",
+      "vraag": "Welk jaartal hoort bij: Clovis wordt gedoopt? (tijdbalk)",
+      "antwoord": "496",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-003",
+      "vraag": "Welk jaartal hoort bij: Mohammed vlucht van Mekka naar Medina (begin islamitische jaartelling)? (tijdbalk)",
+      "antwoord": "622",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-004",
+      "vraag": "Welk jaartal hoort bij: Mohammed verovert Mekka? (tijdbalk)",
+      "antwoord": "630",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-005",
+      "vraag": "Welk jaartal hoort bij: de Arabieren veroveren Spanje? (tijdbalk)",
+      "antwoord": "711",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-006",
+      "vraag": "Welk jaartal hoort bij: Karel Martel verslaat de Arabieren bij Poitiers? (tijdbalk)",
+      "antwoord": "732",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-007",
+      "vraag": "Welk jaartal hoort bij: Karel de Grote wordt tot keizer gekroond? (tijdbalk)",
+      "antwoord": "800",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-h5-jaar-008",
+      "vraag": "Welk jaartal hoort bij: het Frankische Rijk wordt in drieën gedeeld? (tijdbalk)",
+      "antwoord": "843",
+      "modus": "typen",
+      "normalisatie": "exact",
+      "onderdeel": "chronologie (tijdbalk)",
+      "hoofdstuk": "5",
+      "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
+      "confidence": 0.96
+    }
+  ]
+}
