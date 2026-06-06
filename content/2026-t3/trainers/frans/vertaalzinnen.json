@@ -1,0 +1,32 @@
+{
+  "vak": "frans",
+  "hoofdstuk": "6",
+  "richtingen": ["nl->vreemd"],
+  "normalisatie": "zin",
+  "sessieLimiet": 10,
+  "notitie": "GEGENEREERDE oefenzinnen (geen boekbron): door Claude zelf samengesteld uit CH6-vocab + de grammatica die Stijn moet kennen (présent, passé composé, onregelmatige ww avoir/être/aller/faire, vraagstelling). Bedoeld om te vertalen NL→FR. De trainer kiest er per ronde 10 willekeurig. Frans gecontroleerd; markeer als oefenmateriaal, niet als toetsbron.",
+  "items": [
+    { "id": "frans-h6-vert-001", "nl": "Ik woon in een grote stad.", "vreemd": "J'habite dans une grande ville.", "grammatica": "présent (-ER)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-002", "nl": "Wij gaan naar de markt.", "vreemd": "Nous allons au marché.", "acceptedAnswers": ["On va au marché."], "grammatica": "présent (aller, onregelmatig)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-003", "nl": "Hij doet aan sport.", "vreemd": "Il fait du sport.", "grammatica": "présent (faire, onregelmatig)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-004", "nl": "Ik heb een kat.", "vreemd": "J'ai un chat.", "grammatica": "présent (avoir, onregelmatig)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-005", "nl": "Wij zijn in het café.", "vreemd": "Nous sommes au café.", "acceptedAnswers": ["On est au café."], "grammatica": "présent (être, onregelmatig)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-006", "nl": "Zij zoekt de bakkerij.", "vreemd": "Elle cherche la boulangerie.", "grammatica": "présent (-ER)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-007", "nl": "Jullie winkelen.", "vreemd": "Vous faites les magasins.", "grammatica": "présent (faire + uitdrukking)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-008", "nl": "Hij gaat te voet.", "vreemd": "Il va à pied.", "grammatica": "présent (aller, onregelmatig)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-009", "nl": "Wij praten met onze vrienden.", "vreemd": "Nous parlons avec nos amis.", "acceptedAnswers": ["On parle avec nos amis."], "grammatica": "présent (-ER)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-010", "nl": "Ik heb een film gekeken.", "vreemd": "J'ai regardé un film.", "grammatica": "passé composé (-ER, avoir)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-011", "nl": "Wij hebben gegeten.", "vreemd": "Nous avons mangé.", "acceptedAnswers": ["On a mangé."], "grammatica": "passé composé (-ER, avoir)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-012", "nl": "Hij heeft betaald.", "vreemd": "Il a payé.", "grammatica": "passé composé (-ER, avoir)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-013", "nl": "Zij heeft de stad bezocht.", "vreemd": "Elle a visité la ville.", "grammatica": "passé composé (-ER, avoir)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-014", "nl": "Ik heb gevoetbald.", "vreemd": "J'ai fait du foot.", "grammatica": "passé composé (faire + uitdrukking)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-015", "nl": "Hij is naar huis gegaan.", "vreemd": "Il est rentré à la maison.", "grammatica": "passé composé (être als hulpww)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-016", "nl": "Waar woon jij?", "vreemd": "Tu habites où?", "acceptedAnswers": ["Où habites-tu?"], "grammatica": "vraag (vraagwoord où)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-017", "nl": "Wat doe jij?", "vreemd": "Qu'est-ce que tu fais?", "grammatica": "vraag (qu'est-ce que + faire)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-018", "nl": "Waarom ga jij naar Parijs?", "vreemd": "Pourquoi tu vas à Paris?", "acceptedAnswers": ["Pourquoi est-ce que tu vas à Paris?", "Pourquoi vas-tu à Paris?"], "grammatica": "vraag (vraagwoord pourquoi + aller)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-019", "nl": "Wanneer ga jij naar huis?", "vreemd": "Quand est-ce que tu rentres?", "acceptedAnswers": ["Quand rentres-tu?", "Tu rentres quand?"], "grammatica": "vraag (vraagwoord quand)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-020", "nl": "Kun jij mij helpen?", "vreemd": "Tu peux m'aider?", "acceptedAnswers": ["Peux-tu m'aider?", "Vous pouvez m'aider?"], "grammatica": "vraag (ja/nee-vraag)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-021", "nl": "Is het café ver?", "vreemd": "Est-ce que le café est loin?", "acceptedAnswers": ["Le café est loin?"], "grammatica": "vraag (est-ce que)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 },
+    { "id": "frans-h6-vert-022", "nl": "Vind jij de stad leuk?", "vreemd": "Tu aimes la ville?", "acceptedAnswers": ["Est-ce que tu aimes la ville?", "Aimes-tu la ville?"], "grammatica": "vraag (ja/nee-vraag + aimer)", "hoofdstuk": "6", "bron": "gegenereerd voorbeeld", "confidence": 0.6 }
+  ]
+}

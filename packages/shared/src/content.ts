@@ -5,6 +5,7 @@
 /** Normalisatie-profiel bepaalt hoe een getypt antwoord met het juiste wordt vergeleken (SPEC §5 Cat 1). */
 export type NormalisatieProfiel =
   | "frans" // accenten strikt vereist (été ≠ ete); 1-teken-typo → "bijna goed"
+  | "zin" // hele zinnen: accenten strikt, leestekens (. , ? !) genegeerd, apostrof/koppelteken behouden (j'habite, qu'est-ce que)
   | "engels" // accenten optioneel, getallen exact
   | "begrip" // toleranter: leestekens negeren, lidwoorden optioneel (de cel = cel)
   | "exact"; // letterlijk (jaartallen, topografie)

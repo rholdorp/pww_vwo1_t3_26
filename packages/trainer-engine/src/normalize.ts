@@ -30,6 +30,12 @@ export function normalize(input: string, profiel: NormalisatieProfiel): string {
     case "exact":
       // Accenten blijven significant (été ≠ ete).
       break;
+    case "zin":
+      // Hele zinnen: accenten significant, maar zins-leestekens negeren zodat een
+      // vergeten punt/vraagteken niet als fout telt. Apostrof en koppelteken blijven
+      // (elisie/inversie: j'habite, qu'est-ce que, peux-tu).
+      s = s.replace(/[.,;:!?«»""„"…]/g, " ").replace(/\s+/g, " ").trim();
+      break;
     case "engels":
       // Accenten optioneel.
       s = stripAccents(s);
@@ -77,9 +83,10 @@ function nearMissDrempel(profiel: NormalisatieProfiel): number {
   switch (profiel) {
     case "frans":
       return 1; // strikt: alleen 1-teken-typo telt als "bijna"
+    case "zin":
     case "engels":
     case "begrip":
-      return 2;
+      return 2; // langere antwoorden: iets meer coulance
     case "exact":
       return 0; // geen coulance
   }

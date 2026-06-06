@@ -230,7 +230,11 @@ function Trainer({
   const kleur = vakKleur(blok.vak);
   const cards = useMemo(() => blok.bouwCards(richting), [blok, richting]);
   const cardById = useMemo(() => new Map(cards.map((c) => [c.id, c])), [cards]);
-  const [order] = useState<string[]>(() => sessieVolgorde(naam, blok.ids));
+  const maakOrder = () => {
+    const o = sessieVolgorde(naam, blok.ids);
+    return blok.sessieLimiet ? o.slice(0, blok.sessieLimiet) : o;
+  };
+  const [order] = useState<string[]>(maakOrder);
 
   const [state, setState] = useState<SessionState>(() => startSession(order));
   const [input, setInput] = useState("");
@@ -253,7 +257,7 @@ function Trainer({
               className="knop primair"
               style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
               onClick={() => {
-                setState(startSession(sessieVolgorde(naam, blok.ids)));
+                setState(startSession(maakOrder()));
                 setInput("");
                 setFeedback(null);
                 setOnthuld(false);

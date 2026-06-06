@@ -5,9 +5,10 @@
     "nl->vreemd",
     "vreemd->nl"
   ],
-  "normalisatie": "frans",
+  "normalisatie": "zin",
   "scopeItems": [
-    "vocabulaire-ch6-abe"
+    "vocabulaire-ch6-abe",
+    "grammaire-vraagwoord-plaatsing"
   ],
   "notitie": "Vocabulaire CH6 (A/B/E). Bron is tweeledig: (1) Les verbes ch6 docx = werkwoordenlijst van docent, (2) bold-gemarkeerde woorden uit hoofdstukverhaal CH6 (PDF). De full A/B/E vocabulaire-sectie uit het leerboek is nog niet apart gefotografeerd — als die meer items bevat dan deze twee bronnen, ontbreken die hier. Validator/Ralph: vergelijk met boek-secties A/B/E voor zekerheid.",
   "items": [
@@ -90,6 +91,15 @@
     { "id": "frans-h6-phrases-016", "nl": "Hoe gaan wij naar het café?", "vreemd": "Comment on va au café?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
     { "id": "frans-h6-phrases-017", "nl": "Wij gaan lopend naar het café.", "vreemd": "On va à pied.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.95 },
     { "id": "frans-h6-phrases-018", "nl": "Wat gaan wij daarna doen?", "vreemd": "Qu'est-ce qu'on va faire après?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-019", "nl": "Wij gaan gamen.", "vreemd": "On va jouer à la console.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 }
+    { "id": "frans-h6-phrases-019", "nl": "Wij gaan gamen.", "vreemd": "On va jouer à la console.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
+    { "id": "frans-h6-vraagw-001", "nl": "waar (vraagwoord)", "vreemd": "où", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vraagw-002", "nl": "wanneer (vraagwoord)", "vreemd": "quand", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vraagw-003", "nl": "hoe (vraagwoord)", "vreemd": "comment", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vraagw-004", "nl": "hoeveel (vraagwoord)", "vreemd": "combien", "acceptedAnswers": { "vreemd": ["combien de"] }, "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vraagw-005", "nl": "waarom (vraagwoord)", "vreemd": "pourquoi", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vraagw-006", "nl": "wie (vraagwoord)", "vreemd": "qui", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vraagw-007", "nl": "wat (vraagwoord)", "vreemd": "qu'est-ce que", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
+    { "id": "frans-h6-vocab-061", "nl": "sporten", "vreemd": "faire du sport", "context": "uitdrukking met faire — CH6 (verhaal)", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
+    { "id": "frans-h6-vocab-062", "nl": "daarna", "vreemd": "ensuite", "acceptedAnswers": { "nl": ["daarna", "vervolgens"] }, "context": "vocab CH6 (sectie E, p79)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154245730.jpg", "confidence": 0.93 }
   ]
 }

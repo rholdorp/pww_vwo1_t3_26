@@ -69,4 +69,14 @@ describe("gradeAnswer", () => {
   it("exact-profiel geeft geen coulance", () => {
     expect(gradeAnswer("1788", ["1789"], "exact")).toBe("fout");
   });
+
+  it("zin: leestekens genegeerd, accenten en apostrof significant", () => {
+    // Vergeten punt/vraagteken/komma → nog steeds goed.
+    expect(gradeAnswer("c'est loin", ["C'est loin?"], "zin")).toBe("goed");
+    expect(gradeAnswer("Oui bien sûr", ["Oui, bien sûr."], "zin")).toBe("goed");
+    // Apostrof/koppelteken blijven behouden (worden niet tot spatie).
+    expect(gradeAnswer("Tu habites où ?", ["Tu habites où?"], "zin")).toBe("goed");
+    // Accent blijft significant: missend accent telt als (bijna) fout, niet goed.
+    expect(gradeAnswer("Oui bien sur", ["Oui, bien sûr."], "zin")).not.toBe("goed");
+  });
 });

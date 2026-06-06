@@ -64,7 +64,7 @@ export type Card =
     };
 
 /** Interne categorie (niet tonen in UI). */
-export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "schrijven";
+export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven";
 
 /** Stijn-vriendelijk label per soort — géén "Cat 1/3". */
 export const SOORT_LABEL: Record<BlokSoort, string> = {
@@ -72,6 +72,7 @@ export const SOORT_LABEL: Record<BlokSoort, string> = {
   begrippen: "Begrippen",
   uitlegvragen: "Uitlegvragen",
   invullen: "Invullen",
+  vertalen: "Zinnen vertalen",
   schrijven: "Schrijfoefening",
 };
 export const SOORT_ICON: Record<BlokSoort, string> = {
@@ -79,6 +80,7 @@ export const SOORT_ICON: Record<BlokSoort, string> = {
   begrippen: "📖",
   uitlegvragen: "💡",
   invullen: "🔤",
+  vertalen: "🔁",
   schrijven: "✍️",
 };
 
@@ -97,6 +99,8 @@ export interface Blok {
   richtingen?: Richting[];
   /** Alleen bij soort "schrijven": verwijzing naar de schrijfopdracht. */
   opdrachtId?: string;
+  /** Optioneel: maximaal aantal kaarten per ronde (bv. "kies 10 willekeurig"). */
+  sessieLimiet?: number;
   bouwCards: (richting?: Richting) => Card[];
 }
 
@@ -221,6 +225,32 @@ function buildRuw(): Blok[] {
           bouwCards: () => [],
         });
       });
+    } else if (file === "vertaalzinnen.json") {
+      const b = data as {
+        hoofdstuk: string;
+        normalisatie: NormalisatieProfiel;
+        sessieLimiet?: number;
+        items: Array<{ id: string; nl: string; vreemd: string; acceptedAnswers?: string[] }>;
+      };
+      blokken.push({
+        id: `${vak}/vertalen/h${b.hoofdstuk}`,
+        vak,
+        hoofdstuk: b.hoofdstuk,
+        onderdeel: "Zinnen vertalen",
+        soort: "vertalen",
+        titel: "Zinnen vertalen (NL → FR)",
+        ids: b.items.map((it) => it.id),
+        sessieLimiet: b.sessieLimiet ?? 10,
+        bouwCards: () =>
+          b.items.map((it): Card => ({
+            kind: "typed",
+            id: it.id,
+            prompt: it.nl,
+            accepted: [it.vreemd, ...(it.acceptedAnswers ?? [])],
+            norm: b.normalisatie,
+            answer: it.vreemd,
+          })),
+      });
     } else if (file === "hoofdstukverhaal-cloze.json") {
       const b = data as {
         hoofdstuk: string;
@@ -323,8 +353,12 @@ function buildBlokken(): Blok[] {
   const ruw = buildRuw();
   const final: Blok[] = [];
 
-  // Woordjes, invuloefeningen + schrijfopdrachten: ongemoeid.
-  final.push(...ruw.filter((b) => b.soort === "woordjes" || b.soort === "invullen" || b.soort === "schrijven"));
+  // Woordjes, invul-/vertaal-oefeningen + schrijfopdrachten: ongemoeid.
+  final.push(
+    ...ruw.filter(
+      (b) => b.soort === "woordjes" || b.soort === "invullen" || b.soort === "vertalen" || b.soort === "schrijven",
+    ),
+  );
 
   // Begrippen: per (vak, hoofdstuk) de te kleine paragrafen samenvoegen,
   // de rest blijft per paragraaf gescheiden.
@@ -346,7 +380,7 @@ function buildBlokken(): Blok[] {
 
 export const BLOKKEN: Blok[] = buildBlokken();
 
-const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, invullen: 1, begrippen: 2, uitlegvragen: 3, schrijven: 4 };
+const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, invullen: 1, vertalen: 2, begrippen: 3, uitlegvragen: 4, schrijven: 5 };
 
 function hfdNum(h: string): number {
   const n = parseInt(h, 10);
