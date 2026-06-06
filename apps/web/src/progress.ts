@@ -1,4 +1,4 @@
-import { applyResult, mastery, nieuwItem } from "@pww/trainer-engine";
+import { applyResult, isDue, mastery, nieuwItem } from "@pww/trainer-engine";
 import type { ItemProgress, LeitnerBox, Uitkomst } from "@pww/shared";
 
 // v0.1-prototype: voortgang in localStorage, gesleuteld op naam-slug (dezelfde
@@ -56,10 +56,30 @@ export function boxVoor(naam: string, itemId: string): LeitnerBox {
   return (load(naam)[itemId]?.box ?? 1) as LeitnerBox;
 }
 
-/** Sorteer item-ids: zwakste bakjes eerst (meer oefening waar nodig). */
-export function sorteerOpBakje(naam: string, ids: readonly string[]): string[] {
+function shuffle<T>(arr: readonly T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/**
+ * Volgorde voor een nieuwe sessie:
+ *  - alleen items die vandaag "aan de beurt" zijn (Leitner `isDue`) — zo hoef je items
+ *    die je net goed had niet meteen opnieuw te doen bij heropenen;
+ *  - is alles al beheerst/niet-due, dan toch de hele set (review);
+ *  - altijd geschud, zodat de volgorde elke keer anders is (anti-memorisatie).
+ */
+export function sessieVolgorde(naam: string, ids: readonly string[]): string[] {
   const store = load(naam);
-  return [...ids].sort((a, b) => (store[a]?.box ?? 1) - (store[b]?.box ?? 1));
+  const t = vandaag();
+  const due = ids.filter((id) => {
+    const p = store[id];
+    return !p || isDue(p, t);
+  });
+  return shuffle(due.length > 0 ? due : ids);
 }
 
 export function huidigeNaam(): string | null {

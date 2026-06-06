@@ -12,7 +12,9 @@ import {
 import {
   vakGroepen,
   vakLabel,
+  vakKleur,
   richtingLabel,
+  SOORT_ICON,
   type Blok,
   type Card,
 } from "./content";
@@ -20,7 +22,7 @@ import {
   blokMastery,
   huidigeNaam,
   record,
-  sorteerOpBakje,
+  sessieVolgorde,
   zetNaam,
 } from "./progress";
 
@@ -83,12 +85,6 @@ function NaamPoort({ onKlaar }: { onKlaar: (naam: string) => void }) {
   );
 }
 
-const SOORT_LABEL: Record<Blok["soort"], string> = {
-  vocab: "Cat 1 · typen",
-  flashcards: "Cat 1 · begrippen",
-  oefenvragen: "Cat 3 · begripsvragen",
-};
-
 function Home({
   naam,
   onStart,
@@ -99,45 +95,71 @@ function Home({
   const groepen = useMemo(() => vakGroepen(), []);
   return (
     <main className="lijst">
-      <h1>Kies wat je wilt oefenen</h1>
-      {groepen.map((g) => (
-        <section key={g.vak}>
-          <h2>{vakLabel(g.vak)}</h2>
-          {g.blokken.map((blok) => {
-            const ids = blok.bouwCards(blok.richtingen?.[0]).map((c) => c.id);
-            const m = Math.round(blokMastery(naam, ids) * 100);
-            return (
-              <div key={blok.id} className="card">
-                <div className="card-kop">
-                  <div>
-                    <div className="card-titel">{blok.titel}</div>
-                    <div className="muted klein">
-                      {SOORT_LABEL[blok.soort]} · {blok.aantal} kaarten · {m}% beheerst
-                    </div>
-                  </div>
-                </div>
-                <div className="knoppen">
-                  {blok.soort === "vocab" && blok.richtingen ? (
-                    blok.richtingen.map((r) => (
-                      <button key={r} className="knop" onClick={() => onStart(blok, r)}>
-                        {richtingLabel(blok.vak, r)}
-                      </button>
-                    ))
-                  ) : (
-                    <button className="knop primair" onClick={() => onStart(blok)}>
-                      Start
-                    </button>
-                  )}
-                </div>
+      <h1>Wat ga je oefenen?</h1>
+      {groepen.map((g) => {
+        const kleur = vakKleur(g.vak);
+        return (
+          <section key={g.vak} className="vak">
+            <h2 className="vaknaam" style={{ color: kleur }}>
+              <span className="vak-stip" style={{ background: kleur }} />
+              {vakLabel(g.vak)}
+            </h2>
+            {g.hoofdstukken.map((h) => (
+              <div key={h.hoofdstuk} className="hfd-groep">
+                <h3 className="hfd">Hoofdstuk {h.hoofdstuk}</h3>
+                {h.blokken.map((blok) => (
+                  <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} />
+                ))}
               </div>
-            );
-          })}
-        </section>
-      ))}
-      <p className="muted klein voetnoot">
-        Prototype · voortgang lokaal op dit apparaat · {groepen.reduce((n, g) => n + g.blokken.length, 0)} blokken geladen
-      </p>
+            ))}
+          </section>
+        );
+      })}
+      <p className="muted klein voetnoot">Voortgang lokaal op dit apparaat bewaard.</p>
     </main>
+  );
+}
+
+function BlokKaart({
+  naam,
+  blok,
+  kleur,
+  onStart,
+}: {
+  naam: string;
+  blok: Blok;
+  kleur: string;
+  onStart: (blok: Blok, richting?: Richting) => void;
+}) {
+  const m = Math.round(blokMastery(naam, blok.ids) * 100);
+  const beheerst = m >= 80;
+  return (
+    <div className="card blok">
+      <div className="blok-kop">
+        <span className="blok-icon">{SOORT_ICON[blok.soort]}</span>
+        <div className="blok-tekst">
+          <div className="card-titel">{blok.titel}</div>
+          <div className="muted klein">{blok.ids.length} kaarten · {m}% beheerst</div>
+        </div>
+        {beheerst && <span className="badge">✓ beheerst</span>}
+      </div>
+      <div className="balk dun">
+        <div className="balk-vuller" style={{ width: `${m}%`, background: kleur }} />
+      </div>
+      <div className="knoppen">
+        {blok.soort === "woordjes" && blok.richtingen ? (
+          blok.richtingen.map((r) => (
+            <button key={r} className="knop" style={{ borderColor: kleur }} onClick={() => onStart(blok, r)}>
+              {richtingLabel(blok.vak, r)}
+            </button>
+          ))
+        ) : (
+          <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} onClick={() => onStart(blok)}>
+            Oefenen
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -152,32 +174,33 @@ function Trainer({
   richting?: Richting;
   onExit: () => void;
 }) {
+  const kleur = vakKleur(blok.vak);
   const cards = useMemo(() => blok.bouwCards(richting), [blok, richting]);
   const cardById = useMemo(() => new Map(cards.map((c) => [c.id, c])), [cards]);
-  const totaal = cards.length;
+  const [order] = useState<string[]>(() => sessieVolgorde(naam, blok.ids));
 
-  const [state, setState] = useState<SessionState>(() =>
-    startSession(sorteerOpBakje(naam, cards.map((c) => c.id))),
-  );
+  const [state, setState] = useState<SessionState>(() => startSession(order));
   const [input, setInput] = useState("");
   const [feedback, setFeedback] = useState<{ uitkomst: Uitkomst; answer: string } | null>(null);
   const [onthuld, setOnthuld] = useState(false);
 
+  const totaal = order.length;
   const currentId = currentItem(state);
 
   if (isComplete(state) || currentId === null) {
-    const m = Math.round(blokMastery(naam, cards.map((c) => c.id)) * 100);
+    const m = Math.round(blokMastery(naam, blok.ids) * 100);
     return (
       <main className="lijst center">
         <div className="card narrow">
           <h1>Klaar! 🎉</h1>
-          <p>Je hebt alle {totaal} kaarten doorlopen.</p>
-          <p className="muted">{m}% beheerst (bakje 3 of hoger).</p>
+          <p>Je hebt deze ronde van {totaal} {totaal === 1 ? "kaart" : "kaarten"} afgerond.</p>
+          <p className="muted">{m}% van «{blok.titel}» beheerst.</p>
           <div className="knoppen">
             <button
               className="knop primair"
+              style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
               onClick={() => {
-                setState(startSession(sorteerOpBakje(naam, cards.map((c) => c.id))));
+                setState(startSession(sessieVolgorde(naam, blok.ids)));
                 setInput("");
                 setFeedback(null);
                 setOnthuld(false);
@@ -185,9 +208,7 @@ function Trainer({
             >
               Nog een ronde
             </button>
-            <button className="knop" onClick={onExit}>
-              Terug
-            </button>
+            <button className="knop" onClick={onExit}>Terug</button>
           </div>
         </div>
       </main>
@@ -196,7 +217,7 @@ function Trainer({
 
   const card = cardById.get(currentId)!;
   const gedaan = state.cleared.length;
-  const progressPct = Math.round((gedaan / totaal) * 100);
+  const progressPct = totaal > 0 ? Math.round((gedaan / totaal) * 100) : 0;
 
   function volgende(uitkomst: Uitkomst) {
     record(naam, currentId!, uitkomst);
@@ -205,7 +226,6 @@ function Trainer({
     setFeedback(null);
     setOnthuld(false);
   }
-
   function nakijken() {
     if (card.kind !== "typed") return;
     const uitkomst = gradeAnswer(input, card.accepted, card.norm);
@@ -215,17 +235,20 @@ function Trainer({
 
   return (
     <main className="trainer">
+      <div className="trainer-kop">
+        <span className="vak-stip" style={{ background: kleur }} />
+        <span className="muted klein">{vakLabel(blok.vak)} · {blok.titel}</span>
+      </div>
       <div className="balk">
-        <div className="balk-vuller" style={{ width: `${progressPct}%` }} />
+        <div className="balk-vuller" style={{ width: `${progressPct}%`, background: kleur }} />
       </div>
-      <div className="balk-tekst muted klein">
-        {gedaan} / {totaal} af · nog {state.remaining.length} in de rij
-      </div>
+      <div className="balk-tekst muted klein">{gedaan} / {totaal} af · nog {state.remaining.length} te gaan</div>
 
       <div className="card kaart-groot">
         {card.kind === "typed" ? (
           <TypedKaart
             card={card}
+            kleur={kleur}
             input={input}
             setInput={setInput}
             feedback={feedback}
@@ -234,24 +257,18 @@ function Trainer({
             onVolgende={() => feedback && volgende(feedback.uitkomst)}
           />
         ) : (
-          <FlipKaart
-            card={card}
-            onthuld={onthuld}
-            onToon={() => setOnthuld(true)}
-            onBeoordeel={volgende}
-          />
+          <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
         )}
       </div>
 
-      <button className="link" onClick={onExit}>
-        Stoppen
-      </button>
+      <button className="link" onClick={onExit}>Stoppen</button>
     </main>
   );
 }
 
 function TypedKaart({
   card,
+  kleur,
   input,
   setInput,
   feedback,
@@ -260,6 +277,7 @@ function TypedKaart({
   onVolgende,
 }: {
   card: Extract<Card, { kind: "typed" }>;
+  kleur: string;
   input: string;
   setInput: (s: string) => void;
   feedback: { uitkomst: Uitkomst; answer: string } | null;
@@ -292,17 +310,17 @@ function TypedKaart({
           <div className={`uitslag ${feedback.uitkomst}`}>
             {feedback.uitkomst === "goed" && "Goed! ✅"}
             {feedback.uitkomst === "bijna" && "Bijna — let op de spelling"}
-            {feedback.uitkomst === "fout" && "Fout"}
+            {feedback.uitkomst === "fout" && "Helaas"}
           </div>
           {feedback.uitkomst !== "goed" && (
             <div className="juiste">Juiste antwoord: <strong>{card.answer}</strong></div>
           )}
-          <button className="knop primair" autoFocus onClick={onVolgende}>
+          <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} autoFocus onClick={onVolgende}>
             Volgende
           </button>
         </>
       ) : (
-        <button className="knop primair" disabled={!input.trim()} onClick={onNakijken}>
+        <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} disabled={!input.trim()} onClick={onNakijken}>
           Nakijken
         </button>
       )}
@@ -312,11 +330,13 @@ function TypedKaart({
 
 function FlipKaart({
   card,
+  kleur,
   onthuld,
   onToon,
   onBeoordeel,
 }: {
   card: Extract<Card, { kind: "flip" }>;
+  kleur: string;
   onthuld: boolean;
   onToon: () => void;
   onBeoordeel: (uitkomst: Uitkomst) => void;
@@ -326,7 +346,7 @@ function FlipKaart({
       {card.image && <img className="kaart-beeld" src={card.image} alt="" />}
       <div className="prompt">{card.front}</div>
       {!onthuld ? (
-        <button className="knop primair" onClick={onToon}>
+        <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} onClick={onToon}>
           Toon antwoord
         </button>
       ) : (
@@ -341,12 +361,8 @@ function FlipKaart({
           )}
           <div className="muted klein">Wist je dit?</div>
           <div className="knoppen">
-            <button className="knop goed" onClick={() => onBeoordeel("goed")}>
-              Wist ik ✅
-            </button>
-            <button className="knop fout" onClick={() => onBeoordeel("fout")}>
-              Nog niet
-            </button>
+            <button className="knop goed" onClick={() => onBeoordeel("goed")}>Wist ik ✅</button>
+            <button className="knop fout" onClick={() => onBeoordeel("fout")}>Nog niet</button>
           </div>
         </>
       )}

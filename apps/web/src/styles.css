@@ -17,9 +17,10 @@
 html, body, #root { height: 100%; margin: 0; }
 
 body {
-  background: var(--bg);
+  background: linear-gradient(160deg, #0a0e1a, #111830 50%, #0c1020);
+  background-attachment: fixed;
   color: var(--tekst);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: Nunito, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,7 +39,9 @@ body {
   padding: 14px 0;
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: rgba(10, 14, 26, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 2;
 }
 .naam { color: var(--muted); font-size: 14px; }
@@ -51,9 +54,9 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
 .voetnoot { margin-top: 28px; text-align: center; }
 
 .card {
-  background: var(--paneel);
-  border: 1px solid var(--rand);
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
   padding: 16px;
   margin-bottom: 12px;
 }
@@ -122,3 +125,30 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
 
 .rubric { text-align: left; margin: 8px auto 12px; max-width: 420px; padding-left: 20px; }
 .rubric li { margin: 3px 0; }
+
+/* Vak- en hoofdstuk-structuur (home) */
+.vak { margin-top: 22px; }
+.vaknaam {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 19px; font-weight: 800; text-transform: none; letter-spacing: 0;
+  margin: 18px 0 6px;
+}
+.vak-stip { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex: none; }
+.hfd-groep { margin-bottom: 8px; }
+.hfd {
+  font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted); margin: 12px 2px 8px;
+}
+
+.blok { padding: 14px 16px; }
+.blok-kop { display: flex; align-items: center; gap: 12px; }
+.blok-icon { font-size: 22px; flex: none; }
+.blok-tekst { flex: 1 1 auto; min-width: 0; }
+.badge {
+  flex: none; font-size: 12px; font-weight: 700; color: var(--goed);
+  background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35);
+  padding: 3px 8px; border-radius: 99px;
+}
+.balk.dun { height: 5px; margin: 12px 0 0; }
+
+.trainer-kop { display: flex; align-items: center; gap: 8px; padding: 6px 0 2px; }
