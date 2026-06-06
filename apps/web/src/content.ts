@@ -143,7 +143,7 @@ function typedFlashcard(k: FlashcardBestand["kaarten"][number], norm: Normalisat
   };
 }
 
-function buildBlokken(): Blok[] {
+function buildRuw(): Blok[] {
   const blokken: Blok[] = [];
 
   for (const [path, mod] of Object.entries(jsonModules)) {
@@ -217,6 +217,78 @@ function buildBlokken(): Blok[] {
     }
   }
   return blokken;
+}
+
+// Een blok onder deze grootte voelt te mager; we combineren het slim met buren.
+const MIN_KAARTEN = 6;
+
+function paragraafLabel(b: Blok): string {
+  return b.onderdeel.match(/§\d+\.\d+/)?.[0] ?? b.onderdeel;
+}
+
+function combineer(a: Blok, b: Blok, opts?: Partial<Pick<Blok, "id" | "onderdeel" | "titel" | "hoofdstuk">>): Blok {
+  const onderdeel = opts?.onderdeel ?? `${paragraafLabel(a)} + ${paragraafLabel(b)}`;
+  return {
+    id: opts?.id ?? `${a.id}+${b.id}`,
+    vak: a.vak,
+    hoofdstuk: opts?.hoofdstuk ?? a.hoofdstuk,
+    onderdeel,
+    soort: a.soort,
+    titel: opts?.titel ?? onderdeel,
+    ids: [...a.ids, ...b.ids],
+    richtingen: a.richtingen,
+    bouwCards: (r) => [...a.bouwCards(r), ...b.bouwCards(r)],
+  };
+}
+
+/** Voeg per (vak,hoofdstuk,soort) de paragraaf-blokken <MIN samen met een buur. */
+function bundelKlein(blokken: Blok[]): Blok[] {
+  const sorted = [...blokken].sort((x, y) => x.onderdeel.localeCompare(y.onderdeel));
+  const out: Blok[] = [];
+  let buf: Blok | null = null;
+  for (const b of sorted) {
+    if (buf) {
+      buf = combineer(buf, b);
+      if (buf.ids.length >= MIN_KAARTEN) {
+        out.push(buf);
+        buf = null;
+      }
+    } else if (b.ids.length < MIN_KAARTEN) {
+      buf = b;
+    } else {
+      out.push(b);
+    }
+  }
+  if (buf) {
+    if (out.length > 0) out[out.length - 1] = combineer(out[out.length - 1], buf);
+    else out.push(buf);
+  }
+  return out;
+}
+
+function buildBlokken(): Blok[] {
+  const ruw = buildRuw();
+  const final: Blok[] = [];
+
+  // Woordjes: ongemoeid (per hoofdstuk).
+  final.push(...ruw.filter((b) => b.soort === "woordjes"));
+
+  // Begrippen: per (vak, hoofdstuk) de te kleine paragrafen samenvoegen,
+  // de rest blijft per paragraaf gescheiden.
+  const begrippen = ruw.filter((b) => b.soort === "begrippen");
+  for (const [, groep] of groupBy(begrippen, (b) => `${b.vak}|${b.hoofdstuk}`)) {
+    final.push(...bundelKlein(groep));
+  }
+
+  // Uitlegvragen: inherent klein per paragraaf → één review-blok per vak.
+  const uitleg = ruw.filter((b) => b.soort === "uitlegvragen");
+  for (const [vak, groep] of groupBy(uitleg, (b) => b.vak)) {
+    const meta = { id: `${vak}/uitlegvragen`, hoofdstuk: "uitleg", onderdeel: "Uitlegvragen", titel: "Uitlegvragen" };
+    const samen = groep.reduce((acc, b) => combineer(acc, b, meta));
+    final.push({ ...samen, ...meta });
+  }
+
+  return final;
 }
 
 export const BLOKKEN: Blok[] = buildBlokken();

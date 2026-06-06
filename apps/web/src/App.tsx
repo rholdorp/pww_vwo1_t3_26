@@ -106,7 +106,7 @@ function Home({
             </h2>
             {g.hoofdstukken.map((h) => (
               <div key={h.hoofdstuk} className="hfd-groep">
-                <h3 className="hfd">Hoofdstuk {h.hoofdstuk}</h3>
+                <h3 className="hfd">{h.hoofdstuk === "uitleg" ? "Uitleg & verbanden" : `Hoofdstuk ${h.hoofdstuk}`}</h3>
                 {h.blokken.map((blok) => (
                   <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} />
                 ))}
