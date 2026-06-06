@@ -374,10 +374,11 @@ function TypedKaart({
         autoFocus
         placeholder="Typ je antwoord"
         value={input}
-        disabled={!!feedback}
+        readOnly={!!feedback}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
           if (e.key !== "Enter") return;
+          e.preventDefault();
           if (feedback) onVolgende();
           else onNakijken();
         }}
@@ -392,7 +393,7 @@ function TypedKaart({
           {feedback.uitkomst !== "goed" && (
             <div className="juiste">Juiste antwoord: <strong>{card.answer}</strong></div>
           )}
-          <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} autoFocus onClick={onVolgende}>
+          <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} onClick={onVolgende}>
             Volgende
           </button>
         </>

@@ -43,6 +43,28 @@ function groupBy<T>(items: T[], key: (t: T) => string): Map<string, T[]> {
   return m;
 }
 
+// ~20 kaarten per onderwerp houdt de focus vast (Stijn-feedback).
+const WOORD_MAX = 22;
+
+/** Leid een onderwerp af uit de context van een frans vocab-item (voor groepering). */
+function fransOnderwerp(ctx: string | undefined): string {
+  const c = (ctx ?? "").toLowerCase();
+  if (c.includes("phrases-cl")) return "Zinnen oefenen";
+  if (c.includes("vraagwoord")) return "Vraagwoorden";
+  if (c.includes("hoofdstukverhaal") || c.includes("sectie e")) return "Woorden uit het verhaal";
+  return "Werkwoorden & woorden";
+}
+
+/** Verdeel een lijst in zo gelijk mogelijke stukken van ≤ n. */
+function chunk<T>(arr: T[], n: number): T[][] {
+  if (arr.length <= n) return [arr];
+  const delen = Math.ceil(arr.length / n);
+  const per = Math.ceil(arr.length / delen);
+  const out: T[][] = [];
+  for (let i = 0; i < arr.length; i += per) out.push(arr.slice(i, i + per));
+  return out;
+}
+
 /** Eén te oefenen kaart, klaar voor de UI. */
 export type Card =
   | {
@@ -147,10 +169,16 @@ function typedFlashcard(k: FlashcardBestand["kaarten"][number], norm: Normalisat
   if (k.modus === "kaart") {
     return { kind: "flip", id: k.id, front: k.vraag, back: k.antwoord, image: resolveImage(k.afbeelding) };
   }
+  // Begrippen tonen anders alleen de definitie (uitleg). Maak er een vráág van:
+  // als de tekst nog geen vraag is, vraag expliciet naar het begrip. Topografie en
+  // al-vraag-geformuleerde items (eindigen op "?") blijven ongemoeid.
+  const isTopo = (k.onderdeel ?? "").toLowerCase().startsWith("topografie");
+  const isVraag = k.vraag.trim().endsWith("?");
+  const prompt = isTopo || isVraag ? k.vraag : `Welk begrip wordt hier beschreven?\n${k.vraag}`;
   return {
     kind: "typed",
     id: k.id,
-    prompt: k.vraag,
+    prompt,
     accepted: [k.antwoord, ...(k.acceptedAnswers ?? [])],
     norm: k.normalisatie ?? norm,
     answer: k.antwoord,
@@ -170,30 +198,58 @@ function buildRuw(): Blok[] {
       const b = data as VocabBestand;
       const isWerkw = file === "werkwoorden.json";
       const richtingen = b.richtingen?.length ? b.richtingen : (["nl->vreemd"] as Richting[]);
-      // Splits per hoofdstuk (meestal één); houdt de scheiding zichtbaar.
-      for (const [hfd, items] of groupBy(b.items, (it) => it.hoofdstuk || b.hoofdstuk)) {
-        blokken.push({
-          id: `${vak}/${isWerkw ? "werkwoorden" : "woordjes"}/h${hfd}`,
-          vak,
-          hoofdstuk: hfd,
-          onderdeel: isWerkw ? "Werkwoorden" : `Hoofdstuk ${hfd}`,
-          soort: "woordjes",
-          titel: isWerkw ? "Werkwoorden vervoegen" : "Woordjes",
-          ids: items.map((it) => it.id),
-          richtingen,
-          bouwCards: (richting = richtingen[0]) =>
-            items.map((it): Card => {
-              const k = bouwKaart(it, richting);
-              return {
-                kind: "typed",
-                id: it.id,
-                prompt: k.prompt,
-                accepted: k.accepted,
-                norm: b.normalisatie,
-                answer: richting === "nl->vreemd" ? it.vreemd : it.nl,
-              };
-            }),
-        });
+      type Items = VocabBestand["items"];
+      const maakBouwer =
+        (items: Items) =>
+        (richting: Richting = richtingen[0]): Card[] =>
+          items.map((it): Card => {
+            const k = bouwKaart(it, richting);
+            return {
+              kind: "typed",
+              id: it.id,
+              prompt: k.prompt,
+              accepted: k.accepted,
+              norm: b.normalisatie,
+              answer: richting === "nl->vreemd" ? it.vreemd : it.nl,
+            };
+          });
+
+      if (isWerkw) {
+        // Werkwoorden blijven één blok (vervoegen).
+        for (const [hfd, items] of groupBy(b.items, (it) => it.hoofdstuk || b.hoofdstuk)) {
+          blokken.push({
+            id: `${vak}/werkwoorden/h${hfd}`,
+            vak,
+            hoofdstuk: hfd,
+            onderdeel: "Werkwoorden",
+            soort: "woordjes",
+            titel: "Werkwoorden vervoegen",
+            ids: items.map((it) => it.id),
+            richtingen,
+            bouwCards: maakBouwer(items),
+          });
+        }
+      } else {
+        // Groepeer woordjes per onderwerp (~20 per blok) zodat de focus behapbaar
+        // blijft; grote onderwerpen splitsen in "(deel n)". De Leitner-requeue +
+        // due-first sessievolgorde laat foute woorden vanzelf terugkomen.
+        for (const [onderwerp, items] of groupBy(b.items, (it) => fransOnderwerp(it.context))) {
+          const delen = chunk(items, WOORD_MAX);
+          delen.forEach((deel, i) => {
+            const label = delen.length > 1 ? `${onderwerp} (deel ${i + 1})` : onderwerp;
+            blokken.push({
+              id: `${vak}/woordjes/${onderwerp.replace(/\s+/g, "-").toLowerCase()}-${i}`,
+              vak,
+              hoofdstuk: b.hoofdstuk,
+              onderdeel: label,
+              soort: "woordjes",
+              titel: label,
+              ids: deel.map((it) => it.id),
+              richtingen,
+              bouwCards: maakBouwer(deel),
+            });
+          });
+        }
       }
     } else if (file === "flashcards.json") {
       const b = data as FlashcardBestand;
