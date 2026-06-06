@@ -18,10 +18,29 @@ export interface Kaart {
  *  - vreemd->nl: toon de vreemde vorm (die de grammaticale vorm al impliceert) en
  *    accepteer de kále NL-betekenis — "vertaal belle" → Stijn typt "mooi".
  */
+/**
+ * Extra geaccepteerde antwoorden voor één kant. Een kale `string[]` is legacy en
+ * betekent vormen van het *vreemde* antwoord (alleen relevant in nl->vreemd).
+ */
+function extraAntwoorden(
+  aa: VocabItem["acceptedAnswers"],
+  kant: "nl" | "vreemd",
+): string[] {
+  if (!aa) return [];
+  if (Array.isArray(aa)) return kant === "vreemd" ? aa : [];
+  return aa[kant] ?? [];
+}
+
 export function bouwKaart(item: VocabItem, richting: Richting): Kaart {
   if (richting === "nl->vreemd") {
     const prompt = item.vorm ? `${item.nl} (${item.vorm})` : item.nl;
-    return { prompt, accepted: [item.vreemd, ...(item.acceptedAnswers ?? [])] };
+    return {
+      prompt,
+      accepted: [item.vreemd, ...extraAntwoorden(item.acceptedAnswers, "vreemd")],
+    };
   }
-  return { prompt: item.vreemd, accepted: [item.nl] };
+  return {
+    prompt: item.vreemd,
+    accepted: [item.nl, ...extraAntwoorden(item.acceptedAnswers, "nl")],
+  };
 }

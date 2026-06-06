@@ -28,8 +28,13 @@ export interface VocabItem {
   context?: string;
   /** Hoofdstuk waaruit dit item komt. */
   hoofdstuk: string;
-  /** Extra geaccepteerde vormen van het vreemde antwoord (synoniemen, met/zonder lidwoord). */
-  acceptedAnswers?: string[];
+  /**
+   * Extra geaccepteerde antwoorden (synoniemen, met/zonder lidwoord).
+   * - `string[]`: vormen van het **vreemde** antwoord (legacy; gebruikt in nl->vreemd).
+   * - `{ nl?, vreemd? }`: richting-specifiek — `nl` geldt in vreemd->nl, `vreemd` in
+   *   nl->vreemd. Zo mag Stijn bij "vertaal regarder" zowel "bekijken" als "kijken naar".
+   */
+  acceptedAnswers?: string[] | { nl?: string[]; vreemd?: string[] };
   /** Pad naar de raw screenshot waaruit dit item is afgeleid (relatief t.o.v. editie-root). */
   bron: string;
   /** Extractie-confidence 0..1 (review-trigger onder drempel, SPEC §4). */

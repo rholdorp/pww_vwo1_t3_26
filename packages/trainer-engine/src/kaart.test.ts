@@ -48,4 +48,24 @@ describe("bouwKaart", () => {
     expect(bouwKaart(kaas, "nl->vreemd").prompt).toBe("de kaas");
     expect(bouwKaart(kaas, "vreemd->nl").prompt).toBe("le fromage");
   });
+
+  it("richting-specifieke acceptedAnswers ({nl,vreemd}) gelden per kant", () => {
+    const regarder: VocabItem = {
+      id: "frans-h6-vocab-002",
+      nl: "bekijken, kijken naar",
+      vreemd: "regarder",
+      hoofdstuk: "6",
+      bron: "raw/frans/x.docx",
+      confidence: 0.98,
+      acceptedAnswers: { nl: ["bekijken", "kijken naar"] },
+    };
+    // vreemd->nl: prompt "regarder", NL-synoniemen worden geaccepteerd.
+    const heen = bouwKaart(regarder, "vreemd->nl");
+    expect(heen.prompt).toBe("regarder");
+    expect(heen.accepted).toEqual(["bekijken, kijken naar", "bekijken", "kijken naar"]);
+    expect(gradeAnswer("bekijken", heen.accepted, "frans")).toBe("goed");
+    // nl->vreemd: geen vreemd-kant opgegeven → alleen het vreemde woord.
+    const terug = bouwKaart(regarder, "nl->vreemd");
+    expect(terug.accepted).toEqual(["regarder"]);
+  });
 });
