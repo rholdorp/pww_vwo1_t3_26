@@ -1,0 +1,186 @@
+{
+  "vak": "aardrijkskunde",
+  "vragen": [
+    {
+      "id": "aardrijkskunde-h6-vraag-001",
+      "vraag": "Leg uit waarom het in Noord-Europa minder koud is dan je op die hoge breedte zou verwachten.",
+      "modelAntwoord": "De warme Golfstroom brengt warm water uit de Golf van Mexico naar de westkust van Europa. Boven dat warme zeewater is de lucht ook warmer, en de aanlandige westenwind blaast die warme lucht het land op. Daardoor is het langs de kust 's winters niet erg koud.",
+      "rubric": [
+        "noemt de (warme) Golfstroom",
+        "noemt de aanlandige wind / westenwind",
+        "legt het verband: warme zeelucht wordt het land op gevoerd"
+      ],
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-002",
+      "vraag": "Waarom zijn de temperatuurverschillen tussen zomer en winter in het binnenland van Europa groter dan aan de kust?",
+      "modelAntwoord": "Hoe verder je landinwaarts komt, hoe kleiner de invloed van de zee. De zee matigt de temperatuur (warmt langzaam op en koelt langzaam af), maar land warmt snel op en koelt snel af. Daardoor is het in het binnenland kouder in de winter en warmer in de zomer: grotere verschillen.",
+      "rubric": [
+        "noemt dat de invloed van de zee landinwaarts afneemt",
+        "zee matigt / land warmt en koelt snel(ler)",
+        "concludeert: grotere temperatuurverschillen in het binnenland"
+      ],
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-003",
+      "vraag": "Wat is het verschil tussen de poolnacht en de middernachtzon?",
+      "modelAntwoord": "Tijdens de poolnacht (in Hammerfest van 22 november tot 21 januari) komt de zon niet boven de horizon: het is dan donker. Tijdens de middernachtzon (ongeveer half mei tot eind juli) gaat de zon juist nooit onder: het is dan altijd daglicht.",
+      "rubric": [
+        "poolnacht = zon komt niet boven de horizon (winter)",
+        "middernachtzon = zon gaat nooit onder / altijd daglicht (zomer)"
+      ],
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-004",
+      "vraag": "Leg uit hoe een gebergte zorgt voor een natte loefzijde en een droge lijzijde met regenschaduw.",
+      "modelAntwoord": "Vochtige zeewind wordt tegen het gebergte omhoog gestuwd. De lucht koelt af en er ontstaan stuwingsregens aan de kant die naar de wind toe ligt: de loefzijde (nat). Over de top is de lucht uitgeregend, dus aan de andere kant (de lijzijde) valt weinig neerslag. Dat droge gebied heet de regenschaduw.",
+      "rubric": [
+        "vochtige lucht wordt tegen het gebergte omhoog gestuwd (stuwingsregens)",
+        "loefzijde = nat, lijzijde = droog",
+        "noemt de regenschaduw aan de lijzijde"
+      ],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-005",
+      "vraag": "Waarom is het in Bergen (Noorwegen) veel natter en milder dan in Lillehammer aan de andere kant van het gebergte?",
+      "modelAntwoord": "Bergen ligt aan de kust op de loefzijde: de aanlandige wind (versterkt door de warme Golfstroom) brengt er veel vocht en warmte, met bijna 2 m neerslag per jaar. Het Scandinavisch Hoogland werkt als klimaatscheiding en houdt die vochtige, milde lucht tegen. Lillehammer ligt aan de lijzijde (in de regenschaduw) en is daardoor droger en kouder.",
+      "rubric": [
+        "Bergen = loefzijde/kust met aanlandige wind + Golfstroom (nat, mild)",
+        "gebergte werkt als klimaatscheiding / houdt vocht tegen",
+        "Lillehammer = lijzijde/regenschaduw (droger en kouder)"
+      ],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-006",
+      "vraag": "Hoe en waarom verandert de temperatuur als je een hoge berg op klimt?",
+      "modelAntwoord": "Hoe hoger je komt, hoe kouder het wordt. Bij elke 100 m stijging daalt de temperatuur met ongeveer 0,6 °C. Dit verband heet de temperatuurgradiënt.",
+      "rubric": [
+        "hoger = kouder",
+        "noemt 0,6 °C per 100 m",
+        "noemt de term temperatuurgradiënt"
+      ],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-007",
+      "vraag": "Leg het verschil uit tussen een zeeklimaat en een landklimaat.",
+      "modelAntwoord": "In een zeeklimaat heeft de zee veel invloed: het hele jaar door valt er neerslag en de temperaturen zijn gematigd (koel in de zomer, mild in de winter) — een kleine jaaramplitude. In een landklimaat (binnenland) is de invloed van de zee klein: grote temperatuurverschillen tussen zomer en winter (grote jaaramplitude), de koudste maand is kouder dan -3 °C en er valt minder neerslag.",
+      "rubric": [
+        "zeeklimaat = gematigde temperaturen + het hele jaar neerslag (kleine jaaramplitude)",
+        "landklimaat = grote temperatuurverschillen / grote jaaramplitude, koudste maand < -3 °C",
+        "noemt afnemende invloed van de zee in het binnenland"
+      ],
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-008",
+      "vraag": "Waarom groeien er in het zeeklimaat vooral loofbomen en in het landklimaat vooral naaldbomen?",
+      "modelAntwoord": "Het zeeklimaat heeft milde winters; daardoor kunnen bladverliezende loofbomen er groeien. In het landklimaat is de winter te koud (koudste maand kouder dan -3 °C) voor loofbomen, dus groeien er voornamelijk naaldbomen.",
+      "rubric": [
+        "zeeklimaat heeft milde winters → loofbomen",
+        "landklimaat heeft te koude winters → naaldbomen",
+        "legt het verband met de wintertemperatuur"
+      ],
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.89
+    },
+    {
+      "id": "aardrijkskunde-h6-vraag-009",
+      "vraag": "Noem de zes klimaatgebieden van Europa (bron 13).",
+      "modelAntwoord": "Zeeklimaat, Middellandse Zeeklimaat (mediterrane klimaat), landklimaat, droog klimaat, toendraklimaat en hooggebergteklimaat.",
+      "rubric": [
+        "noemt zeeklimaat en Middellandse Zeeklimaat",
+        "noemt landklimaat en droog klimaat",
+        "noemt toendraklimaat en hooggebergteklimaat"
+      ],
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-vraag-001",
+      "vraag": "Waarom is Zuidoost-Azië cultureel zo divers (multicultureel)?",
+      "modelAntwoord": "Zuidoost-Azië is over zee goed bereikbaar, met overal havens. Daardoor kwamen er eeuwenlang invloeden en migranten van buitenaf: Chinezen, handelaren uit India (hindoeisme) en de Arabische wereld (islam), en later de Europese kolonisatoren. Zo zijn honderden volken, talen en godsdiensten bij elkaar gekomen.",
+      "rubric": [
+        "noemt de goede bereikbaarheid over zee (havens)",
+        "noemt invloeden/migranten van buitenaf (bv. China, India, Arabische wereld, Europa)",
+        "concludeert: veel volken/talen/godsdiensten → multicultureel"
+      ],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.88
+    },
+    {
+      "id": "aardrijkskunde-h5-vraag-002",
+      "vraag": "Wat is een kolonie en wat leverde een kolonie op voor het Europese moederland?",
+      "modelAntwoord": "Een kolonie is een gebied in een ander werelddeel dat in het bezit is van (meestal) een Europees land. De kolonie leverde grondstoffen voor de Europese industrie: landbouwproducten (zoals tabak, koffie, thee, cacao, rietsuiker en rubber) en delfstoffen (goud, zilver, kolen, aardolie). Daarnaast was de kolonie een afzetmarkt voor Europese industrieproducten.",
+      "rubric": [
+        "kolonie = gebied in ander werelddeel in bezit van een (Europees) land",
+        "leverde grondstoffen (landbouwproducten en/of delfstoffen)",
+        "noemt ook de afzetmarkt-functie"
+      ],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-vraag-003",
+      "vraag": "Wat is het verband tussen een plantage en monocultuur?",
+      "modelAntwoord": "Op een plantage wordt op grote schaal één gewas verbouwd (zoals thee, rubber, tabak of bananen). Als jaar na jaar hetzelfde gewas op hetzelfde stuk grond wordt verbouwd, heet dat monocultuur. Een plantage leidt dus tot monocultuur.",
+      "rubric": [
+        "plantage = grootschalige teelt van één gewas",
+        "monocultuur = jaar na jaar hetzelfde gewas op dezelfde grond",
+        "legt het verband tussen beide"
+      ],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-vraag-004",
+      "vraag": "Wat is ASEAN en welk land van Zuidoost-Azië is geen lid?",
+      "modelAntwoord": "ASEAN (Association of Southeast Asian Nations) is het samenwerkingsverband van Zuidoost-Aziatische landen, in 1967 opgericht door vier staten. Tien van de elf landen zijn lid en werken samen op het gebied van economie en ontwikkeling. Alleen Oost-Timor is geen lid.",
+      "rubric": [
+        "ASEAN = samenwerkingsverband van Zuidoost-Aziatische landen (economie/ontwikkeling)",
+        "opgericht in 1967 / tien van de elf landen lid",
+        "noemt dat Oost-Timor geen lid is"
+      ],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.89
+    }
+  ]
+}

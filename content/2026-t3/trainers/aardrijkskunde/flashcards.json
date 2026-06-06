@@ -1,0 +1,635 @@
+{
+  "vak": "aardrijkskunde",
+  "normalisatie": "begrip",
+  "kaarten": [
+    {
+      "id": "aardrijkskunde-h6-begrip-001",
+      "vraag": "Luchtstreek waarin Europa grotendeels ligt; de temperaturen zijn er niet heel hoog en niet heel laag.",
+      "antwoord": "gematigde zone",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-002",
+      "vraag": "De ligging op hoge of lage breedte, die bepaalt hoe warm of koud het is (op hoge breedte kouder dan op lage breedte).",
+      "antwoord": "breedteligging",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-003",
+      "vraag": "Het warmere deel van de gematigde zone (Zuid-Europa).",
+      "antwoord": "subtropen",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-004",
+      "vraag": "Gebied (deel van Noord-Europa) waar het zelfs 's zomers zo koud is dat er geen boom kan groeien.",
+      "antwoord": "poolstreek",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-005",
+      "vraag": "Verplaatsing van zeewater die ontstaat als de wind lang uit dezelfde richting waait; kan warm tropenwater naar de polen of koud poolwater naar warme streken brengen.",
+      "antwoord": "zeestroom",
+      "acceptedAnswers": ["zeestromen"],
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-006",
+      "vraag": "Warme zeestroom die warm water uit de Golf van Mexico naar de westkust van Europa brengt; erg belangrijk voor het klimaat in Europa.",
+      "antwoord": "Golfstroom",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-007",
+      "vraag": "Wind die vanaf zee het land op waait; maakt het 's winters minder koud en 's zomers koeler langs de kust.",
+      "antwoord": "aanlandige wind",
+      "acceptedAnswers": ["zeewind"],
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-008",
+      "vraag": "Breedtecirkel; ten noorden ervan komen de poolnacht en de middernachtzon voor (Hammerfest ligt er op 71° N.B. ten noorden van).",
+      "antwoord": "poolcirkel",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-009",
+      "vraag": "Periode waarin de zon niet boven de horizon komt (in Hammerfest van 22 november tot en met 21 januari).",
+      "antwoord": "poolnacht",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-010",
+      "vraag": "Periode waarin de zon nooit ondergaat en het altijd daglicht is (van half mei tot eind juli).",
+      "antwoord": "middernachtzon",
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-011",
+      "vraag": "Gekleurde stroken licht aan de hemel bij de polen (ook noorderlicht of aurora borealis genoemd).",
+      "antwoord": "poollicht",
+      "acceptedAnswers": ["noorderlicht", "aurora borealis"],
+      "onderdeel": "§6.1 Golfstroom",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-012",
+      "vraag": "De hoogteverschillen in een gebied (van vlak laagland tot de toppen van het hooggebergte).",
+      "antwoord": "reliëf",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-013",
+      "vraag": "Hoog gebergte; het belangrijkste van Europa zijn de Alpen.",
+      "antwoord": "hooggebergte",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-014",
+      "vraag": "Hoogtegordel op de bergtoppen die altijd met sneeuw en ijs bedekt is.",
+      "antwoord": "eeuwige sneeuw",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-015",
+      "vraag": "IJsmassa (ijsvlakte) hoog in de bergen.",
+      "antwoord": "gletsjer",
+      "acceptedAnswers": ["gletsjers"],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-016",
+      "vraag": "Lager gebergte, tussen hooggebergte en heuvelland in.",
+      "antwoord": "middelgebergte",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-017",
+      "vraag": "Gebied met heuvels, lager dan een middelgebergte.",
+      "antwoord": "heuvelland",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-018",
+      "vraag": "Vlak, laaggelegen gebied (zoals Nederland).",
+      "antwoord": "laagland",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-019",
+      "vraag": "Gebied dat aan drie kanten door water omringd is; Europa is er één van het Euraziatische continent.",
+      "antwoord": "schiereiland",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-020",
+      "vraag": "Sterk ingesneden kust waar de zee via inhammen diep het land binnendringt; zorgt voor veel schiereilanden en eilanden.",
+      "antwoord": "gelede kust",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-021",
+      "vraag": "Een gebergte dat twee verschillende klimaten van elkaar scheidt: aan beide kanten is een ander klimaat.",
+      "antwoord": "klimaatscheiding",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-022",
+      "vraag": "De daling van de temperatuur met de hoogte: bij elke 100 m stijging daalt de temperatuur met 0,6 °C.",
+      "antwoord": "temperatuurgradiënt",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-023",
+      "vraag": "Het gemiddelde weer in een groot gebied over een lange tijd (meestal dertig jaar), bepaald door temperatuur en neerslag.",
+      "antwoord": "klimaat",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-024",
+      "vraag": "Neerslag die ontstaat doordat vochtige lucht tegen een gebergte omhoog wordt gestuwd.",
+      "antwoord": "stuwingsregen",
+      "acceptedAnswers": ["stuwingsregens"],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-025",
+      "vraag": "De vochtige kant van het gebergte, waar de stuwingsregens vallen.",
+      "antwoord": "loefzijde",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-026",
+      "vraag": "De droge kant van het gebergte, waar veel minder neerslag valt.",
+      "antwoord": "lijzijde",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-027",
+      "vraag": "Het droge gebied aan de lijzijde van een gebergte.",
+      "antwoord": "regenschaduw",
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-028",
+      "vraag": "Klimaat met het hele jaar door neerslag en gematigde temperaturen (koel in de zomer, mild in de winter).",
+      "antwoord": "zeeklimaat",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-029",
+      "vraag": "Zeeklimaat van Zuid-Europa met hogere temperaturen en een droge zomerperiode.",
+      "antwoord": "Middellandse Zeeklimaat",
+      "acceptedAnswers": ["mediterrane klimaat", "mediterraan klimaat", "Middellands Zeeklimaat"],
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-030",
+      "vraag": "Klimaat waar jaarlijks nauwelijks neerslag valt; het landschap is er een steppe.",
+      "antwoord": "droog klimaat",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-031",
+      "vraag": "Droog landschap dat vooral begroeid is met grassen en lage struiken.",
+      "antwoord": "steppe",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-032",
+      "vraag": "Bladverliezende bomen die kunnen groeien in het zeeklimaat (dankzij de milde winters).",
+      "antwoord": "loofbomen",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-033",
+      "vraag": "Klimaat van het binnenland met grote temperatuurverschillen; de gemiddelde temperatuur in de koudste maand is lager dan -3 °C.",
+      "antwoord": "landklimaat",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-034",
+      "vraag": "Het verschil tussen de gemiddelde temperatuur van de warmste en de koudste maand (groot bij een landklimaat).",
+      "antwoord": "jaaramplitude",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-035",
+      "vraag": "Bomen die voornamelijk in het landklimaat groeien, omdat het er voor loofbomen te koud is.",
+      "antwoord": "naaldbomen",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-036",
+      "vraag": "De grens waarboven het te koud is voor bomen om te groeien.",
+      "antwoord": "boomgrens",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-037",
+      "vraag": "Koud klimaat waar in de korte zomer de temperatuur tussen 0 en 10 °C ligt; alleen grassen, mossen en lage struikjes groeien er.",
+      "antwoord": "toendraklimaat",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.91
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-038",
+      "vraag": "Boomloze landschapszone in de poolstreken.",
+      "antwoord": "toendra",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.91
+    },
+    {
+      "id": "aardrijkskunde-h6-begrip-039",
+      "vraag": "Bijzonder koud klimaat in de hooggebergten; het hele jaar ijskoud met veel neerslag (sneeuw).",
+      "antwoord": "hooggebergteklimaat",
+      "onderdeel": "§6.3 Klimaat en vegetatie",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
+      "confidence": 0.91
+    },
+    {
+      "id": "aardrijkskunde-h6-feit-001",
+      "vraag": "Met hoeveel graden daalt de temperatuur per 100 m stijging in een gebergte?",
+      "antwoord": "0,6 °C",
+      "acceptedAnswers": ["0,6 graden", "0,6"],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h6-feit-002",
+      "vraag": "Wat is het belangrijkste hooggebergte van Europa, en wat is daar de hoogste berg?",
+      "antwoord": "de Alpen; de Mont Blanc (4.808 m)",
+      "acceptedAnswers": ["Alpen, Mont Blanc", "Mont Blanc"],
+      "onderdeel": "§6.2 Reliëf",
+      "hoofdstuk": "6",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-001",
+      "vraag": "Gebied met overeenkomstige cultuurkenmerken.",
+      "antwoord": "cultuurgebied",
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66.jpg",
+      "confidence": 0.82
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-002",
+      "vraag": "Kenmerk van een gebied waar veel verschillende culturen, talen en godsdiensten naast elkaar bestaan.",
+      "antwoord": "multicultureel",
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66.jpg",
+      "confidence": 0.82
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-003",
+      "vraag": "Bevolkingsgroep met een eigen cultuur (zoals de Chinezen in de kustplaatsen van Zuidoost-Azië).",
+      "antwoord": "etnische groep",
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-004",
+      "vraag": "Gebied in een ander werelddeel dat in het bezit is van (meestal) een Europees land.",
+      "antwoord": "kolonie",
+      "acceptedAnswers": ["koloniën"],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-005",
+      "vraag": "Uit de bodem gewonnen grondstoffen zoals goud, zilver, kolen en aardolie.",
+      "antwoord": "delfstoffen",
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.91
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-006",
+      "vraag": "Landbouwonderneming waar op grote schaal één gewas wordt verbouwd (zoals thee, rubber, tabak of bananen).",
+      "antwoord": "plantage",
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.91
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-007",
+      "vraag": "Het jaar na jaar op grote schaal verbouwen van één gewas op hetzelfde stuk grond.",
+      "antwoord": "monocultuur",
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "aardrijkskunde-h5-begrip-008",
+      "vraag": "Samenwerkingsverband van Zuidoost-Aziatische landen, in 1967 door vier staten opgericht; tien van de elf landen zijn lid (Oost-Timor niet).",
+      "antwoord": "ASEAN",
+      "acceptedAnswers": ["Association of Southeast Asian Nations"],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-feit-001",
+      "vraag": "Uit hoeveel zelfstandige staten bestaat Zuidoost-Azië?",
+      "antwoord": "elf",
+      "acceptedAnswers": ["11", "elf staten"],
+      "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-001",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Myanmar.",
+      "antwoord": "Myanmar",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-002",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Thailand.",
+      "antwoord": "Thailand",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-003",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Laos.",
+      "antwoord": "Laos",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-004",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Vietnam.",
+      "antwoord": "Vietnam",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-005",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Cambodja.",
+      "antwoord": "Cambodja",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-006",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Maleisië.",
+      "antwoord": "Maleisië",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-007",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Singapore.",
+      "antwoord": "Singapore",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-008",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Brunei.",
+      "antwoord": "Brunei",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-009",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Indonesië.",
+      "antwoord": "Indonesië",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-010",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Filipijnen.",
+      "antwoord": "Filipijnen",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-011",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): Oost-Timor.",
+      "antwoord": "Oost-Timor",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-012",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): de Indische Oceaan.",
+      "antwoord": "Indische Oceaan",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-013",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): de Grote Oceaan.",
+      "antwoord": "Grote Oceaan",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "aardrijkskunde-h5-topo-014",
+      "vraag": "Wijs aan op de kaart van Zuidoost-Azië (5.2): China (begrenzing in het noorden).",
+      "antwoord": "China",
+      "modus": "kaart",
+      "normalisatie": "exact",
+      "onderdeel": "topografie 5.2",
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "hoofdstuk": "5",
+      "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
+      "confidence": 0.95
+    }
+  ]
+}

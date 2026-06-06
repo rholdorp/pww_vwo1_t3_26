@@ -213,22 +213,26 @@ vakken:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 1
-    methode: TBD
+    methode: "BuiteNLand"
     # Officiële toetsscope (PWW 02-07, docentinfo "aardrijkskunde A1 G1").
-    # Screenshots worden gemaakt en in raw/aardrijkskunde/ geplaatst.
+    # Cat 1 (begrippen/topografie) → trainers/aardrijkskunde/flashcards.json (64 kaarten);
+    # Cat 3 (begripsvragen) → oefenvragen.json (13 vragen, flashcard-modus tot LLM).
+    # geextraheerd=true (schema-/verwijzing-check via content-cat3.test.ts). gevalideerd
+    # blijft false: OCR-fidelity-grounding van flashcards/oefenvragen is nog niet in de
+    # validator gewired (aparte gate). Samenvatting/*.md (Cat 3 fase 1) nog te schrijven.
     scope:
       - id: h6-par-1-3
         bron: "Hoofdstuk 6, paragraaf 1 t/m 3 (§6.1 p.78-79, §6.2 p.80-81, §6.3 p.82-83)"
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
         gevalideerd: false
       - id: h5-par-2
         bron: "Hoofdstuk 5, paragraaf 2 'De cultuur van Zuidoost-Azië' (p.66-67)"
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
         gevalideerd: false
       - id: topografie-5.2
         bron: "Topografie 5.2 — Bron 11 'Zuidoost-Azië: invloeden van buitenaf' (close-up)"
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
         gevalideerd: false
