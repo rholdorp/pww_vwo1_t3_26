@@ -10,96 +10,1252 @@
     "vocabulaire-ch6-abe",
     "grammaire-vraagwoord-plaatsing"
   ],
-  "notitie": "Vocabulaire CH6 (A/B/E). Bron is tweeledig: (1) Les verbes ch6 docx = werkwoordenlijst van docent, (2) bold-gemarkeerde woorden uit hoofdstukverhaal CH6 (PDF). De full A/B/E vocabulaire-sectie uit het leerboek is nog niet apart gefotografeerd — als die meer items bevat dan deze twee bronnen, ontbreken die hier. Validator/Ralph: vergelijk met boek-secties A/B/E voor zekerheid.",
+  "notitie": "Vocabulaire CH6 (A/B/E). Bronnen: (1) Les verbes ch6 docx = werkwoordenlijst docent, (2) bold-woorden uit hoofdstukverhaal CH6 (PDF), (3) AUDIT 2026-06-07: ontbrekende A/B/E-woorden alsnog uit de leerboekfoto's p78 (sectie A/B) en p79 (sectie E) geëxtraheerd — 27 items toegevoegd. Sectie F (p79) is gefotografeerd maar OFF-SCOPE (toets = A/B/E). gevalideerd blijft false tot de validator-grounding draait.",
   "items": [
-    { "id": "frans-h6-vocab-001", "nl": "helpen", "vreemd": "aider", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-002", "nl": "bekijken, kijken naar", "vreemd": "regarder", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "acceptedAnswers": { "nl": ["bekijken", "kijken naar", "bekijken, kijken naar"] }, "confidence": 0.98 },
-    { "id": "frans-h6-vocab-003", "nl": "dol zijn op", "vreemd": "adorer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-004", "nl": "bezoeken", "vreemd": "visiter", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-005", "nl": "eten", "vreemd": "manger", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-006", "nl": "een hekel hebben aan", "vreemd": "détester", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-007", "nl": "beginnen", "vreemd": "commencer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-008", "nl": "praten", "vreemd": "parler", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-009", "nl": "betalen", "vreemd": "payer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-010", "nl": "liever hebben", "vreemd": "préférer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-011", "nl": "organiseren", "vreemd": "organiser", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-012", "nl": "naar huis gaan", "vreemd": "rentrer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-013", "nl": "zoeken", "vreemd": "chercher", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-014", "nl": "vinden", "vreemd": "trouver", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-015", "nl": "houden van", "vreemd": "aimer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-016", "nl": "kopen", "vreemd": "acheter", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-017", "nl": "veranderen", "vreemd": "changer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-018", "nl": "passen, proberen", "vreemd": "essayer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "acceptedAnswers": { "nl": ["passen", "proberen", "passen, proberen"] }, "confidence": 0.98 },
-    { "id": "frans-h6-vocab-019", "nl": "wonen", "vreemd": "habiter", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-020", "nl": "aankomen", "vreemd": "arriver", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-021", "nl": "geven", "vreemd": "donner", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-022", "nl": "leren", "vreemd": "apprendre", "context": "werkwoord CH6 (onregelmatig)", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-023", "nl": "hebben", "vreemd": "avoir", "context": "werkwoord CH6 (onregelmatig)", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-024", "nl": "zijn", "vreemd": "être", "context": "werkwoord CH6 (onregelmatig)", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-025", "nl": "werken", "vreemd": "travailler", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-026", "nl": "vragen", "vreemd": "demander", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-027", "nl": "dragen", "vreemd": "porter", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-028", "nl": "delen", "vreemd": "partager", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-029", "nl": "vertellen", "vreemd": "raconter", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-030", "nl": "verloren", "vreemd": "perdu", "context": "voltooid deelwoord (perdre) — CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.97 },
-    { "id": "frans-h6-vocab-031", "nl": "gewonnen", "vreemd": "gagné", "context": "voltooid deelwoord (gagner) — CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.97 },
-    { "id": "frans-h6-vocab-032", "nl": "doorgaan, verdergaan", "vreemd": "continuer", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "acceptedAnswers": { "nl": ["doorgaan", "verdergaan", "doorgaan, verdergaan"] }, "confidence": 0.98 },
-    { "id": "frans-h6-vocab-033", "nl": "oversteken", "vreemd": "traverser", "context": "werkwoord CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-034", "nl": "voetballen", "vreemd": "faire du foot", "context": "uitdrukking met faire — CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-035", "nl": "winkelen", "vreemd": "faire les magasins", "context": "uitdrukking met faire — CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-036", "nl": "naar de bioscoop gaan", "vreemd": "aller au cinéma", "context": "uitdrukking met aller — CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-037", "nl": "gamen", "vreemd": "jouer à la console", "context": "uitdrukking CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.97 },
-    { "id": "frans-h6-vocab-038", "nl": "muziek luisteren", "vreemd": "écouter de la musique", "context": "uitdrukking CH6", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-039", "nl": "gaan", "vreemd": "aller", "context": "werkwoord CH6 (onregelmatig)", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "confidence": 0.98 },
-    { "id": "frans-h6-vocab-040", "nl": "doen, maken", "vreemd": "faire", "context": "werkwoord CH6 (onregelmatig)", "hoofdstuk": "6", "bron": "raw/frans/Les verbes ch6 12356.docx", "acceptedAnswers": { "nl": ["doen", "maken", "doen, maken", "doen/maken"] }, "confidence": 0.98 },
-
-    { "id": "frans-h6-vocab-041", "nl": "de wijk, de buurt", "vreemd": "le quartier", "context": "hoofdstukverhaal zin 1", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["de wijk", "de buurt", "wijk", "buurt"], "vreemd": ["le quartier", "quartier"] }, "confidence": 0.94 },
-    { "id": "frans-h6-vocab-042", "nl": "ongelooflijk", "vreemd": "incroyable", "context": "hoofdstukverhaal zin 2", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-043", "nl": "overal", "vreemd": "partout", "context": "hoofdstukverhaal zin 2", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-044", "nl": "de straat", "vreemd": "la rue", "context": "hoofdstukverhaal zin 3", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["de straat", "straat"], "vreemd": ["la rue", "rue"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-045", "nl": "het plein", "vreemd": "la place", "context": "hoofdstukverhaal zin 3", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["het plein", "plein"], "vreemd": ["la place", "place"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-046", "nl": "de bakkerij", "vreemd": "la boulangerie", "context": "hoofdstukverhaal zin 3", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["de bakkerij", "bakkerij"], "vreemd": ["la boulangerie", "boulangerie"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-047", "nl": "te voet", "vreemd": "à pied", "context": "hoofdstukverhaal zin 4", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-048", "nl": "ver", "vreemd": "loin", "context": "hoofdstukverhaal zin 4", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-049", "nl": "vlakbij, heel dichtbij", "vreemd": "tout près", "context": "hoofdstukverhaal zin 5", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["vlakbij", "heel dichtbij", "dichtbij", "vlakbij, heel dichtbij"] }, "confidence": 0.93 },
-    { "id": "frans-h6-vocab-050", "nl": "de winkel", "vreemd": "le magasin", "context": "hoofdstukverhaal zin 5", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["de winkel", "winkel"], "vreemd": ["le magasin", "magasin"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-051", "nl": "op de markt", "vreemd": "au marché", "context": "hoofdstukverhaal zin 6", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.94 },
-    { "id": "frans-h6-vocab-052", "nl": "de plek, de plaats", "vreemd": "l'endroit", "context": "hoofdstukverhaal zin 7", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["de plek", "de plaats", "plek", "plaats"], "vreemd": ["l'endroit", "endroit"] }, "confidence": 0.94 },
-    { "id": "frans-h6-vocab-053", "nl": "rechtdoor", "vreemd": "tout droit", "context": "hoofdstukverhaal zin 7", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-054", "nl": "naar links", "vreemd": "à gauche", "context": "hoofdstukverhaal zin 7", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["naar links", "links"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-055", "nl": "de weg", "vreemd": "la route", "context": "hoofdstukverhaal zin 8", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["de weg", "weg"], "vreemd": ["la route", "route"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-056", "nl": "laat", "vreemd": "tard", "context": "hoofdstukverhaal zin 10", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-057", "nl": "met de bus", "vreemd": "en bus", "context": "hoofdstukverhaal zin 13", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-058", "nl": "naar het theater gaan", "vreemd": "aller au théâtre", "context": "hoofdstukverhaal zin 14 (uitdrukking met aller)", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-059", "nl": "met de fiets, op de fiets", "vreemd": "à vélo", "context": "hoofdstukverhaal zin 15", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "acceptedAnswers": { "nl": ["met de fiets", "op de fiets", "met de fiets, op de fiets"] }, "confidence": 0.95 },
-    { "id": "frans-h6-vocab-060", "nl": "iets", "vreemd": "quelque chose", "context": "hoofdstukverhaal zin 16", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-phrases-001", "nl": "Sorry. Kunt u mij helpen?", "vreemd": "Excusez-moi. Vous pouvez m'aider?", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-002", "nl": "Ja, natuurlijk.", "vreemd": "Oui, bien sûr.", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-003", "nl": "Ik zoek het station.", "vreemd": "Je cherche la gare.", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-004", "nl": "Het is rechtdoor en dan naar links.", "vreemd": "C'est tout droit et ensuite à gauche.", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-005", "nl": "Kunt u dat herhalen?", "vreemd": "Vous pouvez répéter?", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-006", "nl": "Is het ver?", "vreemd": "C'est loin?", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-007", "nl": "Nee, het is 15 minuten lopen.", "vreemd": "Non, c'est à 15 minutes à pied.", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-008", "nl": "Dan gaan wij met de bus.", "vreemd": "Alors, on y va en bus.", "context": "phrases-clés CH6 — de weg vragen en wijzen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-009", "nl": "Waar woon jij?", "vreemd": "Tu habites où?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-010", "nl": "Ik woon in Parijs.", "vreemd": "J'habite à Paris.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-011", "nl": "Vind jij Parijs leuk?", "vreemd": "Tu aimes Paris?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-012", "nl": "Ja, omdat het een grote stad is.", "vreemd": "Oui, parce que c'est une grande ville.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-013", "nl": "Gaan wij wat drinken?", "vreemd": "On va boire quelque chose?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-014", "nl": "Ja, wij gaan naar een terras.", "vreemd": "Oui, on va aller à une terrasse.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-015", "nl": "In mijn wijk is een café.", "vreemd": "Dans mon quartier, il y a un café.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-016", "nl": "Hoe gaan wij naar het café?", "vreemd": "Comment on va au café?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-017", "nl": "Wij gaan lopend naar het café.", "vreemd": "On va à pied.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-phrases-018", "nl": "Wat gaan wij daarna doen?", "vreemd": "Qu'est-ce qu'on va faire après?", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-phrases-019", "nl": "Wij gaan gamen.", "vreemd": "On va jouer à la console.", "context": "phrases-clés CH6 — praten over je stad en je plannen", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_160614849.jpg", "confidence": 0.97 },
-    { "id": "frans-h6-vraagw-001", "nl": "waar (vraagwoord)", "vreemd": "où", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vraagw-002", "nl": "wanneer (vraagwoord)", "vreemd": "quand", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vraagw-003", "nl": "hoe (vraagwoord)", "vreemd": "comment", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vraagw-004", "nl": "hoeveel (vraagwoord)", "vreemd": "combien", "acceptedAnswers": { "vreemd": ["combien de"] }, "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vraagw-005", "nl": "waarom (vraagwoord)", "vreemd": "pourquoi", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vraagw-006", "nl": "wie (vraagwoord)", "vreemd": "qui", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vraagw-007", "nl": "wat (vraagwoord)", "vreemd": "qu'est-ce que", "context": "vraagwoord (grammaire 4, p83)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154432128.jpg", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-061", "nl": "sporten", "vreemd": "faire du sport", "context": "uitdrukking met faire — CH6 (verhaal)", "hoofdstuk": "6", "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf", "confidence": 0.95 },
-    { "id": "frans-h6-vocab-062", "nl": "daarna", "vreemd": "ensuite", "acceptedAnswers": { "nl": ["daarna", "vervolgens"] }, "context": "vocab CH6 (sectie E, p79)", "hoofdstuk": "6", "bron": "raw/frans/PXL_20260606_154245730.jpg", "confidence": 0.93 }
+    {
+      "id": "frans-h6-vocab-001",
+      "nl": "helpen",
+      "vreemd": "aider",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-002",
+      "nl": "bekijken, kijken naar",
+      "vreemd": "regarder",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "acceptedAnswers": {
+        "nl": [
+          "bekijken",
+          "kijken naar",
+          "bekijken, kijken naar"
+        ]
+      },
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-003",
+      "nl": "dol zijn op",
+      "vreemd": "adorer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-004",
+      "nl": "bezoeken",
+      "vreemd": "visiter",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-005",
+      "nl": "eten",
+      "vreemd": "manger",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-006",
+      "nl": "een hekel hebben aan",
+      "vreemd": "détester",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-007",
+      "nl": "beginnen",
+      "vreemd": "commencer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-008",
+      "nl": "praten",
+      "vreemd": "parler",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-009",
+      "nl": "betalen",
+      "vreemd": "payer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-010",
+      "nl": "liever hebben",
+      "vreemd": "préférer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-011",
+      "nl": "organiseren",
+      "vreemd": "organiser",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-012",
+      "nl": "naar huis gaan",
+      "vreemd": "rentrer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-013",
+      "nl": "zoeken",
+      "vreemd": "chercher",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-014",
+      "nl": "vinden",
+      "vreemd": "trouver",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-015",
+      "nl": "houden van",
+      "vreemd": "aimer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-016",
+      "nl": "kopen",
+      "vreemd": "acheter",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-017",
+      "nl": "veranderen",
+      "vreemd": "changer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-018",
+      "nl": "passen, proberen",
+      "vreemd": "essayer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "acceptedAnswers": {
+        "nl": [
+          "passen",
+          "proberen",
+          "passen, proberen"
+        ]
+      },
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-019",
+      "nl": "wonen",
+      "vreemd": "habiter",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-020",
+      "nl": "aankomen",
+      "vreemd": "arriver",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-021",
+      "nl": "geven",
+      "vreemd": "donner",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-022",
+      "nl": "leren",
+      "vreemd": "apprendre",
+      "context": "werkwoord CH6 (onregelmatig)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-023",
+      "nl": "hebben",
+      "vreemd": "avoir",
+      "context": "werkwoord CH6 (onregelmatig)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-024",
+      "nl": "zijn",
+      "vreemd": "être",
+      "context": "werkwoord CH6 (onregelmatig)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-025",
+      "nl": "werken",
+      "vreemd": "travailler",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-026",
+      "nl": "vragen",
+      "vreemd": "demander",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-027",
+      "nl": "dragen",
+      "vreemd": "porter",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-028",
+      "nl": "delen",
+      "vreemd": "partager",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-029",
+      "nl": "vertellen",
+      "vreemd": "raconter",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-030",
+      "nl": "verloren",
+      "vreemd": "perdu",
+      "context": "voltooid deelwoord (perdre) — CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-vocab-031",
+      "nl": "gewonnen",
+      "vreemd": "gagné",
+      "context": "voltooid deelwoord (gagner) — CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-vocab-032",
+      "nl": "doorgaan, verdergaan",
+      "vreemd": "continuer",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "acceptedAnswers": {
+        "nl": [
+          "doorgaan",
+          "verdergaan",
+          "doorgaan, verdergaan"
+        ]
+      },
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-033",
+      "nl": "oversteken",
+      "vreemd": "traverser",
+      "context": "werkwoord CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-034",
+      "nl": "voetballen",
+      "vreemd": "faire du foot",
+      "context": "uitdrukking met faire — CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-035",
+      "nl": "winkelen",
+      "vreemd": "faire les magasins",
+      "context": "uitdrukking met faire — CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-036",
+      "nl": "naar de bioscoop gaan",
+      "vreemd": "aller au cinéma",
+      "context": "uitdrukking met aller — CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-037",
+      "nl": "gamen",
+      "vreemd": "jouer à la console",
+      "context": "uitdrukking CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-vocab-038",
+      "nl": "muziek luisteren",
+      "vreemd": "écouter de la musique",
+      "context": "uitdrukking CH6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-039",
+      "nl": "gaan",
+      "vreemd": "aller",
+      "context": "werkwoord CH6 (onregelmatig)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-040",
+      "nl": "doen, maken",
+      "vreemd": "faire",
+      "context": "werkwoord CH6 (onregelmatig)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Les verbes ch6 12356.docx",
+      "acceptedAnswers": {
+        "nl": [
+          "doen",
+          "maken",
+          "doen, maken",
+          "doen/maken"
+        ]
+      },
+      "confidence": 0.98
+    },
+    {
+      "id": "frans-h6-vocab-041",
+      "nl": "de wijk, de buurt",
+      "vreemd": "le quartier",
+      "context": "hoofdstukverhaal zin 1",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "de wijk",
+          "de buurt",
+          "wijk",
+          "buurt"
+        ],
+        "vreemd": [
+          "le quartier",
+          "quartier"
+        ]
+      },
+      "confidence": 0.94
+    },
+    {
+      "id": "frans-h6-vocab-042",
+      "nl": "ongelooflijk",
+      "vreemd": "incroyable",
+      "context": "hoofdstukverhaal zin 2",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-043",
+      "nl": "overal",
+      "vreemd": "partout",
+      "context": "hoofdstukverhaal zin 2",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-044",
+      "nl": "de straat",
+      "vreemd": "la rue",
+      "context": "hoofdstukverhaal zin 3",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "de straat",
+          "straat"
+        ],
+        "vreemd": [
+          "la rue",
+          "rue"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-045",
+      "nl": "het plein",
+      "vreemd": "la place",
+      "context": "hoofdstukverhaal zin 3",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "het plein",
+          "plein"
+        ],
+        "vreemd": [
+          "la place",
+          "place"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-046",
+      "nl": "de bakkerij",
+      "vreemd": "la boulangerie",
+      "context": "hoofdstukverhaal zin 3",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "de bakkerij",
+          "bakkerij"
+        ],
+        "vreemd": [
+          "la boulangerie",
+          "boulangerie"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-047",
+      "nl": "te voet",
+      "vreemd": "à pied",
+      "context": "hoofdstukverhaal zin 4",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-048",
+      "nl": "ver",
+      "vreemd": "loin",
+      "context": "hoofdstukverhaal zin 4",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-049",
+      "nl": "vlakbij, heel dichtbij",
+      "vreemd": "tout près",
+      "context": "hoofdstukverhaal zin 5",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "vlakbij",
+          "heel dichtbij",
+          "dichtbij",
+          "vlakbij, heel dichtbij"
+        ]
+      },
+      "confidence": 0.93
+    },
+    {
+      "id": "frans-h6-vocab-050",
+      "nl": "de winkel",
+      "vreemd": "le magasin",
+      "context": "hoofdstukverhaal zin 5",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "de winkel",
+          "winkel"
+        ],
+        "vreemd": [
+          "le magasin",
+          "magasin"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-051",
+      "nl": "op de markt",
+      "vreemd": "au marché",
+      "context": "hoofdstukverhaal zin 6",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.94
+    },
+    {
+      "id": "frans-h6-vocab-052",
+      "nl": "de plek, de plaats",
+      "vreemd": "l'endroit",
+      "context": "hoofdstukverhaal zin 7",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "de plek",
+          "de plaats",
+          "plek",
+          "plaats"
+        ],
+        "vreemd": [
+          "l'endroit",
+          "endroit"
+        ]
+      },
+      "confidence": 0.94
+    },
+    {
+      "id": "frans-h6-vocab-053",
+      "nl": "rechtdoor",
+      "vreemd": "tout droit",
+      "context": "hoofdstukverhaal zin 7",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-054",
+      "nl": "naar links",
+      "vreemd": "à gauche",
+      "context": "hoofdstukverhaal zin 7",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "naar links",
+          "links"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-055",
+      "nl": "de weg",
+      "vreemd": "la route",
+      "context": "hoofdstukverhaal zin 8",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "de weg",
+          "weg"
+        ],
+        "vreemd": [
+          "la route",
+          "route"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-056",
+      "nl": "laat",
+      "vreemd": "tard",
+      "context": "hoofdstukverhaal zin 10",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-057",
+      "nl": "met de bus",
+      "vreemd": "en bus",
+      "context": "hoofdstukverhaal zin 13",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-058",
+      "nl": "naar het theater gaan",
+      "vreemd": "aller au théâtre",
+      "context": "hoofdstukverhaal zin 14 (uitdrukking met aller)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-059",
+      "nl": "met de fiets, op de fiets",
+      "vreemd": "à vélo",
+      "context": "hoofdstukverhaal zin 15",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "acceptedAnswers": {
+        "nl": [
+          "met de fiets",
+          "op de fiets",
+          "met de fiets, op de fiets"
+        ]
+      },
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-060",
+      "nl": "iets",
+      "vreemd": "quelque chose",
+      "context": "hoofdstukverhaal zin 16",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-phrases-001",
+      "nl": "Sorry. Kunt u mij helpen?",
+      "vreemd": "Excusez-moi. Vous pouvez m'aider?",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-002",
+      "nl": "Ja, natuurlijk.",
+      "vreemd": "Oui, bien sûr.",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-003",
+      "nl": "Ik zoek het station.",
+      "vreemd": "Je cherche la gare.",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-004",
+      "nl": "Het is rechtdoor en dan naar links.",
+      "vreemd": "C'est tout droit et ensuite à gauche.",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-005",
+      "nl": "Kunt u dat herhalen?",
+      "vreemd": "Vous pouvez répéter?",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-006",
+      "nl": "Is het ver?",
+      "vreemd": "C'est loin?",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-007",
+      "nl": "Nee, het is 15 minuten lopen.",
+      "vreemd": "Non, c'est à 15 minutes à pied.",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-008",
+      "nl": "Dan gaan wij met de bus.",
+      "vreemd": "Alors, on y va en bus.",
+      "context": "phrases-clés CH6 — de weg vragen en wijzen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-009",
+      "nl": "Waar woon jij?",
+      "vreemd": "Tu habites où?",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-010",
+      "nl": "Ik woon in Parijs.",
+      "vreemd": "J'habite à Paris.",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-011",
+      "nl": "Vind jij Parijs leuk?",
+      "vreemd": "Tu aimes Paris?",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-012",
+      "nl": "Ja, omdat het een grote stad is.",
+      "vreemd": "Oui, parce que c'est une grande ville.",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-013",
+      "nl": "Gaan wij wat drinken?",
+      "vreemd": "On va boire quelque chose?",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-014",
+      "nl": "Ja, wij gaan naar een terras.",
+      "vreemd": "Oui, on va aller à une terrasse.",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-015",
+      "nl": "In mijn wijk is een café.",
+      "vreemd": "Dans mon quartier, il y a un café.",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-016",
+      "nl": "Hoe gaan wij naar het café?",
+      "vreemd": "Comment on va au café?",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-017",
+      "nl": "Wij gaan lopend naar het café.",
+      "vreemd": "On va à pied.",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-phrases-018",
+      "nl": "Wat gaan wij daarna doen?",
+      "vreemd": "Qu'est-ce qu'on va faire après?",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-phrases-019",
+      "nl": "Wij gaan gamen.",
+      "vreemd": "On va jouer à la console.",
+      "context": "phrases-clés CH6 — praten over je stad en je plannen",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_160614849.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "frans-h6-vraagw-001",
+      "nl": "waar (vraagwoord)",
+      "vreemd": "où",
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vraagw-002",
+      "nl": "wanneer (vraagwoord)",
+      "vreemd": "quand",
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vraagw-003",
+      "nl": "hoe (vraagwoord)",
+      "vreemd": "comment",
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vraagw-004",
+      "nl": "hoeveel (vraagwoord)",
+      "vreemd": "combien",
+      "acceptedAnswers": {
+        "vreemd": [
+          "combien de"
+        ]
+      },
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vraagw-005",
+      "nl": "waarom (vraagwoord)",
+      "vreemd": "pourquoi",
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vraagw-006",
+      "nl": "wie (vraagwoord)",
+      "vreemd": "qui",
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vraagw-007",
+      "nl": "wat (vraagwoord)",
+      "vreemd": "qu'est-ce que",
+      "context": "vraagwoord (grammaire 4, p83)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154432128.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-061",
+      "nl": "sporten",
+      "vreemd": "faire du sport",
+      "context": "uitdrukking met faire — CH6 (verhaal)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/Chapitre 6 hoofdstukverhaal faire aller.pdf",
+      "confidence": 0.95
+    },
+    {
+      "id": "frans-h6-vocab-062",
+      "nl": "daarna",
+      "vreemd": "ensuite",
+      "acceptedAnswers": {
+        "nl": [
+          "daarna",
+          "vervolgens"
+        ]
+      },
+      "context": "vocab CH6 (sectie E, p79)",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "frans-h6-vocab-063",
+      "nl": "(naar) rechts",
+      "vreemd": "à droite",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "nl": [
+          "naar rechts",
+          "rechts"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-064",
+      "nl": "op",
+      "vreemd": "sur",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-065",
+      "nl": "in",
+      "vreemd": "dans",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-066",
+      "nl": "voor (plaats)",
+      "vreemd": "devant",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "nl": [
+          "voor"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-067",
+      "nl": "hier",
+      "vreemd": "ici",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-068",
+      "nl": "daarna, vervolgens",
+      "vreemd": "puis",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "nl": [
+          "daarna",
+          "vervolgens"
+        ],
+        "vreemd": [
+          "puis",
+          "ensuite"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-069",
+      "nl": "met de auto",
+      "vreemd": "en voiture",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-070",
+      "nl": "met de metro",
+      "vreemd": "en métro",
+      "context": "vocabulaire CH6 sectie A (p78) — de weg & vervoer",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-072",
+      "nl": "omdat",
+      "vreemd": "parce que",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-073",
+      "nl": "je wilt",
+      "vreemd": "tu veux",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-074",
+      "nl": "de bioscoop",
+      "vreemd": "le cinéma",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "vreemd": [
+          "le cinéma",
+          "cinéma"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-075",
+      "nl": "de markt",
+      "vreemd": "le marché",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "vreemd": [
+          "le marché",
+          "marché"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-076",
+      "nl": "het theater",
+      "vreemd": "le théâtre",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "vreemd": [
+          "le théâtre",
+          "théâtre"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-077",
+      "nl": "de richting",
+      "vreemd": "la direction",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "vreemd": [
+          "la direction",
+          "direction"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-078",
+      "nl": "het noorden",
+      "vreemd": "le nord",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "vreemd": [
+          "le nord",
+          "nord"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-079",
+      "nl": "het oosten",
+      "vreemd": "l'est",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "vorm": "m",
+      "acceptedAnswers": {
+        "vreemd": [
+          "l'est",
+          "est"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-080",
+      "nl": "het zuiden",
+      "vreemd": "le sud",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "vreemd": [
+          "le sud",
+          "sud"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-081",
+      "nl": "het westen",
+      "vreemd": "l'ouest",
+      "context": "vocabulaire CH6 sectie B (p78) — in de stad",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154242939.jpg",
+      "confidence": 0.96,
+      "vorm": "m",
+      "acceptedAnswers": {
+        "vreemd": [
+          "l'ouest",
+          "ouest"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-082",
+      "nl": "maar",
+      "vreemd": "mais",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-083",
+      "nl": "samen",
+      "vreemd": "ensemble",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-084",
+      "nl": "nog (steeds)",
+      "vreemd": "encore",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96,
+      "acceptedAnswers": {
+        "nl": [
+          "nog",
+          "nog steeds"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-085",
+      "nl": "morgen",
+      "vreemd": "demain",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-086",
+      "nl": "perfect",
+      "vreemd": "parfait",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96,
+      "vorm": "(m/v) parfait / parfaite",
+      "acceptedAnswers": {
+        "vreemd": [
+          "parfait",
+          "parfaite"
+        ]
+      }
+    },
+    {
+      "id": "frans-h6-vocab-087",
+      "nl": "ziek",
+      "vreemd": "malade",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-088",
+      "nl": "ik ken",
+      "vreemd": "je connais",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96
+    },
+    {
+      "id": "frans-h6-vocab-089",
+      "nl": "drinken",
+      "vreemd": "boire",
+      "context": "vocabulaire CH6 sectie E (p79) — dagelijks leven",
+      "hoofdstuk": "6",
+      "bron": "raw/frans/PXL_20260606_154245730.jpg",
+      "confidence": 0.96
+    }
   ]
 }

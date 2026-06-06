@@ -51,7 +51,10 @@ function fransOnderwerp(ctx: string | undefined): string {
   const c = (ctx ?? "").toLowerCase();
   if (c.includes("phrases-cl")) return "Zinnen oefenen";
   if (c.includes("vraagwoord")) return "Vraagwoorden";
-  if (c.includes("hoofdstukverhaal") || c.includes("sectie e")) return "Woorden uit het verhaal";
+  if (c.includes("sectie a")) return "De weg & vervoer";
+  if (c.includes("sectie b")) return "In de stad";
+  if (c.includes("sectie e")) return "Dagelijks leven";
+  if (c.includes("hoofdstukverhaal")) return "Woorden uit het verhaal";
   return "Werkwoorden & woorden";
 }
 
