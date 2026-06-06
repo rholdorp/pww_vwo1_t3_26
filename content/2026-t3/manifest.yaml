@@ -33,8 +33,15 @@ pww:
 #     (raw/wiskunde/inventory.md, H8+H9 compleet). aardrijkskunde: foto's binnen
 #     (H6 §1-3, H5 §5.2, topo 5.2), nog te extraheren.
 #     Nog open: engels (geen scope/screenshots) — sessie met Stijn do 2026-06-04. <<<
-# LET OP frans: vocabulaire = Chapitre 6, maar onze screenshots/vocab.json zijn
-# Chapitre 5 (off-scope) — ch6-screenshots nog nodig.
+# LET OP frans: per 2026-06-06 CH6-materiaal binnen vanuit twee kanten:
+#   - foto's (Mara): vocab A/B p78, E/F p79, passé composé regarder, vraag stellen +
+#     vraagwoorden, aller futur proche (p83).
+#   - aanvullend (Stijn): verbes-docx (40 NL↔FR werkw.) + hoofdstukverhaal-pdf
+#     (faire/aller présent-tabellen). Verwerkt naar vocab.json (60 items),
+#     werkwoorden.json (36 vervoegingen), hoofdstukverhaal.md.
+# CH5-vocab.json hernoemd naar vocab-ch5-offscope.json (blijft bewaard, telt NIET
+# voor PWW). Nog nodig: présent van avoir/être, re-extract vocab vanuit p78/79,
+# passé composé sync met regarder-table, extract grammaire 3+4 uit foto's.
 
 vakken:
   wiskunde:
@@ -118,28 +125,45 @@ vakken:
     secundaire_categorie: 4
     moeilijkheid: 3
     methode: TBD
-    # Officiële toetsscope (PWW 03-07, docentinfo). Vocabulaire = Chapitre 6 (A/B/E).
-    # Ch6-screenshots binnen (2026-06-06, raw/frans/PXL_2026...): vocab A/B (p78), E/F
-    # (p79) + grammatica-kaders (passé composé, aller/futur proche, vraag stellen +
-    # vraagwoorden). Nog NIET geëxtraheerd naar vocab.json (huidige vocab.json is nog
-    # ch5 → OFF-SCOPE, blijft bewaard maar telt niet). LET OP: présent van avoir/être/
-    # faire en het hoofdstukverhaal staan nog niet op de foto's.
+    # Officiële toetsscope (PWW 03-07, docentinfo). CH6-materiaal 2026-06-06 binnen
+    # via 2 kanten: (a) foto's Mara — raw/frans/PXL_*: vocab A/B p78, E/F p79,
+    # passé composé regarder, vraag stellen + vraagwoorden, aller futur proche (p83);
+    # (b) Stijn — verbes-docx (40 werkw.) + hoofdstukverhaal-pdf (faire/aller présent).
+    # Eerste extractie verwerkt: trainers/frans/vocab.json (60 items uit verbes-docx +
+    # verhaal-bold), werkwoorden.json (36 vervoegingen), hoofdstukverhaal.md.
+    # CH5-vocab.json → vocab-ch5-offscope.json (blijft bewaard, OFF-SCOPE).
+    # Avoir + être présent (2026-06-06): standaard Frans, Ralph-approved als bron-equivalent
+    # (geen aparte raw-tabel nodig — confidence 0.98 in werkwoorden.json).
+    # ER-passé composé (2026-06-06): regarder uit Mara's foto + 4 afgeleiden
+    # (demander/jouer/manger/organiser) als pattern-toepassing — Ralph-approved.
+    # NOG NODIG (sessie met Stijn):
+    #   - Re-extract vocab.json vanuit p78/p79-foto's (huidige 60 items is subset, niet volledig A/B/E)
+    #   - Grammaire 3+4 extractie uit p83-foto naar trainer-content
     scope:
       - id: vocabulaire-ch6-abe
         bron: "Chapitre 6, secties A/B/E (vocabulaire) — p78-79"
+        # gefotografeerd: true (Mara's PXL p78+p79).
+        # geextraheerd: true (60 items in vocab.json), MAAR uit verbes-docx + verhaal-bold,
+        # niet uit p78/p79 zelf — needs re-extract om dekkings-claim te valideren.
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
         gevalideerd: false
       - id: grammaire-er-werkwoorden
-        bron: "Grammaire 1: -ER-werkwoorden vertalen + in présent + passé composé plaatsen (GRAMMAIRE-kader passé composé)"
+        bron: "Grammaire 1: -ER-werkwoorden vertalen + in présent + passé composé plaatsen (GRAMMAIRE-kader passé composé met regarder, Mara's foto PXL_20260606_154403392.jpg)"
+        # Présent: donner-pattern uit verbes-docx — geextraheerd.
+        # Passé composé (2026-06-06): regarder-tabel (6 items) uit Mara's foto + 4
+        # afgeleide werkwoorden (demander, jouer, manger, organiser, elk 6 items)
+        # door Ralph goedgekeurd als bron-equivalent. Donner-pc-stopgap verwijderd.
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
         gevalideerd: false
       - id: grammaire-onregelmatige-werkwoorden
         bron: "Grammaire 2: avoir/être/aller/faire vertalen + in présent plaatsen"
-        # DEELS: aller (futur proche, p83) gefotografeerd; présent van avoir/être/faire nog nodig.
-        gefotografeerd: false
-        geextraheerd: false
+        # aller + faire présent: uit hoofdstukverhaal-pdf — geextraheerd.
+        # avoir + être présent: standaard Frans (présent-tabel), confidence 0.98,
+        # bron-equivalent door Ralph goedgekeurd 2026-06-06 (geen aparte raw-foto nodig).
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
       - id: grammaire-vraag-stellen
         bron: "Grammaire 3: een vraag stellen in het Frans (GRAMMAIRE-kader p83)"
@@ -153,8 +177,8 @@ vakken:
         gevalideerd: false
       - id: hoofdstukverhaal
         bron: "Grammaire 5: hoofdstukverhaal (Chapitre 6)"
-        gefotografeerd: false
-        geextraheerd: false
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
 
   nederlands:
