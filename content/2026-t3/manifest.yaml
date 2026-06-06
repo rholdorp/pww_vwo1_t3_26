@@ -213,4 +213,21 @@ vakken:
     secundaire_categorie: 1
     moeilijkheid: 1
     methode: TBD
-    scope: []  # TBD do 2026-06-04 — nog geen screenshots
+    # Officiële toetsscope (PWW 02-07, docentinfo "aardrijkskunde A1 G1").
+    # Screenshots worden gemaakt en in raw/aardrijkskunde/ geplaatst.
+    scope:
+      - id: h6-par-1-3
+        bron: "Hoofdstuk 6, paragraaf 1 t/m 3 (§6.1 p.78-79, §6.2 p.80-81, §6.3 p.82-83)"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: h5-par-2
+        bron: "Hoofdstuk 5, paragraaf 2 'De cultuur van Zuidoost-Azië' (p.66-67)"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
+      - id: topografie-5.2
+        bron: "Topografie 5.2 — Bron 11 'Zuidoost-Azië: invloeden van buitenaf' (close-up)"
+        gefotografeerd: true
+        geextraheerd: false
+        gevalideerd: false
