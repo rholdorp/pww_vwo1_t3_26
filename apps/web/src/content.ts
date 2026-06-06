@@ -64,19 +64,21 @@ export type Card =
     };
 
 /** Interne categorie (niet tonen in UI). */
-export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "schrijven";
+export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "schrijven";
 
 /** Stijn-vriendelijk label per soort — géén "Cat 1/3". */
 export const SOORT_LABEL: Record<BlokSoort, string> = {
   woordjes: "Woordjes",
   begrippen: "Begrippen",
   uitlegvragen: "Uitlegvragen",
+  invullen: "Invullen",
   schrijven: "Schrijfoefening",
 };
 export const SOORT_ICON: Record<BlokSoort, string> = {
   woordjes: "💬",
   begrippen: "📖",
   uitlegvragen: "💡",
+  invullen: "🔤",
   schrijven: "✍️",
 };
 
@@ -160,18 +162,19 @@ function buildRuw(): Blok[] {
     const file = fileFromPath(path);
     const data = mod.default;
 
-    if (file === "vocab.json") {
+    if (file === "vocab.json" || file === "werkwoorden.json") {
       const b = data as VocabBestand;
+      const isWerkw = file === "werkwoorden.json";
       const richtingen = b.richtingen?.length ? b.richtingen : (["nl->vreemd"] as Richting[]);
       // Splits per hoofdstuk (meestal één); houdt de scheiding zichtbaar.
       for (const [hfd, items] of groupBy(b.items, (it) => it.hoofdstuk || b.hoofdstuk)) {
         blokken.push({
-          id: `${vak}/woordjes/h${hfd}`,
+          id: `${vak}/${isWerkw ? "werkwoorden" : "woordjes"}/h${hfd}`,
           vak,
           hoofdstuk: hfd,
-          onderdeel: `Hoofdstuk ${hfd}`,
+          onderdeel: isWerkw ? "Werkwoorden" : `Hoofdstuk ${hfd}`,
           soort: "woordjes",
-          titel: "Woordjes",
+          titel: isWerkw ? "Werkwoorden vervoegen" : "Woordjes",
           ids: items.map((it) => it.id),
           richtingen,
           bouwCards: (richting = richtingen[0]) =>
@@ -217,6 +220,31 @@ function buildRuw(): Blok[] {
           opdrachtId: op.id,
           bouwCards: () => [],
         });
+      });
+    } else if (file === "hoofdstukverhaal-cloze.json") {
+      const b = data as {
+        hoofdstuk: string;
+        onderdeel?: string;
+        normalisatie: NormalisatieProfiel;
+        items: Array<{ id: string; zin: string; infinitief: string; tijd?: string; antwoord: string; acceptedAnswers?: string[] }>;
+      };
+      blokken.push({
+        id: `${vak}/invullen/h${b.hoofdstuk}`,
+        vak,
+        hoofdstuk: b.hoofdstuk,
+        onderdeel: b.onderdeel ?? "Werkwoorden invullen",
+        soort: "invullen",
+        titel: "Werkwoorden invullen (verhaal)",
+        ids: b.items.map((it) => it.id),
+        bouwCards: () =>
+          b.items.map((it): Card => ({
+            kind: "typed",
+            id: it.id,
+            prompt: `${it.zin}  (${it.infinitief})`,
+            accepted: [it.antwoord, ...(it.acceptedAnswers ?? [])],
+            norm: b.normalisatie,
+            answer: it.antwoord,
+          })),
       });
     } else if (file === "oefenvragen.json") {
       const b = data as OefenvraagBestand;
@@ -295,8 +323,8 @@ function buildBlokken(): Blok[] {
   const ruw = buildRuw();
   const final: Blok[] = [];
 
-  // Woordjes + schrijfopdrachten: ongemoeid.
-  final.push(...ruw.filter((b) => b.soort === "woordjes" || b.soort === "schrijven"));
+  // Woordjes, invuloefeningen + schrijfopdrachten: ongemoeid.
+  final.push(...ruw.filter((b) => b.soort === "woordjes" || b.soort === "invullen" || b.soort === "schrijven"));
 
   // Begrippen: per (vak, hoofdstuk) de te kleine paragrafen samenvoegen,
   // de rest blijft per paragraaf gescheiden.
@@ -318,7 +346,7 @@ function buildBlokken(): Blok[] {
 
 export const BLOKKEN: Blok[] = buildBlokken();
 
-const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, begrippen: 1, uitlegvragen: 2, schrijven: 3 };
+const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, invullen: 1, begrippen: 2, uitlegvragen: 3, schrijven: 4 };
 
 function hfdNum(h: string): number {
   const n = parseInt(h, 10);

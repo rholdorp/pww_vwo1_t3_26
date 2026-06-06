@@ -1,0 +1,23 @@
+{
+  "vak": "frans",
+  "hoofdstuk": "6",
+  "onderdeel": "Werkwoorden invullen (verhaal)",
+  "normalisatie": "frans",
+  "notitie": "Cloze-oefening op het CH6-hoofdstukverhaal: het werkwoord is weggelaten, de infinitief staat erbij. Toetst grammaire-scope 1+2 (-ER présent + aller/faire présent) in zinscontext. Zinnen letterlijk uit hoofdstukverhaal.md (PXL-grammaire-foto + verhaal-pdf).",
+  "items": [
+    { "id": "frans-h6-cloze-001", "zin": "Demain, je ___ dans le quartier avec mon ami Lucas.", "infinitief": "aller", "tijd": "présent", "antwoord": "vais" },
+    { "id": "frans-h6-cloze-002", "zin": "Nous ___ d'abord dans la rue principale et ensuite sur la place.", "infinitief": "aller", "tijd": "présent", "antwoord": "allons" },
+    { "id": "frans-h6-cloze-003", "zin": "Nous ___ à pied parce que ce n'est pas loin.", "infinitief": "marcher", "tijd": "présent", "antwoord": "marchons" },
+    { "id": "frans-h6-cloze-004", "zin": "Après, nous ___ au marché pour acheter quelque chose à manger.", "infinitief": "aller", "tijd": "présent", "antwoord": "allons" },
+    { "id": "frans-h6-cloze-005", "zin": "Mais nous ne connaissons pas bien l'endroit, alors nous ___ :", "infinitief": "demander", "tijd": "présent", "antwoord": "demandons" },
+    { "id": "frans-h6-cloze-006", "zin": "Je ___ le cinéma.", "infinitief": "chercher", "tijd": "présent", "antwoord": "cherche" },
+    { "id": "frans-h6-cloze-007", "zin": "Nous ___ la route et nous traversons la rue.", "infinitief": "continuer", "tijd": "présent", "antwoord": "continuons" },
+    { "id": "frans-h6-cloze-008", "zin": "Nous continuons la route et nous ___ la rue.", "infinitief": "traverser", "tijd": "présent", "antwoord": "traversons" },
+    { "id": "frans-h6-cloze-009", "zin": "Après dix minutes, nous ___ au cinéma.", "infinitief": "arriver", "tijd": "présent", "antwoord": "arrivons" },
+    { "id": "frans-h6-cloze-010", "zin": "Moi, je ___ écouter de la musique.", "infinitief": "préférer", "tijd": "présent", "antwoord": "préfère" },
+    { "id": "frans-h6-cloze-011", "zin": "Nous ___ du sport ensemble parce que c'est plus amusant.", "infinitief": "faire", "tijd": "présent", "antwoord": "faisons" },
+    { "id": "frans-h6-cloze-012", "zin": "Ensuite, nous ___ en bus au centre.", "infinitief": "aller", "tijd": "présent", "antwoord": "allons" },
+    { "id": "frans-h6-cloze-013", "zin": "Lucas ___ beaucoup les vêtements et moi aussi.", "infinitief": "aimer", "tijd": "présent", "antwoord": "aime" },
+    { "id": "frans-h6-cloze-014", "zin": "Finalement, nous ___ à la maison.", "infinitief": "arriver", "tijd": "présent", "antwoord": "arrivons" }
+  ]
+}
