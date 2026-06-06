@@ -82,6 +82,38 @@ export function sessieVolgorde(naam: string, ids: readonly string[]): string[] {
   return shuffle(due.length > 0 ? due : ids);
 }
 
+// ── Schrijftrainer (Cat 4) — laatste score + concept per opdracht ────────────
+const schrijfKey = (naam: string) => `pww-schrijf:${slug(naam)}`;
+
+type SchrijfStore = Record<string, { score?: number; concept?: Record<string, string> }>;
+
+function laadSchrijf(naam: string): SchrijfStore {
+  try {
+    return JSON.parse(localStorage.getItem(schrijfKey(naam)) ?? "{}") as SchrijfStore;
+  } catch {
+    return {};
+  }
+}
+function bewaarSchrijf(naam: string, s: SchrijfStore): void {
+  localStorage.setItem(schrijfKey(naam), JSON.stringify(s));
+}
+export function laatsteScore(naam: string, opdrachtId: string): number | undefined {
+  return laadSchrijf(naam)[opdrachtId]?.score;
+}
+export function zetScore(naam: string, opdrachtId: string, score: number): void {
+  const s = laadSchrijf(naam);
+  s[opdrachtId] = { ...s[opdrachtId], score };
+  bewaarSchrijf(naam, s);
+}
+export function laadConcept(naam: string, opdrachtId: string): Record<string, string> {
+  return laadSchrijf(naam)[opdrachtId]?.concept ?? {};
+}
+export function bewaarConcept(naam: string, opdrachtId: string, concept: Record<string, string>): void {
+  const s = laadSchrijf(naam);
+  s[opdrachtId] = { ...s[opdrachtId], concept };
+  bewaarSchrijf(naam, s);
+}
+
 export function huidigeNaam(): string | null {
   return localStorage.getItem("pww-naam");
 }

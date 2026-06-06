@@ -152,3 +152,31 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
 .balk.dun { height: 5px; margin: 12px 0 0; }
 
 .trainer-kop { display: flex; align-items: center; gap: 8px; padding: 6px 0 2px; }
+
+/* Schrijftrainer (Cat 4) */
+.label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+.fragment { background: rgba(255,255,255,0.05); }
+.fragment-tekst { white-space: pre-wrap; line-height: 1.5; margin: 4px 0 0; }
+.opdracht-kaart p { margin: 4px 0 0; line-height: 1.45; }
+.schrijf-veld { margin: 12px 0; }
+.veld-label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+.veld-hint { margin-bottom: 6px; }
+.tekstgebied {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.5;
+  border-radius: 10px;
+  border: 1px solid var(--rand);
+  background: #0b1220;
+  color: var(--tekst);
+  resize: vertical;
+}
+.tekstgebied:focus { outline: none; border-color: var(--primair); }
+.feedback-kaart { border-color: rgba(230,126,34,0.4); }
+.feedback-tekst { white-space: pre-wrap; line-height: 1.5; margin: 4px 0 8px; }
+.score-kaart { text-align: center; }
+.score-kaart .rubric, .feedback-kaart .rubric { text-align: left; }
+.score-groot { font-size: 40px; font-weight: 900; margin: 4px 0 8px; }
+.foutmelding { border-color: rgba(245,158,11,0.4); }

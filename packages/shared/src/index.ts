@@ -7,6 +7,9 @@ export type {
   FlashcardBestand,
   Oefenvraag,
   OefenvraagBestand,
+  SchrijfStap,
+  Schrijfopdracht,
+  SchrijfopdrachtBestand,
 } from "./content.js";
 
 export type {

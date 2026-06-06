@@ -1,0 +1,62 @@
+{
+  "vak": "nederlands",
+  "opdrachten": [
+    {
+      "id": "nederlands-brief-001",
+      "titel": "Een brief aan Sam (met hulp)",
+      "tekstfragment": "Sam (12) is net verhuisd naar een ander dorp. In zijn dagboek schrijft hij:\n\n«Vandaag was mijn eerste dag op de nieuwe school. Iedereen kende elkaar al en ik stond in de pauze in mijn eentje bij het hek. Niemand vroeg of ik mee wilde voetballen. Ik mis mijn oude vrienden heel erg. Vanavond heb ik tegen mama gezegd dat ik nooit meer naar school wil. Misschien wordt het morgen beter, maar ik durf er bijna niet op te hopen.»",
+      "opdracht": "Schrijf een informele brief aan Sam. Reageer op wat hij in zijn dagboek schrijft, leef je in zijn situatie in en probeer hem op te vrolijken. Gebruik een persoonlijke, informele toon — zoals je aan een vriend zou schrijven.",
+      "begeleid": true,
+      "stappen": [
+        { "sleutel": "aanhef", "label": "Aanhef", "hint": "Begin informeel, bijvoorbeeld: “Hoi Sam,” of “Beste Sam,”" },
+        { "sleutel": "opening", "label": "Inleiding", "hint": "Vertel kort waarom je schrijft en laat merken dat je zijn dagboek hebt gelezen." },
+        { "sleutel": "kern", "label": "Kern", "hint": "Reageer op zijn verhaal: leef mee, geef een tip of bemoediging, en deel iets persoonlijks (bijv. een keer dat jij je ook alleen voelde)." },
+        { "sleutel": "slot", "label": "Afsluiting + groet", "hint": "Sluit positief af en eindig met een informele groet, bijvoorbeeld: “Groetjes,” of “Hou vol! —” en je naam." }
+      ],
+      "checklist": [
+        "Ik heb een informele aanhef gebruikt (Hoi/Beste + naam).",
+        "Ik laat merken dat ik Sams verhaal heb gelezen en leef me in.",
+        "Ik schrijf in een persoonlijke, informele toon (ik/je).",
+        "Ik geef bemoediging of een tip en deel iets van mezelf.",
+        "Ik sluit netjes af met een groet en mijn naam.",
+        "Ik heb op spelling en zinnen gelet."
+      ],
+      "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal",
+      "confidence": 0.6
+    },
+    {
+      "id": "nederlands-brief-002",
+      "titel": "Een brief aan Noor",
+      "tekstfragment": "In het schoolkrantje staat een interview met Noor (13):\n\n«Ik heb meegedaan aan de talentenjacht en ik heb gewonnen met jongleren! Het gekke is dat ik het bijna niet had gedurfd. Een week ervoor wilde ik me afmelden, omdat ik bang was dat iedereen me zou uitlachen. Mijn opa zei: ‘Als je het niet probeert, weet je nooit wat er had gekund.’ Daardoor ben ik toch gegaan. Nu wil onze gymleraar dat ik het op het schoolfeest weer doe, maar voor zo veel mensen durf ik echt niet…»",
+      "opdracht": "Schrijf een informele brief aan Noor. Feliciteer haar, reageer op haar twijfel over het schoolfeest en moedig haar aan. Schrijf zoals je aan een leeftijdsgenoot zou schrijven.",
+      "begeleid": false,
+      "checklist": [
+        "Ik heb een informele aanhef en afsluiting met groet gebruikt.",
+        "Ik feliciteer Noor en reageer op haar verhaal uit het interview.",
+        "Ik ga in op haar twijfel over het schoolfeest en moedig haar aan.",
+        "Ik schrijf in een persoonlijke, informele toon en deel eventueel iets van mezelf.",
+        "De brief heeft een logische opbouw (begin – midden – eind).",
+        "Ik heb op spelling en zinsbouw gelet."
+      ],
+      "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal",
+      "confidence": 0.6
+    },
+    {
+      "id": "nederlands-brief-003",
+      "titel": "Een brief aan Tijn",
+      "tekstfragment": "Op een online forum voor jonge dierenliefhebbers schrijft Tijn (12):\n\n«Ik heb sinds twee weken een hond uit het asiel, een kruising die Pluk heet. Hij is super lief, maar 's nachts piept hij en dan slaapt niemand. Mijn ouders zeggen dat als het zo doorgaat, Pluk misschien terug moet. Ik wil dat echt niet! Ik heb al van alles geprobeerd, maar niets helpt. Heeft iemand tips? Ik ben echt bang dat ik hem kwijtraak.»",
+      "opdracht": "Schrijf een informele brief aan Tijn. Reageer op zijn probleem met Pluk, leef je in en geef hem een paar concrete tips. Houd de toon vriendelijk en informeel.",
+      "begeleid": false,
+      "checklist": [
+        "Ik heb een informele aanhef en een groet aan het eind gebruikt.",
+        "Ik laat merken dat ik Tijns bericht heb gelezen en leef mee.",
+        "Ik geef minstens twee concrete, vriendelijke tips.",
+        "Ik schrijf in een persoonlijke, informele toon.",
+        "De brief heeft een duidelijke opbouw en sluit bemoedigend af.",
+        "Ik heb op spelling en zinsbouw gelet."
+      ],
+      "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal",
+      "confidence": 0.6
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import type {
   VocabBestand,
   FlashcardBestand,
   OefenvraagBestand,
+  SchrijfopdrachtBestand,
+  Schrijfopdracht,
   NormalisatieProfiel,
   Richting,
 } from "@pww/shared";
@@ -62,19 +64,24 @@ export type Card =
     };
 
 /** Interne categorie (niet tonen in UI). */
-export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen";
+export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "schrijven";
 
 /** Stijn-vriendelijk label per soort — géén "Cat 1/3". */
 export const SOORT_LABEL: Record<BlokSoort, string> = {
   woordjes: "Woordjes",
   begrippen: "Begrippen",
   uitlegvragen: "Uitlegvragen",
+  schrijven: "Schrijfoefening",
 };
 export const SOORT_ICON: Record<BlokSoort, string> = {
   woordjes: "💬",
   begrippen: "📖",
   uitlegvragen: "💡",
+  schrijven: "✍️",
 };
+
+/** Schrijfopdrachten (Cat 4), opzoekbaar op id voor de schrijftrainer. */
+export const SCHRIJFOPDRACHTEN = new Map<string, Schrijfopdracht>();
 
 /** Eén oefen-eenheid: één onderdeel/paragraaf van één vak. */
 export interface Blok {
@@ -86,6 +93,8 @@ export interface Blok {
   titel: string;
   ids: string[];
   richtingen?: Richting[];
+  /** Alleen bij soort "schrijven": verwijzing naar de schrijfopdracht. */
+  opdrachtId?: string;
   bouwCards: (richting?: Richting) => Card[];
 }
 
@@ -193,6 +202,22 @@ function buildRuw(): Blok[] {
           bouwCards: () => kaarten.map((k) => typedFlashcard(k, b.normalisatie)),
         });
       }
+    } else if (file === "schrijfopdrachten.json") {
+      const b = data as SchrijfopdrachtBestand;
+      b.opdrachten.forEach((op, i) => {
+        SCHRIJFOPDRACHTEN.set(op.id, op);
+        blokken.push({
+          id: `${vak}/schrijven/${op.id}`,
+          vak,
+          hoofdstuk: "schrijven",
+          onderdeel: `${i + 1}. ${op.titel}`,
+          soort: "schrijven",
+          titel: `${i + 1}. ${op.titel}`,
+          ids: [op.id],
+          opdrachtId: op.id,
+          bouwCards: () => [],
+        });
+      });
     } else if (file === "oefenvragen.json") {
       const b = data as OefenvraagBestand;
       for (const [onderdeel, vragen] of groupBy(b.vragen, (v) => v.onderdeel ?? `Hoofdstuk ${v.hoofdstuk}`)) {
@@ -270,8 +295,8 @@ function buildBlokken(): Blok[] {
   const ruw = buildRuw();
   const final: Blok[] = [];
 
-  // Woordjes: ongemoeid (per hoofdstuk).
-  final.push(...ruw.filter((b) => b.soort === "woordjes"));
+  // Woordjes + schrijfopdrachten: ongemoeid.
+  final.push(...ruw.filter((b) => b.soort === "woordjes" || b.soort === "schrijven"));
 
   // Begrippen: per (vak, hoofdstuk) de te kleine paragrafen samenvoegen,
   // de rest blijft per paragraaf gescheiden.
@@ -293,7 +318,7 @@ function buildBlokken(): Blok[] {
 
 export const BLOKKEN: Blok[] = buildBlokken();
 
-const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, begrippen: 1, uitlegvragen: 2 };
+const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, begrippen: 1, uitlegvragen: 2, schrijven: 3 };
 
 function hfdNum(h: string): number {
   const n = parseInt(h, 10);

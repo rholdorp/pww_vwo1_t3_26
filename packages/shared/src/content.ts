@@ -132,3 +132,42 @@ export interface OefenvraagBestand {
   vak: string;
   vragen: Oefenvraag[];
 }
+
+// ── Cat 4 (Nederlands / Engels — productieve schrijfvaardigheid) ─────────────
+// Een schrijfopdracht: lees een tekstfragment, schrijf (informele) brief, krijg
+// LLM-feedback, herzie één keer, krijg dan een score + verbeterpunten (SPEC §5 Cat 4).
+
+/** Eén begeleidings-stap (alleen voor begeleide opdrachten): een deel van de brief. */
+export interface SchrijfStap {
+  /** Stabiele sleutel, bv. "aanhef", "kern", "slot". */
+  sleutel: string;
+  /** Label boven het tekstvak. */
+  label: string;
+  /** Stimulerende hint/placeholder voor dit deel. */
+  hint: string;
+}
+
+/** Eén schrijfopdracht. Bestand: content/<editie>/trainers/<vak>/schrijfopdrachten.json. */
+export interface Schrijfopdracht {
+  id: string;
+  titel: string;
+  /** Het te lezen tekstfragment (markdown/plain). */
+  tekstfragment: string;
+  /** De schrijfopdracht zelf. */
+  opdracht: string;
+  /** Begeleid (per-deel tekstvakken met hints) of vrij (één tekstvak). */
+  begeleid: boolean;
+  /** Alleen bij begeleid: de delen van de brief. */
+  stappen?: SchrijfStap[];
+  /** Zelf-nakijk-checklist (fallback als er geen LLM-feedback beschikbaar is). */
+  checklist: string[];
+  /** Pad/oorsprong van het materiaal (gegenereerd voorbeeld → expliciet vermelden). */
+  bron: string;
+  confidence: number;
+}
+
+/** Bestand content/<editie>/trainers/<vak>/schrijfopdrachten.json. */
+export interface SchrijfopdrachtBestand {
+  vak: string;
+  opdrachten: Schrijfopdracht[];
+}
