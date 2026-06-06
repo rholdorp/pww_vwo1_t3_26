@@ -52,6 +52,17 @@ export function blokMastery(naam: string, ids: readonly string[]): number {
   return mastery(ids.map((id) => store[id] ?? nieuwItem(id, vandaag())));
 }
 
+/** Is er al minstens één item van dit blok ooit beantwoord (voor "deels" vs "open")? */
+export function isGezien(naam: string, ids: readonly string[]): boolean {
+  const store = load(naam);
+  return ids.some((id) => store[id] !== undefined);
+}
+
+/** Vandaag als ISO-datum (YYYY-MM-DD) — gedeeld met de planner. */
+export function vandaagISO(): string {
+  return vandaag();
+}
+
 export function boxVoor(naam: string, itemId: string): LeitnerBox {
   return (load(naam)[itemId]?.box ?? 1) as LeitnerBox;
 }
@@ -112,6 +123,21 @@ export function bewaarConcept(naam: string, opdrachtId: string, concept: Record<
   const s = laadSchrijf(naam);
   s[opdrachtId] = { ...s[opdrachtId], concept };
   bewaarSchrijf(naam, s);
+}
+
+// ── Dagplan (planner) — bevroren keuze van vandaag, zodat de teller stabiel is ──
+const dagplanKey = (naam: string, datum: string) => `pww-plan:${slug(naam)}:${datum}`;
+
+export function laadDagplan(naam: string, datum: string): string[] | null {
+  try {
+    const raw = localStorage.getItem(dagplanKey(naam, datum));
+    return raw ? (JSON.parse(raw) as string[]) : null;
+  } catch {
+    return null;
+  }
+}
+export function bewaarDagplan(naam: string, datum: string, ids: string[]): void {
+  localStorage.setItem(dagplanKey(naam, datum), JSON.stringify(ids));
 }
 
 export function huidigeNaam(): string | null {

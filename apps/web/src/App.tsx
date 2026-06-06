@@ -16,6 +16,7 @@ import {
   richtingLabel,
   SOORT_ICON,
   SCHRIJFOPDRACHTEN,
+  BLOKKEN,
   type Blok,
   type Card,
 } from "./content";
@@ -29,59 +30,78 @@ import {
   zetScore,
   laadConcept,
   bewaarConcept,
+  vandaagISO,
+  laadDagplan,
+  bewaarDagplan,
 } from "./progress";
+import { planVandaag, blokStatus, PWW_DATUM, dagenTot, type BlokStatusKind } from "./planner";
 
-type Scherm =
-  | { type: "home" }
+type Tab = "vandaag" | "oefenen" | "voortgang";
+type Actief =
   | { type: "train"; blok: Blok; richting?: Richting }
-  | { type: "schrijf"; opdracht: Schrijfopdracht };
+  | { type: "schrijf"; opdracht: Schrijfopdracht }
+  | null;
 
 export default function App() {
   const [naam, setNaam] = useState<string | null>(() => huidigeNaam());
-  const [scherm, setScherm] = useState<Scherm>({ type: "home" });
+  const [tab, setTab] = useState<Tab>("vandaag");
+  const [actief, setActief] = useState<Actief>(null);
 
   if (!naam) {
     return <NaamPoort onKlaar={(n) => { zetNaam(n); setNaam(n); }} />;
   }
 
+  function startBlok(blok: Blok, richting?: Richting) {
+    if (blok.soort === "schrijven" && blok.opdrachtId) {
+      const opdracht = SCHRIJFOPDRACHTEN.get(blok.opdrachtId);
+      if (opdracht) return setActief({ type: "schrijf", opdracht });
+    }
+    setActief({ type: "train", blok, richting });
+  }
+
+  if (actief) {
+    return (
+      <div className="app">
+        <header className="topbar">
+          <button className="link" onClick={() => setActief(null)}>← Terug</button>
+          <span className="naam">{naam}</span>
+        </header>
+        {actief.type === "train" ? (
+          <Trainer
+            key={actief.blok.id + (actief.richting ?? "")}
+            naam={naam}
+            blok={actief.blok}
+            richting={actief.richting}
+            onExit={() => setActief(null)}
+          />
+        ) : (
+          <SchrijfTrainer key={actief.opdracht.id} naam={naam} opdracht={actief.opdracht} onExit={() => setActief(null)} />
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div className="app">
+    <div className="app heeft-nav">
       <header className="topbar">
-        <button className="link" onClick={() => setScherm({ type: "home" })}>
-          ← PWW Trainer
-        </button>
+        <span className="logo">PWW Trainer</span>
         <span className="naam">{naam}</span>
       </header>
 
-      {scherm.type === "home" && (
-        <Home
-          naam={naam}
-          onStart={(blok, richting) => {
-            if (blok.soort === "schrijven" && blok.opdrachtId) {
-              const opdracht = SCHRIJFOPDRACHTEN.get(blok.opdrachtId);
-              if (opdracht) return setScherm({ type: "schrijf", opdracht });
-            }
-            setScherm({ type: "train", blok, richting });
-          }}
-        />
-      )}
-      {scherm.type === "train" && (
-        <Trainer
-          key={scherm.blok.id + (scherm.richting ?? "")}
-          naam={naam}
-          blok={scherm.blok}
-          richting={scherm.richting}
-          onExit={() => setScherm({ type: "home" })}
-        />
-      )}
-      {scherm.type === "schrijf" && (
-        <SchrijfTrainer
-          key={scherm.opdracht.id}
-          naam={naam}
-          opdracht={scherm.opdracht}
-          onExit={() => setScherm({ type: "home" })}
-        />
-      )}
+      {tab === "vandaag" && <Vandaag naam={naam} onStart={startBlok} onNaarOefenen={() => setTab("oefenen")} />}
+      {tab === "oefenen" && <Home naam={naam} onStart={startBlok} />}
+      {tab === "voortgang" && <Voortgang naam={naam} />}
+
+      <nav className="bottomnav">
+        {([["vandaag", "📅", "Vandaag"], ["oefenen", "🎯", "Oefenen"], ["voortgang", "📈", "Voortgang"]] as const).map(
+          ([t, icon, label]) => (
+            <button key={t} className={`navknop ${tab === t ? "actief" : ""}`} onClick={() => setTab(t)}>
+              <span className="nav-icon">{icon}</span>
+              <span className="nav-label">{label}</span>
+            </button>
+          ),
+        )}
+      </nav>
     </div>
   );
 }
@@ -604,6 +624,149 @@ function SchrijfTrainer({
         )}
         <button className="knop" onClick={onExit}>Terug</button>
       </div>
+    </main>
+  );
+}
+
+const STATUS_ICON: Record<BlokStatusKind, string> = { open: "○", deels: "◐", afgevinkt: "✓" };
+
+function Vandaag({
+  naam,
+  onStart,
+  onNaarOefenen,
+}: {
+  naam: string;
+  onStart: (blok: Blok, richting?: Richting) => void;
+  onNaarOefenen: () => void;
+}) {
+  const datum = vandaagISO();
+  const blokById = useMemo(() => new Map(BLOKKEN.map((b) => [b.id, b])), []);
+  const [planIds] = useState<string[]>(() => {
+    const bewaard = laadDagplan(naam, datum);
+    if (bewaard && bewaard.length) return bewaard;
+    const ids = planVandaag(BLOKKEN, naam, datum).map((p) => p.blok.id);
+    bewaarDagplan(naam, datum, ids);
+    return ids;
+  });
+  const items = planIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
+  const statussen = items.map((b) => ({ blok: b, st: blokStatus(naam, b) }));
+  const klaar = statussen.filter((s) => s.st.status === "afgevinkt").length;
+
+  const komende = [...new Set(items.map((b) => b.vak))]
+    .map((v) => ({ vak: v, dagen: dagenTot(datum, PWW_DATUM[v] ?? "2026-07-03") }))
+    .sort((a, b) => a.dagen - b.dagen)[0];
+  const datumLabel = new Date(`${datum}T00:00:00`).toLocaleDateString("nl-NL", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+
+  return (
+    <main className="lijst">
+      <div className="card vandaag-kop">
+        <div className="vandaag-datum">{datumLabel}</div>
+        <div className="vandaag-tel">{klaar}/{items.length} ✓</div>
+        {komende && komende.dagen >= 0 && (
+          <div className="muted klein">
+            Volgende toets: {vakLabel(komende.vak)}{" "}
+            {komende.dagen === 0 ? "vandaag" : `over ${komende.dagen} dag${komende.dagen === 1 ? "" : "en"}`}
+          </div>
+        )}
+      </div>
+
+      <p className="muted klein banner">⚠️ Content nog niet gevalideerd — controleer bij twijfel met je boek.</p>
+
+      {items.length === 0 ? (
+        <div className="card narrow">
+          <p>Niks meer ingepland voor vandaag 🎉</p>
+          <button className="knop primair" onClick={onNaarOefenen}>Vrij oefenen</button>
+        </div>
+      ) : (
+        statussen.map(({ blok, st }) => {
+          const kleur = vakKleur(blok.vak);
+          return (
+            <div key={blok.id} className="card blok">
+              <div className="blok-kop">
+                <span className="blok-icon">{SOORT_ICON[blok.soort]}</span>
+                <div className="blok-tekst">
+                  <div className="card-titel">{vakLabel(blok.vak)} · {blok.titel}</div>
+                  <div className="muted klein">{Math.round(st.mastery * 100)}% beheerst</div>
+                </div>
+                <span className={`status-icoon ${st.status}`}>{STATUS_ICON[st.status]}</span>
+              </div>
+              <div className="balk dun">
+                <div className="balk-vuller" style={{ width: `${Math.round(st.mastery * 100)}%`, background: kleur }} />
+              </div>
+              <div className="knoppen">
+                {blok.soort === "woordjes" && blok.richtingen ? (
+                  blok.richtingen.map((r) => (
+                    <button key={r} className="knop" style={{ borderColor: kleur }} onClick={() => onStart(blok, r)}>
+                      {richtingLabel(blok.vak, r)}
+                    </button>
+                  ))
+                ) : (
+                  <button
+                    className="knop primair"
+                    style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
+                    onClick={() => onStart(blok)}
+                  >
+                    {st.status === "open" ? "Start" : "Verder"}
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })
+      )}
+      <p className="muted klein voetnoot">
+        Ingepland op basis van je voortgang + toetsdatums. Niet af? Het blok komt een volgende keer terug.
+      </p>
+    </main>
+  );
+}
+
+function Voortgang({ naam }: { naam: string }) {
+  const groepen = useMemo(() => vakGroepen(), []);
+  const datum = vandaagISO();
+  return (
+    <main className="lijst">
+      <h1>Voortgang</h1>
+      {groepen.map((g) => {
+        const kleur = vakKleur(g.vak);
+        const blokken = g.hoofdstukken.flatMap((h) => h.blokken);
+        const gem = blokken.length
+          ? Math.round((blokken.reduce((s, b) => s + blokStatus(naam, b).mastery, 0) / blokken.length) * 100)
+          : 0;
+        const dagen = dagenTot(datum, PWW_DATUM[g.vak] ?? "2026-07-03");
+        return (
+          <div key={g.vak} className="card">
+            <div className="blok-kop">
+              <span className="vak-stip" style={{ background: kleur }} />
+              <div className="blok-tekst">
+                <div className="card-titel" style={{ color: kleur }}>{vakLabel(g.vak)}</div>
+                <div className="muted klein">{gem}% klaar{dagen >= 0 ? ` · toets over ${dagen} dagen` : ""}</div>
+              </div>
+            </div>
+            <div className="balk dun">
+              <div className="balk-vuller" style={{ width: `${gem}%`, background: kleur }} />
+            </div>
+            <div className="voortgang-blokken">
+              {blokken.map((b) => {
+                const st = blokStatus(naam, b);
+                return (
+                  <div key={b.id} className="voortgang-rij">
+                    <span>{STATUS_ICON[st.status]} {b.titel}</span>
+                    <span className="muted klein">{Math.round(st.mastery * 100)}%</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+      <p className="muted klein voetnoot">
+        Vakken zonder eigen trainer (Engels, Biologie, Wiskunde) leer je voorlopig uit het boek.
+      </p>
     </main>
   );
 }
