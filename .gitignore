@@ -49,3 +49,6 @@ content/*/cache/
 
 # local progress data (productie staat in Firestore)
 progress/local/
+
+# Claude Code lokale settings (machine-specifiek)
+.claude/settings.local.json

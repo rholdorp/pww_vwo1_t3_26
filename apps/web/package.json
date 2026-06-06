@@ -3,11 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Webapp (React + Vite + Tailwind, GitHub Pages target). Zie SPEC.md §10–11.",
+  "description": "Webapp (React + Vite, GitHub Pages target). Zie SPEC.md §10–11.",
   "scripts": {
-    "dev": "echo 'TODO: vite' && exit 0",
-    "build": "echo 'TODO: vite build' && exit 0",
-    "preview": "echo 'TODO: vite preview' && exit 0",
-    "lint": "echo 'TODO: eslint' && exit 0"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "echo 'TODO: eslint' && exit 0",
+    "test": "echo 'no tests yet' && exit 0"
+  },
+  "dependencies": {
+    "@pww/shared": "*",
+    "@pww/trainer-engine": "*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
   }
 }
