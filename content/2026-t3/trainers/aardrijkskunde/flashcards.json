@@ -493,124 +493,135 @@
     },
     {
       "id": "aardrijkskunde-h5-topo-001",
-      "vraag": "Welk land ligt in het westen van het vasteland van Zuidoost-Azië, grenzend aan India?",
+      "vraag": "Welk land is donkerblauw gekleurd op de kaart?",
       "antwoord": "Myanmar",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-002",
-      "vraag": "Welk vasteland-land ligt tussen Myanmar (in het westen) en Laos/Cambodja (in het oosten)?",
+      "vraag": "Welk land is oranje gekleurd op de kaart?",
       "antwoord": "Thailand",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-003",
-      "vraag": "Welk land van Zuidoost-Azië heeft geen zeekust en ligt tussen Thailand en Vietnam?",
+      "vraag": "Welk land is donkergroen gekleurd op de kaart?",
       "antwoord": "Laos",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-004",
-      "vraag": "Welk langgerekt land ligt langs de oostkust van het vasteland, aan de Grote Oceaan?",
+      "vraag": "Welk land is geel gekleurd op de kaart?",
       "antwoord": "Vietnam",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-005",
-      "vraag": "Welk vasteland-land ligt ten zuiden van Laos, met kust aan de Golf van Thailand?",
+      "vraag": "Welk land is paars gekleurd op de kaart?",
       "antwoord": "Cambodja",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-006",
-      "vraag": "Welk land bestaat uit twee delen: het zuiden van het schiereiland én een stuk op Borneo?",
+      "vraag": "Welk land is lichtblauw gekleurd op de kaart (twee delen: schiereiland + noord-Borneo)?",
       "antwoord": "Maleisië",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-007",
-      "vraag": "Welke kleine eiland-stadstaat ligt aan de zuidpunt van het Maleisisch schiereiland?",
+      "vraag": "Welke kleine eiland-stadstaat ligt als klein stipje aan de zuidpunt van het Maleisisch schiereiland?",
       "antwoord": "Singapore",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-008",
-      "vraag": "Welk klein land ligt aan de noordkust van Borneo, omringd door Maleisië?",
+      "vraag": "Welk klein grijs land ligt aan de noordkust van Borneo, omringd door het lichtblauwe land?",
       "antwoord": "Brunei",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-009",
-      "vraag": "Welk land is het grootste van Zuidoost-Azië: een grote eilandengroep tussen de Indische en de Grote Oceaan?",
+      "vraag": "Welk land is lichtgroen gekleurd op de kaart (de grote eilandengroep)?",
       "antwoord": "Indonesië",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-010",
-      "vraag": "Welke eilandengroep ligt in het noordoosten van Zuidoost-Azië, in de Grote Oceaan?",
+      "vraag": "Welk land is lichtpaars gekleurd op de kaart (de eilandengroep in het noordoosten)?",
       "antwoord": "Filipijnen",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-011",
-      "vraag": "Welk klein land ligt op het oostelijke deel van het eiland Timor en is geen ASEAN-lid?",
+      "vraag": "Welk klein bruin land ligt aan de oostkant van de lichtgroene eilandengroep?",
       "antwoord": "Oost-Timor",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-012",
@@ -621,29 +632,32 @@
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.96
+      "confidence": 0.96,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-013",
-      "vraag": "Welke oceaan ligt ten oosten van Zuidoost-Azië (ook wel de Stille Oceaan)?",
+      "vraag": "Welke oceaan ligt ten oosten van Zuidoost-Azië (bij de Filipijnen)?",
       "antwoord": "Grote Oceaan",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.96
+      "confidence": 0.96,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     },
     {
       "id": "aardrijkskunde-h5-topo-014",
-      "vraag": "Welk groot buurland ligt ten noorden van Zuidoost-Azië (boven Myanmar, Laos en Vietnam)?",
+      "vraag": "Welk land is rood gekleurd op de kaart?",
       "antwoord": "China",
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.95
+      "confidence": 0.95,
+      "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     }
   ]
 }
