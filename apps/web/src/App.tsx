@@ -365,6 +365,7 @@ function TypedKaart({
   return (
     <>
       {card.image && <img className="kaart-beeld" src={card.image} alt="" />}
+      {card.subtitel && <div className="muted klein kaart-subtitel">{card.subtitel}</div>}
       <div className="prompt">{card.prompt}</div>
       {hint && !feedback && (
         <div className="muted klein hint">hint: begint met “{card.answer.slice(0, 1)}”</div>

@@ -71,6 +71,8 @@ export type Card =
       kind: "typed";
       id: string;
       prompt: string;
+      /** Optionele gedempte koptekst boven de prompt (bv. "Welk begrip past bij deze omschrijving?"). */
+      subtitel?: string;
       accepted: string[];
       norm: NormalisatieProfiel;
       answer: string;
@@ -169,16 +171,16 @@ function typedFlashcard(k: FlashcardBestand["kaarten"][number], norm: Normalisat
   if (k.modus === "kaart") {
     return { kind: "flip", id: k.id, front: k.vraag, back: k.antwoord, image: resolveImage(k.afbeelding) };
   }
-  // Begrippen tonen anders alleen de definitie (uitleg). Maak er een vráág van:
-  // als de tekst nog geen vraag is, vraag expliciet naar het begrip. Topografie en
-  // al-vraag-geformuleerde items (eindigen op "?") blijven ongemoeid.
-  const isTopo = (k.onderdeel ?? "").toLowerCase().startsWith("topografie");
-  const isVraag = k.vraag.trim().endsWith("?");
-  const prompt = isTopo || isVraag ? k.vraag : `Welk begrip wordt hier beschreven?\n${k.vraag}`;
+  // Omschrijvingskaarten tonen anders alleen de definitie als stelling. Die krijgen
+  // een gedempte subtitel ("Welk begrip past bij deze omschrijving?") boven de prompt.
+  // Al-vraag-geformuleerde kaarten (bevatten ergens een "?" — bv. jaartal/feit-vragen
+  // met een staartje als "(tijdbalk)") blijven kaal: de vraag spreekt voor zich.
+  const isVraag = k.vraag.includes("?");
   return {
     kind: "typed",
     id: k.id,
-    prompt,
+    prompt: k.vraag,
+    subtitel: isVraag ? undefined : "Welk begrip past bij deze omschrijving?",
     accepted: [k.antwoord, ...(k.acceptedAnswers ?? [])],
     norm: k.normalisatie ?? norm,
     answer: k.antwoord,
