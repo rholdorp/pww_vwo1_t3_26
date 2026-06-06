@@ -28,10 +28,11 @@ pww:
 # Een vak is pas `compleet` (en wordt pas als vertrouwd in de app getoond) als ELK
 # scope-item alle drie de vinkjes heeft: gefotografeerd + geextraheerd + gevalideerd.
 # De scope-lijst (welke stof toetsbaar is) komt van Stijn/docent.
-# >>> frans/geschiedenis/nederlands: scope vastgelegd uit officiële docentinfo
-#     (PWW-detailschermen). wiskunde: scope vastgelegd uit foto-inventory
-#     (raw/wiskunde/inventory.md, H8+H9 compleet).
-#     Nog open: engels, aardrijkskunde + screenshots maken — sessie met Stijn do 2026-06-04. <<<
+# >>> frans/geschiedenis/nederlands/aardrijkskunde: scope vastgelegd uit officiële
+#     docentinfo (PWW-detailschermen). wiskunde: scope vastgelegd uit foto-inventory
+#     (raw/wiskunde/inventory.md, H8+H9 compleet). aardrijkskunde: foto's binnen
+#     (H6 §1-3, H5 §5.2, topo 5.2), nog te extraheren.
+#     Nog open: engels (geen scope/screenshots) — sessie met Stijn do 2026-06-04. <<<
 # LET OP frans: vocabulaire = Chapitre 6, maar onze screenshots/vocab.json zijn
 # Chapitre 5 (off-scope) — ch6-screenshots nog nodig.
 
