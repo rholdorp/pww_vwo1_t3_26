@@ -37,6 +37,7 @@ import {
   bewaarDagschema,
 } from "./progress";
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, type BlokStatusKind } from "./planner";
+import { logResultaat, mijlpaalStand, streakDagen, MIJLPALEN } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
 
 type Tab = "vandaag" | "kalender" | "oefenen" | "voortgang";
@@ -267,8 +268,22 @@ function Trainer({
 
   const totaal = order.length;
   const currentId = currentItem(state);
+  const sessieKlaar = isComplete(state) || currentId === null;
 
-  if (isComplete(state) || currentId === null) {
+  // Append-only resultaat-log (SPEC §8) wanneer de sessie af is.
+  useEffect(() => {
+    if (!sessieKlaar) return;
+    const st = blokStatus(naam, blok);
+    logResultaat(naam, {
+      blokId: blok.id,
+      vak: blok.vak,
+      soort: blok.soort,
+      mastery: st.mastery,
+      afgevinkt: st.status === "afgevinkt",
+    });
+  }, [sessieKlaar, naam, blok]);
+
+  if (sessieKlaar) {
     const m = Math.round(blokMastery(naam, blok.ids) * 100);
     return (
       <main className="lijst center">
@@ -645,7 +660,16 @@ function SchrijfTrainer({
         setFeedback(data.feedback ?? "");
       } else {
         setScore(data as ScoreResultaat);
-        if (typeof data.score === "number") zetScore(naam, opdracht.id, data.score);
+        if (typeof data.score === "number") {
+          zetScore(naam, opdracht.id, data.score);
+          logResultaat(naam, {
+            blokId: `nederlands/schrijven/${opdracht.id}`,
+            vak: "nederlands",
+            soort: "schrijven",
+            mastery: data.score / 10,
+            afgevinkt: data.score / 10 >= 0.7,
+          });
+        }
       }
     } catch {
       setFout("Kon de feedback-server niet bereiken.");
@@ -758,6 +782,33 @@ function SchrijfTrainer({
 
 const STATUS_ICON: Record<BlokStatusKind, string> = { open: "○", deels: "◐", afgevinkt: "✓" };
 
+function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar: number; totaal: number }) {
+  const stand = useMemo(() => mijlpaalStand(naam), [naam, klaar]);
+  const streak = useMemo(() => streakDagen(naam), [naam, klaar]);
+  const dagDoel = totaal > 0 && klaar === totaal;
+  return (
+    <div className="card widget">
+      <div className="widget-rij">
+        <span className="widget-streak" title="dagen-streak">🔥 {streak}</span>
+        <span className="widget-punten">{stand.punten} pt</span>
+        <span className="muted klein">Vandaag {klaar}/{totaal} {dagDoel ? "🎉" : "✓"}</span>
+      </div>
+      {stand.volgende ? (
+        <>
+          <div className="balk dun">
+            <div className="balk-vuller" style={{ width: `${Math.round(stand.fractie * 100)}%` }} />
+          </div>
+          <div className="muted klein">
+            Volgende mijlpaal: <b>{stand.volgende.naam}</b> — nog {stand.restant} pt
+          </div>
+        </>
+      ) : (
+        <div className="muted klein">🏆 Hoogste mijlpaal ({stand.huidige?.naam}) bereikt!</div>
+      )}
+    </div>
+  );
+}
+
 function Vandaag({
   naam,
   onStart,
@@ -791,6 +842,7 @@ function Vandaag({
 
   return (
     <main className="lijst">
+      <ProgressWidget naam={naam} klaar={klaar} totaal={items.length} />
       <div className="card vandaag-kop">
         <div className="vandaag-datum">{datumLabel}</div>
         <div className="vandaag-tel">{klaar}/{items.length} ✓</div>
@@ -856,9 +908,27 @@ function Vandaag({
 function Voortgang({ naam }: { naam: string }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const datum = vandaagISO();
+  const stand = mijlpaalStand(naam);
   return (
     <main className="lijst">
       <h1>Voortgang</h1>
+
+      <div className="card">
+        <div className="card-titel">Mijlpalen · {stand.punten} pt</div>
+        <div className="mijlpalen">
+          {MIJLPALEN.map((m) => {
+            const behaald = stand.punten >= m.drempel;
+            return (
+              <div key={m.naam} className={`mijlpaal-rij ${behaald ? "behaald" : ""}`}>
+                <span className="mijlpaal-naam">{behaald ? "🏅" : "🔒"} {m.naam} <span className="muted klein">{m.drempel} pt</span></span>
+                <span className="muted klein">{m.beloning}</span>
+              </div>
+            );
+          })}
+        </div>
+        <p className="muted klein">🔥 {streakDagen(naam)} dagen-streak. Beloningen instellen kan later (ouder).</p>
+      </div>
+
       {groepen.map((g) => {
         const kleur = vakKleur(g.vak);
         const blokken = g.hoofdstukken.flatMap((h) => h.blokken);

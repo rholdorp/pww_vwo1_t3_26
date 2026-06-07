@@ -236,6 +236,17 @@ circle.region.target { fill: rgba(245,158,11,0.92); stroke: #f59e0b; stroke-widt
   fill: #fde68a !important; stroke: #f59e0b !important; stroke-width: 2.6 !important;
 }
 
+/* Progress-widget + mijlpalen (gamification) */
+.widget { background: rgba(99,102,241,0.10); border-color: rgba(99,102,241,0.30); }
+.widget-rij { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+.widget-streak { font-size: 18px; font-weight: 800; }
+.widget-punten { font-size: 20px; font-weight: 900; color: var(--primair); }
+.widget-rij .muted { margin-left: auto; }
+.mijlpalen { display: flex; flex-direction: column; gap: 4px; margin: 8px 0; }
+.mijlpaal-rij { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; opacity: .55; }
+.mijlpaal-rij.behaald { opacity: 1; }
+.mijlpaal-naam { font-weight: 700; }
+
 /* Kalender (maand-grid) */
 .kal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
 .kal-kop { margin-bottom: 2px; }

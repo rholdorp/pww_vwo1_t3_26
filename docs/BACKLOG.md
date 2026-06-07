@@ -41,16 +41,23 @@ _Laatst bijgewerkt: 2026-06-07_
   oude `planVandaag` (kan later op de engine's "vandaag" gezet worden).
 
 ## UI / schermen (§7, §10)
-- ✅ Vandaag (default) + Voortgang + NaamPoort + mobile-first.
-- 🟡 Nav = Vandaag/Oefenen/Voortgang; **"Instellingen"-tab ontbreekt** (rooster/
-  voorkeuren/beloningen).
-- ❌ Mini-progress-widget (streak/punten/mijlpaal), timer-balkje, afronding-modal,
-  sparkline, "toon alleen rood"-filter, accent-helper-rij.
+- ✅ Vandaag (default) + Kalender + Voortgang + NaamPoort + mobile-first.
+- ✅ **Mini-progress-widget** (🔥 streak / punten / volgende mijlpaal + balk / vandaag X/Y) op Vandaag.
+- 🟡 Nav = Vandaag/Kalender/Oefenen/Voortgang; **"Instellingen"-tab ontbreekt** (rooster/
+  voorkeuren/beloningen-config).
+- ❌ Timer-balkje, afronding-modal, sparkline, "toon alleen rood"-filter, accent-helper-rij,
+  confetti-burst bij dagdoel.
 - 🟡 Geen Tailwind/shadcn — eigen CSS.
 
-## Gamification (§8) — bewust fase-2
-- 🟡 Afvink-criterium per blok (mastery-drempels per soort); coverage-criterium niet echt.
-- ❌ `blok-resultaten.jsonl` append-only log; punten/streaks/mijlpalen/ouder-beloningen.
+## Gamification (§8)
+- ✅ **Append-only resultaten-log** (`gamification.ts`, SPEC §8 bron-van-waarheid) — trainers
+  loggen elk afgerond blok.
+- ✅ **Punten/streaks/mijlpalen** als pure afgeleide view: blok ✓ 10/15, deels 2, vak-klaar
+  +75, dagdoel +15, weekstreak +50 (anti-grinding: hoogste per blok). Mijlpalen Brons/Zilver/
+  Goud/Platina (100/300/600/1000) met standaard-beloningen, getoond in Voortgang + widget.
+- 🟡 Afvink-criterium per blok = mastery-drempels (coverage-criterium niet apart).
+- ❌ **Ouder-configureerbare beloningen** (nu standaard-tekst, niet bewerkbaar) — later, met de
+  Instellingen-tab.
 
 ## Multi-user & data (§9, §11)
 - ❌ **Firestore cross-device sync** — nu localStorage; zelfde naam ≠ zelfde voortgang

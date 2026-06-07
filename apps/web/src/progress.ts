@@ -157,6 +157,17 @@ export function bewaarDagschema(naam: string, datum: string, blokken: GeplandBlo
   localStorage.setItem(dagschemaKey(naam, datum), JSON.stringify(blokken));
 }
 
+/** Alle datums waarvoor een dagschema is bevroren (voor de dagdoel-bonus). */
+export function dagschemaDatums(naam: string): string[] {
+  const prefix = `pww-schema:${slug(naam)}:`;
+  const out: string[] = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith(prefix)) out.push(k.slice(prefix.length));
+  }
+  return out;
+}
+
 export function huidigeNaam(): string | null {
   return localStorage.getItem("pww-naam");
 }
