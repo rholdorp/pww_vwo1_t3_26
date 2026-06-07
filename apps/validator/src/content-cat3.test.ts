@@ -35,7 +35,9 @@ function laad<T>(vak: string, bestand: string): T {
 for (const vak of CAT3_VAKKEN) {
   const flashcards = laad<FlashcardBestand>(vak, "flashcards.json");
   const oefenvragen = laad<OefenvraagBestand>(vak, "oefenvragen.json");
-  const idRe = new RegExp(`^${vak}-h\\d`);
+  // Ids zijn vak-namespaced; het oude `-h\d`-patroon klopt niet meer sinds we ook
+  // vaardigheid-/thema-gebaseerde ids hebben (bv. geschiedenis-vaard-…, biologie-t4-…).
+  const idRe = new RegExp(`^${vak}-\\S`);
 
   describe(`${vak} flashcards.json`, () => {
     it("heeft een geldig bestand-niveau normalisatieprofiel + juiste vak", () => {

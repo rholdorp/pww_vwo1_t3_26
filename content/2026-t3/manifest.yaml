@@ -266,13 +266,64 @@ vakken:
     primaire_categorie: 3
     secundaire_categorie: 1
     moeilijkheid: 1
-    methode: TBD
+    methode: "Biologie voor jou"
+    # Toetsscope (PWW di 30-06): Thema 4 "Stevigheid en beweging" basisstof 1-5 +
+    # Leren onderzoeken 1 en 2; Thema 6 "Voortplanting bij planten en dieren"
+    # basisstof 1-4. AUDIT 2026-06-07: 74 foto's binnen; geëxtraheerd via 8
+    # parallelle vision-agents naar trainers/biologie/flashcards.json (111 kaarten,
+    # begrippen + leerdoel-feiten per basisstof). gevalideerd blijft false
+    # (validator-grounding nog niet gewired). Leren onderzoeken 3 (werkplan) is óók
+    # gefotografeerd maar buiten Stijns scope ("1 en 2") gelaten.
     scope:
-      # geseed uit huidige screenshots — bevestigen + aanvullen do 2026-06-04
-      - id: h1-skelet
-        bron: "Hoofdstuk 1 — Het skelet"
+      - id: t4-b1-skelet
+        bron: "Thema 4 §1 Het skelet (leerdoelen 4.1.1-3)"
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
+        gevalideerd: false
+      - id: t4-b2-bouw-botten
+        bron: "Thema 4 §2 De bouw van botten (4.2.4-5)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t4-b3-beenverbindingen
+        bron: "Thema 4 §3 Beenverbindingen (4.3.6-8)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t4-b4-spieren
+        bron: "Thema 4 §4 Spieren (4.4.x)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t4-b5-wervelkolom
+        bron: "Thema 4 §5 De wervelkolom (4.5.11)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t4-leren-onderzoeken-1-2
+        bron: "Thema 4 Leren onderzoeken 1 (nauwkeurig meten, 4.0.16) + 2 (tabellen/grafieken, 4.0.17/18)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t6-b1-bloemen
+        bron: "Thema 6 §1 Bloemen (6.1.1)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t6-b2-bestuiving
+        bron: "Thema 6 §2 Bestuiving (6.2.1-4)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t6-b3-bevruchting
+        bron: "Thema 6 §3 Bevruchting (6.3.5-6)"
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: false
+      - id: t6-b4-vruchten-zaden
+        bron: "Thema 6 §4 Vruchten en zaden (6.4.7)"
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
 
   aardrijkskunde:
