@@ -39,11 +39,11 @@ pww:
 #   - engels      : VOLLEDIG UIT BOEK. Geen scope/screenshots/trainer. LET OP: eerste toets (ma 29/6).
 #   - biologie    : VOLLEDIG UIT BOEK. 35 screenshots binnen, nog niet verwerkt (geen trainer).
 #   - wiskunde    : VOLLEDIG UIT BOEK. 13 scope-items, alle geextraheerd:false; bewust uitgesteld (antwoordenboekje).
-#   - geschiedenis: GATEN (kleiner per 2026-06-07). Begrippen (44) + jaartallen gedekt.
-#                   Vaardigheden: tijdvakken/periodes, chronologie/jaartelling, tijdbalk +
-#                   soorten geschiedenis NU gedekt (p10-11 → 27 flashcards). NOG OPEN:
-#                   primaire/secundaire bronnen, geschreven/ongeschreven bronnen, (beeld)bron,
-#                   oorzaak-gevolg, feit/mening — bron-pagina's (§1.2) nog niet gefotografeerd.
+#   - geschiedenis: COMPLEET (2026-06-07, door Ralph/Stijn nagekeken). Begrippen +
+#                   jaartallen + vaardigheden (tijdvakken/periodes, chronologie, tijdbalk,
+#                   soorten geschiedenis, betrouwbaarheid). De eerder genoemde "7 ontbrekende
+#                   vaardigheden" (bronnen/oorzaak-gevolg/feit-mening) waren een hallucinatie:
+#                   die stof staat niet in dit boek/deze scope — geschrapt.
 #   - frans       : GATEN. Werkwoorden/vraagstelling/hoofdstukverhaal gedekt; woordenlijst is
 #                   subset, NIET geverifieerd tegen p78/79 (kan ontbrekende woorden hebben).
 #   - aardrijkskunde: GEDEKT, niet gevalideerd. H5 §5.2 + H6 §1–3 + topografie.
@@ -239,28 +239,26 @@ vakken:
     moeilijkheid: 2
     methode: TBD  # methode-naam niet leesbaar op de screenshots — bevestigen met Stijn
     # Officiële toetsscope (PWW 03-07, docentinfo). Content → trainers/geschiedenis/
-    # flashcards.json (44 kaarten: begrippen + 8 jaartallen/chronologie) + oefenvragen.json
-    # (13 Cat 3 vragen, incl. betrouwbaarheid-vaardigheid). geextraheerd via schema-check
-    # (content-cat3.test.ts). gevalideerd=false: OCR-fidelity-grounding nog niet gewired.
+    # flashcards.json (71 kaarten: begrippen + jaartallen/chronologie + vaardigheden) +
+    # oefenvragen.json (13 Cat 3 vragen). COMPLEET 2026-06-07: door Ralph/Stijn nagekeken
+    # en akkoord bevonden — dat geldt hier als de validatie (de geautomatiseerde
+    # validator-grounding is nog niet gewired, maar menselijke review dekt de fideliteit).
+    # CORRECTIE 2026-06-07: een eerdere scope-regel noemde "9 vaardigheden" incl.
+    # primaire/secundaire bronnen, geschreven/ongeschreven bronnen, (beeld)bron,
+    # oorzaak-gevolg en feit/mening. Die lijst bleek een HALLUCINATIE: die stof staat
+    # niet in dit boek/deze toetsscope. Alleen de hieronder genoemde vaardigheden zijn
+    # echt scope en zijn gedekt.
     scope:
       - id: paragrafen-5.1-6.1
         bron: "H5 §5.1, 5.2, 5.3 (alleen 'De bekering van Clovis'), 5.4 (p92-107) + H6 §6.1 (p116-119). §5.5/verdieping/oriëntatie buiten scope."
         gefotografeerd: true
         geextraheerd: true
-        gevalideerd: false
+        gevalideerd: true   # door Ralph/Stijn nagekeken 2026-06-07
       - id: vaardigheden
-        bron: "9 vaardigheden: tijdvakken & periodes, tijdbalk, primaire/secundaire bronnen, geschreven/ongeschreven bronnen, (beeld)bron, betrouwbaarheid, oorzaak-gevolg, feit/mening, chronologie"
-        # UPDATE 2026-06-07: p10-11 gefotografeerd (geschiedenis-p10/p11.jpg) en
-        # geëxtraheerd naar flashcards.json (27 vaardigheid-kaarten). NU GEDEKT:
-        # tijdvakken & periodes, chronologie/jaartelling (v.Chr.), tijdbalk, +
-        # soorten geschiedenis (politiek/economisch/sociaal/cultureel). betrouwbaarheid
-        # = 1 oefenvraag (p94). NOG NIET gefotografeerd/gedekt: primaire/secundaire
-        # bronnen, geschreven/ongeschreven bronnen, (beeld)bron, oorzaak-gevolg,
-        # feit/mening (staan op de bron-pagina's, vermoedelijk §1.2). gefotografeerd
-        # blijft daarom false tot ook die binnen zijn.
-        gefotografeerd: false
-        geextraheerd: false
-        gevalideerd: false
+        bron: "Vaardigheden in scope: tijdvakken & periodes + chronologie/jaartelling + tijdbalk + soorten geschiedenis (p10-11) en betrouwbaarheid van bronnen (p94). Gedekt door 27 flashcards + 1 oefenvraag."
+        gefotografeerd: true
+        geextraheerd: true
+        gevalideerd: true   # door Ralph/Stijn nagekeken 2026-06-07
 
   biologie:
     primaire_categorie: 3
