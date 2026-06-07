@@ -1,0 +1,271 @@
+{
+  "vak": "biologie",
+  "diagrammen": [
+    {
+      "id": "biologie-skelet",
+      "titel": "Het skelet",
+      "hoofdstuk": "4",
+      "normalisatie": "begrip",
+      "benoemVraag": "Welk bot is dit?",
+      "svg": "assets/biologie/skelet.svg",
+      "regios": [
+        {
+          "id": "r-voorhoofdsbeen",
+          "naam": "Voorhoofdsbeen",
+          "hint": "Boven aan de schedel."
+        },
+        {
+          "id": "r-wandbeen",
+          "naam": "Wandbeen",
+          "hint": "Zijkant van de schedel."
+        },
+        {
+          "id": "r-schedel",
+          "naam": "Schedel",
+          "acceptedAnswers": [
+            "schedelbeenderen"
+          ],
+          "hint": "Het ronde deel rond de ogen."
+        },
+        {
+          "id": "r-bovenkaak",
+          "naam": "Bovenkaak",
+          "hint": "Het vaste kaakbot."
+        },
+        {
+          "id": "r-onderkaak",
+          "naam": "Onderkaak",
+          "hint": "Het beweegbare kaakbot."
+        },
+        {
+          "id": "r-halswervels",
+          "naam": "Halswervels",
+          "hint": "Bovenste deel van de wervelkolom."
+        },
+        {
+          "id": "r-sleutelbeen",
+          "naam": "Sleutelbeen",
+          "hint": "Deel van de schoudergordel, vooraan."
+        },
+        {
+          "id": "r-schouderblad",
+          "naam": "Schouderblad",
+          "hint": "Plat bot achter de schouder."
+        },
+        {
+          "id": "r-borstbeen",
+          "naam": "Borstbeen",
+          "hint": "Plat bot midden in de borstkas."
+        },
+        {
+          "id": "r-ribben",
+          "naam": "Ribben",
+          "acceptedAnswers": [
+            "rib"
+          ]
+        },
+        {
+          "id": "r-wervelkolom",
+          "naam": "Wervelkolom",
+          "acceptedAnswers": [
+            "ruggengraat",
+            "lendenwervels"
+          ],
+          "hint": "De wervels onder de ribben."
+        },
+        {
+          "id": "r-opperarmbeen",
+          "naam": "Opperarmbeen",
+          "hint": "Het bovenarmbot."
+        },
+        {
+          "id": "r-spaakbeen",
+          "naam": "Spaakbeen",
+          "hint": "Onderarm, duim-kant."
+        },
+        {
+          "id": "r-ellepijp",
+          "naam": "Ellepijp",
+          "hint": "Onderarm, pink-kant."
+        },
+        {
+          "id": "r-handwortel",
+          "naam": "Handwortelbeentjes",
+          "acceptedAnswers": [
+            "handwortel"
+          ],
+          "hint": "Acht kleine botjes in de pols."
+        },
+        {
+          "id": "r-middenhand",
+          "naam": "Middenhandsbeentjes",
+          "acceptedAnswers": [
+            "middenhand"
+          ],
+          "hint": "Tussen pols en vingers."
+        },
+        {
+          "id": "r-vingerkootjes",
+          "naam": "Vingerkootjes",
+          "acceptedAnswers": [
+            "vingerkoot"
+          ],
+          "hint": "De botjes van de vingers."
+        },
+        {
+          "id": "r-bekkengordel",
+          "naam": "Bekkengordel",
+          "acceptedAnswers": [
+            "bekken"
+          ]
+        },
+        {
+          "id": "r-dijbeen",
+          "naam": "Dijbeen",
+          "hint": "Het langste bot, bovenbeen."
+        },
+        {
+          "id": "r-kniebeen",
+          "naam": "Kniebeen",
+          "acceptedAnswers": [
+            "knieschijf"
+          ]
+        },
+        {
+          "id": "r-scheenbeen",
+          "naam": "Scheenbeen",
+          "hint": "Het dikke onderbeenbot, binnenkant."
+        },
+        {
+          "id": "r-kuitbeen",
+          "naam": "Kuitbeen",
+          "hint": "Het dunne onderbeenbot, buitenkant."
+        },
+        {
+          "id": "r-voetwortel",
+          "naam": "Voetwortelbeentjes",
+          "acceptedAnswers": [
+            "voetwortel"
+          ],
+          "hint": "De wreef."
+        },
+        {
+          "id": "r-middenvoet",
+          "naam": "Middenvoetsbeentjes",
+          "acceptedAnswers": [
+            "middenvoet"
+          ],
+          "hint": "Tussen wreef en tenen."
+        },
+        {
+          "id": "r-teenkootjes",
+          "naam": "Teenkootjes",
+          "acceptedAnswers": [
+            "teenkoot"
+          ],
+          "hint": "De botjes van de tenen."
+        }
+      ]
+    },
+    {
+      "id": "biologie-spieren",
+      "titel": "De spieren",
+      "hoofdstuk": "4",
+      "normalisatie": "begrip",
+      "benoemVraag": "Welke spier is dit?",
+      "svg": "assets/biologie/spieren.svg",
+      "regios": [
+        {
+          "id": "m-biceps",
+          "naam": "Biceps",
+          "acceptedAnswers": [
+            "armbuigspier"
+          ],
+          "hint": "Voorkant bovenarm."
+        },
+        {
+          "id": "m-triceps",
+          "naam": "Triceps",
+          "acceptedAnswers": [
+            "armstrekspier"
+          ],
+          "hint": "Achterkant bovenarm."
+        },
+        {
+          "id": "m-kuitspier",
+          "naam": "Kuitspier",
+          "hint": "Achterkant onderbeen."
+        },
+        {
+          "id": "m-scheenbeenspier",
+          "naam": "Scheenbeenspier",
+          "acceptedAnswers": [
+            "scheenspier"
+          ],
+          "hint": "Voorkant onderbeen."
+        },
+        {
+          "id": "m-dijbeenspier",
+          "naam": "Voorste dijbeenspier",
+          "acceptedAnswers": [
+            "dijbeenspier",
+            "quadriceps"
+          ],
+          "hint": "Voorkant bovenbeen."
+        },
+        {
+          "id": "m-achterste-dijbeenspier",
+          "naam": "Achterste dijbeenspier",
+          "acceptedAnswers": [
+            "hamstring"
+          ],
+          "hint": "Achterkant bovenbeen."
+        },
+        {
+          "id": "m-borstspier",
+          "naam": "Borstspier"
+        },
+        {
+          "id": "m-buikspieren",
+          "naam": "Buikspieren",
+          "acceptedAnswers": [
+            "buikspier"
+          ]
+        },
+        {
+          "id": "m-rugspieren",
+          "naam": "Rugspieren",
+          "acceptedAnswers": [
+            "rugspier"
+          ],
+          "hint": "Onderrug."
+        },
+        {
+          "id": "m-bilspier",
+          "naam": "Bilspier"
+        },
+        {
+          "id": "m-monnikskap",
+          "naam": "Monnikskapspier",
+          "acceptedAnswers": [
+            "monnikskap"
+          ],
+          "hint": "Nek en bovenrug."
+        },
+        {
+          "id": "m-tussenribspieren",
+          "naam": "Tussenribspieren",
+          "acceptedAnswers": [
+            "tussenribspier"
+          ],
+          "hint": "Tussen de ribben."
+        },
+        {
+          "id": "m-achillespees",
+          "naam": "Achillespees",
+          "hint": "Onder de kuitspier, naar de hiel."
+        }
+      ]
+    }
+  ]
+}

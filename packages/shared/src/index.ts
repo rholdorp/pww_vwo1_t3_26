@@ -10,6 +10,10 @@ export type {
   SchrijfStap,
   Schrijfopdracht,
   SchrijfopdrachtBestand,
+  DiagramRegio,
+  DiagramMarker,
+  Diagram,
+  DiagramBestand,
 } from "./content.js";
 
 export type {

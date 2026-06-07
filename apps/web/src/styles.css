@@ -215,6 +215,27 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
 .status-icoon.deels { color: var(--bijna); }
 .status-icoon.open { color: var(--muted); }
 
+/* Hotspot-diagrammen (gelabelde afbeeldingen) */
+.hotspot { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.hotspot-prompt { font-size: 20px; }
+.hotspot .tekstveld { max-width: 420px; }
+.diagram-svg { width: 100%; max-width: 440px; }
+.diagram-svg svg, .anat-svg { width: 100%; height: auto; max-height: 58vh; display: block; }
+.diagram-overlay { position: relative; display: inline-block; max-width: 100%; line-height: 0; }
+.diagram-overlay img { width: 100%; height: auto; max-height: 58vh; display: block; border-radius: 10px; }
+.diagram-overlay > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* overlay-cirkels (topografie) */
+circle.region { fill: rgba(99,102,241,0.45); stroke: #ffffff; stroke-width: 0.6; cursor: pointer; transition: fill .12s; }
+circle.region:hover { fill: rgba(99,102,241,0.78); }
+circle.region.correct { fill: rgba(34,197,94,0.88); stroke: #16a34a; }
+circle.region.wrong { fill: rgba(239,68,68,0.88); stroke: #dc2626; }
+circle.region.hint { fill: rgba(37,99,235,0.9); stroke: #2563eb; }
+circle.region.target { fill: rgba(245,158,11,0.92); stroke: #f59e0b; stroke-width: 1; }
+/* benoem-highlight op shaped SVG (botten/spieren) */
+.region.target .bone, .region.target .muscle, .region.target .pees {
+  fill: #fde68a !important; stroke: #f59e0b !important; stroke-width: 2.6 !important;
+}
+
 /* Voortgang */
 .voortgang-blokken { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
 .voortgang-rij { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }

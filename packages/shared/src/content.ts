@@ -134,6 +134,66 @@ export interface OefenvraagBestand {
   vragen: Oefenvraag[];
 }
 
+// ── Gelabelde diagrammen / hotspots (Cat 1 met beeld-prompt — SPEC §4/§5) ────
+// Een diagram draait op de Cat 1-leerlogica (typen/Leitner/normalisatie), maar de
+// "plek" is een region op een afbeelding. Twee bron-types, beide leveren
+// `.region`-elementen met een `data-region`:
+//   - shaped SVG: vormen met data-region (bv. biologie skelet/spieren).
+//   - afbeelding + cirkel-overlay: een PNG als achtergrond + markers per region (topo).
+// Twee richtingen: "benoem" (region licht op → typ de naam) en "aanwijs" (naam → klik region).
+// NB: we gebruiken bewust SVG data-region + %-markers i.p.v. de pixel-`coords` uit
+// het SPEC §4-voorbeeld — schoner en schaalbaar (zie docs/BACKLOG.md).
+
+/** Eén benoembare/aanwijsbare region van een diagram. */
+export interface DiagramRegio {
+  /** Matcht het `data-region`-attribuut in de SVG (shaped) of een marker-id (overlay). */
+  id: string;
+  /** Het te kennen antwoord (bv. "scheenbeen", "Vietnam"). */
+  naam: string;
+  /** Extra geaccepteerde vormen van de naam (synoniemen, met/zonder lidwoord). */
+  acceptedAnswers?: string[];
+  /** Optionele hint (positie-omschrijving) bij de aanwijs-richting. */
+  hint?: string;
+}
+
+/** Cirkel-overlay-positie (%) van een region op een achtergrondafbeelding. */
+export interface DiagramMarker {
+  /** Matcht een DiagramRegio.id. */
+  id: string;
+  /** Horizontale positie 0–100 (% van de afbeeldingsbreedte). */
+  x: number;
+  /** Verticale positie 0–100 (% van de afbeeldingshoogte). */
+  y: number;
+}
+
+/** Eén diagram. */
+export interface Diagram {
+  /** Stabiele id, bv. "biologie-skelet". */
+  id: string;
+  /** Titel boven het diagram, bv. "Het skelet". */
+  titel: string;
+  hoofdstuk?: string;
+  /** Normalisatie voor de benoem-richting (default "begrip"). */
+  normalisatie?: NormalisatieProfiel;
+  /** Vraagtekst voor de benoem-richting (default "Welk onderdeel is dit?"). */
+  benoemVraag?: string;
+  /** Welke richtingen geoefend worden (default: beide). */
+  richtingen?: ("benoem" | "aanwijs")[];
+  /** Pad naar een shaped SVG met `data-region` per region (relatief t.o.v. editie-root). */
+  svg?: string;
+  /** Pad naar een achtergrondafbeelding (overlay-modus; relatief t.o.v. editie-root). */
+  afbeelding?: string;
+  /** Bij `afbeelding`: cirkel-positie per region. */
+  markers?: DiagramMarker[];
+  regios: DiagramRegio[];
+}
+
+/** Bestand content/<editie>/trainers/<vak>/diagram.json. */
+export interface DiagramBestand {
+  vak: string;
+  diagrammen: Diagram[];
+}
+
 // ── Cat 4 (Nederlands / Engels — productieve schrijfvaardigheid) ─────────────
 // Een schrijfopdracht: lees een tekstfragment, schrijf (informele) brief, krijg
 // LLM-feedback, herzie één keer, krijg dan een score + verbeterpunten (SPEC §5 Cat 4).

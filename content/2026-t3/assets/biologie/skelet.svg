@@ -1,0 +1,313 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 620" class="anat-svg" aria-label="Skelet — voor- en zijaanzicht">
+  <defs>
+    <style>
+      .body-bg { fill:#fef3f2; stroke:#fbcfe8; stroke-width:1; }
+      .bone    { fill:#f8fafc; stroke:#475569; stroke-width:1.3; }
+      .feature { fill:#475569; }
+      .label   { font: 600 9px sans-serif; fill:#475569; text-anchor:middle; pointer-events:none; }
+      .heading { font: 700 12px sans-serif; fill:#0f172a; text-anchor:middle; pointer-events:none; }
+      .region  { cursor:pointer; }
+      .hit     { fill:rgba(0,0,0,0); stroke:none; pointer-events:all; }
+      .region:hover .bone      { fill:#fef9c3; }
+      .region:hover .hit       { fill:rgba(254,240,138,0.25); }
+      .region.correct .bone    { fill:#bbf7d0; stroke:#16a34a; stroke-width:2; }
+      .region.wrong   .bone    { fill:#fecaca; stroke:#dc2626; stroke-width:2; }
+      .region.hint    .bone    { fill:#bfdbfe; stroke:#2563eb; stroke-width:2; }
+      .region.correct .hit, .region.wrong .hit, .region.hint .hit { fill:rgba(0,0,0,0); }
+    </style>
+  </defs>
+
+  <!-- ======================= VOORAANZICHT (links) ======================= -->
+  <text class="heading" x="110" y="14">vooraanzicht</text>
+  <g class="silhouette" pointer-events="none">
+    <ellipse class="body-bg" cx="110" cy="50"  rx="40" ry="44"/>
+    <rect    class="body-bg" x="48"  y="92"   width="124" height="160" rx="30"/>
+    <rect    class="body-bg" x="18"  y="108"  width="40"  height="200" rx="18"/>
+    <rect    class="body-bg" x="162" y="108"  width="40"  height="200" rx="18"/>
+    <rect    class="body-bg" x="60"  y="240"  width="44"  height="350" rx="20"/>
+    <rect    class="body-bg" x="116" y="240"  width="44"  height="350" rx="20"/>
+  </g>
+
+  <!-- Schedel-omtrek als referentie (geen region zelf) -->
+  <ellipse class="bone" cx="110" cy="50" rx="34" ry="38" pointer-events="none" opacity="0.0"/>
+
+  <!-- Voorhoofdsbeen -->
+  <g class="region" data-region="r-voorhoofdsbeen">
+    <title>voorhoofdsbeen</title>
+    <rect class="hit" x="74" y="14" width="72" height="22"/>
+    <path class="bone" d="M78,32 Q110,8 142,32 L142,40 Q110,30 78,40 Z"/>
+  </g>
+
+  <!-- Wandbeen (zijkanten/bovenkant boven oren) -->
+  <g class="region" data-region="r-wandbeen">
+    <title>wandbeen</title>
+    <rect class="hit" x="64" y="32" width="22" height="34"/>
+    <rect class="hit" x="134" y="32" width="22" height="34"/>
+    <path class="bone" d="M78,40 Q66,46 70,64 L86,62 L86,40 Z"/>
+    <path class="bone" d="M142,40 Q154,46 150,64 L134,62 L134,40 Z"/>
+  </g>
+
+  <!-- Schedel (achterhoofd / overig schedeldak — midden) -->
+  <g class="region" data-region="r-schedel">
+    <title>schedel (overig schedeldak)</title>
+    <rect class="hit" x="86" y="40" width="48" height="30"/>
+    <path class="bone" d="M86,40 L134,40 L134,68 Q110,72 86,68 Z"/>
+    <circle class="feature" cx="100" cy="58" r="2.5"/>
+    <circle class="feature" cx="120" cy="58" r="2.5"/>
+  </g>
+
+  <!-- Bovenkaak -->
+  <g class="region" data-region="r-bovenkaak">
+    <title>bovenkaak</title>
+    <rect class="hit" x="80" y="66" width="60" height="14"/>
+    <path class="bone" d="M86,70 Q110,80 134,70 L132,80 Q110,84 88,80 Z"/>
+  </g>
+
+  <!-- Onderkaak -->
+  <g class="region" data-region="r-onderkaak">
+    <title>onderkaak</title>
+    <rect class="hit" x="78" y="80" width="64" height="18"/>
+    <path class="bone" d="M82,84 Q110,102 138,84 L134,94 Q110,100 86,94 Z"/>
+  </g>
+
+  <!-- Halswervels -->
+  <g class="region" data-region="r-halswervels">
+    <title>halswervels</title>
+    <rect class="hit" x="96" y="96" width="28" height="20"/>
+    <rect class="bone" x="102" y="98"  width="16" height="6" rx="1.5"/>
+    <rect class="bone" x="102" y="106" width="16" height="6" rx="1.5"/>
+  </g>
+
+  <!-- Sleutelbeen -->
+  <g class="region" data-region="r-sleutelbeen">
+    <title>sleutelbeen</title>
+    <rect class="hit" x="48" y="108" width="56" height="14"/>
+    <rect class="hit" x="116" y="108" width="56" height="14"/>
+    <path class="bone" d="M104,116 Q80,110 54,120 L54,124 Q80,116 104,120 Z"/>
+    <path class="bone" d="M116,116 Q140,110 166,120 L166,124 Q140,116 116,120 Z"/>
+  </g>
+
+  <!-- Borstbeen -->
+  <g class="region" data-region="r-borstbeen">
+    <title>borstbeen</title>
+    <rect class="hit" x="96" y="124" width="28" height="72"/>
+    <rect class="bone" x="100" y="126" width="20" height="64" rx="4"/>
+  </g>
+
+  <!-- Ribben -->
+  <g class="region" data-region="r-ribben">
+    <title>ribben</title>
+    <rect class="hit" x="46" y="132" width="50" height="80"/>
+    <rect class="hit" x="124" y="132" width="50" height="80"/>
+    <path class="bone" d="M98,134 Q72,140 50,156 L50,162 Q72,146 98,140 Z"/>
+    <path class="bone" d="M98,152 Q68,160 46,176 L46,182 Q68,166 98,158 Z"/>
+    <path class="bone" d="M98,170 Q68,178 48,194 L48,200 Q68,184 98,176 Z"/>
+    <path class="bone" d="M98,188 Q72,196 56,210 L56,216 Q72,202 98,194 Z"/>
+    <path class="bone" d="M122,134 Q148,140 170,156 L170,162 Q148,146 122,140 Z"/>
+    <path class="bone" d="M122,152 Q152,160 174,176 L174,182 Q152,166 122,158 Z"/>
+    <path class="bone" d="M122,170 Q152,178 172,194 L172,200 Q152,184 122,176 Z"/>
+    <path class="bone" d="M122,188 Q148,196 164,210 L164,216 Q148,202 122,194 Z"/>
+  </g>
+
+  <!-- Wervelkolom (lendenwervels) -->
+  <g class="region" data-region="r-wervelkolom">
+    <title>wervelkolom</title>
+    <rect class="hit" x="96" y="190" width="28" height="58"/>
+    <rect class="bone" x="102" y="194" width="16" height="10" rx="1.5"/>
+    <rect class="bone" x="102" y="206" width="16" height="10" rx="1.5"/>
+    <rect class="bone" x="102" y="218" width="16" height="10" rx="1.5"/>
+    <rect class="bone" x="102" y="230" width="16" height="10" rx="1.5"/>
+  </g>
+
+  <!-- Opperarmbeen -->
+  <g class="region" data-region="r-opperarmbeen">
+    <title>opperarmbeen</title>
+    <rect class="hit" x="24" y="120" width="36" height="92"/>
+    <rect class="hit" x="160" y="120" width="36" height="92"/>
+    <rect class="bone" x="30"  y="124" width="20" height="92" rx="8"/>
+    <rect class="bone" x="170" y="124" width="20" height="92" rx="8"/>
+  </g>
+
+  <!-- Spaakbeen (DUIM-kant: lateraal — buitenkant arm; bij vooraanzicht aan de buitenkant) -->
+  <g class="region" data-region="r-spaakbeen">
+    <title>spaakbeen (duimzijde)</title>
+    <rect class="hit" x="20" y="218" width="20" height="80"/>
+    <rect class="hit" x="180" y="218" width="20" height="80"/>
+    <rect class="bone" x="24" y="222" width="12" height="78" rx="4"/>
+    <rect class="bone" x="184" y="222" width="12" height="78" rx="4"/>
+    <text class="label" x="30"  y="262" transform="rotate(-90 30 262)">spaak</text>
+    <text class="label" x="190" y="262" transform="rotate(-90 190 262)">spaak</text>
+  </g>
+
+  <!-- Ellepijp (PINK-kant: mediaal — binnenkant arm) -->
+  <g class="region" data-region="r-ellepijp">
+    <title>ellepijp (pinkzijde)</title>
+    <rect class="hit" x="40" y="218" width="20" height="80"/>
+    <rect class="hit" x="160" y="218" width="20" height="80"/>
+    <rect class="bone" x="44" y="222" width="12" height="78" rx="4"/>
+    <rect class="bone" x="164" y="222" width="12" height="78" rx="4"/>
+    <text class="label" x="50"  y="262" transform="rotate(-90 50 262)">elle</text>
+    <text class="label" x="170" y="262" transform="rotate(-90 170 262)">elle</text>
+  </g>
+
+  <!-- Handwortel (pols) -->
+  <g class="region" data-region="r-handwortel">
+    <title>handwortelbeentjes</title>
+    <rect class="hit" x="14" y="298" width="50" height="22"/>
+    <rect class="hit" x="156" y="298" width="50" height="22"/>
+    <ellipse class="bone" cx="38"  cy="308" rx="22" ry="10"/>
+    <ellipse class="bone" cx="182" cy="308" rx="22" ry="10"/>
+  </g>
+
+  <!-- Middenhandsbeentjes -->
+  <g class="region" data-region="r-middenhand">
+    <title>middenhandsbeentjes</title>
+    <rect class="hit" x="14" y="320" width="50" height="22"/>
+    <rect class="hit" x="156" y="320" width="50" height="22"/>
+    <rect class="bone" x="18" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="28" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="38" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="48" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="58" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="162" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="172" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="182" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="192" y="324" width="6" height="18" rx="2"/>
+    <rect class="bone" x="152" y="324" width="6" height="18" rx="2"/>
+  </g>
+
+  <!-- Vingerkootjes -->
+  <g class="region" data-region="r-vingerkootjes">
+    <title>vingerkootjes</title>
+    <rect class="hit" x="14" y="342" width="50" height="28"/>
+    <rect class="hit" x="156" y="342" width="50" height="28"/>
+    <rect class="bone" x="18" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="28" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="38" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="48" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="58" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="18" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="28" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="38" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="48" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="58" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="152" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="162" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="172" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="182" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="192" y="346" width="6" height="10" rx="2"/>
+    <rect class="bone" x="152" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="162" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="172" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="182" y="358" width="6" height="8" rx="2"/>
+    <rect class="bone" x="192" y="358" width="6" height="8" rx="2"/>
+  </g>
+
+  <!-- Bekken -->
+  <g class="region" data-region="r-bekkengordel">
+    <title>bekkengordel</title>
+    <rect class="hit" x="60" y="244" width="100" height="68"/>
+    <path class="bone" d="M68,248 L152,248 Q170,284 148,312 L72,312 Q50,284 68,248 Z"/>
+  </g>
+
+  <!-- Dijbeen -->
+  <g class="region" data-region="r-dijbeen">
+    <title>dijbeen</title>
+    <rect class="hit" x="62" y="312" width="46" height="130"/>
+    <rect class="hit" x="116" y="312" width="46" height="130"/>
+    <rect class="bone" x="70" y="316" width="28" height="124" rx="10"/>
+    <rect class="bone" x="124" y="316" width="28" height="124" rx="10"/>
+  </g>
+
+  <!-- Kniebeen -->
+  <g class="region" data-region="r-kniebeen">
+    <title>kniebeen (knieschijf)</title>
+    <rect class="hit" x="68" y="442" width="40" height="26"/>
+    <rect class="hit" x="116" y="442" width="40" height="26"/>
+    <circle class="bone" cx="84"  cy="455" r="12"/>
+    <circle class="feature" cx="84"  cy="455" r="3"/>
+    <circle class="bone" cx="138" cy="455" r="12"/>
+    <circle class="feature" cx="138" cy="455" r="3"/>
+  </g>
+
+  <!-- Scheenbeen -->
+  <g class="region" data-region="r-scheenbeen">
+    <title>scheenbeen</title>
+    <rect class="hit" x="68" y="468" width="26" height="92"/>
+    <rect class="hit" x="128" y="468" width="26" height="92"/>
+    <rect class="bone" x="74" y="472" width="16" height="88" rx="5"/>
+    <rect class="bone" x="132" y="472" width="16" height="88" rx="5"/>
+  </g>
+
+  <!-- Kuitbeen -->
+  <g class="region" data-region="r-kuitbeen">
+    <title>kuitbeen</title>
+    <rect class="hit" x="94" y="468" width="20" height="92"/>
+    <rect class="hit" x="154" y="468" width="20" height="92"/>
+    <rect class="bone" x="98" y="472" width="8" height="88" rx="3"/>
+    <rect class="bone" x="156" y="472" width="8" height="88" rx="3"/>
+  </g>
+
+  <!-- Voetwortelbeentjes -->
+  <g class="region" data-region="r-voetwortel">
+    <title>voetwortelbeentjes (hiel/wreef)</title>
+    <rect class="hit" x="60" y="560" width="56" height="20"/>
+    <rect class="hit" x="120" y="560" width="56" height="20"/>
+    <ellipse class="bone" cx="84"  cy="568" rx="22" ry="8"/>
+    <ellipse class="bone" cx="138" cy="568" rx="22" ry="8"/>
+  </g>
+
+  <!-- Middenvoetsbeentjes -->
+  <g class="region" data-region="r-middenvoet">
+    <title>middenvoetsbeentjes</title>
+    <rect class="hit" x="60" y="580" width="56" height="14"/>
+    <rect class="hit" x="120" y="580" width="56" height="14"/>
+    <rect class="bone" x="64" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="72" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="80" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="88" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="96" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="120" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="128" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="136" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="144" y="582" width="5" height="12" rx="1"/>
+    <rect class="bone" x="152" y="582" width="5" height="12" rx="1"/>
+  </g>
+
+  <!-- Teenkootjes -->
+  <g class="region" data-region="r-teenkootjes">
+    <title>teenkootjes</title>
+    <rect class="hit" x="60" y="594" width="56" height="18"/>
+    <rect class="hit" x="120" y="594" width="56" height="18"/>
+    <rect class="bone" x="64" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="72" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="80" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="88" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="96" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="120" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="128" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="136" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="144" y="596" width="5" height="8" rx="1"/>
+    <rect class="bone" x="152" y="596" width="5" height="8" rx="1"/>
+  </g>
+
+  <!-- ======================= ACHTERAANZICHT (rechts) ======================= -->
+  <text class="heading" x="300" y="14">achteraanzicht (schouder)</text>
+  <g class="silhouette" pointer-events="none" transform="translate(220 0)">
+    <ellipse class="body-bg" cx="80" cy="50"  rx="34" ry="38"/>
+    <rect    class="body-bg" x="32" y="92"   width="96"  height="160" rx="26"/>
+    <rect    class="body-bg" x="6"  y="106"  width="32"  height="120" rx="14"/>
+    <rect    class="body-bg" x="122" y="106" width="32"  height="120" rx="14"/>
+  </g>
+
+  <!-- Schouderblad (achterkant — duidelijk zichtbaar) -->
+  <g class="region" data-region="r-schouderblad">
+    <title>schouderblad</title>
+    <rect class="hit" x="230" y="106" width="50" height="64"/>
+    <rect class="hit" x="300" y="106" width="50" height="64"/>
+    <path class="bone" d="M234,112 L278,108 L274,168 L238,164 Z"/>
+    <path class="bone" d="M304,108 L348,112 L344,164 L308,168 Z"/>
+    <line x1="236" y1="120" x2="276" y2="118" stroke="#475569" stroke-width="1.5"/>
+    <line x1="306" y1="118" x2="346" y2="120" stroke="#475569" stroke-width="1.5"/>
+  </g>
+</svg>

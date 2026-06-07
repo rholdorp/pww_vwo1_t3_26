@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Richting, Uitkomst, Schrijfopdracht } from "@pww/shared";
 import {
   currentItem,
@@ -333,6 +333,8 @@ function Trainer({
             onNakijken={nakijken}
             onVolgende={() => feedback && volgende(feedback.uitkomst)}
           />
+        ) : card.kind === "hotspot" ? (
+          <HotspotKaart key={card.id + card.richting} card={card} kleur={kleur} onResultaat={volgende} />
         ) : (
           <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
         )}
@@ -446,6 +448,126 @@ function FlipKaart({
         </>
       )}
     </>
+  );
+}
+
+function HotspotKaart({
+  card,
+  kleur,
+  onResultaat,
+}: {
+  card: Extract<Card, { kind: "hotspot" }>;
+  kleur: string;
+  onResultaat: (uitkomst: Uitkomst) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [input, setInput] = useState("");
+  const [feedback, setFeedback] = useState<{ uitkomst: Uitkomst; msg: string } | null>(null);
+  const klaar = feedback !== null;
+  const primair = { background: `${kleur}22`, color: kleur, borderColor: kleur };
+
+  // AANWIJS: klik-beoordeling op de .region-elementen (max 2 pogingen).
+  useEffect(() => {
+    if (card.richting !== "aanwijs") return;
+    const root = ref.current;
+    if (!root) return;
+    let attempts = 0;
+    let done = false;
+    const onClick = (e: Event) => {
+      if (done) return;
+      const t = (e.target as Element).closest(".region") as HTMLElement | null;
+      if (!t) return;
+      attempts++;
+      if (t.getAttribute("data-region") === card.targetId) {
+        done = true;
+        t.classList.add("correct");
+        setFeedback({ uitkomst: attempts === 1 ? "goed" : "fout", msg: `✅ Goed! Dit is ${card.naam}.` });
+      } else if (attempts < 2) {
+        t.classList.add("wrong");
+        window.setTimeout(() => t.classList.remove("wrong"), 800);
+      } else {
+        done = true;
+        root.querySelector(`.region[data-region="${card.targetId}"]`)?.classList.add("hint");
+        setFeedback({ uitkomst: "fout", msg: `❌ Het juiste antwoord (blauw) is ${card.naam}.` });
+      }
+    };
+    root.addEventListener("click", onClick);
+    return () => root.removeEventListener("click", onClick);
+  }, [card]);
+
+  // BENOEM: het juiste onderdeel oplichten; Stijn typt de naam.
+  useEffect(() => {
+    if (card.richting !== "benoem") return;
+    const target = ref.current?.querySelector(`.region[data-region="${card.targetId}"]`);
+    target?.classList.add("target");
+    return () => target?.classList.remove("target");
+  }, [card]);
+
+  function nakijkenBenoem() {
+    setFeedback({ uitkomst: gradeAnswer(input, card.accepted, card.norm), msg: "" });
+  }
+
+  const markers =
+    card.richting === "benoem" ? (card.markers ?? []).filter((m) => m.id === card.targetId) : (card.markers ?? []);
+  const diagram = card.svgInline ? (
+    <div className="diagram-svg" ref={ref} dangerouslySetInnerHTML={{ __html: card.svgInline }} />
+  ) : card.image ? (
+    <div className="diagram-overlay" ref={ref}>
+      <img src={card.image} alt="" />
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        {markers.map((m) => (
+          <circle key={m.id} className="region marker" data-region={m.id} cx={m.x} cy={m.y} r={3.2} />
+        ))}
+      </svg>
+    </div>
+  ) : null;
+
+  if (card.richting === "aanwijs") {
+    return (
+      <div className="hotspot">
+        <div className="prompt hotspot-prompt">Klik op: <b>{card.naam}</b></div>
+        {card.hint && !klaar && <div className="muted klein">💡 {card.hint}</div>}
+        {diagram}
+        {feedback && (
+          <>
+            <div className={`uitslag ${feedback.uitkomst}`}>{feedback.msg}</div>
+            <button className="knop primair" style={primair} onClick={() => onResultaat(feedback.uitkomst)}>
+              Volgende →
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="hotspot">
+      <div className="prompt hotspot-prompt">{card.benoemVraag}</div>
+      {diagram}
+      <input
+        className="tekstveld"
+        autoFocus
+        readOnly={klaar}
+        value={input}
+        placeholder="Typ de naam"
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key !== "Enter") return;
+          e.preventDefault();
+          if (klaar) onResultaat(feedback!.uitkomst);
+          else nakijkenBenoem();
+        }}
+      />
+      {klaar && (
+        <div className={`uitslag ${feedback!.uitkomst}`}>
+          {feedback!.uitkomst === "goed" ? "Goed! ✅" : feedback!.uitkomst === "bijna" ? "Bijna! 🟠" : "Helaas ❌"}
+        </div>
+      )}
+      {klaar && feedback!.uitkomst !== "goed" && <div className="juiste">Het is: <b>{card.naam}</b></div>}
+      <button className="knop primair" style={primair} onClick={() => (klaar ? onResultaat(feedback!.uitkomst) : nakijkenBenoem())}>
+        {klaar ? "Volgende →" : "Nakijken"}
+      </button>
+    </div>
   );
 }
 

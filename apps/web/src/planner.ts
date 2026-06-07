@@ -19,6 +19,7 @@ const DREMPEL: Record<BlokSoort, number> = {
   invullen: 0.8,
   vertalen: 0.8,
   begrippen: 0.8,
+  diagram: 0.8,
   uitlegvragen: 0.6,
   schrijven: 0.7,
 };

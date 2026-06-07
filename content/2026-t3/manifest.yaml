@@ -272,6 +272,9 @@ vakken:
     # begrippen + leerdoel-feiten per basisstof). gevalideerd blijft false
     # (validator-grounding nog niet gewired). Leren onderzoeken 3 (werkplan) is óók
     # gefotografeerd maar buiten Stijns scope ("1 en 2") gelaten.
+    # HOTSPOTS 2026-06-07: trainers/biologie/diagram.json (skelet 25 + spieren 13
+    # regio's, SVG's uit ~/projects/vwo1_t3_26_bio) — aanwijzen + benoemen. Dekt
+    # leerdoel 4.1.2 (botten benoemen in afbeelding) nu actief.
     scope:
       - id: t4-b1-skelet
         bron: "Thema 4 §1 Het skelet (leerdoelen 4.1.1-3)"
@@ -352,6 +355,8 @@ vakken:
         # actief via een ONGELABELDE gekleurde kaart (raw/.../aardrijkskunde-h05-topo-
         # gekleurd.png): kleur/positie → landnaam typen. Vorige self-rate ("wijs aan")
         # vervangen omdat die niets toetste.
+        # HOTSPOTS 2026-06-07: trainers/aardrijkskunde/diagram.json — dezelfde kaart als
+        # achtergrond + klikbare cirkel-overlay (12 landen), richtingen aanwijzen + benoemen.
         gefotografeerd: true
         geextraheerd: true
         gevalideerd: false

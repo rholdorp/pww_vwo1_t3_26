@@ -4,6 +4,7 @@ import type {
   OefenvraagBestand,
   SchrijfopdrachtBestand,
   Schrijfopdracht,
+  DiagramBestand,
   NormalisatieProfiel,
   Richting,
 } from "@pww/shared";
@@ -32,6 +33,18 @@ function resolveImage(rel?: string): string | undefined {
   if (!rel) return undefined;
   const k = Object.keys(imageUrls).find((x) => x.endsWith(rel));
   return k ? imageUrls[k] : undefined;
+}
+
+// Shaped diagram-SVG's (data-region per onderdeel) worden als ruwe tekst geladen
+// zodat we ze inline in de DOM kunnen zetten en regio's kunnen aanklikken/oplichten.
+const svgRaw = import.meta.glob(
+  "../../../content/2026-t3/assets/**/*.svg",
+  { eager: true, query: "?raw", import: "default" },
+) as Record<string, string>;
+function resolveSvg(rel?: string): string | undefined {
+  if (!rel) return undefined;
+  const k = Object.keys(svgRaw).find((x) => x.endsWith(rel));
+  return k ? svgRaw[k] : undefined;
 }
 function groupBy<T>(items: T[], key: (t: T) => string): Map<string, T[]> {
   const m = new Map<string, T[]>();
@@ -88,10 +101,29 @@ export type Card =
       back: string;
       rubric?: string[];
       image?: string;
+    }
+  | {
+      kind: "hotspot";
+      id: string;
+      /** "benoem" = regio licht op, typ de naam; "aanwijs" = naam gegeven, klik de regio. */
+      richting: "benoem" | "aanwijs";
+      /** data-region (shaped SVG) of marker-id (overlay) van het juiste antwoord. */
+      targetId: string;
+      naam: string;
+      accepted: string[];
+      norm: NormalisatieProfiel;
+      benoemVraag: string;
+      hint?: string;
+      /** Shaped SVG-tekst (biologie) — inline in de DOM. */
+      svgInline?: string;
+      /** Achtergrondafbeelding-URL (overlay-modus, topo). */
+      image?: string;
+      /** Cirkel-overlay-posities per regio (overlay-modus). */
+      markers?: { id: string; x: number; y: number }[];
     };
 
 /** Interne categorie (niet tonen in UI). */
-export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven";
+export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven" | "diagram";
 
 /** Stijn-vriendelijk label per soort — géén "Cat 1/3". */
 export const SOORT_LABEL: Record<BlokSoort, string> = {
@@ -101,6 +133,7 @@ export const SOORT_LABEL: Record<BlokSoort, string> = {
   invullen: "Invullen",
   vertalen: "Zinnen vertalen",
   schrijven: "Schrijfoefening",
+  diagram: "Op de afbeelding",
 };
 export const SOORT_ICON: Record<BlokSoort, string> = {
   woordjes: "💬",
@@ -109,6 +142,7 @@ export const SOORT_ICON: Record<BlokSoort, string> = {
   invullen: "🔤",
   vertalen: "🔁",
   schrijven: "✍️",
+  diagram: "🖼️",
 };
 
 /** Schrijfopdrachten (Cat 4), opzoekbaar op id voor de schrijftrainer. */
@@ -358,6 +392,45 @@ function buildRuw(): Blok[] {
             })),
         });
       }
+    } else if (file === "diagram.json") {
+      const b = data as DiagramBestand;
+      for (const d of b.diagrammen) {
+        const richtingen = d.richtingen?.length ? d.richtingen : (["aanwijs", "benoem"] as const);
+        const norm = d.normalisatie ?? "begrip";
+        const benoemVraag = d.benoemVraag ?? "Welk onderdeel is dit?";
+        const svgInline = resolveSvg(d.svg);
+        const image = resolveImage(d.afbeelding);
+        const ids = d.regios.map((r) => `${d.id}-${r.id}`);
+        // Twee blokken per diagram (aanwijzen / benoemen); ze delen dezelfde
+        // Leitner-ids zodat mastery over beide richtingen samenvalt.
+        for (const richting of richtingen) {
+          const label = richting === "aanwijs" ? "aanwijzen" : "benoemen";
+          blokken.push({
+            id: `${vak}/diagram/${d.id}/${richting}`,
+            vak,
+            hoofdstuk: d.hoofdstuk ?? "",
+            onderdeel: d.titel,
+            soort: "diagram",
+            titel: `${d.titel} — ${label}`,
+            ids,
+            bouwCards: () =>
+              d.regios.map((r): Card => ({
+                kind: "hotspot",
+                id: `${d.id}-${r.id}`,
+                richting,
+                targetId: r.id,
+                naam: r.naam,
+                accepted: [r.naam, ...(r.acceptedAnswers ?? [])],
+                norm,
+                benoemVraag,
+                hint: r.hint,
+                svgInline,
+                image,
+                markers: d.markers,
+              })),
+          });
+        }
+      }
     }
   }
   return blokken;
@@ -414,10 +487,15 @@ function buildBlokken(): Blok[] {
   const ruw = buildRuw();
   const final: Blok[] = [];
 
-  // Woordjes, invul-/vertaal-oefeningen + schrijfopdrachten: ongemoeid.
+  // Woordjes, invul-/vertaal-oefeningen, schrijfopdrachten + diagrammen: ongemoeid.
   final.push(
     ...ruw.filter(
-      (b) => b.soort === "woordjes" || b.soort === "invullen" || b.soort === "vertalen" || b.soort === "schrijven",
+      (b) =>
+        b.soort === "woordjes" ||
+        b.soort === "invullen" ||
+        b.soort === "vertalen" ||
+        b.soort === "schrijven" ||
+        b.soort === "diagram",
     ),
   );
 
@@ -441,7 +519,7 @@ function buildBlokken(): Blok[] {
 
 export const BLOKKEN: Blok[] = buildBlokken();
 
-const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, invullen: 1, vertalen: 2, begrippen: 3, uitlegvragen: 4, schrijven: 5 };
+const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, invullen: 1, vertalen: 2, begrippen: 3, diagram: 4, uitlegvragen: 5, schrijven: 6 };
 
 function hfdNum(h: string): number {
   const n = parseInt(h, 10);

@@ -6,10 +6,16 @@ elke afgeronde stap. Legenda: ✅ klaar · 🟡 deels · ❌ nog niet · 🔜 nu
 _Laatst bijgewerkt: 2026-06-07_
 
 ## Nu mee bezig
-- 🔜 **Gelabelde diagrammen / hotspots (`diagram.json`)** — §4/§5. Use-cases:
-  aardrijkskunde topografie (gekleurde kaart), biologie skelet- & spierlocaties,
-  wiskunde meetkundefiguren (later). Ref: Ralph heeft lokaal een biologie-trainer
-  met een goede oefen-tool voor dit — bekijken vóór de UX-keuze.
+- (niets — volgende item kiezen)
+
+## Recent afgerond
+- ✅ **Gelabelde diagrammen / hotspots (`diagram.json`)** — §4/§5. Eén engine, twee
+  richtingen (**benoem** = oplichten→typen, **aanwijs** = naam→klik), twee bron-types:
+  shaped SVG met `data-region` (biologie skelet 25 + spieren 13, hergebruikt uit
+  `~/projects/vwo1_t3_26_bio`) én achtergrondafbeelding + cirkel-overlay (topografie,
+  12 landen op de gekleurde kaart). Draait op Cat-1-logica (Leitner/normalisatie);
+  beide richtingen delen de Leitner-ids. **Bewuste SPEC-afwijking:** SVG `data-region`
+  + %-markers i.p.v. pixel-`coords` uit §4 (schoner/schaalbaar). Wiskunde-figuren: later.
 
 ## Trainer-engines (§5)
 - ✅ Cat 1 (vocab/feiten): intypen + Leitner + normalisatie + in-sessie-requeue.
@@ -18,7 +24,8 @@ _Laatst bijgewerkt: 2026-06-07_
   (samenvatting.md) + LLM-rubric (Haiku) ontbreken**.
 - 🟡 Cat 4 (tekst): Nederlands-schrijftrainer mét LLM (dev-middleware); **lees-fase
   + meerkeuzevragen ontbreken**.
-- ❌ Gelabelde diagrammen / hotspots → zie "Nu mee bezig".
+- ✅ Gelabelde diagrammen / hotspots (`diagram.json`) — biologie skelet/spieren +
+  topografie ZO-Azië, beide richtingen (benoem + aanwijs). Zie "Recent afgerond".
 
 ## Planner (§7)
 - 🟡 planVandaag werkt (top-3 blokken, PWW-datum + mastery, round-robin), maar
