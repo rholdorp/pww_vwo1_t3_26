@@ -111,6 +111,7 @@ async function handle(apiKey: string, body: FeedbackBody): Promise<unknown> {
 export const schrijfFeedback = onRequest(
   {
     cors: true, // GitHub Pages → Cloud Functions cross-origin
+    invoker: "public", // browser-visitor mag direct callen (Firebase v2 = private by default)
     secrets: [ANTHROPIC_API_KEY],
     timeoutSeconds: 60,
     memory: "256MiB",
