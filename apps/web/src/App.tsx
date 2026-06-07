@@ -163,35 +163,74 @@ function Home({
   onStart: (blok: Blok, richting?: Richting) => void;
 }) {
   const groepen = useMemo(() => vakGroepen(), []);
+  const [gekozenVak, setGekozenVak] = useState<string | null>(null);
+
+  // Drill-down: één vak gekozen → toon alleen die vak's trainers + terug-knop.
+  if (gekozenVak) {
+    const g = groepen.find((x) => x.vak === gekozenVak);
+    if (!g) {
+      setGekozenVak(null);
+      return null;
+    }
+    const kleur = vakKleur(g.vak);
+    return (
+      <main className="lijst">
+        <ProgressWidget naam={naam} />
+        <button className="link" onClick={() => setGekozenVak(null)}>← Alle vakken</button>
+        <h1 style={{ color: kleur }}>
+          <span className="vak-stip" style={{ background: kleur, verticalAlign: "middle", marginRight: 8 }} />
+          {vakLabel(g.vak)}
+        </h1>
+        {g.hoofdstukken.map((h) => (
+          <div key={h.hoofdstuk} className="hfd-groep">
+            <h3 className="hfd">
+              {h.hoofdstuk === "uitleg"
+                ? "Uitleg & verbanden"
+                : h.hoofdstuk === "schrijven"
+                  ? "Schrijven"
+                  : `Hoofdstuk ${h.hoofdstuk}`}
+            </h3>
+            {h.blokken.map((blok) => (
+              <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} />
+            ))}
+          </div>
+        ))}
+        <p className="muted klein voetnoot">Voortgang lokaal op dit apparaat bewaard.</p>
+      </main>
+    );
+  }
+
+  // Vak-overzicht: tegelgrid met per-vak gemiddelde mastery + aantal blokken.
   return (
     <main className="lijst">
+      <ProgressWidget naam={naam} />
       <h1>Wat ga je oefenen?</h1>
-      {groepen.map((g) => {
-        const kleur = vakKleur(g.vak);
-        return (
-          <section key={g.vak} className="vak">
-            <h2 className="vaknaam" style={{ color: kleur }}>
-              <span className="vak-stip" style={{ background: kleur }} />
-              {vakLabel(g.vak)}
-            </h2>
-            {g.hoofdstukken.map((h) => (
-              <div key={h.hoofdstuk} className="hfd-groep">
-                <h3 className="hfd">
-                  {h.hoofdstuk === "uitleg"
-                    ? "Uitleg & verbanden"
-                    : h.hoofdstuk === "schrijven"
-                      ? "Schrijven"
-                      : `Hoofdstuk ${h.hoofdstuk}`}
-                </h3>
-                {h.blokken.map((blok) => (
-                  <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} />
-                ))}
+      <div className="vak-tegels">
+        {groepen.map((g) => {
+          const kleur = vakKleur(g.vak);
+          const alleBlokken = g.hoofdstukken.flatMap((h) => h.blokken);
+          const gem = alleBlokken.length
+            ? Math.round((alleBlokken.reduce((s, b) => s + blokStatus(naam, b).mastery, 0) / alleBlokken.length) * 100)
+            : 0;
+          return (
+            <button
+              key={g.vak}
+              className="vak-tegel"
+              style={{ borderColor: kleur, color: kleur }}
+              onClick={() => setGekozenVak(g.vak)}
+            >
+              <div className="vak-tegel-naam">{vakLabel(g.vak)}</div>
+              <div className="vak-tegel-meta muted klein">
+                {alleBlokken.length} {alleBlokken.length === 1 ? "blok" : "blokken"} · {gem}% beheerst
               </div>
-            ))}
-          </section>
-        );
-      })}
-      <p className="muted klein voetnoot">Voortgang lokaal op dit apparaat bewaard.</p>
+              <div className="balk dun">
+                <div className="balk-vuller" style={{ width: `${gem}%`, background: kleur }} />
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <p className="muted klein voetnoot">Tik op een vak voor de trainers.</p>
     </main>
   );
 }
@@ -809,16 +848,21 @@ function SchrijfTrainer({
 
 const STATUS_ICON: Record<BlokStatusKind, string> = { open: "○", deels: "◐", afgevinkt: "✓" };
 
-function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar: number; totaal: number }) {
+function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number; totaal?: number }) {
+  // klaar/totaal optioneel: alleen Vandaag-tab geeft 'm mee. Op Kalender/Oefenen
+  // tonen we alleen streak + punten + volgende mijlpaal (geen vandaag-teller).
   const stand = useMemo(() => mijlpaalStand(naam), [naam, klaar]);
   const streak = useMemo(() => streakDagen(naam), [naam, klaar]);
-  const dagDoel = totaal > 0 && klaar === totaal;
+  const toonDagdoel = typeof klaar === "number" && typeof totaal === "number";
+  const dagDoel = toonDagdoel && totaal! > 0 && klaar === totaal;
   return (
     <div className="card widget">
       <div className="widget-rij">
         <span className="widget-streak" title="dagen-streak">🔥 {streak}</span>
         <span className="widget-punten">{stand.punten} pt</span>
-        <span className="muted klein">Vandaag {klaar}/{totaal} {dagDoel ? "🎉" : "✓"}</span>
+        {toonDagdoel && (
+          <span className="muted klein">Vandaag {klaar}/{totaal} {dagDoel ? "🎉" : "✓"}</span>
+        )}
       </div>
       {stand.volgende ? (
         <>
@@ -1046,6 +1090,7 @@ function Kalender({ naam, onStart }: { naam: string; onStart: (blok: Blok, richt
 
   return (
     <main className="lijst">
+      <ProgressWidget naam={naam} />
       <h1>Kalender</h1>
       <p className="muted klein">Je leerschema tot de proefwerkweek. Tik op een dag voor de details.</p>
       {schema.flags.length > 0 && (
@@ -1112,45 +1157,58 @@ function KalenderDag({
   naam: string; datum: string; label: string; blokken: GeplandBlok[]; isVandaag: boolean;
   blokById: Map<string, Blok>; onStart: (blok: Blok, richting?: Richting) => void;
 }) {
+  const isToekomst = datum > vandaagISO();
   return (
     <div className="card kal-detail">
-      <div className="card-titel" style={{ textTransform: "capitalize" }}>{label}</div>
+      <div className="card-titel" style={{ textTransform: "capitalize" }}>
+        {label}{isVandaag ? " · vandaag" : isToekomst ? " · vooruitkijkend" : " · terugblik"}
+      </div>
       {blokken.length === 0 ? (
-        <p className="muted klein">{datum > vandaagISO() ? "Wordt op de dag zelf ingepland." : "Geen leerblokken op deze dag."}</p>
+        <p className="muted klein">{isToekomst ? "Wordt op de dag zelf ingepland." : "Geen leerblokken op deze dag."}</p>
       ) : (
-        blokken.map((b, i) => {
-          const trainers = b.trainerBlokIds.map((id) => blokById.get(id)).filter((x): x is Blok => !!x);
-          const kleur = vakKleur(b.vak);
-          return (
-            <div key={i} className="kal-detail-blok">
-              <div className="blok-kop">
-                <span className="vak-stip" style={{ background: kleur }} />
-                <div className="blok-tekst">
-                  <div className="card-titel" style={{ color: kleur }}>
-                    {vakLabel(b.vak)}{b.soort === "boek" ? " — uit boek" : b.soort === "review" ? " — herhalen" : ""}
-                  </div>
-                  {b.soort === "boek" ? (
-                    <div className="muted klein">Werk ~30 min uit je boek (nog geen trainer).</div>
-                  ) : (
-                    <div className="muted klein">
-                      {trainers.map((t) => {
-                        const st = blokStatus(naam, t).status;
-                        return (
-                          <div key={t.id} className="kal-trainer-rij">
-                            <span>{STATUS_ICON[st] ?? "○"} {t.titel}</span>
-                            {isVandaag && st !== "afgevinkt" && (
-                              <button className="link" onClick={() => onStart(t)}>Start →</button>
-                            )}
-                          </div>
-                        );
-                      })}
+        <>
+          {isToekomst && (
+            <p className="muted klein">Vooruit oefenen kan — items komen later gewoon weer terug in je planning.</p>
+          )}
+          {blokken.map((b, i) => {
+            const trainers = b.trainerBlokIds.map((id) => blokById.get(id)).filter((x): x is Blok => !!x);
+            const kleur = vakKleur(b.vak);
+            if (b.soort === "boek") {
+              return (
+                <div key={i} className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
+                  <div className="blok-kop">
+                    <span className="vak-stip" style={{ background: kleur }} />
+                    <div className="blok-tekst">
+                      <div className="card-titel" style={{ color: kleur }}>
+                        {vakLabel(b.vak)} — uit boek
+                      </div>
+                      <div className="muted klein">Werk ~30 min uit je boek (nog geen trainer).</div>
                     </div>
-                  )}
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })
+              );
+            }
+            if (b.soort === "review") {
+              return (
+                <div key={i} className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
+                  <div className="blok-kop">
+                    <span className="vak-stip" style={{ background: kleur }} />
+                    <div className="blok-tekst">
+                      <div className="card-titel" style={{ color: kleur }}>
+                        {vakLabel(b.vak)} — herhalen
+                      </div>
+                      <div className="muted klein">Snelle review van wat je al hebt geleerd.</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            // Echte trainer-blokken: render elk als volwaardige BlokKaart, altijd klikbaar.
+            return trainers.map((t) => (
+              <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} />
+            ));
+          })}
+        </>
       )}
     </div>
   );

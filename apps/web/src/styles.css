@@ -135,6 +135,30 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
   margin: 18px 0 6px;
 }
 .vak-stip { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex: none; }
+
+/* Vak-tegels (Oefenen-hoofdscherm) */
+.vak-tegels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.vak-tegel {
+  background: var(--paneel);
+  border: 2px solid var(--rand);
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .12s ease, border-color .12s ease;
+  font: inherit;
+}
+.vak-tegel:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+.vak-tegel:active { transform: translateY(0); }
+.vak-tegel-naam { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+.vak-tegel-meta { color: var(--muted); margin-bottom: 8px; }
+.vak-tegel .balk { margin-top: 0; }
+
 .hfd-groep { margin-bottom: 8px; }
 .hfd {
   font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
