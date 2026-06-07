@@ -413,6 +413,16 @@ Geen code-aanpassingen, geen nieuwe trainer-engines, geen nieuwe SPEC-secties.
 
 Vier generieke trainer-engines, elke met eigen leeralgoritme. Elk vak gebruikt één of meer engines.
 
+> **Besluit 2026-06-07 (LLM-scope) — Ralph.** LLM-beoordeling wordt **alleen** ingezet voor
+> **Nederlands** (Cat 4 primair: de schrijftrainer met rubric-feedback). Voor alle andere
+> open-vraag-content — **Cat 3** (biologie/aardrijkskunde/geschiedenis begripsvragen) en
+> **Engels** (Cat 4 secundair) — is de **flashcard-modus (vraag → modelantwoord, zelf
+> nakijken) permanent voldoende**; daar komt géén LLM-rubric. Gevolg: de Cat 3
+> **samenvatting-lees-fase + AI-rubric** en de Cat 4 **LLM-rubric voor Engels** zijn
+> **descoped** (de "fallback (budget op)" wordt voor die categorieën de normale modus).
+> De `modelAntwoord`/`rubric`-velden blijven bestaan (handig voor zelf-nakijken + validator),
+> maar er draait geen runtime-LLM op. Dit drukt het runtime-budget fors (zie §11).
+
 ### Categorie 1 — Vocabulaire & feitenkennis
 **Methode:** **Actief intypen** van het antwoord (geen "weet ik / wist ik niet"-knop). Combinatie van getypte productie + Leitner spaced repetition (5 bakjes), beide richtingen, korte sessies van ~15 min.
 
@@ -881,7 +891,7 @@ progress/<user-id>/
 | Database | **Firestore** (alleen voortgang) | Real-time cross-device sync; gratis tier ruim voldoende. v0.1 zonder auth → open rules (bewust, zie §9) |
 | Bestandsopslag (screenshots) | **Firebase Cloud Storage** | Beheerd door Ralph, klasgenoten alleen-lezen via signed URLs |
 | Serverless functies (LLM-proxy) | **Firebase Cloud Functions (Node.js)** | Anthropic API-sleutel server-side, rate limiting per user |
-| LLM voor beoordeling Cat 3/4 | **Claude Haiku 4.5** (snel + goedkoop) | Past in €100/maand-budget bij ~15 users |
+| LLM voor beoordeling **Nederlands** (Cat 4) | **Claude Haiku 4.5** (snel + goedkoop) | Alleen de NL-schrijftrainer (besluit 2026-06-07). Cat 3 + Engels draaien permanent flashcard-modus → veel lager runtime-budget |
 | LLM voor content-extractie + validator | **Claude Opus 4.8** (vision) | Eenmalig per content-update, kwaliteit boven kosten |
 | Hosting frontend | **GitHub Pages** (vanuit `apps/web/dist`) | Gratis, ingebouwde CI via Actions |
 | Domein | `<repo>.github.io/pww` (geen custom domein) | Geen voorkeur opgegeven |

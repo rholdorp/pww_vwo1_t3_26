@@ -37,7 +37,7 @@ import {
   bewaarDagschema,
 } from "./progress";
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, type BlokStatusKind } from "./planner";
-import { logResultaat, mijlpaalStand, streakDagen, MIJLPALEN } from "./gamification";
+import { logResultaat, mijlpaalStand, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
 import { startSync, stopSync, flushPush } from "./firestoreSync";
 
@@ -46,6 +46,13 @@ type Actief =
   | { type: "train"; blok: Blok; richting?: Richting }
   | { type: "schrijf"; opdracht: Schrijfopdracht }
   | null;
+
+/** Seconden → "m:ss". */
+function minSec(sec: number): string {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
 
 export default function App() {
   const [naam, setNaam] = useState<string | null>(() => huidigeNaam());
@@ -325,12 +332,21 @@ function Trainer({
   const [input, setInput] = useState("");
   const [feedback, setFeedback] = useState<{ uitkomst: Uitkomst; answer: string } | null>(null);
   const [onthuld, setOnthuld] = useState(false);
+  const startRef = useRef<number>(Date.now());
+  const [elapsedSec, setElapsedSec] = useState(0);
 
   const totaal = order.length;
   const currentId = currentItem(state);
   const sessieKlaar = isComplete(state) || currentId === null;
 
-  // Append-only resultaat-log (SPEC §8) wanneer de sessie af is.
+  // Sessie-timer: telt op zolang de sessie loopt; bevriest bij afronding.
+  useEffect(() => {
+    if (sessieKlaar) return;
+    const id = window.setInterval(() => setElapsedSec(Math.floor((Date.now() - startRef.current) / 1000)), 1000);
+    return () => window.clearInterval(id);
+  }, [sessieKlaar]);
+
+  // Append-only resultaat-log (SPEC §8) + focus-duur wanneer de sessie af is.
   useEffect(() => {
     if (!sessieKlaar) return;
     const st = blokStatus(naam, blok);
@@ -340,22 +356,37 @@ function Trainer({
       soort: blok.soort,
       mastery: st.mastery,
       afgevinkt: st.status === "afgevinkt",
+      duurSec: Math.floor((Date.now() - startRef.current) / 1000),
     });
   }, [sessieKlaar, naam, blok]);
 
   if (sessieKlaar) {
     const m = Math.round(blokMastery(naam, blok.ids) * 100);
+    const focus = focusPunten(elapsedSec);
+    const stand = mijlpaalStand(naam);
+    const uitmuntend = m >= 90;
     return (
       <main className="lijst center">
-        <div className="card narrow">
-          <h1>Klaar! 🎉</h1>
+        <div className="card narrow afronding">
+          <h1>Klaar! {uitmuntend ? "🌟" : "🎉"}</h1>
           <p>Je hebt deze ronde van {totaal} {totaal === 1 ? "kaart" : "kaarten"} afgerond.</p>
-          <p className="muted">{m}% van «{blok.titel}» beheerst.</p>
+          <div className="score-groot" style={{ color: kleur }}>{m}%</div>
+          <p className="muted klein">van «{blok.titel}» beheerst</p>
+          <div className="afronding-stats">
+            <span>⏱️ {minSec(elapsedSec)}</span>
+            {focus > 0 && <span>🔥 focus +{focus}</span>}
+            <span>{stand.punten} pt totaal</span>
+          </div>
+          {stand.volgende && (
+            <p className="muted klein">Nog {stand.restant} pt tot {stand.volgende.naam}.</p>
+          )}
           <div className="knoppen">
             <button
               className="knop primair"
               style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
               onClick={() => {
+                startRef.current = Date.now();
+                setElapsedSec(0);
                 setState(startSession(maakOrder()));
                 setInput("");
                 setFeedback(null);
@@ -398,7 +429,12 @@ function Trainer({
       <div className="balk">
         <div className="balk-vuller" style={{ width: `${progressPct}%`, background: kleur }} />
       </div>
-      <div className="balk-tekst muted klein">{gedaan} / {totaal} af · nog {state.remaining.length} te gaan</div>
+      <div className="balk-tekst muted klein">
+        <span>{gedaan} / {totaal} af · nog {state.remaining.length} te gaan</span>
+        <span className={`timer ${elapsedSec >= 1800 ? "t30" : elapsedSec >= 900 ? "t15" : ""}`}>
+          ⏱️ {minSec(elapsedSec)}{elapsedSec >= 1800 ? " 🔥+15" : elapsedSec >= 900 ? " 🔥+5" : ""}
+        </span>
+      </div>
 
       <div className="card kaart-groot">
         {card.kind === "typed" ? (
@@ -443,6 +479,18 @@ function TypedKaart({
   onNakijken: () => void;
   onVolgende: () => void;
 }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const isFrans = card.norm === "frans" || card.norm === "zin";
+  const voegAccentToe = (ch: string) => {
+    const el = inputRef.current;
+    const s = el?.selectionStart ?? input.length;
+    const e = el?.selectionEnd ?? input.length;
+    setInput(input.slice(0, s) + ch + input.slice(e));
+    requestAnimationFrame(() => {
+      el?.focus();
+      el?.setSelectionRange(s + ch.length, s + ch.length);
+    });
+  };
   return (
     <>
       {card.image && <img className="kaart-beeld" src={card.image} alt="" />}
@@ -452,6 +500,7 @@ function TypedKaart({
         <div className="muted klein hint">hint: begint met “{card.answer.slice(0, 1)}”</div>
       )}
       <input
+        ref={inputRef}
         className="tekstveld"
         autoFocus
         placeholder="Typ je antwoord"
@@ -465,6 +514,15 @@ function TypedKaart({
           else onNakijken();
         }}
       />
+      {isFrans && !feedback && (
+        <div className="accent-rij">
+          {["é", "è", "ê", "ë", "à", "â", "ç", "ù", "û", "î", "ï", "ô", "œ"].map((ch) => (
+            <button key={ch} type="button" className="accent-knop" onMouseDown={(e) => e.preventDefault()} onClick={() => voegAccentToe(ch)}>
+              {ch}
+            </button>
+          ))}
+        </div>
+      )}
       {feedback ? (
         <>
           <div className={`uitslag ${feedback.uitkomst}`}>
@@ -848,6 +906,48 @@ function SchrijfTrainer({
 
 const STATUS_ICON: Record<BlokStatusKind, string> = { open: "○", deels: "◐", afgevinkt: "✓" };
 
+function Confetti() {
+  const stukjes = useMemo(
+    () =>
+      Array.from({ length: 30 }, (_, i) => ({
+        left: Math.round(Math.random() * 100),
+        delay: Math.round(Math.random() * 600),
+        dur: 1800 + Math.round(Math.random() * 1300),
+        emoji: ["🎉", "✨", "⭐", "🎊", "🟣", "🟡", "🟢"][i % 7],
+      })),
+    [],
+  );
+  return (
+    <div className="confetti" aria-hidden>
+      {stukjes.map((s, i) => (
+        <span
+          key={i}
+          className="confetti-stuk"
+          style={{ left: `${s.left}%`, animationDelay: `${s.delay}ms`, animationDuration: `${s.dur}ms` }}
+        >
+          {s.emoji}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** Mini SVG-sparkline van 7 dag-waarden. */
+function Sparkline({ data, kleur }: { data: number[]; kleur: string }) {
+  const max = Math.max(1, ...data);
+  const w = 84;
+  const h = 20;
+  const bw = w / data.length;
+  return (
+    <svg className="sparkline" width={w} height={h} aria-hidden>
+      {data.map((v, i) => {
+        const bh = Math.round((v / max) * (h - 2));
+        return <rect key={i} x={i * bw + 1} y={h - bh} width={bw - 2} height={bh || 1} rx={1} fill={v > 0 ? kleur : "var(--rand)"} />;
+      })}
+    </svg>
+  );
+}
+
 function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number; totaal?: number }) {
   // klaar/totaal optioneel: alleen Vandaag-tab geeft 'm mee. Op Kalender/Oefenen
   // tonen we alleen streak + punten + volgende mijlpaal (geen vandaag-teller).
@@ -911,8 +1011,20 @@ function Vandaag({
     month: "long",
   });
 
+  const dagDoel = items.length > 0 && klaar === items.length;
+  const [confetti, setConfetti] = useState(false);
+  useEffect(() => {
+    if (dagDoel && !alGevierd(naam, datum)) {
+      zetGevierd(naam, datum);
+      setConfetti(true);
+      const t = window.setTimeout(() => setConfetti(false), 2600);
+      return () => window.clearTimeout(t);
+    }
+  }, [dagDoel, naam, datum]);
+
   return (
     <main className="lijst">
+      {confetti && <Confetti />}
       <ProgressWidget naam={naam} klaar={klaar} totaal={items.length} />
       <div className="card vandaag-kop">
         <div className="vandaag-datum">{datumLabel}</div>
@@ -980,9 +1092,15 @@ function Voortgang({ naam }: { naam: string }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const datum = vandaagISO();
   const stand = mijlpaalStand(naam);
+  const [alleenRood, setAlleenRood] = useState(false);
   return (
     <main className="lijst">
-      <h1>Voortgang</h1>
+      <div className="voortgang-kop">
+        <h1>Voortgang</h1>
+        <button className={`knop filter ${alleenRood ? "aan" : ""}`} onClick={() => setAlleenRood((v) => !v)}>
+          {alleenRood ? "Toon alles" : "Alleen nog te doen"}
+        </button>
+      </div>
 
       <div className="card">
         <div className="card-titel">Mijlpalen · {stand.punten} pt</div>
@@ -1007,6 +1125,8 @@ function Voortgang({ naam }: { naam: string }) {
           ? Math.round((blokken.reduce((s, b) => s + blokStatus(naam, b).mastery, 0) / blokken.length) * 100)
           : 0;
         const dagen = dagenTot(datum, PWW_DATUM[g.vak] ?? "2026-07-03");
+        const zichtbaar = alleenRood ? blokken.filter((b) => blokStatus(naam, b).status !== "afgevinkt") : blokken;
+        if (alleenRood && zichtbaar.length === 0) return null;
         return (
           <div key={g.vak} className="card">
             <div className="blok-kop">
@@ -1015,12 +1135,13 @@ function Voortgang({ naam }: { naam: string }) {
                 <div className="card-titel" style={{ color: kleur }}>{vakLabel(g.vak)}</div>
                 <div className="muted klein">{gem}% klaar{dagen >= 0 ? ` · toets over ${dagen} dagen` : ""}</div>
               </div>
+              <Sparkline data={activiteit7dagen(naam, g.vak)} kleur={kleur} />
             </div>
             <div className="balk dun">
               <div className="balk-vuller" style={{ width: `${gem}%`, background: kleur }} />
             </div>
             <div className="voortgang-blokken">
-              {blokken.map((b) => {
+              {zichtbaar.map((b) => {
                 const st = blokStatus(naam, b);
                 return (
                   <div key={b.id} className="voortgang-rij">

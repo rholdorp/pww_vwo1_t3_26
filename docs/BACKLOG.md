@@ -20,10 +20,10 @@ _Laatst bijgewerkt: 2026-06-07_
 ## Trainer-engines (§5)
 - ✅ Cat 1 (vocab/feiten): intypen + Leitner + normalisatie + in-sessie-requeue.
 - ❌ Cat 2 (wiskunde, pen-en-papier): niet gebouwd (geen wiskunde-content). *Later.*
-- 🟡 Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus; **lees-fase
-  (samenvatting.md) + LLM-rubric (Haiku) ontbreken**.
-- 🟡 Cat 4 (tekst): Nederlands-schrijftrainer mét LLM (dev-middleware); **lees-fase
-  + meerkeuzevragen ontbreken**.
+- ✅ Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus. **LLM-rubric +
+  samenvatting-lees-fase DESCOPED** (besluit 2026-06-07: flashcards volstaan; alleen NL krijgt LLM).
+- ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback (dev-middleware). Engels (Cat 4
+  secundair) blijft flashcard-modus (LLM descoped).
 - ✅ Gelabelde diagrammen / hotspots (`diagram.json`) — biologie skelet/spieren +
   topografie ZO-Azië, beide richtingen (benoem + aanwijs). Zie "Recent afgerond".
 
@@ -45,16 +45,20 @@ _Laatst bijgewerkt: 2026-06-07_
 - ✅ **Mini-progress-widget** (🔥 streak / punten / volgende mijlpaal + balk / vandaag X/Y) op Vandaag.
 - 🟡 Nav = Vandaag/Kalender/Oefenen/Voortgang; **"Instellingen"-tab ontbreekt** (rooster/
   voorkeuren/beloningen-config).
-- ❌ Timer-balkje, afronding-modal, sparkline, "toon alleen rood"-filter, accent-helper-rij,
-  confetti-burst bij dagdoel.
+- ✅ **Sessie-timer** + focus-bonus (≥15 min +5, ≥30 min +15), **afrondings-modal**
+  (tijd/focus/punten/mijlpaal), **sparkline** (7-daagse activiteit per vak),
+  **"alleen nog te doen"-filter**, **accent-helper-rij** (é è ê ç…) voor Frans,
+  **confetti-burst** bij dagdoel (1×/dag).
 - 🟡 Geen Tailwind/shadcn — eigen CSS.
 
 ## Gamification (§8)
 - ✅ **Append-only resultaten-log** (`gamification.ts`, SPEC §8 bron-van-waarheid) — trainers
   loggen elk afgerond blok.
 - ✅ **Punten/streaks/mijlpalen** als pure afgeleide view: blok ✓ 10/15, deels 2, vak-klaar
-  +75, dagdoel +15, weekstreak +50 (anti-grinding: hoogste per blok). Mijlpalen Brons/Zilver/
-  Goud/Platina (100/300/600/1000) met standaard-beloningen, getoond in Voortgang + widget.
+  +75, dagdoel +15, weekstreak +50, **focus-bonus** (≥15 min +5, ≥30 min +15) (anti-grinding:
+  hoogste per blok). Mijlpalen Brons/Zilver/Goud/Platina (100/300/600/1000) met standaard-
+  beloningen, getoond in Voortgang + widget. **Mijlpaal-getallen + beloningen: Ralph kalibreert
+  nog met Stijn (geparkeerd).**
 - 🟡 Afvink-criterium per blok = mastery-drempels (coverage-criterium niet apart).
 - ❌ **Ouder-configureerbare beloningen** (nu standaard-tekst, niet bewerkbaar) — later, met de
   Instellingen-tab.

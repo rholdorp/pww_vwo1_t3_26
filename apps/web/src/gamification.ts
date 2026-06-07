@@ -15,6 +15,17 @@ export interface Resultaat {
   soort: string;
   mastery: number;
   afgevinkt: boolean;
+  /** Aaneengesloten studietijd van deze sessie (sec) — voor de focus-bonus. */
+  duurSec?: number;
+}
+
+/**
+ * Focus-bonus (besluit Ralph 2026-06-07): beloon volgehouden aandacht.
+ * ≥15 min aan één stuk → +5, ≥30 min → nog eens +10 (samen +15).
+ */
+export function focusPunten(duurSec: number): number {
+  const min = duurSec / 60;
+  return (min >= 15 ? 5 : 0) + (min >= 30 ? 10 : 0);
 }
 
 const logKey = (naam: string) => `pww-resultaten:${slug(naam)}`;
@@ -32,6 +43,23 @@ export function logResultaat(naam: string, r: Omit<Resultaat, "afgerondOp" | "da
   const log = laadLog(naam);
   log.push({ ...r, afgerondOp: new Date().toISOString(), datum: vandaagISO() });
   localStorage.setItem(logKey(naam), JSON.stringify(log));
+}
+
+/** Activiteit per dag over de laatste 7 dagen (oud→vandaag): # afgeronde sessies van dit vak. */
+export function activiteit7dagen(naam: string, vak: string): number[] {
+  const vandaag = vandaagISO();
+  const perDag = new Map<string, number>();
+  for (const r of laadLog(naam)) if (r.vak === vak) perDag.set(r.datum, (perDag.get(r.datum) ?? 0) + 1);
+  return Array.from({ length: 7 }, (_, i) => perDag.get(isoMinus(vandaag, 6 - i)) ?? 0);
+}
+
+// Confetti-burst bij dagdoel: 1× per dag.
+const gevierdKey = (naam: string, datum: string) => `pww-gevierd:${slug(naam)}:${datum}`;
+export function alGevierd(naam: string, datum: string): boolean {
+  return localStorage.getItem(gevierdKey(naam, datum)) === "1";
+}
+export function zetGevierd(naam: string, datum: string): void {
+  localStorage.setItem(gevierdKey(naam, datum), "1");
 }
 
 export interface Mijlpaal {
@@ -101,6 +129,8 @@ export function totaalPunten(naam: string): number {
   }
   // Weekstreak: +50 per volle 7-daagse streak.
   p += Math.floor(streakDagen(naam) / 7) * 50;
+  // Focus-bonus: volgehouden studietijd per sessie (SPEC §8 + besluit 2026-06-07).
+  for (const r of laadLog(naam)) if (r.duurSec) p += focusPunten(r.duurSec);
   return p;
 }
 
