@@ -3,7 +3,7 @@
 Lopende lijst van wat er t.o.v. [SPEC.md](../SPEC.md) nog open staat. Bijwerken bij
 elke afgeronde stap. Legenda: ✅ klaar · 🟡 deels · ❌ nog niet · 🔜 nu mee bezig.
 
-_Laatst bijgewerkt: 2026-06-07_
+_Laatst bijgewerkt: 2026-06-08_
 
 ## Nu mee bezig
 - (niets — volgende item kiezen)
@@ -22,8 +22,9 @@ _Laatst bijgewerkt: 2026-06-07_
 - ❌ Cat 2 (wiskunde, pen-en-papier): niet gebouwd (geen wiskunde-content). *Later.*
 - ✅ Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus. **LLM-rubric +
   samenvatting-lees-fase DESCOPED** (besluit 2026-06-07: flashcards volstaan; alleen NL krijgt LLM).
-- ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback (dev-middleware). Engels (Cat 4
-  secundair) blijft flashcard-modus (LLM descoped).
+- ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback via **Cloud Function**
+  (`apps/functions`, Haiku, key als Firebase-secret); dev-middleware blijft voor lokaal.
+  Engels (Cat 4 secundair) blijft flashcard-modus (LLM descoped).
 - ✅ Gelabelde diagrammen / hotspots (`diagram.json`) — biologie skelet/spieren +
   topografie ZO-Azië, beide richtingen (benoem + aanwijs). Zie "Recent afgerond".
 
@@ -42,7 +43,9 @@ _Laatst bijgewerkt: 2026-06-07_
 
 ## UI / schermen (§7, §10)
 - ✅ Vandaag (default) + Kalender + Voortgang + NaamPoort + mobile-first.
-- ✅ **Mini-progress-widget** (🔥 streak / punten / volgende mijlpaal + balk / vandaag X/Y) op Vandaag.
+- ✅ **Mini-progress-widget** (🔥 streak / punten / volgende mijlpaal + balk / vandaag X/Y) —
+  op Vandaag (met teller) + Oefenen/Kalender (zonder teller).
+- ✅ **Oefenen = vak-tegels** (drill-down per vak), **klikbare kalender-taken**.
 - 🟡 Nav = Vandaag/Kalender/Oefenen/Voortgang; **"Instellingen"-tab ontbreekt** (rooster/
   voorkeuren/beloningen-config).
 - ✅ **Sessie-timer** + focus-bonus (≥15 min +5, ≥30 min +15), **afrondings-modal**
@@ -64,11 +67,18 @@ _Laatst bijgewerkt: 2026-06-07_
   Instellingen-tab.
 
 ## Multi-user & data (§9, §11)
-- ❌ **Firestore cross-device sync** — nu localStorage; zelfde naam ≠ zelfde voortgang
-  cross-device (SPEC noemt dit een dealbreaker).
-- ✅ Naam-identiteit (geen auth), lokaal.
-- ❌ Cloud Functions (LLM-proxy), Cloud Storage, budget/quota-machinerie — uitgesteld.
-- ❓ GitHub Pages-deploy live? (build werkt; publicatie niet geverifieerd).
+- ✅ **Firestore cross-device sync** (`firestoreSync.ts` + `firebase.ts`) — voortgang per
+  naam-slug naar `/progress/{slug}`; offline-cache + multi-tab; valt elegant terug op
+  localStorage als er geen Firebase-config is. Rules: open read, self-attested write
+  (`firestore.rules`, bewuste keuze Ralph — geen auth).
+- ✅ Naam-identiteit (geen auth).
+- ✅ **Cloud Function `schrijfFeedback`** (`apps/functions`, Haiku) — `ANTHROPIC_API_KEY`
+  als Firebase-**secret** (server-side, niet in de bundle). NL-schrijftrainer draait
+  hierop in productie (dev-middleware blijft voor lokaal).
+- ✅ **Deploy-infra**: GitHub Pages (web) + Firebase (`firebase.json`, `.firebaserc`).
+  Web-config via `VITE_FIREBASE_*`-env-vars op build-tijd.
+- ❌ Cloud Storage (signed-URL screenshots), budget/quota-machinerie — nog uitgesteld
+  (runtime-LLM nu alleen NL → laag risico).
 
 ## Content & pipeline (§4, §6)
 - ✅ Content los van code; manifest scope-checklist; validator-tool (`npm run validate`).
