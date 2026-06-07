@@ -6,7 +6,10 @@
       "id": "geschiedenis-h5-begrip-001",
       "vraag": "Iemand die bij de adel hoort: door zijn afkomst had hij speciale rechten en bestuurde in de Middeleeuwen in naam van de koning het land.",
       "antwoord": "edele",
-      "acceptedAnswers": ["edelman", "adel"],
+      "acceptedAnswers": [
+        "edelman",
+        "adel"
+      ],
       "onderdeel": "§5.1 Karel de Grote",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
@@ -16,7 +19,10 @@
       "id": "geschiedenis-h5-begrip-002",
       "vraag": "De relatie tussen een leenheer en zijn leenman, die tot stand komt door een belofte van trouw.",
       "antwoord": "feodale verhouding",
-      "acceptedAnswers": ["feodale verhoudingen", "feodaliteit"],
+      "acceptedAnswers": [
+        "feodale verhoudingen",
+        "feodaliteit"
+      ],
       "onderdeel": "§5.1 Karel de Grote",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
@@ -71,7 +77,9 @@
       "id": "geschiedenis-h5-begrip-008",
       "vraag": "Zeelui uit Scandinavië (ook Vikingen genoemd) die kloosters, kerken en steden plunderden.",
       "antwoord": "Noormannen",
-      "acceptedAnswers": ["Vikingen"],
+      "acceptedAnswers": [
+        "Vikingen"
+      ],
       "onderdeel": "§5.1 Karel de Grote",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p99.jpg",
@@ -144,7 +152,9 @@
       "id": "geschiedenis-h5-begrip-016",
       "vraag": "Iemand die het geloof verspreidt.",
       "antwoord": "missionaris",
-      "acceptedAnswers": ["missionarissen"],
+      "acceptedAnswers": [
+        "missionarissen"
+      ],
       "onderdeel": "§5.3 De bekering van Clovis",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
@@ -154,7 +164,9 @@
       "id": "geschiedenis-h5-begrip-017",
       "vraag": "Iemand die in dienst is van de kerk, zoals een bisschop, priester of kloosterling.",
       "antwoord": "geestelijke",
-      "acceptedAnswers": ["geestelijken"],
+      "acceptedAnswers": [
+        "geestelijken"
+      ],
       "onderdeel": "§5.3 De bekering van Clovis",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
@@ -173,7 +185,9 @@
       "id": "geschiedenis-h5-begrip-019",
       "vraag": "Titel van de opvolgers van Mohammed, die aan het hoofd staan van de islamitische gemeenschap.",
       "antwoord": "kalief",
-      "acceptedAnswers": ["kaliefen"],
+      "acceptedAnswers": [
+        "kaliefen"
+      ],
       "onderdeel": "§5.4 De islam",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p113.jpg",
@@ -183,7 +197,9 @@
       "id": "geschiedenis-h5-begrip-020",
       "vraag": "Het gebouw in Mekka met de heilige zwarte steen, waar mensen offers brachten aan godenbeelden.",
       "antwoord": "Ka'aba",
-      "acceptedAnswers": ["Kaaba"],
+      "acceptedAnswers": [
+        "Kaaba"
+      ],
       "onderdeel": "§5.4 De islam",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p104.jpg",
@@ -256,7 +272,10 @@
       "id": "geschiedenis-h6-begrip-004",
       "vraag": "Beroepsorganisatie van burgers met hetzelfde beroep; je mocht het beroep alleen uitoefenen als je er lid van was.",
       "antwoord": "ambachtsgilde",
-      "acceptedAnswers": ["gilde", "ambachtsgilden"],
+      "acceptedAnswers": [
+        "gilde",
+        "ambachtsgilden"
+      ],
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
@@ -284,7 +303,9 @@
       "id": "geschiedenis-h6-begrip-007",
       "vraag": "Markt die jaarlijks en wekenlang werd gehouden en een middelpunt was van de internationale handel.",
       "antwoord": "jaarmarkt",
-      "acceptedAnswers": ["jaarmarkten"],
+      "acceptedAnswers": [
+        "jaarmarkten"
+      ],
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p118.jpg",
@@ -303,7 +324,9 @@
       "id": "geschiedenis-h6-begrip-009",
       "vraag": "Samenwerkingsverband van handelssteden; de grootste bestond uit tientallen steden aan de Noordzee en de Oostzee.",
       "antwoord": "hanze",
-      "acceptedAnswers": ["Hanze"],
+      "acceptedAnswers": [
+        "Hanze"
+      ],
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p119.jpg",
@@ -313,7 +336,10 @@
       "id": "geschiedenis-h5-feit-001",
       "vraag": "In welke periode regeerde Karel de Grote over het Frankische Rijk?",
       "antwoord": "768-814",
-      "acceptedAnswers": ["768 tot 814", "van 768 tot 814"],
+      "acceptedAnswers": [
+        "768 tot 814",
+        "van 768 tot 814"
+      ],
       "onderdeel": "§5.1 Karel de Grote",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p93.jpg",
@@ -332,7 +358,10 @@
       "id": "geschiedenis-h6-feit-001",
       "vraag": "Tussen welke twee jaartallen ontstonden veel Europese steden?",
       "antwoord": "1000 en 1350",
-      "acceptedAnswers": ["tussen 1000 en 1350", "1000-1350"],
+      "acceptedAnswers": [
+        "tussen 1000 en 1350",
+        "1000-1350"
+      ],
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p116.jpg",
@@ -425,6 +454,284 @@
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p112.jpg",
       "confidence": 0.96
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-001",
+      "vraag": "Welk tijdvak hoort bij de jaren tot 3000 v.Chr.?",
+      "antwoord": "Tijd van jagers en boeren",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-002",
+      "vraag": "Welk tijdvak hoort bij 3000 v.Chr. tot 500?",
+      "antwoord": "Tijd van Grieken en Romeinen",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-003",
+      "vraag": "Welk tijdvak hoort bij 500–1000?",
+      "antwoord": "Tijd van monniken en ridders",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-004",
+      "vraag": "Welk tijdvak hoort bij 1000–1500?",
+      "antwoord": "Tijd van steden en staten",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-005",
+      "vraag": "Welk tijdvak hoort bij 1500–1600?",
+      "antwoord": "Tijd van ontdekkers en hervormers",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-006",
+      "vraag": "Welk tijdvak hoort bij 1600–1700?",
+      "antwoord": "Tijd van regenten en vorsten",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-007",
+      "vraag": "Welk tijdvak hoort bij 1700–1800?",
+      "antwoord": "Tijd van pruiken en revoluties",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-008",
+      "vraag": "Welk tijdvak hoort bij 1800–1900?",
+      "antwoord": "Tijd van burgers en stoommachines",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-009",
+      "vraag": "Welk tijdvak hoort bij 1900–1950?",
+      "antwoord": "Tijd van wereldoorlogen",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdvak-010",
+      "vraag": "Welk tijdvak hoort bij 1950–heden?",
+      "antwoord": "Tijd van televisie en computer",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-periode-011",
+      "vraag": "Hoe heet de periode waarin de mensen nog niet konden schrijven?",
+      "antwoord": "prehistorie",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-periode-012",
+      "vraag": "In welke periode valt de Tijd van Grieken en Romeinen?",
+      "antwoord": "Oudheid",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "de Oudheid"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-periode-013",
+      "vraag": "De Tijd van monniken en ridders en de Tijd van steden en staten vormen samen welke periode?",
+      "antwoord": "Middeleeuwen",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "de Middeleeuwen"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-periode-014",
+      "vraag": "De tijdvakken van 1500 tot 1800 (ontdekkers, regenten, pruiken) vormen welke periode?",
+      "antwoord": "Vroegmoderne Tijd",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-periode-015",
+      "vraag": "De tijdvakken vanaf 1800 (burgers, wereldoorlogen, televisie) vormen welke periode?",
+      "antwoord": "Moderne Tijd",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-periode-016",
+      "vraag": "Hoe heet de Tijd van monniken en ridders ook wel?",
+      "antwoord": "vroege Middeleeuwen",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-periode-017",
+      "vraag": "Hoe heet de Tijd van steden en staten ook wel?",
+      "antwoord": "late Middeleeuwen",
+      "onderdeel": "Vaardigheid: tijdvakken & periodes",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p10.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-soort-018",
+      "vraag": "Welk soort geschiedenis gaat over hoe de macht verdeeld is en wie het land bestuurt?",
+      "antwoord": "politiek",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "politieke geschiedenis"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-soort-019",
+      "vraag": "Welk soort geschiedenis gaat over hoe mensen aan hun middelen van bestaan komen (handel en landbouw)?",
+      "antwoord": "economisch",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "economische geschiedenis"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-soort-020",
+      "vraag": "Welk soort geschiedenis gaat over hoe mensen en groepen mensen met elkaar omgaan?",
+      "antwoord": "sociaal",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "sociale geschiedenis"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-soort-021",
+      "vraag": "Welk soort geschiedenis gaat over de gebruiken, ideeën, kunst en tradities van mensen?",
+      "antwoord": "cultureel",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "culturele geschiedenis"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-tijd-022",
+      "vraag": "Hoe noem je de volgorde van gebeurtenissen, van vroeger naar later?",
+      "antwoord": "chronologie",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "chronologische volgorde"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-tijd-023",
+      "vraag": "Welke jaartelling gebruiken wij, die begint bij de geboorte van Jezus?",
+      "antwoord": "christelijke jaartelling",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "de christelijke jaartelling"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-tijd-024",
+      "vraag": "Bij welk jaar begint de christelijke jaartelling?",
+      "antwoord": "jaar 1",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "1",
+        "het jaar 1"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-tijd-025",
+      "vraag": "Wat betekent de afkorting 'v.Chr.'?",
+      "antwoord": "voor Christus",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "geschiedenis-vaard-tijdbalk-026",
+      "vraag": "Wat stelt elk vakje op een tijdbalk voor?",
+      "antwoord": "een even lange tijd",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "een even lange periode",
+        "even lange tijd"
+      ]
+    },
+    {
+      "id": "geschiedenis-vaard-tijdbalk-027",
+      "vraag": "Wat geef je een tijdbalk altijd, zodat duidelijk is waarover hij gaat?",
+      "antwoord": "een titel",
+      "onderdeel": "Vaardigheid: chronologie, tijdbalk & soorten",
+      "hoofdstuk": "1",
+      "bron": "raw/geschiedenis/geschiedenis-p11.jpg",
+      "confidence": 0.95,
+      "acceptedAnswers": [
+        "titel"
+      ]
     }
   ]
 }
