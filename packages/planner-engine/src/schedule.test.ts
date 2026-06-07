@@ -1,0 +1,110 @@
+import { describe, expect, it } from "vitest";
+import { planPeriode, type DagSlot, type VakInput, type DagType } from "./index.js";
+
+// Helper: bouw een reeks dagen. wo(3)+za(6) = gereduceerd; weekend buffer/leer per type-map.
+function dag(datum: string, type: DagType, toetsVakken: string[] = []): DagSlot {
+  return { datum, type, toetsVakken };
+}
+
+// Mini-rooster: ma 09 t/m zo 22 juni 2026. 8 juni = maandag.
+// leer: ma/di/do/vr/zo · gereduceerd: wo/za · (geen buffer in deze fixture, los getest)
+function leerWeek(maandagDdMm: string[]): DagSlot[] {
+  // maandagDdMm = lijst ISO-datums ma..zo
+  const types: DagType[] = ["leer", "leer", "gereduceerd", "leer", "leer", "gereduceerd", "leer"];
+  return maandagDdMm.map((d, i) => dag(d, types[i]!));
+}
+
+function vakBlok(vak: string, n: number) {
+  return Array.from({ length: n }, (_, i) => ({ id: `${vak}#${i}`, vak, trainerBlokIds: [`${vak}-b${i}`] }));
+}
+
+const WEEK1 = leerWeek([
+  "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14",
+]);
+
+function basisVakken(): VakInput[] {
+  return [
+    { vak: "frans", pwwDatum: "2026-07-03", moeilijkheid: 3, gereduceerdOk: false, isBoek: false, pending: vakBlok("frans", 3), alleBlokIds: ["f"] },
+    { vak: "biologie", pwwDatum: "2026-06-30", moeilijkheid: 1, gereduceerdOk: true, isBoek: false, pending: vakBlok("biologie", 3), alleBlokIds: ["b"] },
+    { vak: "aardrijkskunde", pwwDatum: "2026-07-02", moeilijkheid: 1, gereduceerdOk: true, isBoek: false, pending: vakBlok("aardrijkskunde", 2), alleBlokIds: ["a"] },
+    { vak: "nederlands", pwwDatum: "2026-07-01", moeilijkheid: 3, gereduceerdOk: false, isBoek: false, maxSessies: 3, pending: vakBlok("nederlands", 1), alleBlokIds: ["n"] },
+    { vak: "wiskunde", pwwDatum: "2026-07-02", moeilijkheid: 3, gereduceerdOk: false, isBoek: true, pending: [], alleBlokIds: [] },
+    { vak: "engels", pwwDatum: "2026-06-29", moeilijkheid: 2, gereduceerdOk: false, isBoek: true, pending: [], alleBlokIds: [] },
+  ];
+}
+
+describe("planPeriode — harde regels", () => {
+  const res = planPeriode(basisVakken(), WEEK1, "2026-06-08");
+
+  it("plant geen dag vóór vandaag", () => {
+    expect(res.dagen.every((d) => d.datum >= "2026-06-08")).toBe(true);
+  });
+
+  it("max 3 vakken per dag", () => {
+    for (const d of res.dagen) expect(new Set(d.blokken.map((b) => b.vak)).size).toBeLessThanOrEqual(3);
+  });
+
+  it("max 1 leerblok per vak per dag", () => {
+    for (const d of res.dagen) {
+      const perVak = d.blokken.map((b) => b.vak);
+      expect(perVak.length).toBe(new Set(perVak).size);
+    }
+  });
+
+  it("respecteert de dagcapaciteit (gereduceerd = 1, leer = 3)", () => {
+    for (const d of res.dagen) {
+      const max = d.type === "gereduceerd" ? 1 : d.type === "leer" ? 3 : 0;
+      expect(d.blokken.length).toBeLessThanOrEqual(max);
+    }
+  });
+
+  it("gereduceerde dagen bevatten alleen makkelijke (gereduceerdOk) vakken — geen wiskunde/frans", () => {
+    const easy = new Set(["biologie", "aardrijkskunde"]);
+    for (const d of res.dagen.filter((d) => d.type === "gereduceerd")) {
+      for (const b of d.blokken) expect(easy.has(b.vak)).toBe(true);
+    }
+  });
+
+  it("nederlands komt niet vaker dan maxSessies (3) voor", () => {
+    const n = res.dagen.flatMap((d) => d.blokken).filter((b) => b.vak === "nederlands").length;
+    expect(n).toBeLessThanOrEqual(3);
+  });
+
+  it("plaatst alle content-blokken (geen overflow-flag) bij genoeg capaciteit", () => {
+    const trainer = res.dagen.flatMap((d) => d.blokken).filter((b) => b.soort === "trainer");
+    // frans 3 + bio 3 + ak 2 + ndl 1 = 9
+    expect(trainer.length).toBe(9);
+    expect(res.flags).toHaveLength(0);
+  });
+
+  it("geeft wiskunde meerdere boek-dagen (maar niet op gereduceerde dagen)", () => {
+    const wis = res.dagen.filter((d) => d.blokken.some((b) => b.vak === "wiskunde"));
+    expect(wis.length).toBeGreaterThanOrEqual(3);
+    expect(wis.every((d) => d.type !== "gereduceerd")).toBe(true);
+  });
+});
+
+describe("planPeriode — herplannen & overflow", () => {
+  it("afgevinkte content (uit pending verwijderd) verschijnt niet meer", () => {
+    const vakken = basisVakken();
+    vakken[0]!.pending = vakBlok("frans", 1); // 2 frans-blokken 'afgevinkt'
+    const res = planPeriode(vakken, WEEK1, "2026-06-08");
+    const fransTrainer = res.dagen.flatMap((d) => d.blokken).filter((b) => b.vak === "frans" && b.soort === "trainer");
+    expect(fransTrainer.length).toBe(1);
+  });
+
+  it("te veel content voor de beschikbare dagen → overflow-flag", () => {
+    const vakken = basisVakken();
+    vakken[0]!.pending = vakBlok("frans", 20); // past niet in één week
+    const res = planPeriode(vakken, WEEK1, "2026-06-08");
+    expect(res.flags.some((f) => f.includes("frans"))).toBe(true);
+  });
+
+  it("herhaalweek (buffer) bevat alleen review/boek, geen nieuwe trainer-content bij volledige dekking", () => {
+    const buffer: DagSlot[] = [dag("2026-06-22", "buffer"), dag("2026-06-23", "buffer")];
+    const res = planPeriode(basisVakken(), [...WEEK1, ...buffer], "2026-06-08");
+    const bufferBlokken = res.dagen.filter((d) => d.type === "buffer").flatMap((d) => d.blokken);
+    expect(bufferBlokken.length).toBeGreaterThan(0);
+    expect(bufferBlokken.every((b) => b.soort === "review" || b.soort === "boek")).toBe(true);
+  });
+});

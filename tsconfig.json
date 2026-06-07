@@ -3,6 +3,7 @@
   "references": [
     { "path": "./packages/shared" },
     { "path": "./packages/trainer-engine" },
+    { "path": "./packages/planner-engine" },
     { "path": "./apps/validator" }
   ]
 }

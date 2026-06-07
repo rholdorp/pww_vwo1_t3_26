@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Planning-algoritme: backward scheduling vanaf PWW, sessieblokken, moeilijkheidsgewichten. Zie SPEC.md §7.",
+  "description": "Planning-algoritme: meerdaagse spreiding van leerblokken vanaf vandaag, dekking vóór de herhaalweek, moeilijkheidsgewichten, herplannen bij falen. Zie SPEC.md §7.",
   "main": "./src/index.ts",
   "scripts": {
-    "build": "echo 'TODO: tsc' && exit 0",
+    "build": "tsc -b",
+    "typecheck": "tsc -b",
     "lint": "echo 'TODO: eslint' && exit 0",
-    "test": "echo 'TODO: vitest' && exit 0"
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
   }
 }

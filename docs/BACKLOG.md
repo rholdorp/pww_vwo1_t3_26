@@ -28,9 +28,17 @@ _Laatst bijgewerkt: 2026-06-07_
   topografie ZO-Azië, beide richtingen (benoem + aanwijs). Zie "Recent afgerond".
 
 ## Planner (§7)
-- 🟡 planVandaag werkt (top-3 blokken, PWW-datum + mastery, round-robin), maar
-  **geen vaste tijdslots / schoolrooster / huiswerk- & pauze-blokken / duur /
-  deeplink / timer / backward-planning / pacing-flags ("haal ik het?")**.
+- ✅ **Meerdaagse planner-engine** (`packages/planner-engine`, getest): verdeelt alle
+  content over 8–21 juni (dekking vóór de herhaalweek), herhaalweek 22–28 = review-only,
+  max 3 vakken/dag, 30-min vak-blokken (meerdere trainer-blokjes), content in volgorde,
+  wiskunde/engels = boek-blokken (wiskunde ~5/7 via gereduceerde-dag-uitsluiting),
+  nederlands cap 3, herplannen bij falen (recompute op mastery), pacing-flags bij overflow.
+- ✅ **Maandkalender** (Kalender-tab): vooruitblik (vak-chips per dag, toetsdagen 🎯,
+  herhaalweek-tint) + terugblik (bevroren dagschema + status ✓/◐/○; vult zich naarmate
+  dagen verstrijken). Dagdetail toont de trainer-blokjes + START voor vandaag.
+- 🟡 Resten: vaste **tijdslots/klokuren** + **huiswerk/pauze-blokken** + **timer** + de
+  **`duurMin`-heuristiek finetunen** (nu optimistisch). Vandaag-scherm leunt nog op de
+  oude `planVandaag` (kan later op de engine's "vandaag" gezet worden).
 
 ## UI / schermen (§7, §10)
 - ✅ Vandaag (default) + Voortgang + NaamPoort + mobile-first.

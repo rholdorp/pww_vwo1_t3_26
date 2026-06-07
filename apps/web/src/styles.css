@@ -236,6 +236,33 @@ circle.region.target { fill: rgba(245,158,11,0.92); stroke: #f59e0b; stroke-widt
   fill: #fde68a !important; stroke: #f59e0b !important; stroke-width: 2.6 !important;
 }
 
+/* Kalender (maand-grid) */
+.kal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
+.kal-kop { margin-bottom: 2px; }
+.kal-weekdag { text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.kal-cel {
+  appearance: none; text-align: left; cursor: pointer; color: var(--tekst);
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 4px; min-height: 66px; display: flex; flex-direction: column; gap: 3px; overflow: hidden;
+}
+.kal-cel.verleden { opacity: .62; }
+.kal-cel.type-vrij { opacity: .4; }
+.kal-cel.type-gereduceerd { background: rgba(255,255,255,0.015); }
+.kal-cel.type-buffer { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.25); }
+.kal-cel.type-toets { background: rgba(239,68,68,0.10); border-color: rgba(239,68,68,0.3); }
+.kal-cel.vandaag { border-color: var(--primair); box-shadow: 0 0 0 1px var(--primair); }
+.kal-cel.gekozen { outline: 2px solid var(--primair); }
+.kal-datum { font-size: 12px; font-weight: 700; color: var(--muted); }
+.kal-cel.vandaag .kal-datum { color: var(--tekst); }
+.kal-toets { font-size: 10px; font-weight: 700; color: var(--fout); line-height: 1.1; }
+.kal-chips { display: flex; flex-wrap: wrap; gap: 2px; }
+.kal-chip { font-size: 10px; font-weight: 700; padding: 1px 4px; border-radius: 5px; border: 1px solid; line-height: 1.3; white-space: nowrap; }
+.kal-legenda { margin: 8px 2px 4px; line-height: 1.6; }
+.kal-detail { margin-top: 10px; }
+.kal-detail-blok { padding: 8px 0; border-top: 1px solid var(--rand); }
+.kal-detail-blok:first-of-type { border-top: none; }
+.kal-trainer-rij { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 2px 0; }
+
 /* Voortgang */
 .voortgang-blokken { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
 .voortgang-rij { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }

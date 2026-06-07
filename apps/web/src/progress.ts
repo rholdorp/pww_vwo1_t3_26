@@ -1,5 +1,6 @@
 import { applyResult, isDue, mastery, nieuwItem } from "@pww/trainer-engine";
 import type { ItemProgress, LeitnerBox, Uitkomst } from "@pww/shared";
+import type { GeplandBlok } from "@pww/planner-engine";
 
 // v0.1-prototype: voortgang in localStorage, gesleuteld op naam-slug (dezelfde
 // sleutel-aanpak als de latere Firestore-sync uit SPEC §9). Nog geen cross-device.
@@ -138,6 +139,22 @@ export function laadDagplan(naam: string, datum: string): string[] | null {
 }
 export function bewaarDagplan(naam: string, datum: string, ids: string[]): void {
   localStorage.setItem(dagplanKey(naam, datum), JSON.stringify(ids));
+}
+
+// ── Dagschema (kalender) — bevroren snapshot van de geplande vak-blokken per dag,
+// zodat de terugblik stabiel blijft (verleden wordt nooit herberekend). ──────────
+const dagschemaKey = (naam: string, datum: string) => `pww-schema:${slug(naam)}:${datum}`;
+
+export function laadDagschema(naam: string, datum: string): GeplandBlok[] | null {
+  try {
+    const raw = localStorage.getItem(dagschemaKey(naam, datum));
+    return raw ? (JSON.parse(raw) as GeplandBlok[]) : null;
+  } catch {
+    return null;
+  }
+}
+export function bewaarDagschema(naam: string, datum: string, blokken: GeplandBlok[]): void {
+  localStorage.setItem(dagschemaKey(naam, datum), JSON.stringify(blokken));
 }
 
 export function huidigeNaam(): string | null {
