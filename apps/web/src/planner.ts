@@ -191,6 +191,9 @@ export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaa
       gereduceerdOk: GEREDUCEERD_OK.has(vak),
       isBoek: vakBlokken.length === 0,
       maxSessies: vak === "nederlands" ? 3 : undefined,
+      // Afspraak Ralph/Stijn (2026-06-07): wiskunde elke niet-gereduceerde dag.
+      // Geldt ook in de herhaalweek (ma–vr 22–26 juni). 5/7 dagen totaal per week.
+      dagelijks: vak === "wiskunde",
       pending: pakVakBlokken(vak, nietAf),
       alleBlokIds: vakBlokken.map((b) => b.id),
     };

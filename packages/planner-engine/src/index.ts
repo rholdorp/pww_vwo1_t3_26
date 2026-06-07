@@ -31,6 +31,13 @@ export interface VakInput {
   isBoek: boolean;
   /** Harde bovengrens aan het aantal leerblokken (bv. Nederlands = 3). */
   maxSessies?: number;
+  /**
+   * Reserveer elke niet-gereduceerde dag (incl. buffer-week) als eerste een slot
+   * voor dit vak. Voor wiskunde: ~5/7 dagen (ma/di/do/vr/zo + ma–vr in de
+   * herhaalweek), zoals afgesproken met Stijn. Andere boek-vakken (engels)
+   * blijven via de roterende kiesBoek-logica concurreren.
+   */
+  dagelijks?: boolean;
   /** Nog niet-afgeronde vak-blokken, in leervolgorde (leeg voor boek-vakken). */
   pending: VakBlok[];
   /** Alle trainer-blok-ids van het vak (voor review-blokken in de herhaalweek). */
@@ -107,15 +114,30 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
   const leerDagen = dagen.filter((d) => d.type === "leer" || d.type === "gereduceerd");
   const bufferDagen = dagen.filter((d) => d.type === "buffer");
 
-  // De minst-gebruikte boek-kandidaat (balanceert wiskunde ↔ engels), tiebreak op prioriteit.
+  // Vakken die elke niet-gereduceerde dag een gegarandeerd slot krijgen (Stijns
+  // afspraak: wiskunde 5/7 dagen). Deze worden vóór alle andere logica geplaatst,
+  // zodat ze nooit door content-vakken weggedrukt worden.
+  const dagelijkseVakken = prioriteit.filter((v) => v.dagelijks);
+  function plaatsDagelijks(d: DagToewijzing) {
+    for (const v of dagelijkseVakken) {
+      if (mag(v, d)) plaats(v, d, null, v.isBoek ? "boek" : "trainer");
+    }
+  }
+
+  // De minst-gebruikte boek-kandidaat (balanceert engels ↔ overige boek-vakken),
+  // tiebreak op prioriteit. Vakken met `dagelijks: true` zijn op deze dag al
+  // geplaatst en worden door `mag()` (same-vak-check) automatisch overgeslagen.
   const kiesBoek = (d: DagToewijzing): VakInput | undefined =>
     prioriteit
       .filter((v) => v.isBoek && mag(v, d))
       .sort((a, b) => (sessies.get(a.vak) ?? 0) - (sessies.get(b.vak) ?? 0))[0];
 
   for (const d of leerDagen) {
-    // 1) Reserveer op een volle leerdag één boek-slot (wiskunde/engels krijgen zo
-    //    dagelijks ruimte; op gereduceerde dagen geen boek).
+    // 0) Dagelijkse vakken (wiskunde) eerst — gegarandeerd slot op leer/zondag,
+    //    overgeslagen op gereduceerde dagen via `mag`.
+    plaatsDagelijks(d);
+    // 1) Op een gewone leerdag ook een roterend boek-slot voor de overige boek-
+    //    vakken (engels). Op gereduceerde dagen geen boek.
     if (d.type === "leer") {
       const boek = kiesBoek(d);
       if (boek) plaats(boek, d, null, "boek");
@@ -146,6 +168,10 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
   // nog landen (vangnet); daarna review, gebalanceerd over álle vakken (minst-herhaald
   // eerst), met content-vakken vóór boek-vakken op gelijke stand.
   for (const d of bufferDagen) {
+    // Dagelijkse vakken (wiskunde) krijgen ook hier elke buffer-dag een slot
+    // (geen gereduceerde dagen in de herhaalweek). Wordt geboekt als "boek" zodat
+    // Stijn doorgaat in zijn boek; review van content-vakken vult de rest.
+    plaatsDagelijks(d);
     while (d.blokken.length < CAP[d.type]) {
       const leftover = prioriteit.find((v) => !v.isBoek && (queue.get(v.vak)!.length > 0) && mag(v, d));
       if (leftover) {

@@ -108,3 +108,42 @@ describe("planPeriode — herplannen & overflow", () => {
     expect(bufferBlokken.every((b) => b.soort === "review" || b.soort === "boek")).toBe(true);
   });
 });
+
+describe("planPeriode — dagelijks (wiskunde-afspraak)", () => {
+  function metDagelijksWiskunde(): VakInput[] {
+    const v = basisVakken();
+    const wis = v.find((x) => x.vak === "wiskunde")!;
+    wis.dagelijks = true;
+    return v;
+  }
+
+  it("plaatst wiskunde op elke niet-gereduceerde leer-dag", () => {
+    const res = planPeriode(metDagelijksWiskunde(), WEEK1, "2026-06-08");
+    const leerDagen = res.dagen.filter((d) => d.type === "leer");
+    for (const d of leerDagen) {
+      expect(d.blokken.some((b) => b.vak === "wiskunde")).toBe(true);
+    }
+  });
+
+  it("plaatst wiskunde NOOIT op een gereduceerde dag (wo/za)", () => {
+    const res = planPeriode(metDagelijksWiskunde(), WEEK1, "2026-06-08");
+    const gered = res.dagen.filter((d) => d.type === "gereduceerd");
+    for (const d of gered) {
+      expect(d.blokken.some((b) => b.vak === "wiskunde")).toBe(false);
+    }
+  });
+
+  it("plaatst wiskunde op elke buffer-dag (herhaalweek = ma–vr, geen gereduceerd)", () => {
+    const buffer: DagSlot[] = [
+      dag("2026-06-22", "buffer"), dag("2026-06-23", "buffer"),
+      dag("2026-06-24", "buffer"), dag("2026-06-25", "buffer"),
+      dag("2026-06-26", "buffer"),
+    ];
+    const res = planPeriode(metDagelijksWiskunde(), [...WEEK1, ...buffer], "2026-06-08");
+    const bufferDagen = res.dagen.filter((d) => d.type === "buffer");
+    expect(bufferDagen.length).toBe(5);
+    for (const d of bufferDagen) {
+      expect(d.blokken.some((b) => b.vak === "wiskunde")).toBe(true);
+    }
+  });
+});
