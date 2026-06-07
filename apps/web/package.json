@@ -15,6 +15,7 @@
     "@pww/shared": "*",
     "@pww/trainer-engine": "*",
     "@pww/planner-engine": "*",
+    "firebase": "^10.13.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

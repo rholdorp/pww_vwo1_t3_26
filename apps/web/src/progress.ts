@@ -2,8 +2,18 @@ import { applyResult, isDue, mastery, nieuwItem } from "@pww/trainer-engine";
 import type { ItemProgress, LeitnerBox, Uitkomst } from "@pww/shared";
 import type { GeplandBlok } from "@pww/planner-engine";
 
-// v0.1-prototype: voortgang in localStorage, gesleuteld op naam-slug (dezelfde
-// sleutel-aanpak als de latere Firestore-sync uit SPEC §9). Nog geen cross-device.
+// Voortgang in localStorage, gesleuteld op naam-slug. Bij actieve Firestore-
+// sync (zie firestoreSync.ts) wordt elke save doorgepushed naar de cloud en
+// updates van andere devices automatisch teruggesynct. Zonder Firebase-config
+// fungeert localStorage als enige opslag.
+
+// Lazy import zodat progress.ts/trainer-engine geen statische Firebase-dependency
+// hebben (bv. voor de validator-Node-runs).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let pushSync: ((naam: string) => void) | null = null;
+void import("./firestoreSync").then((m) => {
+  pushSync = m.schedulePush;
+});
 
 function vandaag(): string {
   return new Date().toISOString().slice(0, 10);
@@ -35,6 +45,7 @@ export function load(naam: string): Store {
 
 function save(naam: string, store: Store): void {
   localStorage.setItem(key(naam), JSON.stringify(store));
+  pushSync?.(naam);
 }
 
 export function progressVoor(naam: string, itemId: string): ItemProgress {
@@ -108,6 +119,7 @@ function laadSchrijf(naam: string): SchrijfStore {
 }
 function bewaarSchrijf(naam: string, s: SchrijfStore): void {
   localStorage.setItem(schrijfKey(naam), JSON.stringify(s));
+  pushSync?.(naam);
 }
 export function laatsteScore(naam: string, opdrachtId: string): number | undefined {
   return laadSchrijf(naam)[opdrachtId]?.score;

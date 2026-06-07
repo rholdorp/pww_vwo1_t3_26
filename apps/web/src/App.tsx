@@ -39,6 +39,7 @@ import {
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, type BlokStatusKind } from "./planner";
 import { logResultaat, mijlpaalStand, streakDagen, MIJLPALEN } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
+import { startSync, stopSync, flushPush } from "./firestoreSync";
 
 type Tab = "vandaag" | "kalender" | "oefenen" | "voortgang";
 type Actief =
@@ -50,6 +51,26 @@ export default function App() {
   const [naam, setNaam] = useState<string | null>(() => huidigeNaam());
   const [tab, setTab] = useState<Tab>("vandaag");
   const [actief, setActief] = useState<Actief>(null);
+  // Bump bij elke binnenkomende Firestore-update zodat React re-render't —
+  // localStorage is dan al bijgewerkt door firestoreSync.
+  const [, setSyncTick] = useState(0);
+
+  // Firestore-sync activeren zodra de naam bekend is, en weer afsluiten op
+  // unmount / naam-wissel. Updates van andere devices triggeren een re-render
+  // via het pww-progress-updated event.
+  useEffect(() => {
+    if (!naam) return;
+    startSync(naam);
+    const handler = () => setSyncTick((t) => t + 1);
+    window.addEventListener("pww-progress-updated", handler);
+    const beforeUnload = () => flushPush(naam);
+    window.addEventListener("beforeunload", beforeUnload);
+    return () => {
+      window.removeEventListener("pww-progress-updated", handler);
+      window.removeEventListener("beforeunload", beforeUnload);
+      stopSync();
+    };
+  }, [naam]);
 
   if (!naam) {
     return <NaamPoort onKlaar={(n) => { zetNaam(n); setNaam(n); }} />;
@@ -640,7 +661,13 @@ function SchrijfTrainer({
     setFout(null);
     setGeenKey(false);
     try {
-      const r = await fetch("/api/schrijf-feedback", {
+      // Dev: Vite-middleware op /api/schrijf-feedback (ANTHROPIC_API_KEY in .env)
+      // Prod: Cloud Function (VITE_FUNCTIONS_BASE_URL + /schrijfFeedback)
+      const base = import.meta.env.VITE_FUNCTIONS_BASE_URL;
+      const endpoint = base
+        ? `${base.replace(/\/$/, "")}/schrijfFeedback`
+        : "/api/schrijf-feedback";
+      const r = await fetch(endpoint, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
