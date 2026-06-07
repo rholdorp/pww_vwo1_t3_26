@@ -6,68 +6,78 @@
       "titel": "Topografie Zuidoost-Azië",
       "hoofdstuk": "5",
       "normalisatie": "exact",
-      "benoemVraag": "Welk land is dit?",
+      "benoemVraag": "Welk land of welke oceaan is dit?",
       "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png",
       "markers": [
         {
           "id": "id-china",
           "x": 52,
-          "y": 9
+          "y": 11
         },
         {
           "id": "id-myanmar",
-          "x": 19,
+          "x": 22,
           "y": 24
         },
         {
           "id": "id-laos",
-          "x": 41,
+          "x": 36,
           "y": 27
         },
         {
           "id": "id-vietnam",
           "x": 50,
-          "y": 46
-        },
-        {
-          "id": "id-thailand",
-          "x": 31,
-          "y": 40
-        },
-        {
-          "id": "id-cambodja",
-          "x": 43,
           "y": 45
         },
         {
+          "id": "id-thailand",
+          "x": 34,
+          "y": 38
+        },
+        {
+          "id": "id-cambodja",
+          "x": 42,
+          "y": 43
+        },
+        {
           "id": "id-maleisie",
-          "x": 36,
-          "y": 59
+          "x": 60,
+          "y": 68
         },
         {
           "id": "id-singapore",
-          "x": 37,
+          "x": 39,
           "y": 71
         },
         {
           "id": "id-indonesie",
-          "x": 32,
-          "y": 82
+          "x": 60,
+          "y": 80
         },
         {
           "id": "id-filipijnen",
-          "x": 83,
-          "y": 38
+          "x": 84,
+          "y": 45
         },
         {
           "id": "id-brunei",
-          "x": 62,
-          "y": 66
+          "x": 65,
+          "y": 63
         },
         {
           "id": "id-oost-timor",
-          "x": 88,
-          "y": 91
+          "x": 91,
+          "y": 95
+        },
+        {
+          "id": "id-indische-oceaan",
+          "x": 15,
+          "y": 85
+        },
+        {
+          "id": "id-stille-oceaan",
+          "x": 95,
+          "y": 30
         }
       ],
       "regios": [
@@ -136,6 +146,18 @@
           "acceptedAnswers": [
             "oost timor",
             "timor-leste"
+          ]
+        },
+        {
+          "id": "id-indische-oceaan",
+          "naam": "Indische Oceaan"
+        },
+        {
+          "id": "id-stille-oceaan",
+          "naam": "Stille Oceaan",
+          "acceptedAnswers": [
+            "Grote Oceaan",
+            "Grote/Stille Oceaan"
           ]
         }
       ]
