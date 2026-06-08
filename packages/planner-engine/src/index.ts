@@ -38,6 +38,10 @@ export interface VakInput {
    * blijven via de roterende kiesBoek-logica concurreren.
    */
   dagelijks?: boolean;
+  /** Niet inplannen vóór deze ISO-datum (bv. wiskunde eenmalig uitstellen tot morgen). */
+  nietVoor?: string;
+  /** Minimaal aantal dagen tussen twee leerblokken van dit vak (spreiding, bv. nederlands). */
+  minIntervalDagen?: number;
   /** Nog niet-afgeronde vak-blokken, in leervolgorde (leeg voor boek-vakken). */
   pending: VakBlok[];
   /** Alle trainer-blok-ids van het vak (voor review-blokken in de herhaalweek). */
@@ -90,15 +94,25 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
   );
   const queue = new Map(vakken.map((v) => [v.vak, [...v.pending]]));
   const sessies = new Map(vakken.map((v) => [v.vak, 0]));
+  const laatst = new Map<string, string>(); // vak → laatste plaatsingsdatum (voor spreiding)
+  const dagDiff = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000);
 
   const vakkenOp = (d: DagToewijzing) => new Set(d.blokken.map((b) => b.vak));
-  function mag(v: VakInput, d: DagToewijzing): boolean {
+  // Basisregels die voor élke plaatsing gelden (capaciteit, max 3 vakken/dag, 1/vak/dag, cap).
+  function basisOk(v: VakInput, d: DagToewijzing): boolean {
     if (d.blokken.length >= CAP[d.type]) return false;
     const op = vakkenOp(d);
     if (op.has(v.vak)) return false; // max 1 leerblok per vak per dag
     if (op.size >= 3) return false; // max 3 vakken per dag
-    if (d.type === "gereduceerd" && !v.gereduceerdOk) return false;
     if (v.maxSessies != null && (sessies.get(v.vak) ?? 0) >= v.maxSessies) return false;
+    return true;
+  }
+  function mag(v: VakInput, d: DagToewijzing): boolean {
+    if (!basisOk(v, d)) return false;
+    if (d.type === "gereduceerd" && !v.gereduceerdOk) return false;
+    if (v.nietVoor && d.datum < v.nietVoor) return false; // uitgesteld
+    const vorige = laatst.get(v.vak);
+    if (v.minIntervalDagen && vorige && dagDiff(vorige, d.datum) < v.minIntervalDagen) return false;
     return true;
   }
   function plaats(v: VakInput, d: DagToewijzing, blok: VakBlok | null, soort: GeplandeSoort) {
@@ -109,7 +123,17 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
       soort,
     });
     sessies.set(v.vak, (sessies.get(v.vak) ?? 0) + 1);
+    laatst.set(v.vak, d.datum);
   }
+  // Review-plaatsing (herhaalweek + gereduceerde dagen): negeert gereduceerdOk en
+  // de spreidings-/uitstel-regels — het is lichte herhaling, geen nieuwe stof.
+  function magReview(v: VakInput, d: DagToewijzing): boolean {
+    return basisOk(v, d) && !(v.nietVoor && d.datum < v.nietVoor);
+  }
+  const kiesReview = (d: DagToewijzing): VakInput | undefined =>
+    prioriteit
+      .filter((v) => !v.isBoek && magReview(v, d))
+      .sort((a, b) => (sessies.get(a.vak) ?? 0) - (sessies.get(b.vak) ?? 0))[0];
 
   const leerDagen = dagen.filter((d) => d.type === "leer" || d.type === "gereduceerd");
   const bufferDagen = dagen.filter((d) => d.type === "buffer");
@@ -154,6 +178,12 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
       if (!boek) break;
       plaats(boek, d, null, "boek");
     }
+    // 4) Gereduceerde dag (wo/za) nog leeg? Rustdag ≠ niks → licht review-blok
+    //    (van een content-vak, minst-herhaald eerst; bv. geschiedenis).
+    if (d.type === "gereduceerd" && d.blokken.length === 0) {
+      const rev = kiesReview(d);
+      if (rev) plaats(rev, d, null, "review");
+    }
   }
 
   // Content die niet vóór de herhaalweek paste → waarschuwing (SPEC §7 pacing).
@@ -179,7 +209,7 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
         continue;
       }
       const kandidaten = prioriteit
-        .filter((v) => mag(v, d))
+        .filter((v) => magReview(v, d))
         .sort(
           (a, b) =>
             (sessies.get(a.vak) ?? 0) - (sessies.get(b.vak) ?? 0) ||

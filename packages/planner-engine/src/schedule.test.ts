@@ -58,11 +58,19 @@ describe("planPeriode — harde regels", () => {
     }
   });
 
-  it("gereduceerde dagen bevatten alleen makkelijke (gereduceerdOk) vakken — geen wiskunde/frans", () => {
+  it("gereduceerde dagen: geen boek-vakken; nieuwe content alleen Bio/AK (review mag breder)", () => {
     const easy = new Set(["biologie", "aardrijkskunde"]);
     for (const d of res.dagen.filter((d) => d.type === "gereduceerd")) {
-      for (const b of d.blokken) expect(easy.has(b.vak)).toBe(true);
+      for (const b of d.blokken) {
+        expect(["wiskunde", "engels"]).not.toContain(b.vak); // geen boek-vak op een rustdag
+        if (b.soort === "trainer") expect(easy.has(b.vak)).toBe(true); // nieuwe content: alleen makkelijk
+      }
     }
+  });
+
+  it("gereduceerde dag is niet leeg als er review mogelijk is (rustdag ≠ niks)", () => {
+    const gereduceerd = res.dagen.filter((d) => d.type === "gereduceerd");
+    for (const d of gereduceerd) expect(d.blokken.length).toBeGreaterThan(0);
   });
 
   it("nederlands komt niet vaker dan maxSessies (3) voor", () => {

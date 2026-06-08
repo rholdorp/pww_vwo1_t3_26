@@ -117,6 +117,15 @@ const MOEILIJKHEID: Record<string, 1 | 2 | 3> = {
 // Alleen makkelijke Cat-1-vakken mogen op een gereduceerde dag (wo/za, SPEC §7).
 const GEREDUCEERD_OK = new Set(["biologie", "aardrijkskunde"]);
 
+// Vakken die (nog) niet ingepland worden — handmatige knoppen (Ralph 2026-06-08).
+//  - engels: geen content/materiaal → voorlopig helemaal uit het plan.
+const GEPAUZEERD = new Set(["engels"]);
+//  - wiskunde: eenmalig uitstellen tot 9 juni (we hopen het antwoordenboekje +
+//    een echte trainer te krijgen). Verwijder deze regel zodra wiskunde mee mag.
+const VAK_NIET_VOOR: Record<string, string> = { wiskunde: "2026-06-09" };
+// Spreiding: minimaal aantal dagen tussen twee leerblokken van een vak (anti-clustering).
+const MIN_INTERVAL: Record<string, number> = { nederlands: 4 };
+
 /** Grove tijdsschatting per trainer-blok (min). Heuristiek; later te finetunen. */
 export function duurMin(blok: Blok): number {
   if (blok.soort === "schrijven") return 30;
@@ -179,24 +188,28 @@ export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaa
     if (!perVak.has(b.vak)) perVak.set(b.vak, []);
     perVak.get(b.vak)!.push(b);
   }
-  const vakInputs: VakInput[] = Object.keys(PWW_DATUM).map((vak) => {
-    const vakBlokken = (perVak.get(vak) ?? [])
-      .slice()
-      .sort((a, b) => a.hoofdstuk.localeCompare(b.hoofdstuk) || a.titel.localeCompare(b.titel));
-    const nietAf = vakBlokken.filter((b) => blokStatus(naam, b).status !== "afgevinkt");
-    return {
-      vak,
-      pwwDatum: PWW_DATUM[vak] ?? PWW_EIND,
-      moeilijkheid: MOEILIJKHEID[vak] ?? 2,
-      gereduceerdOk: GEREDUCEERD_OK.has(vak),
-      isBoek: vakBlokken.length === 0,
-      maxSessies: vak === "nederlands" ? 3 : undefined,
-      // Afspraak Ralph/Stijn (2026-06-07): wiskunde elke niet-gereduceerde dag.
-      // Geldt ook in de herhaalweek (ma–vr 22–26 juni). 5/7 dagen totaal per week.
-      dagelijks: vak === "wiskunde",
-      pending: pakVakBlokken(vak, nietAf),
-      alleBlokIds: vakBlokken.map((b) => b.id),
-    };
-  });
+  const vakInputs: VakInput[] = Object.keys(PWW_DATUM)
+    .filter((vak) => !GEPAUZEERD.has(vak))
+    .map((vak) => {
+      const vakBlokken = (perVak.get(vak) ?? [])
+        .slice()
+        .sort((a, b) => a.hoofdstuk.localeCompare(b.hoofdstuk) || a.titel.localeCompare(b.titel));
+      const nietAf = vakBlokken.filter((b) => blokStatus(naam, b).status !== "afgevinkt");
+      return {
+        vak,
+        pwwDatum: PWW_DATUM[vak] ?? PWW_EIND,
+        moeilijkheid: MOEILIJKHEID[vak] ?? 2,
+        gereduceerdOk: GEREDUCEERD_OK.has(vak),
+        isBoek: vakBlokken.length === 0,
+        maxSessies: vak === "nederlands" ? 3 : undefined,
+        // Afspraak Ralph/Stijn: wiskunde elke niet-gereduceerde dag (5/7 per week),
+        // ook in de herhaalweek.
+        dagelijks: vak === "wiskunde",
+        nietVoor: VAK_NIET_VOOR[vak],
+        minIntervalDagen: MIN_INTERVAL[vak],
+        pending: pakVakBlokken(vak, nietAf),
+        alleBlokIds: vakBlokken.map((b) => b.id),
+      };
+    });
   return planPeriode(vakInputs, roosterSlots(), vandaagISO);
 }

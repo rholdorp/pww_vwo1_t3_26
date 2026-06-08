@@ -991,12 +991,16 @@ function Vandaag({
 }) {
   const datum = vandaagISO();
   const blokById = useMemo(() => new Map(BLOKKEN.map((b) => [b.id, b])), []);
+  // Vandaag leunt op dezelfde engine + het bevroren dagschema als de Kalender,
+  // zodat beide schermen identiek zijn. Boek-blokken (wiskunde/engels) leveren geen
+  // trainer-blokjes → die verschijnen op de kalender, niet als startbare items hier.
   const [planIds] = useState<string[]>(() => {
-    const bewaard = laadDagplan(naam, datum);
-    if (bewaard && bewaard.length) return bewaard;
-    const ids = planVandaag(BLOKKEN, naam, datum).map((p) => p.blok.id);
-    bewaarDagplan(naam, datum, ids);
-    return ids;
+    let dag = laadDagschema(naam, datum);
+    if (!dag) {
+      dag = kalenderSchema(naam, datum).dagen.find((d) => d.datum === datum)?.blokken ?? [];
+      bewaarDagschema(naam, datum, dag);
+    }
+    return dag.flatMap((b) => b.trainerBlokIds);
   });
   const items = planIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
   const statussen = items.map((b) => ({ blok: b, st: blokStatus(naam, b) }));
