@@ -20,6 +20,7 @@ import {
   vakLabel,
   vakKleur,
   richtingLabel,
+  kanLeren,
   SOORT_ICON,
   SCHRIJFOPDRACHTEN,
   BLOKKEN,
@@ -52,6 +53,7 @@ import { startSync, stopSync, flushPush } from "./firestoreSync";
 type Tab = "vandaag" | "kalender" | "oefenen" | "voortgang";
 type Actief =
   | { type: "train"; blok: Blok; richting?: Richting }
+  | { type: "leer"; blok: Blok }
   | { type: "schrijf"; opdracht: Schrijfopdracht }
   | null;
 
@@ -98,6 +100,9 @@ export default function App() {
     }
     setActief({ type: "train", blok, richting });
   }
+  function startLeer(blok: Blok) {
+    setActief({ type: "leer", blok });
+  }
 
   if (actief) {
     return (
@@ -121,6 +126,14 @@ export default function App() {
             richting={actief.richting}
             onExit={() => setActief(null)}
           />
+        ) : actief.type === "leer" ? (
+          <LeerWeergave
+            key={actief.blok.id}
+            naam={naam}
+            blok={actief.blok}
+            onExit={() => setActief(null)}
+            onOefen={() => setActief({ type: "train", blok: actief.blok })}
+          />
         ) : (
           <SchrijfTrainer key={actief.opdracht.id} naam={naam} opdracht={actief.opdracht} onExit={() => setActief(null)} />
         )}
@@ -135,9 +148,9 @@ export default function App() {
         <span className="naam">{naam}</span>
       </header>
 
-      {tab === "vandaag" && <Vandaag naam={naam} onStart={startBlok} onNaarOefenen={() => setTab("oefenen")} />}
-      {tab === "kalender" && <Kalender naam={naam} onStart={startBlok} />}
-      {tab === "oefenen" && <Home naam={naam} onStart={startBlok} />}
+      {tab === "vandaag" && <Vandaag naam={naam} onStart={startBlok} onLeer={startLeer} onNaarOefenen={() => setTab("oefenen")} />}
+      {tab === "kalender" && <Kalender naam={naam} onStart={startBlok} onLeer={startLeer} />}
+      {tab === "oefenen" && <Home naam={naam} onStart={startBlok} onLeer={startLeer} />}
       {tab === "voortgang" && <Voortgang naam={naam} />}
 
       <nav className="bottomnav">
@@ -180,9 +193,11 @@ function NaamPoort({ onKlaar }: { onKlaar: (naam: string) => void }) {
 function Home({
   naam,
   onStart,
+  onLeer,
 }: {
   naam: string;
   onStart: (blok: Blok, richting?: Richting) => void;
+  onLeer: (blok: Blok) => void;
 }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const [gekozenVak, setGekozenVak] = useState<string | null>(null);
@@ -213,7 +228,7 @@ function Home({
                   : `Hoofdstuk ${h.hoofdstuk}`}
             </h3>
             {h.blokken.map((blok) => (
-              <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} />
+              <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} onLeer={onLeer} />
             ))}
           </div>
         ))}
@@ -262,11 +277,13 @@ function BlokKaart({
   blok,
   kleur,
   onStart,
+  onLeer,
 }: {
   naam: string;
   blok: Blok;
   kleur: string;
   onStart: (blok: Blok, richting?: Richting) => void;
+  onLeer?: (blok: Blok) => void;
 }) {
   if (blok.soort === "schrijven") {
     const score = blok.opdrachtId ? laatsteScore(naam, blok.opdrachtId) : undefined;
@@ -307,6 +324,11 @@ function BlokKaart({
         <div className="balk-vuller" style={{ width: `${m}%`, background: kleur }} />
       </div>
       <div className="knoppen">
+        {kanLeren(blok.soort) && onLeer && (
+          <button className="knop" style={{ borderColor: kleur }} onClick={() => onLeer(blok)}>
+            📚 Leren
+          </button>
+        )}
         {blok.soort === "woordjes" && blok.richtingen ? (
           blok.richtingen.map((r) => (
             <button key={r} className="knop" style={{ borderColor: kleur }} onClick={() => onStart(blok, r)}>
@@ -465,9 +487,9 @@ function Trainer({
           />
         ) : card.kind === "hotspot" ? (
           <HotspotKaart key={card.id + card.richting} card={card} kleur={kleur} onResultaat={volgende} />
-        ) : (
+        ) : card.kind === "flip" ? (
           <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
-        )}
+        ) : null}
       </div>
 
       <button className="link" onClick={onExit}>Stoppen</button>
@@ -690,6 +712,216 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
 
       <button className="link" onClick={onExit}>Stoppen</button>
     </main>
+  );
+}
+
+// ── Leren-modus — stof eerst bekijken, zonder beoordeling ────────────────────
+// Twee weergaven voor kaart-blokken: "bladeren" (één kaart tegelijk, term +
+// uitleg samen zichtbaar) en "lijst" (alles onder elkaar, als samenvattingsblad).
+// Diagram-blokken krijgen een verkenmodus: tik op een onderdeel of naam → het
+// licht op in de afbeelding. Leren geeft géén mastery (dat blijft aan Oefenen),
+// maar telt vanaf 2 minuten wel mee als sessie (streak + focus-bonus).
+
+type LeerItem = { id: string; term: string; uitleg: string; rubric?: string[]; image?: string };
+
+function LeerWeergave({
+  naam,
+  blok,
+  onExit,
+  onOefen,
+}: {
+  naam: string;
+  blok: Blok;
+  onExit: () => void;
+  onOefen: () => void;
+}) {
+  const kleur = vakKleur(blok.vak);
+  const cards = useMemo(() => blok.bouwCards(), [blok]);
+  const hotspots = useMemo(() => {
+    const per = new Map<string, Extract<Card, { kind: "hotspot" }>>();
+    for (const c of cards) if (c.kind === "hotspot" && !per.has(c.targetId)) per.set(c.targetId, c);
+    return [...per.values()];
+  }, [cards]);
+  const items = useMemo(
+    () =>
+      cards.flatMap((c): LeerItem[] =>
+        c.kind === "typed"
+          ? [{ id: c.id, term: c.answer, uitleg: c.prompt, image: c.image }]
+          : c.kind === "flip"
+            ? [{ id: c.id, term: c.front, uitleg: c.back, rubric: c.rubric, image: c.image }]
+            : [],
+      ),
+    [cards],
+  );
+  const [weergave, setWeergave] = useState<"bladeren" | "lijst">("bladeren");
+  const [index, setIndex] = useState(0);
+  const startRef = useRef<number>(Date.now());
+
+  // Log de leersessie bij het verlaten — pas vanaf 2 min, zodat even
+  // binnengluren geen streak-dag oplevert. mastery komt uit blokStatus en
+  // verandert hier dus niet: punten blijven aan Oefenen voorbehouden.
+  useEffect(() => {
+    return () => {
+      const duurSec = Math.floor((Date.now() - startRef.current) / 1000);
+      if (duurSec < 120) return;
+      const st = blokStatus(naam, blok);
+      logResultaat(naam, {
+        blokId: blok.id,
+        vak: blok.vak,
+        soort: "leren",
+        mastery: st.mastery,
+        afgevinkt: st.status === "afgevinkt",
+        duurSec,
+      });
+    };
+  }, [naam, blok]);
+
+  const huidig = items.length ? items[Math.min(index, items.length - 1)] : null;
+
+  return (
+    <main className="trainer">
+      <div className="trainer-kop">
+        <span className="vak-stip" style={{ background: kleur }} />
+        <span className="muted klein">{vakLabel(blok.vak)} · {blok.titel} · leren</span>
+      </div>
+
+      {hotspots.length > 0 ? (
+        <DiagramLeer hotspots={hotspots} kleur={kleur} />
+      ) : (
+        <>
+          <div className="leer-toggle">
+            {([["bladeren", "🃏 Bladeren"], ["lijst", "📖 Lijst"]] as const).map(([w, label]) => (
+              <button key={w} className={`knop ${weergave === w ? "aan" : ""}`} onClick={() => setWeergave(w)}>
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {weergave === "bladeren" && huidig ? (
+            <>
+              <div className="balk">
+                <div className="balk-vuller" style={{ width: `${Math.round(((index + 1) / items.length) * 100)}%`, background: kleur }} />
+              </div>
+              <div className="balk-tekst muted klein">
+                <span>kaart {index + 1} / {items.length}</span>
+                <span>kijken en onthouden — nog geen toets</span>
+              </div>
+              <div className="card kaart-groot">
+                {huidig.image && <img className="kaart-beeld" src={huidig.image} alt="" />}
+                <div className="prompt" style={{ color: kleur }}>{huidig.term}</div>
+                <div className="leer-uitleg">{huidig.uitleg}</div>
+                {huidig.rubric && huidig.rubric.length > 0 && (
+                  <ul className="rubric muted klein">
+                    {huidig.rubric.map((r, i) => (
+                      <li key={i}>{r}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div className="knoppen">
+                <button className="knop" disabled={index === 0} onClick={() => setIndex((i) => Math.max(0, i - 1))}>
+                  ← Vorige
+                </button>
+                {index < items.length - 1 ? (
+                  <button
+                    className="knop primair"
+                    style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
+                    onClick={() => setIndex((i) => Math.min(items.length - 1, i + 1))}
+                  >
+                    Volgende →
+                  </button>
+                ) : (
+                  <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} onClick={onOefen}>
+                    Nu oefenen →
+                  </button>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="card leer-lijst">
+              {items.map((it) => (
+                <div key={it.id} className="leer-rij">
+                  <div className="leer-term" style={{ color: kleur }}>{it.term}</div>
+                  <div className="leer-uitleg klein">{it.uitleg}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+
+      <div className="knoppen">
+        <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} onClick={onOefen}>
+          Nu oefenen →
+        </button>
+        <button className="knop" onClick={onExit}>Terug</button>
+      </div>
+    </main>
+  );
+}
+
+function DiagramLeer({ hotspots, kleur }: { hotspots: Extract<Card, { kind: "hotspot" }>[]; kleur: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [sel, setSel] = useState<string | null>(hotspots[0]?.targetId ?? null);
+  const eerste = hotspots[0];
+
+  // Geselecteerde regio oplichten — zelfde .target-styling als de benoem-trainer.
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    root.querySelectorAll(".region.target").forEach((el) => el.classList.remove("target"));
+    if (sel) root.querySelector(`.region[data-region="${sel}"]`)?.classList.add("target");
+  }, [sel]);
+
+  // Andersom verkennen: tik op een onderdeel in de afbeelding → selecteer het.
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    const onClick = (e: Event) => {
+      const t = (e.target as Element).closest(".region");
+      if (t) setSel(t.getAttribute("data-region"));
+    };
+    root.addEventListener("click", onClick);
+    return () => root.removeEventListener("click", onClick);
+  }, []);
+
+  if (!eerste) return null;
+  const gekozen = hotspots.find((h) => h.targetId === sel);
+
+  return (
+    <div className="hotspot">
+      <div className="muted klein">Tik op een onderdeel in de afbeelding, of op een naam eronder — het licht op.</div>
+      {eerste.svgInline ? (
+        <div className="diagram-svg" ref={ref} dangerouslySetInnerHTML={{ __html: eerste.svgInline }} />
+      ) : eerste.image ? (
+        <div className="diagram-overlay" ref={ref}>
+          <img src={eerste.image} alt="" />
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            {(eerste.markers ?? []).map((m) => (
+              <circle key={m.id} className="region marker" data-region={m.id} cx={m.x} cy={m.y} r={3.2} />
+            ))}
+          </svg>
+        </div>
+      ) : null}
+      {gekozen && (
+        <div className="leer-gekozen">
+          <b style={{ color: kleur }}>{gekozen.naam}</b>
+          {gekozen.hint && <span className="muted klein"> — {gekozen.hint}</span>}
+        </div>
+      )}
+      <div className="leer-legenda">
+        {hotspots.map((h) => (
+          <button
+            key={h.targetId}
+            className={`leer-chip ${h.targetId === sel ? "actief" : ""}`}
+            style={h.targetId === sel ? { borderColor: kleur, color: kleur } : undefined}
+            onClick={() => setSel(h.targetId)}
+          >
+            {h.naam}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -1216,10 +1448,12 @@ function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number;
 function Vandaag({
   naam,
   onStart,
+  onLeer,
   onNaarOefenen,
 }: {
   naam: string;
   onStart: (blok: Blok, richting?: Richting) => void;
+  onLeer: (blok: Blok) => void;
   onNaarOefenen: () => void;
 }) {
   const datum = vandaagISO();
@@ -1298,6 +1532,11 @@ function Vandaag({
                 <div className="balk-vuller" style={{ width: `${Math.round(st.mastery * 100)}%`, background: kleur }} />
               </div>
               <div className="knoppen">
+                {kanLeren(blok.soort) && (
+                  <button className="knop" style={{ borderColor: kleur }} onClick={() => onLeer(blok)}>
+                    📚 Leren
+                  </button>
+                )}
                 {blok.soort === "woordjes" && blok.richtingen ? (
                   blok.richtingen.map((r) => (
                     <button key={r} className="knop" style={{ borderColor: kleur }} onClick={() => onStart(blok, r)}>
@@ -1404,7 +1643,7 @@ const VAK_AFK: Record<string, string> = {
 };
 const WEEKDAGEN = ["ma", "di", "wo", "do", "vr", "za", "zo"];
 
-function Kalender({ naam, onStart }: { naam: string; onStart: (blok: Blok, richting?: Richting) => void }) {
+function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blok, richting?: Richting) => void; onLeer: (blok: Blok) => void }) {
   const vandaag = vandaagISO();
   const blokById = useMemo(() => new Map(BLOKKEN.map((b) => [b.id, b])), []);
   const schema = useMemo(() => kalenderSchema(naam, vandaag), [naam, vandaag]);
@@ -1504,16 +1743,16 @@ function Kalender({ naam, onStart }: { naam: string; onStart: (blok: Blok, richt
         🎯 toets · 📕 uit boek · ✓ gedaan · ◐ deels (komt terug) · ↻ herhalen
       </div>
 
-      {sel && <KalenderDag naam={naam} datum={sel} label={maandLabel(sel)} blokken={dagBlokken(sel)} isVandaag={sel === vandaag} blokById={blokById} onStart={onStart} />}
+      {sel && <KalenderDag naam={naam} datum={sel} label={maandLabel(sel)} blokken={dagBlokken(sel)} isVandaag={sel === vandaag} blokById={blokById} onStart={onStart} onLeer={onLeer} />}
     </main>
   );
 }
 
 function KalenderDag({
-  naam, datum, label, blokken, isVandaag, blokById, onStart,
+  naam, datum, label, blokken, isVandaag, blokById, onStart, onLeer,
 }: {
   naam: string; datum: string; label: string; blokken: GeplandBlok[]; isVandaag: boolean;
-  blokById: Map<string, Blok>; onStart: (blok: Blok, richting?: Richting) => void;
+  blokById: Map<string, Blok>; onStart: (blok: Blok, richting?: Richting) => void; onLeer: (blok: Blok) => void;
 }) {
   const isToekomst = datum > vandaagISO();
   return (
@@ -1563,7 +1802,7 @@ function KalenderDag({
             }
             // Echte trainer-blokken: render elk als volwaardige BlokKaart, altijd klikbaar.
             return trainers.map((t) => (
-              <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} />
+              <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} onLeer={onLeer} />
             ));
           })}
         </>

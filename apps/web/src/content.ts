@@ -162,6 +162,16 @@ export const SOORT_LABEL: Record<BlokSoort, string> = {
   diagram: "Op de afbeelding",
   opgaven: "Opgaven oefenen",
 };
+/**
+ * Soorten met een aparte leer-weergave: eerst de stof bekijken (samenvatting /
+ * bladeren / diagram verkennen), daarna pas oefenen. Invullen/vertalen/schrijven
+ * en wiskunde-opgaven zijn inherent doe-oefeningen — daar is geen kijk-stand voor.
+ */
+const LEERBAAR: ReadonlySet<BlokSoort> = new Set(["begrippen", "uitlegvragen", "diagram", "woordjes"]);
+export function kanLeren(soort: BlokSoort): boolean {
+  return LEERBAAR.has(soort);
+}
+
 export const SOORT_ICON: Record<BlokSoort, string> = {
   woordjes: "💬",
   begrippen: "📖",

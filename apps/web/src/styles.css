@@ -339,6 +339,25 @@ circle.region.target { fill: rgba(245,158,11,0.92); stroke: #f59e0b; stroke-widt
 .kal-detail-blok:first-of-type { border-top: none; }
 .kal-trainer-rij { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 2px 0; }
 
+/* Leren-modus (samenvatting / bladeren / diagram verkennen) */
+.leer-toggle { display: flex; gap: 8px; margin: 8px 0 12px; }
+.leer-toggle .knop { flex: 1 1 0; padding: 8px 12px; min-height: 0; font-size: 14px; }
+.leer-toggle .knop.aan { background: var(--primair); border-color: var(--primair); color: #fff; }
+.leer-uitleg { font-size: 17px; line-height: 1.45; }
+.leer-lijst { padding: 6px 16px; }
+.leer-rij { padding: 10px 0; border-top: 1px solid var(--rand); }
+.leer-rij:first-child { border-top: none; }
+.leer-term { font-weight: 800; font-size: 16px; margin-bottom: 2px; }
+.leer-gekozen { font-size: 18px; text-align: center; }
+.leer-legenda { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.leer-chip {
+  appearance: none; cursor: pointer; font-size: 13px; font-weight: 700;
+  padding: 6px 10px; border-radius: 999px;
+  background: var(--paneel-2); color: var(--muted); border: 1px solid var(--rand); white-space: nowrap;
+}
+.leer-chip:hover { border-color: var(--primair); color: var(--tekst); }
+.leer-chip.actief { background: var(--paneel); border-width: 2px; }
+
 /* Voortgang */
 .voortgang-blokken { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
 .voortgang-rij { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
