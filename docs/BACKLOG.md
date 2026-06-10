@@ -33,12 +33,15 @@ _Laatst bijgewerkt: 2026-06-08_
     (symmetrie, driehoeken, vierhoeken, Z/F-hoeken + reken-regels) in `flashcards.json`,
     getrouw uit de boek-theorie. Plumbing voor figuur-bij-opgave is gebouwd (`afbeelding`
     op `Opgave`/`Card`, `°`-tolerantie in `wiskundeGelijk`, image-glob `assets/wiskunde/`).
-  - **Nog open:** §8.5 (machten en letters), binair-onderzoek; **H9 numerieke hoek-opgaven
-    met figuur** (Cat-2). Blokker: de bijlage-foto's die ik had waren de Herhaling/diagnostische
-    sectie (opg 1–16), niet de §9.3/§9.5-antwoorden (opg 25–78); + figuur-croppen uit de
-    gedraaide lesboekpagina's is bewerkelijk/foutgevoelig. Aanpak volgende slag: juiste
-    antwoordpagina's erbij + figuren zorgvuldig croppen (en zelf verifiëren). Validator-
-    grounding voor Cat 2 niet gewired → `gevalideerd` blijft false (vak nog niet "live").
+  - **H9 numerieke hoek-opgaven (2026-06-10):** **eerste set LIVE** — 10 Cat-2 hoek-opgaven
+    §9.3 (opg 41/42/43, gelijkbenige driehoek) mét bijgesneden figuur (`assets/wiskunde/h9/`),
+    via `scripts/build-wiskunde-h9-opgaven.mjs`. **Elk triple (vraag + figuur + antwoord) is
+    met de hand geverifieerd** tegen lesboek p167 + antwoordsleutel p41 + eigen geometrie-
+    controle. NB: een eerdere agent-run koppelde figuur-nr ≠ opgave-nr (mismatch) — opgevangen
+    bij verificatie (P8), niet geshipt. °-teken wordt door de matcher genegeerd (`70` = `70°`).
+  - **Nog open:** §8.5 (machten en letters), binair-onderzoek; **meer H9-hoek-opgaven**
+    (rest van §9.3 + §9.5 Z/F-hoeken) — zelfde recept: figuur croppen + boek-antwoord +
+    zelf verifiëren. Validator-grounding voor Cat 2 niet gewired → `gevalideerd` blijft false.
 - ✅ Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus. **LLM-rubric +
   samenvatting-lees-fase DESCOPED** (besluit 2026-06-07: flashcards volstaan; alleen NL krijgt LLM).
 - ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback via **Cloud Function**
