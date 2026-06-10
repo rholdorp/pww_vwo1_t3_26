@@ -286,6 +286,18 @@ circle.region.target { fill: rgba(245,158,11,0.92); stroke: #f59e0b; stroke-widt
 }
 .accent-knop:hover { border-color: var(--primair); }
 
+/* Cat 2 (wiskunde) — kralenketting + opgave-prompt */
+.onderdeel-rij { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 4px 0 2px; }
+.onderdeel-chip {
+  font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+  background: var(--paneel-2); color: var(--muted); border: 1px solid var(--rand); white-space: nowrap;
+}
+.onderdeel-chip.st-klaar { color: #16a34a; border-color: #16a34a55; }
+.onderdeel-chip.st-deels { color: #d97706; border-color: #d9770655; }
+.onderdeel-chip.st-vergrendeld { opacity: .55; }
+.onderdeel-chip.actief { background: var(--paneel); border-width: 2px; }
+.wiskunde-prompt { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 22px; }
+
 /* Sparkline + voortgang-filter */
 .voortgang-kop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .knop.filter { flex: none; padding: 8px 12px; min-height: 0; font-size: 13px; }

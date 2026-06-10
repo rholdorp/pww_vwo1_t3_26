@@ -8,6 +8,12 @@ import {
   startSession,
   submit,
   type SessionState,
+  startCat2,
+  huidigeOpgaveId,
+  isKlaarCat2,
+  beantwoordCat2,
+  wiskundeGelijk,
+  type Cat2State,
 } from "@pww/trainer-engine";
 import {
   vakGroepen,
@@ -24,6 +30,8 @@ import {
   blokMastery,
   huidigeNaam,
   record,
+  zetOnderdeelStatus,
+  onderdeelMastery,
   sessieVolgorde,
   zetNaam,
   laatsteScore,
@@ -98,7 +106,14 @@ export default function App() {
           <button className="link" onClick={() => setActief(null)}>← Terug</button>
           <span className="naam">{naam}</span>
         </header>
-        {actief.type === "train" ? (
+        {actief.type === "train" && actief.blok.soort === "opgaven" ? (
+          <Cat2Trainer
+            key={actief.blok.id}
+            naam={naam}
+            blok={actief.blok}
+            onExit={() => setActief(null)}
+          />
+        ) : actief.type === "train" ? (
           <Trainer
             key={actief.blok.id + (actief.richting ?? "")}
             naam={naam}
@@ -452,6 +467,223 @@ function Trainer({
           <HotspotKaart key={card.id + card.richting} card={card} kleur={kleur} onResultaat={volgende} />
         ) : (
           <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
+        )}
+      </div>
+
+      <button className="link" onClick={onExit}>Stoppen</button>
+    </main>
+  );
+}
+
+// ── Cat 2 (wiskunde) — adaptieve opgaven-trainer ─────────────────────────────
+function schud<T>(arr: readonly T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+type OpgaveCard = Extract<Card, { kind: "opgave" }>;
+
+function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit: () => void }) {
+  const kleur = vakKleur(blok.vak);
+  const cards = useMemo(
+    () => blok.bouwCards().filter((c): c is OpgaveCard => c.kind === "opgave"),
+    [blok],
+  );
+  const cardById = useMemo(() => new Map(cards.map((c) => [c.id, c])), [cards]);
+
+  // Schud de pool per onderdeel één keer; de engine trekt er deterministisch uit.
+  const maakEngineOpgaven = () => {
+    const per = new Map<string, OpgaveCard[]>();
+    for (const c of cards) {
+      if (!per.has(c.onderdeel)) per.set(c.onderdeel, []);
+      per.get(c.onderdeel)!.push(c);
+    }
+    const out: { id: string; onderdeel: string; onderdeelTitel: string; isSynthese: boolean }[] = [];
+    for (const [, lijst] of per)
+      for (const c of schud(lijst))
+        out.push({ id: c.id, onderdeel: c.onderdeel, onderdeelTitel: c.onderdeelTitel, isSynthese: c.isSynthese });
+    return out;
+  };
+
+  const [state, setState] = useState<Cat2State>(() => startCat2(maakEngineOpgaven()));
+  const [input, setInput] = useState("");
+  const [feedback, setFeedback] = useState<{ goed: boolean; answer: string } | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const startRef = useRef<number>(Date.now());
+  const [elapsedSec, setElapsedSec] = useState(0);
+
+  const klaar = isKlaarCat2(state);
+
+  useEffect(() => {
+    if (klaar) return;
+    const id = window.setInterval(() => setElapsedSec(Math.floor((Date.now() - startRef.current) / 1000)), 1000);
+    return () => window.clearInterval(id);
+  }, [klaar]);
+
+  useEffect(() => {
+    if (!klaar) return;
+    const st = blokStatus(naam, blok);
+    logResultaat(naam, {
+      blokId: blok.id,
+      vak: blok.vak,
+      soort: blok.soort,
+      mastery: st.mastery,
+      afgevinkt: st.status === "afgevinkt",
+      duurSec: Math.floor((Date.now() - startRef.current) / 1000),
+    });
+  }, [klaar, naam, blok]);
+
+  const syntheseVergrendeld = state.voortgang.some((v) => v.isSynthese && v.status === "vergrendeld");
+
+  if (klaar) {
+    const m = Math.round(onderdeelMastery(naam, blok.id, blok.onderdelen ?? []) * 100);
+    const focus = focusPunten(elapsedSec);
+    const klaarN = state.voortgang.filter((v) => v.status === "klaar").length;
+    const stand = mijlpaalStand(naam);
+    return (
+      <main className="lijst center">
+        <div className="card narrow afronding">
+          <h1>Klaar! 🎉</h1>
+          <p>{klaarN} van {state.voortgang.length} onderdelen afgerond deze ronde.</p>
+          <div className="score-groot" style={{ color: kleur }}>{m}%</div>
+          <p className="muted klein">van «{blok.titel}» (onderdelen ✓)</p>
+          <div className="afronding-stats">
+            <span>⏱️ {minSec(elapsedSec)}</span>
+            {focus > 0 && <span>🔥 focus +{focus}</span>}
+            <span>{stand.punten} pt totaal</span>
+          </div>
+          <div className="knoppen">
+            <button
+              className="knop primair"
+              style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
+              onClick={() => {
+                startRef.current = Date.now();
+                setElapsedSec(0);
+                setState(startCat2(maakEngineOpgaven()));
+                setInput("");
+                setFeedback(null);
+              }}
+            >
+              Nog een ronde
+            </button>
+            <button className="knop" onClick={onExit}>Terug</button>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const huidigeId = huidigeOpgaveId(state);
+  const card = huidigeId ? cardById.get(huidigeId) ?? null : null;
+  const actief = state.voortgang.find((v) => v.onderdeel === state.actief);
+  if (!card || !actief) return null;
+
+  function insert(ch: string) {
+    const el = inputRef.current;
+    const s = el?.selectionStart ?? input.length;
+    const e = el?.selectionEnd ?? input.length;
+    setInput(input.slice(0, s) + ch + input.slice(e));
+    requestAnimationFrame(() => {
+      el?.focus();
+      el?.setSelectionRange(s + ch.length, s + ch.length);
+    });
+  }
+  function nakijken() {
+    if (!card || feedback) return;
+    const goed = wiskundeGelijk(input, card.answer, card.accepted, card.exacteVorm);
+    record(naam, card.id, goed ? "goed" : "fout");
+    setFeedback({ goed, answer: card.answer });
+  }
+  function volgende() {
+    if (!feedback) return;
+    const ns = beantwoordCat2(state, feedback.goed);
+    for (const v of ns.voortgang)
+      if (v.status === "klaar" || v.status === "deels") zetOnderdeelStatus(naam, blok.id, v.onderdeel, v.status);
+    setState(ns);
+    setInput("");
+    setFeedback(null);
+  }
+
+  const statusIcon = (s: string) => (s === "klaar" ? "✓" : s === "deels" ? "•" : s === "vergrendeld" ? "🔒" : "");
+
+  return (
+    <main className="trainer">
+      <div className="trainer-kop">
+        <span className="vak-stip" style={{ background: kleur }} />
+        <span className="muted klein">{vakLabel(blok.vak)} · {blok.titel}</span>
+      </div>
+
+      {/* Kralenketting: onderdeel-status (losse eerst, synthese met slot) */}
+      <div className="onderdeel-rij">
+        {[...state.voortgang].map((v) => (
+          <span
+            key={v.onderdeel}
+            className={`onderdeel-chip ${v.onderdeel === state.actief ? "actief" : ""} st-${v.status}`}
+            style={v.onderdeel === state.actief ? { borderColor: kleur, color: kleur } : undefined}
+            title={`${v.titel} — ${v.goed}/${v.gevraagd} goed`}
+          >
+            {(v.titel.match(/§\d+\.\d+/)?.[0] ?? (v.isSynthese ? "Synthese" : "Voork."))} {statusIcon(v.status)}
+          </span>
+        ))}
+      </div>
+
+      <div className="balk-tekst muted klein">
+        <span>{actief.titel} · {actief.goed}/{actief.gevraagd} goed{syntheseVergrendeld ? " · 🔒 synthese komt later" : ""}</span>
+        <span className={`timer ${elapsedSec >= 1800 ? "t30" : elapsedSec >= 900 ? "t15" : ""}`}>
+          ⏱️ {minSec(elapsedSec)}{elapsedSec >= 1800 ? " 🔥+15" : elapsedSec >= 900 ? " 🔥+5" : ""}
+        </span>
+      </div>
+
+      <div className="card kaart-groot">
+        <div className="muted klein kaart-subtitel">✏️ Maak de som op papier, typ dan je eindantwoord — in de simpelste vorm.</div>
+        <div className="prompt wiskunde-prompt">{card.vraag}</div>
+
+        <input
+          ref={inputRef}
+          className="tekstveld"
+          autoFocus
+          placeholder="Je eindantwoord"
+          value={input}
+          readOnly={!!feedback}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key !== "Enter") return;
+            e.preventDefault();
+            if (feedback) volgende();
+            else nakijken();
+          }}
+        />
+
+        {!feedback && (
+          <div className="accent-rij">
+            {["^", "²", "³", "·", "/", "(", ")", "x", "-", "="].map((ch) => (
+              <button key={ch} type="button" className="accent-knop" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(ch)}>
+                {ch}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {feedback ? (
+          <>
+            <div className={`uitslag ${feedback.goed ? "goed" : "fout"}`}>
+              {feedback.goed ? "Goed! ✅" : "Helaas — niet de simpelste vorm of niet juist."}
+            </div>
+            {!feedback.goed && (
+              <div className="juiste">Juiste antwoord: <strong>{feedback.answer}</strong></div>
+            )}
+            <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} onClick={volgende}>
+              {feedback.goed ? "Volgende →" : "Probeer een vergelijkbare som →"}
+            </button>
+          </>
+        ) : (
+          <button className="knop primair" style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }} disabled={!input.trim()} onClick={nakijken}>
+            Nakijken
+          </button>
         )}
       </div>
 

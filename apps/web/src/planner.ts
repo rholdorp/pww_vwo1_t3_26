@@ -1,5 +1,5 @@
 import { BLOKKEN, type Blok, type BlokSoort } from "./content";
-import { blokMastery, isGezien, laatsteScore } from "./progress";
+import { blokMastery, isGezien, laatsteScore, onderdeelMastery, onderdeelGezien } from "./progress";
 import { planPeriode, type DagSlot, type DagType, type SchemaResultaat, type VakInput, type VakBlok } from "@pww/planner-engine";
 
 // PWW-rooster (SPEC §7, manifest.yaml). Bepaalt prioriteit: vak met de vroegste
@@ -23,6 +23,7 @@ const DREMPEL: Record<BlokSoort, number> = {
   diagram: 0.8,
   uitlegvragen: 0.6,
   schrijven: 0.7,
+  opgaven: 0.7, // Cat 2 (SPEC §8): afgevinkt bij ≥70% onderdelen ✓
 };
 
 export type BlokStatusKind = "open" | "deels" | "afgevinkt";
@@ -37,6 +38,14 @@ export function blokStatus(naam: string, blok: Blok): BlokStatus {
     const s = blok.opdrachtId ? laatsteScore(naam, blok.opdrachtId) : undefined;
     const mastery = s != null ? s / 10 : 0;
     const status: BlokStatusKind = s == null ? "open" : mastery >= DREMPEL.schrijven ? "afgevinkt" : "deels";
+    return { mastery, status };
+  }
+  if (blok.soort === "opgaven") {
+    // Cat 2: mastery = fractie onderdelen ✓ (niet per losse opgave).
+    const onderdelen = blok.onderdelen ?? [];
+    const mastery = onderdeelMastery(naam, blok.id, onderdelen);
+    const status: BlokStatusKind =
+      mastery >= DREMPEL.opgaven ? "afgevinkt" : onderdeelGezien(naam, blok.id, onderdelen) ? "deels" : "open";
     return { mastery, status };
   }
   const mastery = blokMastery(naam, blok.ids);
@@ -120,9 +129,8 @@ const GEREDUCEERD_OK = new Set(["biologie", "aardrijkskunde"]);
 // Vakken die (nog) niet ingepland worden — handmatige knoppen (Ralph 2026-06-08).
 //  - engels: geen content/materiaal → voorlopig helemaal uit het plan.
 const GEPAUZEERD = new Set(["engels"]);
-//  - wiskunde: eenmalig uitstellen tot 9 juni (we hopen het antwoordenboekje +
-//    een echte trainer te krijgen). Verwijder deze regel zodra wiskunde mee mag.
-const VAK_NIET_VOOR: Record<string, string> = { wiskunde: "2026-06-09" };
+//  - wiskunde heeft nu een echte Cat-2-trainer (H8) → geen boek/uitstel meer.
+const VAK_NIET_VOOR: Record<string, string> = {};
 // Spreiding: minimaal aantal dagen tussen twee leerblokken van een vak (anti-clustering).
 const MIN_INTERVAL: Record<string, number> = { nederlands: 4 };
 

@@ -7,6 +7,8 @@ export type {
   FlashcardBestand,
   Oefenvraag,
   OefenvraagBestand,
+  Opgave,
+  OpgavenBestand,
   SchrijfStap,
   Schrijfopdracht,
   SchrijfopdrachtBestand,

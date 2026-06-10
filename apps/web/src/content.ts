@@ -2,6 +2,7 @@ import type {
   VocabBestand,
   FlashcardBestand,
   OefenvraagBestand,
+  OpgavenBestand,
   SchrijfopdrachtBestand,
   Schrijfopdracht,
   DiagramBestand,
@@ -103,6 +104,25 @@ export type Card =
       image?: string;
     }
   | {
+      kind: "opgave";
+      id: string;
+      /** Paragraaf-sleutel (onderdeel) voor de Cat-2-engine, bv. "8.2". */
+      onderdeel: string;
+      /** Leesbare onderdeel-titel, bv. "§8.2 Haakjes wegwerken". */
+      onderdeelTitel: string;
+      isSynthese: boolean;
+      /** De opgave-tekst (instructie + expressie). */
+      vraag: string;
+      /** Het juiste eindantwoord (simpelste vorm, antwoordenboekje). */
+      answer: string;
+      /** Extra geaccepteerde gelijkwaardige vormen. */
+      accepted: string[];
+      /** Strikt op vorm graderen (wetenschappelijke notatie) i.p.v. waarde. */
+      exacteVorm: boolean;
+      /** Vraagtype (weergave). */
+      type: string;
+    }
+  | {
       kind: "hotspot";
       id: string;
       /** "benoem" = regio licht op, typ de naam; "aanwijs" = naam gegeven, klik de regio. */
@@ -123,7 +143,7 @@ export type Card =
     };
 
 /** Interne categorie (niet tonen in UI). */
-export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven" | "diagram";
+export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven" | "diagram" | "opgaven";
 
 /** Stijn-vriendelijk label per soort — géén "Cat 1/3". */
 export const SOORT_LABEL: Record<BlokSoort, string> = {
@@ -134,6 +154,7 @@ export const SOORT_LABEL: Record<BlokSoort, string> = {
   vertalen: "Zinnen vertalen",
   schrijven: "Schrijfoefening",
   diagram: "Op de afbeelding",
+  opgaven: "Opgaven oefenen",
 };
 export const SOORT_ICON: Record<BlokSoort, string> = {
   woordjes: "💬",
@@ -143,6 +164,7 @@ export const SOORT_ICON: Record<BlokSoort, string> = {
   vertalen: "🔁",
   schrijven: "✍️",
   diagram: "🖼️",
+  opgaven: "✏️",
 };
 
 /** Schrijfopdrachten (Cat 4), opzoekbaar op id voor de schrijftrainer. */
@@ -158,6 +180,8 @@ export interface Blok {
   titel: string;
   ids: string[];
   richtingen?: Richting[];
+  /** Alleen bij soort "opgaven" (Cat 2): de onderdeel-sleutels (paragrafen) in dit blok. */
+  onderdelen?: string[];
   /** Alleen bij soort "schrijven": verwijzing naar de schrijfopdracht. */
   opdrachtId?: string;
   /** Optioneel: maximaal aantal kaarten per ronde (bv. "kies 10 willekeurig"). */
@@ -371,6 +395,36 @@ function buildRuw(): Blok[] {
             answer: it.antwoord,
           })),
       });
+    } else if (file === "opgaven.json") {
+      // Cat 2 (wiskunde): één blok per hoofdstuk; de Cat-2-engine doet adaptief
+      // per onderdeel (paragraaf). Synthese-onderdelen pas vrij na de losse.
+      const b = data as OpgavenBestand;
+      for (const [hfd, opg] of groupBy(b.opgaven, (o) => o.hoofdstuk)) {
+        const onderdelen = [...new Set(opg.map((o) => o.onderdeel))];
+        blokken.push({
+          id: `${vak}/opgaven/h${hfd}`,
+          vak,
+          hoofdstuk: hfd,
+          onderdeel: `Hoofdstuk ${hfd} — opgaven`,
+          soort: "opgaven",
+          titel: `Opgaven oefenen (H${hfd})`,
+          ids: opg.map((o) => o.id),
+          onderdelen,
+          bouwCards: () =>
+            opg.map((o): Card => ({
+              kind: "opgave",
+              id: o.id,
+              onderdeel: o.onderdeel,
+              onderdeelTitel: o.onderdeelTitel,
+              isSynthese: !!o.isSynthese,
+              vraag: o.vraag,
+              answer: o.antwoord,
+              accepted: o.acceptedForms ?? [],
+              exacteVorm: !!o.exacteVorm,
+              type: o.type,
+            })),
+        });
+      }
     } else if (file === "oefenvragen.json") {
       const b = data as OefenvraagBestand;
       for (const [onderdeel, vragen] of groupBy(b.vragen, (v) => v.onderdeel ?? `Hoofdstuk ${v.hoofdstuk}`)) {
@@ -487,7 +541,7 @@ function buildBlokken(): Blok[] {
   const ruw = buildRuw();
   const final: Blok[] = [];
 
-  // Woordjes, invul-/vertaal-oefeningen, schrijfopdrachten + diagrammen: ongemoeid.
+  // Woordjes, invul-/vertaal-oefeningen, schrijfopdrachten, diagrammen + opgaven (Cat 2): ongemoeid.
   final.push(
     ...ruw.filter(
       (b) =>
@@ -495,7 +549,8 @@ function buildBlokken(): Blok[] {
         b.soort === "invullen" ||
         b.soort === "vertalen" ||
         b.soort === "schrijven" ||
-        b.soort === "diagram",
+        b.soort === "diagram" ||
+        b.soort === "opgaven",
     ),
   );
 
@@ -519,7 +574,7 @@ function buildBlokken(): Blok[] {
 
 export const BLOKKEN: Blok[] = buildBlokken();
 
-const SOORT_ORDER: Record<BlokSoort, number> = { woordjes: 0, invullen: 1, vertalen: 2, begrippen: 3, diagram: 4, uitlegvragen: 5, schrijven: 6 };
+const SOORT_ORDER: Record<BlokSoort, number> = { opgaven: 0, woordjes: 1, invullen: 2, vertalen: 3, begrippen: 4, diagram: 5, uitlegvragen: 6, schrijven: 7 };
 
 function hfdNum(h: string): number {
   const n = parseInt(h, 10);

@@ -1,4 +1,5 @@
 import type { NormalisatieProfiel, Uitkomst } from "@pww/shared";
+import { schoonWiskunde, wiskundeGelijk } from "./mathClean.js";
 
 const LEADING_ARTICLES = new Set([
   // NL
@@ -20,6 +21,10 @@ function stripAccents(s: string): string {
 
 /** Normaliseer een antwoord volgens het profiel, vóór vergelijking (SPEC §5 Cat 1). */
 export function normalize(input: string, profiel: NormalisatieProfiel): string {
+  // Wiskunde (Cat 2): eigen cosmetische opschoning (²→^2, ·→*, komma→punt, …).
+  // Strikt de simpelste vorm — geen taal-normalisatie.
+  if (profiel === "wiskunde") return schoonWiskunde(input);
+
   // NFC eerst: visueel identieke accenten kunnen als precomposed (é) of als
   // e+combining-accent binnenkomen — zonder canonicalisatie zouden die als verschillend
   // tellen en een correct antwoord onterecht afkeuren.
@@ -87,6 +92,7 @@ function nearMissDrempel(profiel: NormalisatieProfiel): number {
     case "engels":
     case "begrip":
       return 2; // langere antwoorden: iets meer coulance
+    case "wiskunde":
     case "exact":
       return 0; // geen coulance
   }
@@ -103,6 +109,13 @@ export function gradeAnswer(
   accepted: string[],
   profiel: NormalisatieProfiel,
 ): Uitkomst {
+  // Wiskunde (Cat 2): strikt de simpelste vorm uit het antwoordenboekje, mét
+  // getal-/breuk-canonical (0.5=1/2). Geen "bijna" — goed of fout.
+  if (profiel === "wiskunde") {
+    const [antwoord, ...forms] = accepted;
+    return antwoord !== undefined && wiskundeGelijk(input, antwoord, forms) ? "goed" : "fout";
+  }
+
   const genorm = normalize(input, profiel);
   if (genorm.length === 0) return "fout";
 

@@ -19,7 +19,20 @@ _Laatst bijgewerkt: 2026-06-08_
 
 ## Trainer-engines (§5)
 - ✅ Cat 1 (vocab/feiten): intypen + Leitner + normalisatie + in-sessie-requeue.
-- ❌ Cat 2 (wiskunde, pen-en-papier): niet gebouwd (geen wiskunde-content). *Later.*
+- ✅ Cat 2 (wiskunde, pen-en-papier) — **H8 gebouwd (2026-06-10).** Adaptieve engine
+  (`packages/trainer-engine/cat2.ts`: 2 random/onderdeel → 2/2 ✓ · 1/2 +2 (≥3/4) · 0/2 +2,
+  synthese-lock) + strikt nakijken (`mathClean.ts` `wiskundeGelijk`: alléén cosmetisch, geen
+  CAS — de simpelste vorm uit het antwoordenboekje is het antwoord; `exacteVorm` voor wet.
+  notatie) + `Cat2Trainer`-UI (✏️ maak op papier, helperrij, kralenketting, fout→antwoord +
+  vergelijkbare som). Content: `opgaven.json` (187 opgaven, Voorkennis+§8.1–8.4, **elke Q→A
+  met de hand door berekening geverifieerd**) + `flashcards.json` (8 regel-kaarten).
+  - **Bewust NIET opgenomen (eerlijk, P8):** figuur-opgaven (oppervlakte/omtrek, priemfactor-
+    figuur), woordproblemen, breuk-coëfficiënt-antwoorden (matcher-onveilig), `*`-antwoorden
+    (tekening/uitwerking). **Herscan nodig:** opg 37 (geen vraag-scan), A55/L8 (geen antwoord-scan).
+  - **Nog open:** §8.5 (machten en letters), binair-onderzoek, en heel **H9 meetkunde**
+    (aanpak in plan-appendix: mix Cat-1-flashcards + Cat-2 numerieke hoek-opgaven + hotspot;
+    figuren nog te fotograferen/als SVG). Validator-grounding voor Cat 2 niet gewired →
+    `gevalideerd` blijft false (vak nog niet "live").
 - ✅ Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus. **LLM-rubric +
   samenvatting-lees-fase DESCOPED** (besluit 2026-06-07: flashcards volstaan; alleen NL krijgt LLM).
 - ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback via **Cloud Function**
@@ -32,7 +45,7 @@ _Laatst bijgewerkt: 2026-06-08_
 - ✅ **Meerdaagse planner-engine** (`packages/planner-engine`, getest): verdeelt alle
   content over 8–21 juni (dekking vóór de herhaalweek), herhaalweek 22–28 = review-only,
   max 3 vakken/dag, 30-min vak-blokken (meerdere trainer-blokjes), content in volgorde,
-  wiskunde/engels = boek-blokken (wiskunde ~5/7 via gereduceerde-dag-uitsluiting),
+  engels = boek-blokken; wiskunde is sinds 2026-06-10 een echt content-vak (H8 Cat-2),
   nederlands cap 3, herplannen bij falen (recompute op mastery), pacing-flags bij overflow.
 - ✅ **Maandkalender** (Kalender-tab): vooruitblik (vak-chips per dag, toetsdagen 🎯,
   herhaalweek-tint) + terugblik (bevroren dagschema + status ✓/◐/○; vult zich naarmate

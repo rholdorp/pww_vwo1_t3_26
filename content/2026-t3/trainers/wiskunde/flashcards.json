@@ -1,0 +1,86 @@
+{
+  "vak": "wiskunde",
+  "normalisatie": "begrip",
+  "kaarten": [
+    {
+      "id": "wiskunde-h8-regel-001",
+      "vraag": "In de macht 5³: hoe heet het getal 5?",
+      "antwoord": "grondtal",
+      "modus": "typen",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p114.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-002",
+      "vraag": "In de macht 5³: hoe heet het getal 3?",
+      "antwoord": "exponent",
+      "modus": "typen",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p114.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-003",
+      "vraag": "Wat betekent de macht 5³ (schrijf als herhaald product)?",
+      "antwoord": "5 · 5 · 5",
+      "modus": "kaart",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p114.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-004",
+      "vraag": "Wat is de volgorde van bewerkingen?",
+      "antwoord": "1) haakjes  2) machten  3) vermenigvuldigen en delen (van links naar rechts)  4) optellen en aftrekken (van links naar rechts)",
+      "modus": "kaart",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p117.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-005",
+      "vraag": "Wat is het verschil tussen -2⁴ en (-2)⁴?",
+      "antwoord": "-2⁴ = -(2·2·2·2) = -16 (alleen het grondtal 2 staat onder de macht). (-2)⁴ = (-2)·(-2)·(-2)·(-2) = 16 (de hele -2 staat onder de macht).",
+      "modus": "kaart",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p118.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-006",
+      "vraag": "Een macht (-a)ⁿ van een negatief grondtal is positief als de exponent n … is.",
+      "antwoord": "even",
+      "modus": "typen",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p118.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-007",
+      "vraag": "Hoe ziet de wetenschappelijke notatie van een getal eruit?",
+      "antwoord": "als a · 10^n, waarbij a een getal is met 1 ≤ a < 10 en n een geheel getal",
+      "modus": "kaart",
+      "onderdeel": "§8.4 De wetenschappelijke notatie",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p122.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-008",
+      "vraag": "Hoe werk je de haakjes weg in a(b + c)?",
+      "antwoord": "ab + ac (vermenigvuldig a met élke term tussen de haakjes)",
+      "modus": "kaart",
+      "onderdeel": "§8.2 Haakjes wegwerken",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p107.jpg",
+      "confidence": 0.9
+    }
+  ]
+}

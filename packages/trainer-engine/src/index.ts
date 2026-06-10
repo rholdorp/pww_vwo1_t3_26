@@ -24,3 +24,18 @@ export type { SessionState } from "./session.js";
 
 export { bouwKaart } from "./kaart.js";
 export type { Kaart } from "./kaart.js";
+
+export { schoonWiskunde, wiskundeGelijk } from "./mathClean.js";
+
+export {
+  startCat2,
+  huidigeOpgaveId,
+  isKlaarCat2,
+  beantwoordCat2,
+} from "./cat2.js";
+export type {
+  Cat2Opgave,
+  Cat2State,
+  OnderdeelVoortgang,
+  OnderdeelStatusKind,
+} from "./cat2.js";

@@ -105,6 +105,43 @@ export function sessieVolgorde(naam: string, ids: readonly string[]): string[] {
   return shuffle(due.length > 0 ? due : ids);
 }
 
+// ── Cat 2 (wiskunde-opgaven) — status per onderdeel (paragraaf) per blok ──────
+// De Cat-2-engine pakt maar ~2 opgaven per onderdeel, dus Leitner-mastery over álle
+// opgaven zou de voortgang onderschatten. We bewaren daarom per (blok, onderdeel) de
+// bereikte status ("klaar" = ✓ / "deels"). Losse opgave-resultaten gaan wél óók via
+// `record` (spaced repetition + gamification-punten).
+const cat2Key = (naam: string) => `pww-cat2:${slug(naam)}`;
+type Cat2Store = Record<string, "klaar" | "deels">; // sleutel: `${blokId}|${onderdeel}`
+
+function laadCat2(naam: string): Cat2Store {
+  try {
+    return JSON.parse(localStorage.getItem(cat2Key(naam)) ?? "{}") as Cat2Store;
+  } catch {
+    return {};
+  }
+}
+/** Leg de bereikte status van een onderdeel vast (klaar wint van deels). */
+export function zetOnderdeelStatus(naam: string, blokId: string, onderdeel: string, status: "klaar" | "deels"): void {
+  const s = laadCat2(naam);
+  const k = `${blokId}|${onderdeel}`;
+  if (s[k] === "klaar") return; // klaar nooit terugzetten
+  s[k] = status;
+  localStorage.setItem(cat2Key(naam), JSON.stringify(s));
+  pushSync?.(naam);
+}
+/** Fractie onderdelen ✓ (klaar) van een Cat-2-blok. */
+export function onderdeelMastery(naam: string, blokId: string, onderdelen: readonly string[]): number {
+  if (onderdelen.length === 0) return 0;
+  const s = laadCat2(naam);
+  const klaar = onderdelen.filter((o) => s[`${blokId}|${o}`] === "klaar").length;
+  return klaar / onderdelen.length;
+}
+/** Is er al een onderdeel van dit blok aangeraakt (klaar of deels)? */
+export function onderdeelGezien(naam: string, blokId: string, onderdelen: readonly string[]): boolean {
+  const s = laadCat2(naam);
+  return onderdelen.some((o) => s[`${blokId}|${o}`] !== undefined);
+}
+
 // ── Schrijftrainer (Cat 4) — laatste score + concept per opdracht ────────────
 const schrijfKey = (naam: string) => `pww-schrijf:${slug(naam)}`;
 

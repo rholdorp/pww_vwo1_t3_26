@@ -8,6 +8,7 @@ export type NormalisatieProfiel =
   | "zin" // hele zinnen: accenten strikt, leestekens (. , ? !) genegeerd, apostrof/koppelteken behouden (j'habite, qu'est-ce que)
   | "engels" // accenten optioneel, getallen exact
   | "begrip" // toleranter: leestekens negeren, lidwoorden optioneel (de cel = cel)
+  | "wiskunde" // Cat 2: alléén cosmetische verschillen (²→^2, ·→*, komma→punt, breuk/getal-canonical); strikt de simpelste vorm uit het antwoordenboekje. Geen "bijna".
   | "exact"; // letterlijk (jaartallen, topografie)
 
 /** Eén woord-/zinpaar uit een vocab.json (Frans / Engels — Cat 1). */
@@ -192,6 +193,66 @@ export interface Diagram {
 export interface DiagramBestand {
   vak: string;
   diagrammen: Diagram[];
+}
+
+// ── Cat 2 (Wiskunde — reken-/herleidvaardigheid) ─────────────────────────────
+// Een Cat-2-vak oefent een toetsbare vaardigheid actief: Stijn maakt de som op
+// papier en typt het EINDantwoord; de trainer kijkt strikt na tegen het
+// antwoordenboekje (de simpelste vorm). Adaptief per onderdeel (= paragraaf),
+// SPEC §5 Cat 2. Antwoordenboek heeft alléén eindantwoorden → fout toont het
+// juiste antwoord + een vergelijkbare som (geen uitwerkingen).
+
+/** Eén opgave (Cat 2). Bestand: content/<editie>/trainers/<vak>/opgaven.json. */
+export interface Opgave {
+  /** Stabiele id: <vak>-h<hoofdstuk>-<onderdeel>-<nummer>, bv. "wiskunde-h8-8.2-10a". */
+  id: string;
+  /** Hoofdstuk, bv. "8". */
+  hoofdstuk: string;
+  /** Paragraaf/onderdeel, bv. "8.2" of "voorkennis". */
+  onderdeel: string;
+  /** Onderdeel-titel (leesbaar), bv. "§8.2 Machten". */
+  onderdeelTitel: string;
+  /** Opgavenummer inclusief subletter, bv. "10a". */
+  opgavenummer: string;
+  /** De opgave-tekst (overgetypt uit het lesboek → trainer werkt zonder boek). */
+  vraag: string;
+  /** Het juiste EINDantwoord (de simpelste vorm, letterlijk uit het antwoordenboekje). */
+  antwoord: string;
+  /**
+   * Extra écht-gelijkwaardige simpele vormen die óók goed zijn (escape-hatch,
+   * bv. termvolgorde `a+b` = `b+a`). Bewust spaarzaam: een niet-vereenvoudigde
+   * vorm hoort hier NIET in — die is fout (H8 gaat over vereenvoudigen).
+   */
+  acceptedForms?: string[];
+  /** Vraagtype (grof, voor weergave/sortering), bv. "herleiden", "machten", "wet-notatie". */
+  type: string;
+  /**
+   * Grade alléén op exacte (cosmetische) vorm, zónder getal-/breuk-canonical.
+   * Voor opgaven waar de VORM telt, niet de waarde (bv. wetenschappelijke notatie:
+   * `4,8·10^5` goed, maar `480000` fout). Default false.
+   */
+  exacteVorm?: boolean;
+  /**
+   * Synthese-opgave: combineert meerdere onderdelen. Pas beschikbaar als alle
+   * losse onderdelen ✓ zijn (SPEC §5 Cat 2).
+   */
+  isSynthese?: boolean;
+  /** Pad naar de raw screenshot van de OPGAVE (lesboek). */
+  bron: string;
+  /** Pad naar de raw screenshot van het ANTWOORD (antwoordenboekje). */
+  antwoordBron?: string;
+  /** Extractie-confidence 0..1 (review-trigger onder drempel, SPEC §4). */
+  confidence: number;
+  /** Hoe het antwoord geverifieerd is. Cat 2: altijd "boek" (antwoordenboekje). */
+  verifiedBy: "boek";
+}
+
+/** Bestand content/<editie>/trainers/<vak>/opgaven.json. */
+export interface OpgavenBestand {
+  vak: string;
+  /** Normalisatie voor het eindantwoord — Cat 2 altijd "wiskunde". */
+  normalisatie: NormalisatieProfiel;
+  opgaven: Opgave[];
 }
 
 // ── Cat 4 (Nederlands / Engels — productieve schrijfvaardigheid) ─────────────
