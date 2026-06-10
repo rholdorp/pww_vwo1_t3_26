@@ -75,17 +75,44 @@ export interface SchemaResultaat {
   flags: string[];
 }
 
-const CAP: Record<DagType, number> = { leer: 3, gereduceerd: 1, buffer: 3, toets: 0, vrij: 0 };
+export interface PlanOpties {
+  /**
+   * Niets inplannen vóór deze ISO-datum (naast `vandaag`). Voor het geval het leren
+   * later begint dan de roosterperiode (bv. Stijn start pas op vrijdag).
+   */
+  startDatum?: string;
+  /**
+   * Aantal blokken (~30 min elk) op een volle leer-/buffer-dag. Default 3 (~1,5 u);
+   * de web-adapter schaalt op naar 4 (~2 u) als de stof anders niet vóór de
+   * herhaalweek past. Gereduceerde dagen blijven altijd 1 blok.
+   */
+  dagCap?: number;
+  /** Max. aantal verschillende vakken per dag. Default = max(3, dagCap). */
+  maxVakkenPerDag?: number;
+}
+
+const STANDAARD_CAP: Record<DagType, number> = { leer: 3, gereduceerd: 1, buffer: 3, toets: 0, vrij: 0 };
 
 /**
  * Verdeel de pending vak-blokken + boek-/review-blokken over de dagen vanaf `vandaag`.
  * Pure functie: dezelfde input → hetzelfde schema. Herplannen = opnieuw aanroepen met
  * de bijgewerkte `pending` (afgevinkte blokken zijn er dan uit → de rest schuift door).
  */
-export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: string): SchemaResultaat {
+export function planPeriode(
+  vakken: VakInput[],
+  slots: DagSlot[],
+  vandaag: string,
+  opties: PlanOpties = {},
+): SchemaResultaat {
+  const dagCap = opties.dagCap ?? STANDAARD_CAP.leer;
+  const maxVakken = opties.maxVakkenPerDag ?? Math.max(3, dagCap);
+  const startDatum = opties.startDatum;
+  // Volle dagen (leer/buffer) krijgen de instelbare cap; gereduceerd/toets/vrij vast.
+  const CAP: Record<DagType, number> = { ...STANDAARD_CAP, leer: dagCap, buffer: dagCap };
+
   const flags: string[] = [];
   const dagen: DagToewijzing[] = slots
-    .filter((s) => s.datum >= vandaag)
+    .filter((s) => s.datum >= vandaag && (!startDatum || s.datum >= startDatum))
     .map((s) => ({ datum: s.datum, type: s.type, toetsVakken: s.toetsVakken, blokken: [] }));
 
   // Prioriteit: vroegste toets eerst, dan moeilijkste vak eerst.
@@ -93,18 +120,21 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
     (a, b) => a.pwwDatum.localeCompare(b.pwwDatum) || b.moeilijkheid - a.moeilijkheid,
   );
   const queue = new Map(vakken.map((v) => [v.vak, [...v.pending]]));
-  const sessies = new Map(vakken.map((v) => [v.vak, 0]));
-  const laatst = new Map<string, string>(); // vak → laatste plaatsingsdatum (voor spreiding)
+  const sessies = new Map(vakken.map((v) => [v.vak, 0])); // álle plaatsingen (balancering)
+  // Alleen nieuwe-stof-plaatsingen (trainer/boek). maxSessies + spreiding kijken
+  // hiernaar: een lichte review mag de leer-budget/-spreiding niet opeten.
+  const leerSessies = new Map(vakken.map((v) => [v.vak, 0]));
+  const laatst = new Map<string, string>(); // vak → laatste leerblok-datum (voor spreiding)
   const dagDiff = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000);
 
   const vakkenOp = (d: DagToewijzing) => new Set(d.blokken.map((b) => b.vak));
-  // Basisregels die voor élke plaatsing gelden (capaciteit, max 3 vakken/dag, 1/vak/dag, cap).
+  // Basisregels die voor élke plaatsing gelden (capaciteit, max vakken/dag, 1/vak/dag, cap).
   function basisOk(v: VakInput, d: DagToewijzing): boolean {
     if (d.blokken.length >= CAP[d.type]) return false;
     const op = vakkenOp(d);
     if (op.has(v.vak)) return false; // max 1 leerblok per vak per dag
-    if (op.size >= 3) return false; // max 3 vakken per dag
-    if (v.maxSessies != null && (sessies.get(v.vak) ?? 0) >= v.maxSessies) return false;
+    if (op.size >= maxVakken) return false; // max. aantal vakken per dag
+    if (v.maxSessies != null && (leerSessies.get(v.vak) ?? 0) >= v.maxSessies) return false;
     return true;
   }
   function mag(v: VakInput, d: DagToewijzing): boolean {
@@ -123,7 +153,12 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
       soort,
     });
     sessies.set(v.vak, (sessies.get(v.vak) ?? 0) + 1);
-    laatst.set(v.vak, d.datum);
+    // Reviews tellen niet mee voor de leer-budget (maxSessies) of de spreiding:
+    // anders blokkeert een rustdag-review een nog niet-geplaatst echt leerblok.
+    if (soort !== "review") {
+      leerSessies.set(v.vak, (leerSessies.get(v.vak) ?? 0) + 1);
+      laatst.set(v.vak, d.datum);
+    }
   }
   // Review-plaatsing (herhaalweek + gereduceerde dagen): negeert gereduceerdOk en
   // de spreidings-/uitstel-regels — het is lichte herhaling, geen nieuwe stof.
@@ -144,7 +179,17 @@ export function planPeriode(vakken: VakInput[], slots: DagSlot[], vandaag: strin
   const dagelijkseVakken = prioriteit.filter((v) => v.dagelijks);
   function plaatsDagelijks(d: DagToewijzing) {
     for (const v of dagelijkseVakken) {
-      if (mag(v, d)) plaats(v, d, null, v.isBoek ? "boek" : "trainer");
+      if (!mag(v, d)) continue;
+      if (v.isBoek) {
+        plaats(v, d, null, "boek");
+        continue;
+      }
+      // Vak mét trainer-content (bv. wiskunde): trek een écht blok uit de wachtrij,
+      // zodat de dagelijkse slot klikbare opgaven bevat. Is de stof op, dan een
+      // review-blok — wiskunde blijft zo elke dag terugkomen zonder lege kaart.
+      const q = queue.get(v.vak)!;
+      const blok = q.shift() ?? null;
+      plaats(v, d, blok, blok ? "trainer" : "review");
     }
   }
 

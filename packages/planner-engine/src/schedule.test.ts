@@ -101,6 +101,21 @@ describe("planPeriode — herplannen & overflow", () => {
     expect(fransTrainer.length).toBe(1);
   });
 
+  it("een rustdag-review verbruikt geen maxSessies-/spreiding-budget van een leerblok", () => {
+    // Reproductie van de bug bij Stijns latere start: nederlands (maxSessies 3,
+    // interval 4) kreeg op een gereduceerde dag een review die de 3e échte
+    // schrijfsessie wegdrukte. Met de fix passen alle 3 de leerblokken.
+    const buffer: DagSlot[] = [dag("2026-06-15", "leer"), dag("2026-06-16", "gereduceerd"), dag("2026-06-17", "leer")];
+    const vakken = basisVakken();
+    const ndl = vakken.find((v) => v.vak === "nederlands")!;
+    ndl.pending = vakBlok("nederlands", 3);
+    ndl.minIntervalDagen = 2;
+    const res = planPeriode(vakken, [...WEEK1, ...buffer], "2026-06-08");
+    const ndlTrainer = res.dagen.flatMap((d) => d.blokken).filter((b) => b.vak === "nederlands" && b.soort === "trainer");
+    expect(ndlTrainer.length).toBe(3);
+    expect(res.flags.some((f) => f.includes("nederlands"))).toBe(false);
+  });
+
   it("te veel content voor de beschikbare dagen → overflow-flag", () => {
     const vakken = basisVakken();
     vakken[0]!.pending = vakBlok("frans", 20); // past niet in één week
@@ -114,6 +129,42 @@ describe("planPeriode — herplannen & overflow", () => {
     const bufferBlokken = res.dagen.filter((d) => d.type === "buffer").flatMap((d) => d.blokken);
     expect(bufferBlokken.length).toBeGreaterThan(0);
     expect(bufferBlokken.every((b) => b.soort === "review" || b.soort === "boek")).toBe(true);
+  });
+});
+
+describe("planPeriode — latere start + intensieve dagcap (Stijn 2026-06-11)", () => {
+  it("plant niets vóór startDatum, ook al ligt vandaag eerder", () => {
+    const res = planPeriode(basisVakken(), WEEK1, "2026-06-08", { startDatum: "2026-06-11" });
+    expect(res.dagen.every((d) => d.datum >= "2026-06-11")).toBe(true);
+    expect(res.dagen.some((d) => d.datum === "2026-06-08")).toBe(false);
+  });
+
+  it("dagCap 4 laat een vierde vak + vierde blok op een leerdag toe", () => {
+    const vakken = basisVakken();
+    // Vier content-vakken met genoeg voorraad zodat een leerdag echt vol kan.
+    vakken[0]!.pending = vakBlok("frans", 8);
+    vakken[1]!.pending = vakBlok("biologie", 8);
+    vakken[2]!.pending = vakBlok("aardrijkskunde", 8);
+    vakken[3]!.maxSessies = undefined;
+    vakken[3]!.pending = vakBlok("nederlands", 8);
+    const res = planPeriode(vakken, WEEK1, "2026-06-08", { dagCap: 4 });
+    const leer = res.dagen.filter((d) => d.type === "leer");
+    expect(leer.some((d) => d.blokken.length === 4)).toBe(true);
+    for (const d of res.dagen) expect(d.blokken.length).toBeLessThanOrEqual(d.type === "gereduceerd" ? 1 : 4);
+  });
+
+  it("default (geen opties) blijft cap 3 / max 3 vakken", () => {
+    const vakken = basisVakken();
+    vakken[0]!.pending = vakBlok("frans", 8);
+    vakken[1]!.pending = vakBlok("biologie", 8);
+    vakken[2]!.pending = vakBlok("aardrijkskunde", 8);
+    vakken[3]!.maxSessies = undefined;
+    vakken[3]!.pending = vakBlok("nederlands", 8);
+    const res = planPeriode(vakken, WEEK1, "2026-06-08");
+    for (const d of res.dagen) {
+      expect(new Set(d.blokken.map((b) => b.vak)).size).toBeLessThanOrEqual(3);
+      expect(d.blokken.length).toBeLessThanOrEqual(d.type === "gereduceerd" ? 1 : 3);
+    }
   });
 });
 
@@ -139,6 +190,24 @@ describe("planPeriode — dagelijks (wiskunde-afspraak)", () => {
     for (const d of gered) {
       expect(d.blokken.some((b) => b.vak === "wiskunde")).toBe(false);
     }
+  });
+
+  it("dagelijks vak mét trainer-content vult slots met échte blokken en leegt de wachtrij", () => {
+    const v = basisVakken();
+    const wis = v.find((x) => x.vak === "wiskunde")!;
+    wis.dagelijks = true;
+    wis.isBoek = false;
+    wis.pending = vakBlok("wiskunde", 2); // 2 echte opgaven-blokken
+    const res = planPeriode(v, WEEK1, "2026-06-08");
+    const wisBlokken = res.dagen.flatMap((d) => d.blokken).filter((b) => b.vak === "wiskunde");
+    const trainer = wisBlokken.filter((b) => b.soort === "trainer");
+    // Beide content-blokken geplaatst, met niet-lege trainerBlokIds (geen lege kaart).
+    expect(trainer.length).toBe(2);
+    expect(trainer.every((b) => b.trainerBlokIds.length > 0)).toBe(true);
+    // Geen overflow-flag: de dagelijkse plaatsing heeft de wachtrij geleegd.
+    expect(res.flags.some((f) => f.includes("wiskunde"))).toBe(false);
+    // Daarna komt wiskunde nog terug als review (elke niet-gereduceerde dag).
+    expect(wisBlokken.some((b) => b.soort === "review")).toBe(true);
   });
 
   it("plaatst wiskunde op elke buffer-dag (herhaalweek = ma–vr, geen gereduceerd)", () => {
