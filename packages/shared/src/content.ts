@@ -226,6 +226,8 @@ export interface Opgave {
   acceptedForms?: string[];
   /** Vraagtype (grof, voor weergave/sortering), bv. "herleiden", "machten", "wet-notatie". */
   type: string;
+  /** Optionele figuur bij de opgave (meetkunde H9), relatief t.o.v. editie-root. */
+  afbeelding?: string;
   /**
    * Grade alléén op exacte (cosmetische) vorm, zónder getal-/breuk-canonical.
    * Voor opgaven waar de VORM telt, niet de waarde (bv. wetenschappelijke notatie:

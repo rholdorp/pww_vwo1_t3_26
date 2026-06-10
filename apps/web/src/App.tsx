@@ -640,6 +640,7 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
 
       <div className="card kaart-groot">
         <div className="muted klein kaart-subtitel">✏️ Maak de som op papier, typ dan je eindantwoord — in de simpelste vorm.</div>
+        {card.image && <img className="kaart-beeld" src={card.image} alt="figuur bij de opgave" />}
         <div className="prompt wiskunde-prompt">{card.vraag}</div>
 
         <input

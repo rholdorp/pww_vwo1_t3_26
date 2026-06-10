@@ -29,10 +29,16 @@ _Laatst bijgewerkt: 2026-06-08_
   - **Bewust NIET opgenomen (eerlijk, P8):** figuur-opgaven (oppervlakte/omtrek, priemfactor-
     figuur), woordproblemen, breuk-coëfficiënt-antwoorden (matcher-onveilig), `*`-antwoorden
     (tekening/uitwerking). **Herscan nodig:** opg 37 (geen vraag-scan), A55/L8 (geen antwoord-scan).
-  - **Nog open:** §8.5 (machten en letters), binair-onderzoek, en heel **H9 meetkunde**
-    (aanpak in plan-appendix: mix Cat-1-flashcards + Cat-2 numerieke hoek-opgaven + hotspot;
-    figuren nog te fotograferen/als SVG). Validator-grounding voor Cat 2 niet gewired →
-    `gevalideerd` blijft false (vak nog niet "live").
+  - **H9 meetkunde (2026-06-10):** **concept-flashcards LIVE** — 37 kaarten over §9.1–9.5
+    (symmetrie, driehoeken, vierhoeken, Z/F-hoeken + reken-regels) in `flashcards.json`,
+    getrouw uit de boek-theorie. Plumbing voor figuur-bij-opgave is gebouwd (`afbeelding`
+    op `Opgave`/`Card`, `°`-tolerantie in `wiskundeGelijk`, image-glob `assets/wiskunde/`).
+  - **Nog open:** §8.5 (machten en letters), binair-onderzoek; **H9 numerieke hoek-opgaven
+    met figuur** (Cat-2). Blokker: de bijlage-foto's die ik had waren de Herhaling/diagnostische
+    sectie (opg 1–16), niet de §9.3/§9.5-antwoorden (opg 25–78); + figuur-croppen uit de
+    gedraaide lesboekpagina's is bewerkelijk/foutgevoelig. Aanpak volgende slag: juiste
+    antwoordpagina's erbij + figuren zorgvuldig croppen (en zelf verifiëren). Validator-
+    grounding voor Cat 2 niet gewired → `gevalideerd` blijft false (vak nog niet "live").
 - ✅ Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus. **LLM-rubric +
   samenvatting-lees-fase DESCOPED** (besluit 2026-06-07: flashcards volstaan; alleen NL krijgt LLM).
 - ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback via **Cloud Function**

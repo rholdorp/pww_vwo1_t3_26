@@ -117,6 +117,10 @@ vakken:
         gefotografeerd: true
         geextraheerd: false
         gevalideerd: false
+      # 2026-06-10: H9 CONCEPT-flashcards gebouwd (37 kaarten §9.1–9.5 in flashcards.json,
+      # getrouw uit de theorie). De NUMERIEKE hoek-opgaven (Cat-2, met figuur) zijn nog NIET
+      # geëxtraheerd → geextraheerd blijft per saldo false tot ook de opgaven + figuren erin
+      # zitten (zie docs/BACKLOG.md). gevalideerd overal false.
       - id: h9-voorkennis
         bron: "H9 Voorkennis Loodlijnen (p147)"
         gefotografeerd: true

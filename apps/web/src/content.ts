@@ -17,10 +17,14 @@ const jsonModules = import.meta.glob(
   { eager: true },
 ) as Record<string, { default: unknown }>;
 
-// Alleen mappen waaruit flashcards een referentie-afbeelding gebruiken (nu enkel
-// aardrijkskunde-topografie). Bewust smal zodat grote raw-scans niet mee de bundle in gaan.
+// Alleen mappen waaruit content een referentie-afbeelding gebruikt: aardrijkskunde-
+// topografie + wiskunde-meetkundefiguren (bijgesneden uit de lesboekpagina's). Bewust
+// smal zodat de grote ongesneden raw-scans niet mee de bundle in gaan.
 const imageUrls = import.meta.glob(
-  "../../../content/2026-t3/raw/aardrijkskunde/*.{jpg,jpeg,png}",
+  [
+    "../../../content/2026-t3/raw/aardrijkskunde/*.{jpg,jpeg,png}",
+    "../../../content/2026-t3/assets/wiskunde/**/*.{jpg,jpeg,png}",
+  ],
   { eager: true, query: "?url", import: "default" },
 ) as Record<string, string>;
 
@@ -113,6 +117,8 @@ export type Card =
       isSynthese: boolean;
       /** De opgave-tekst (instructie + expressie). */
       vraag: string;
+      /** Optionele figuur bij de opgave (meetkunde) — URL. */
+      image?: string;
       /** Het juiste eindantwoord (simpelste vorm, antwoordenboekje). */
       answer: string;
       /** Extra geaccepteerde gelijkwaardige vormen. */
@@ -418,6 +424,7 @@ function buildRuw(): Blok[] {
               onderdeelTitel: o.onderdeelTitel,
               isSynthese: !!o.isSynthese,
               vraag: o.vraag,
+              image: resolveImage(o.afbeelding),
               answer: o.antwoord,
               accepted: o.acceptedForms ?? [],
               exacteVorm: !!o.exacteVorm,

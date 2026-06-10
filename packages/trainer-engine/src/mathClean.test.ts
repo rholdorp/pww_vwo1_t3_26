@@ -32,6 +32,11 @@ describe("wiskundeGelijk — cosmetisch goed", () => {
   it("accepteert expliciete acceptedForms (termvolgorde)", () => {
     expect(wiskundeGelijk("b+a", "a+b", ["b+a"])).toBe(true);
   });
+  it("negeert het graden-teken (meetkunde-hoeken)", () => {
+    expect(wiskundeGelijk("70°", "70")).toBe(true);
+    expect(wiskundeGelijk("70", "70°")).toBe(true);
+    expect(wiskundeGelijk("70°", "70°")).toBe(true);
+  });
 });
 
 describe("wiskundeGelijk — niet-vereenvoudigd / anders is fout", () => {

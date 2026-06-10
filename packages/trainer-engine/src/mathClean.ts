@@ -77,6 +77,7 @@ export function schoonWiskunde(raw: string): string {
   s = s.replace(/(\d),(\d)/g, "$1.$2");
   s = s.replace(/−/g, "-"); // Unicode MINUS SIGN → ASCII -
   s = s.replace(/[×⋅·]/g, "*"); // ×, ⋅ (U+22C5), · (U+00B7) → *
+  s = s.replace(/°/g, ""); // graden-teken negeren ("70°" = "70") — meetkunde-hoeken
   s = s.replace(/\s+/g, "");
   return s.toLowerCase();
 }

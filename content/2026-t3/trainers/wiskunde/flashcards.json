@@ -81,6 +81,388 @@
       "hoofdstuk": "8",
       "bron": "raw/wiskunde/wiskunde-h08-p107.jpg",
       "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-001",
+      "vraag": "Wat betekent de notatie k ⊥ m?",
+      "antwoord": "k staat loodrecht op m.",
+      "modus": "kaart",
+      "onderdeel": "Voorkennis: Loodlijnen",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p147.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-002",
+      "vraag": "Hoe noem je een figuur waarvan de twee helften precies op elkaar passen als je hem dubbelvouwt?",
+      "antwoord": "lijnsymmetrisch",
+      "modus": "typen",
+      "onderdeel": "§9.1 Lijnsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-003",
+      "vraag": "Hoe heet de lijn waarover je vouwt bij lijnsymmetrie (en welke andere naam heeft die lijn)?",
+      "antwoord": "de symmetrieas; een andere naam is spiegelas",
+      "modus": "kaart",
+      "onderdeel": "§9.1 Lijnsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-004",
+      "vraag": "Wat zijn de twee helften van een lijnsymmetrische figuur ten opzichte van elkaar?",
+      "antwoord": "elkaars spiegelbeeld",
+      "modus": "kaart",
+      "onderdeel": "§9.1 Lijnsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-005",
+      "vraag": "Bij spiegelen: hoe heet de figuur waar je vanuit gaat, en hoe heet de figuur die je erbij tekent?",
+      "antwoord": "het origineel en het spiegelbeeld (beeld)",
+      "modus": "kaart",
+      "onderdeel": "§9.1 Lijnsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p151.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-006",
+      "vraag": "Wat geldt er bij de spiegeling van een punt P in de lijn s (twee eigenschappen)?",
+      "antwoord": "origineel P en beeld P' liggen even ver van de spiegelas s, en het lijnstuk PP' staat loodrecht op de spiegelas",
+      "modus": "kaart",
+      "onderdeel": "§9.1 Lijnsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p151.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-007",
+      "vraag": "Wanneer heet een figuur draaisymmetrisch?",
+      "antwoord": "als hij bij draaiing om een punt (over minder dan 360°) met zichzelf samenvalt",
+      "modus": "kaart",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p154.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-008",
+      "vraag": "Hoe heet het punt waar je een draaisymmetrische figuur omheen draait?",
+      "antwoord": "draaipunt",
+      "modus": "typen",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p154.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-009",
+      "vraag": "Hoe bereken je de kleinste draaihoek van een figuur die in n stappen rondvalt?",
+      "antwoord": "360° : n  (bv. 360° : 6 = 60°)",
+      "modus": "kaart",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p154.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-010",
+      "vraag": "Wat is het verschil tussen lijnsymmetrie en draaisymmetrie?",
+      "antwoord": "bij lijnsymmetrie vouw je langs een lijn; bij draaisymmetrie draai je om een punt",
+      "modus": "kaart",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p155.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-011",
+      "vraag": "Wat is een regelmatige veelhoek?",
+      "antwoord": "een veelhoek waarvan alle zijden even lang en alle hoeken even groot zijn",
+      "modus": "kaart",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p155.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-012",
+      "vraag": "Wanneer heet een figuur puntsymmetrisch, en hoe heet dat punt?",
+      "antwoord": "als er bij elk punt een tweede punt is waarbij M het midden van het verbindingslijnstuk is; M heet het punt van symmetrie",
+      "modus": "kaart",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p156.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-013",
+      "vraag": "Puntsymmetrie is hetzelfde als draaisymmetrie met welke draaihoek?",
+      "antwoord": "180°",
+      "modus": "typen",
+      "onderdeel": "§9.2 Draai- en puntsymmetrie",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p156.jpg",
+      "confidence": 0.9,
+      "acceptedAnswers": [
+        "180"
+      ]
+    },
+    {
+      "id": "wiskunde-h9-concept-014",
+      "vraag": "Wat is een gelijkbenige driehoek?",
+      "antwoord": "een driehoek met twee gelijke zijden",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-015",
+      "vraag": "In een gelijkbenige driehoek heten de twee gelijke zijden de …",
+      "antwoord": "benen",
+      "modus": "typen",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-016",
+      "vraag": "In een gelijkbenige driehoek heet de zijde die geen been is de …",
+      "antwoord": "basis",
+      "modus": "typen",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-017",
+      "vraag": "In een gelijkbenige driehoek: hoe heten de hoeken aan de basis, en hoe heet de andere hoek?",
+      "antwoord": "de hoeken aan de basis heten de basishoeken; de andere hoek heet de tophoek",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-018",
+      "vraag": "Wat geldt er voor de basishoeken van een gelijkbenige driehoek (en de omkering)?",
+      "antwoord": "de basishoeken zijn even groot; en als twee hoeken van een driehoek even groot zijn, is die driehoek gelijkbenig",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-019",
+      "vraag": "Wat is een gelijkzijdige driehoek, en hoe groot is elke hoek?",
+      "antwoord": "een driehoek met drie gelijke zijden; elke hoek is 180° : 3 = 60°",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p162.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-020",
+      "vraag": "Hoeveel symmetrieassen heeft een gelijkzijdige driehoek, en wat is zijn kleinste draaihoek?",
+      "antwoord": "drie symmetrieassen; kleinste draaihoek 360° : 3 = 120°",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p162.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-021",
+      "vraag": "Wat is een rechthoekige driehoek?",
+      "antwoord": "een driehoek met een hoek van 90°",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p162.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-022",
+      "vraag": "Hoeveel graden zijn de drie hoeken van een driehoek samen?",
+      "antwoord": "180°",
+      "modus": "typen",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p164.jpg",
+      "confidence": 0.9,
+      "acceptedAnswers": [
+        "180"
+      ]
+    },
+    {
+      "id": "wiskunde-h9-concept-023",
+      "vraag": "Hoeveel graden zijn de vier hoeken van een vierhoek samen?",
+      "antwoord": "360°",
+      "modus": "typen",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p166.jpg",
+      "confidence": 0.9,
+      "acceptedAnswers": [
+        "360"
+      ]
+    },
+    {
+      "id": "wiskunde-h9-concept-024",
+      "vraag": "Hoe groot is een gestrekte hoek?",
+      "antwoord": "180°",
+      "modus": "typen",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p166.jpg",
+      "confidence": 0.9,
+      "acceptedAnswers": [
+        "180"
+      ]
+    },
+    {
+      "id": "wiskunde-h9-concept-025",
+      "vraag": "Wat geldt er voor overstaande hoeken?",
+      "antwoord": "overstaande hoeken zijn even groot",
+      "modus": "kaart",
+      "onderdeel": "§9.3 Bijzondere driehoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p166.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-026",
+      "vraag": "Wat is een parallellogram?",
+      "antwoord": "een vierhoek waarvan beide paren overstaande zijden evenwijdig zijn",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p169.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-027",
+      "vraag": "Noem de vier eigenschappen van een parallellogram.",
+      "antwoord": "1) puntsymmetrisch; 2) overstaande zijden even lang; 3) diagonalen delen elkaar middendoor; 4) overstaande hoeken even groot",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p169.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-028",
+      "vraag": "Wat is een ruit?",
+      "antwoord": "een vierhoek waarvan alle zijden even lang zijn",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p171.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-029",
+      "vraag": "Noem de extra eigenschappen van een ruit (naast die van een parallellogram).",
+      "antwoord": "de diagonalen zijn symmetrieassen; ze staan loodrecht op elkaar; ze delen de hoeken middendoor",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p171.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-030",
+      "vraag": "Is elke ruit een parallellogram?",
+      "antwoord": "ja — een ruit is een bijzonder parallellogram (met bovendien alle zijden even lang), dus alle eigenschappen van een parallellogram gelden ook",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p171.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-031",
+      "vraag": "Wat is een trapezium?",
+      "antwoord": "een vierhoek met minstens één paar evenwijdige zijden",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p173.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-032",
+      "vraag": "Wat is een gelijkbenig trapezium?",
+      "antwoord": "een trapezium met één symmetrieas",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p173.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-033",
+      "vraag": "Wat is een vlieger?",
+      "antwoord": "een vierhoek waarvan minstens één diagonaal symmetrieas is",
+      "modus": "kaart",
+      "onderdeel": "§9.4 Bijzondere vierhoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p173.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-034",
+      "vraag": "Welke regel geldt voor Z-hoeken?",
+      "antwoord": "in een Z-figuur zijn twee lijnen evenwijdig en zijn de Z-hoeken gelijk",
+      "modus": "kaart",
+      "onderdeel": "§9.5 Z- en F-hoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p175.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-035",
+      "vraag": "Welke regel geldt voor F-hoeken?",
+      "antwoord": "in een F-figuur zijn twee lijnen evenwijdig en zijn de F-hoeken gelijk",
+      "modus": "kaart",
+      "onderdeel": "§9.5 Z- en F-hoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p177.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-036",
+      "vraag": "Waarvoor gebruik je Z-hoeken en F-hoeken?",
+      "antwoord": "om hoeken te herkennen en te berekenen in figuren met evenwijdige lijnen",
+      "modus": "kaart",
+      "onderdeel": "§9.5 Z- en F-hoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p177.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h9-concept-037",
+      "vraag": "Welke regels mag je gebruiken bij het berekenen van hoeken?",
+      "antwoord": "rechte hoek (90°), gestrekte hoek (180°), overstaande hoeken, hoekensom driehoek (180°), hoekensom vierhoek (360°), basishoeken, F-hoeken en Z-hoeken",
+      "modus": "kaart",
+      "onderdeel": "§9.5 Z- en F-hoeken",
+      "hoofdstuk": "9",
+      "bron": "raw/wiskunde/wiskunde-h09-p179.jpg",
+      "confidence": 0.9
     }
   ]
 }
