@@ -68,21 +68,19 @@ export interface Mijlpaal {
   beloning: string;
 }
 
-// Standaard-mijlpalen (SPEC §8). Ouder-configureerbare beloningen: later.
-// Ladder verfijnd 2026-06-12 (Ralph): ±elke 2 dagen een beloning haalbaar (~65 pt/dag
-// bij 3 blokken + bonussen), met extra kleine stapjes aan het begin om aan te haken.
-// De beloningsteksten zijn startersuggesties — Ralph kalibreert ze met Stijn.
+// Mijlpalen + beloningen, door Ralph vastgesteld met Stijn (2026-06-12).
+// 9 stappen, ±elke 2 dagen één haalbaar (~65 pt/dag bij 3 blokken + bonussen);
+// bewust kleine stapjes aan het begin (1–3 binnen ~2 dagen) zodat Stijn aanhaakt.
 export const MIJLPALEN: Mijlpaal[] = [
-  { naam: "Aftrap", drempel: 30, beloning: "Snack naar keuze 🍪" },
-  { naam: "Sprintje", drempel: 80, beloning: "30 min extra schermtijd" },
-  { naam: "Brons", drempel: 150, beloning: "IJsje na het avondeten" },
-  { naam: "Volhouder", drempel: 280, beloning: "Jij kiest de film vanavond 🎬" },
-  { naam: "Zilver", drempel: 420, beloning: "Zaterdagavond bowlen met een vriend" },
-  { naam: "Doorzetter", drempel: 560, beloning: "Patat- of pizza-avond naar keuze 🍕" },
-  { naam: "Goud", drempel: 700, beloning: "€15 extra zakgeld" },
-  { naam: "Kanjer", drempel: 850, beloning: "Vriend mag blijven slapen" },
-  { naam: "Platina", drempel: 1000, beloning: "Concertje / dagje uit naar keuze" },
-  { naam: "Legende", drempel: 1200, beloning: "Grote verrassing van papa & mama 🎁" },
+  { naam: "Aftrap", drempel: 25, beloning: "€5 extra zakgeld (Revolut) 💶" },
+  { naam: "Sprintje", drempel: 60, beloning: "IJsje eten in Duitsland, met een vriend of Lauren erbij 🍦" },
+  { naam: "Brons", drempel: 110, beloning: "€10 tegoed game-kaartje 🎮" },
+  { naam: "Volhouder", drempel: 200, beloning: "Zo laat gaan slapen als jij wilt — samen een gezellige avond! 🌙" },
+  { naam: "Zilver", drempel: 320, beloning: "Bowlen met een vriend erbij 🎳" },
+  { naam: "Doorzetter", drempel: 470, beloning: "Jij kiest wat of waar we gaan eten 🍽️" },
+  { naam: "Goud", drempel: 650, beloning: "€15 extra zakgeld (cash of Revolut) 💶" },
+  { naam: "Flapdrol", drempel: 850, beloning: "Lunchpauze Coffee Mundo ☕" },
+  { naam: "Eindbaas", drempel: 1100, beloning: "Karten bij All-in 🏎️" },
 ];
 
 const blokById = new Map(BLOKKEN.map((b) => [b.id, b]));

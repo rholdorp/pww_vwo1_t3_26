@@ -105,11 +105,12 @@ _Laatst bijgewerkt: 2026-06-12_
 - ✅ **Punten/streaks/mijlpalen** als pure afgeleide view: blok ✓ 10/15, deels 2, vak-klaar
   +75, dagdoel +15, weekstreak +50, **focus-bonus** (≥15 min +5, ≥30 min +15) (anti-grinding:
   hoogste per blok).
-- ✅ **Beloningsladder verfijnd (2026-06-12, Ralph):** 10 stappen i.p.v. 4 — Aftrap 30 /
-  Sprintje 80 / Brons 150 / Volhouder 280 / Zilver 420 / Doorzetter 560 / Goud 700 /
-  Kanjer 850 / Platina 1000 / Legende 1200 — zodat er ±elke 2 dagen een beloning haalbaar
-  is (~65 pt/dag), met kleine stapjes aan het begin om aan te haken. Beloningsteksten zijn
-  suggesties; Ralph kalibreert met Stijn.
+- ✅ **Beloningsladder definitief (2026-06-12, door Ralph vastgesteld):** 9 stappen —
+  Aftrap 25 / Sprintje 60 / Brons 110 / Volhouder 200 / Zilver 320 / Doorzetter 470 /
+  Goud 650 / Flapdrol 850 / Eindbaas 1100 — ±elke 2 dagen één haalbaar (~65 pt/dag),
+  met extra kleine stapjes aan het begin (1–3 binnen ~2 dagen) om aan te haken. De
+  beloningen zijn échte, met Ralph afgesproken beloningen (zakgeld, ijsje in Duitsland,
+  game-tegoed, bowlen, karten als eindbaas) — niet langer placeholders.
 - ✅ **Concreet beloningsadvies (`beloningAdvies`):** "nog X pt ≈ N blokken (±D dagen)" +
   de beloning zelf, overal verwerkt: widget (alle tabs), beide afrondings-modals en de
   Voortgang-tab (ladder met ⭐-volgende + voortgangsbalk + puntenuitleg).
