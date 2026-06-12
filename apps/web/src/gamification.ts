@@ -75,7 +75,7 @@ export interface Mijlpaal {
  */
 export function toontBeloningen(naam: string): boolean {
   const s = slug(naam);
-  return s === "stijn" || s === "test" || s.startsWith("test-");
+  return s === "stijn" || s === "stijn1" || s === "test" || s.startsWith("test-");
 }
 
 // Mijlpalen + beloningen, door Ralph vastgesteld met Stijn (2026-06-12).
