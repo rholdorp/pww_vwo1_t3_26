@@ -115,6 +115,11 @@ const LEER_START = "2026-06-12";
 const HERHAALWEEK_START = "2026-06-22"; // 22–26 juni: alleen herhaling
 const PWW_START = "2026-06-29";
 const PWW_EIND = "2026-07-03";
+// Dag-uitzonderingen (afspraak 2026-06-12): za 13/6 = verjaardagsfeest, max ~1 uur
+// → leer-dag met cap 2 (wiskunde-dagelijks + 1 urgent blok) i.p.v. gereduceerd.
+const DAG_UITZONDERING: Record<string, { type: DagType; cap: number }> = {
+  "2026-06-13": { type: "leer", cap: 2 },
+};
 
 // Dagcapaciteit: standaard 3 blokken (~1,5 u). Past de stof daarmee niet meer vóór
 // de herhaalweek (door de latere start), dan schaalt de planner op naar 4 blokken
@@ -140,6 +145,9 @@ const GEREDUCEERD_OK = new Set(["biologie", "aardrijkskunde"]);
 const GEPAUZEERD = new Set(["engels"]);
 //  - wiskunde heeft nu een echte Cat-2-trainer (H8) → geen boek/uitstel meer.
 const VAK_NIET_VOOR: Record<string, string> = {};
+// Afspraak Ralph/Stijn: wiskunde elke niet-gereduceerde dag (5/7 per week), ook in
+// de herhaalweek. Dagelijkse vakken tellen niet mee als "uitloop" (zie kalenderSchema).
+const DAGELIJKS = new Set(["wiskunde"]);
 // Spreiding: minimaal aantal dagen tussen twee leerblokken van een vak (anti-clustering).
 const MIN_INTERVAL: Record<string, number> = { nederlands: 4 };
 
@@ -193,7 +201,12 @@ export function roosterSlots(): DagSlot[] {
     if (datum >= PWW_START) type = "toets";
     else if (datum >= HERHAALWEEK_START) type = "buffer";
     else type = dow === 3 || dow === 6 ? "gereduceerd" : "leer";
-    slots.push({ datum, type, toetsVakken: toetsPerDatum[datum] ?? [] });
+    const uitzondering = DAG_UITZONDERING[datum];
+    if (uitzondering) {
+      slots.push({ datum, type: uitzondering.type, cap: uitzondering.cap, toetsVakken: toetsPerDatum[datum] ?? [] });
+    } else {
+      slots.push({ datum, type, toetsVakken: toetsPerDatum[datum] ?? [] });
+    }
   }
   return slots;
 }
@@ -219,9 +232,7 @@ export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaa
         gereduceerdOk: GEREDUCEERD_OK.has(vak),
         isBoek: vakBlokken.length === 0,
         maxSessies: vak === "nederlands" ? 3 : undefined,
-        // Afspraak Ralph/Stijn: wiskunde elke niet-gereduceerde dag (5/7 per week),
-        // ook in de herhaalweek.
-        dagelijks: vak === "wiskunde",
+        dagelijks: DAGELIJKS.has(vak),
         nietVoor: VAK_NIET_VOOR[vak],
         minIntervalDagen: MIN_INTERVAL[vak],
         pending: pakVakBlokken(vak, nietAf),
@@ -231,14 +242,27 @@ export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaa
   const slots = roosterSlots();
   // Niet vóór Stijns effectieve start inplannen (vandaag, of LEER_START als dat later is).
   const startDatum = vandaagISO > LEER_START ? vandaagISO : LEER_START;
-  // Eerst op normale pacing (~1,5 u/dag). Loopt de stof daarmee over de herhaalweek
-  // heen (overflow-flags), dan intensiever plannen (~2 u/dag) zodat het tóch past.
-  const normaal = planPeriode(vakInputs, slots, vandaagISO, { startDatum, dagCap: DAG_CAP_NORMAAL });
-  if (normaal.flags.length === 0) return normaal;
-  const intensief = planPeriode(vakInputs, slots, vandaagISO, { startDatum, dagCap: DAG_CAP_INTENSIEF });
-  // Alleen naar 2 u opschalen als de extra ruimte écht meer leerstof kwijt kan
-  // (anders blijft de overflow een scope-/sessielimiet-kwestie die 2 u niet oplost).
+  // Escalatieladder (afspraken 2026-06-11 + 2026-06-12):
+  //  1. normale pacing (~1,5 u/dag), alles vóór de herhaalweek;
+  //  2. past het niet → intensiever (~2 u/dag), nog steeds vóór de herhaalweek;
+  //  3. past het dan nóg niet → uitloop accepteren: leren mag de herhaalweek in,
+  //     tot uiterlijk 3 dagen vóór de toets van het vak (laatste 3 dagen = herhalen/
+  //     automatiseren). De engine bewaakt die grens; hier kiezen we het schema dat
+  //     de meeste leerstof kwijt kan, bij gelijke dekking met de minste uitloop.
   const telLeer = (r: SchemaResultaat) =>
     r.dagen.reduce((s, d) => s + d.blokken.filter((b) => b.soort === "trainer").length, 0);
-  return telLeer(intensief) > telLeer(normaal) ? intensief : normaal;
+  // Uitloop = nieuwe leerstof die pas in de herhaalweek landt. Dagelijkse vakken
+  // (wiskunde) horen daar bewust elke dag — die tellen niet mee.
+  const telUitloop = (r: SchemaResultaat) =>
+    r.dagen
+      .filter((d) => d.type === "buffer")
+      .reduce((s, d) => s + d.blokken.filter((b) => b.soort === "trainer" && !DAGELIJKS.has(b.vak)).length, 0);
+  const normaal = planPeriode(vakInputs, slots, vandaagISO, { startDatum, dagCap: DAG_CAP_NORMAAL });
+  if (normaal.flags.length === 0 && telUitloop(normaal) === 0) return normaal;
+  const intensief = planPeriode(vakInputs, slots, vandaagISO, { startDatum, dagCap: DAG_CAP_INTENSIEF });
+  if (intensief.flags.length === 0 && telUitloop(intensief) === 0) return intensief;
+  // Beide schema's hebben uitloop en/of harde flags → meeste dekking wint, dan de
+  // minste uitloop, dan de rustigste pacing (1,5 u).
+  const score = (r: SchemaResultaat) => telLeer(r) * 1000 - telUitloop(r);
+  return score(intensief) > score(normaal) ? intensief : normaal;
 }

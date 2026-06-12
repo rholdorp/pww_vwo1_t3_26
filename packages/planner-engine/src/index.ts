@@ -3,7 +3,9 @@
 // rooster-config aan; deze engine verdeelt ze over de dagen vanaf vandaag.
 //
 // Kernregels (Ralph):
-//  - Alle content aangeraakt vóór de herhaalweek (dekking); herhaalweek = alleen review.
+//  - Alle content liefst aangeraakt vóór de herhaalweek (dekking); herhaalweek = primair
+//    review. Past het niet, dan mag leren uitlopen tot uiterlijk 3 dagen vóór de toets
+//    van het vak — de laatste 3 dagen zijn altijd herhalen/automatiseren (2026-06-12).
 //  - Max 3 vakken/dag; max 1 leerblok per vak per dag (elk blok ~30 min).
 //  - Gereduceerde dagen (wo/za): 1 blok, alleen "makkelijke" Cat-1-vakken (Bio/AK).
 //  - Boek-vakken (wiskunde/engels, nog geen trainer-content) krijgen gereserveerde
@@ -53,6 +55,11 @@ export interface DagSlot {
   type: DagType;
   /** Vakken met een toets op deze dag. */
   toetsVakken: string[];
+  /**
+   * Capaciteits-override voor déze dag (aantal blokken), bovenop het dagtype.
+   * Bv. verjaardagsfeest 13/6: leer-dag maar maar ~1 uur → cap 2.
+   */
+  cap?: number;
 }
 
 export interface GeplandBlok {
@@ -67,6 +74,8 @@ export interface DagToewijzing {
   type: DagType;
   toetsVakken: string[];
   blokken: GeplandBlok[];
+  /** Effectieve capaciteit van deze dag (slot-override of dagtype-default). */
+  cap: number;
 }
 
 export interface SchemaResultaat {
@@ -108,12 +117,13 @@ export function planPeriode(
   const maxVakken = opties.maxVakkenPerDag ?? Math.max(3, dagCap);
   const startDatum = opties.startDatum;
   // Volle dagen (leer/buffer) krijgen de instelbare cap; gereduceerd/toets/vrij vast.
+  // Een slot-cap (bv. verjaardagsfeest → 2 blokken) overrulet beide.
   const CAP: Record<DagType, number> = { ...STANDAARD_CAP, leer: dagCap, buffer: dagCap };
 
   const flags: string[] = [];
   const dagen: DagToewijzing[] = slots
     .filter((s) => s.datum >= vandaag && (!startDatum || s.datum >= startDatum))
-    .map((s) => ({ datum: s.datum, type: s.type, toetsVakken: s.toetsVakken, blokken: [] }));
+    .map((s) => ({ datum: s.datum, type: s.type, toetsVakken: s.toetsVakken, blokken: [], cap: s.cap ?? CAP[s.type] }));
 
   // Prioriteit: vroegste toets eerst, dan moeilijkste vak eerst.
   const prioriteit = [...vakken].sort(
@@ -126,21 +136,27 @@ export function planPeriode(
   const leerSessies = new Map(vakken.map((v) => [v.vak, 0]));
   const laatst = new Map<string, string>(); // vak → laatste leerblok-datum (voor spreiding)
   const dagDiff = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000);
+  const isoMinDagen = (iso: string, n: number) =>
+    new Date(Date.parse(`${iso}T00:00:00Z`) - n * 86_400_000).toISOString().slice(0, 10);
 
   const vakkenOp = (d: DagToewijzing) => new Set(d.blokken.map((b) => b.vak));
   // Basisregels die voor élke plaatsing gelden (capaciteit, max vakken/dag, 1/vak/dag, cap).
   function basisOk(v: VakInput, d: DagToewijzing): boolean {
-    if (d.blokken.length >= CAP[d.type]) return false;
+    if (d.blokken.length >= d.cap) return false;
     const op = vakkenOp(d);
     if (op.has(v.vak)) return false; // max 1 leerblok per vak per dag
     if (op.size >= maxVakken) return false; // max. aantal vakken per dag
     if (v.maxSessies != null && (leerSessies.get(v.vak) ?? 0) >= v.maxSessies) return false;
     return true;
   }
+  // Nieuwe leerstof (trainer/boek) mag tot uiterlijk 3 dagen vóór de toets van het
+  // vak: de laatste 3 dagen zijn voor herhalen/automatiseren (afspraak 2026-06-12).
+  const magLeren = (v: VakInput, datum: string) => datum < isoMinDagen(v.pwwDatum, 3);
   function mag(v: VakInput, d: DagToewijzing): boolean {
     if (!basisOk(v, d)) return false;
     if (d.type === "gereduceerd" && !v.gereduceerdOk) return false;
     if (v.nietVoor && d.datum < v.nietVoor) return false; // uitgesteld
+    if (!magLeren(v, d.datum)) return false; // laatste 3 dagen = review-only
     const vorige = laatst.get(v.vak);
     if (v.minIntervalDagen && vorige && dagDiff(vorige, d.datum) < v.minIntervalDagen) return false;
     return true;
@@ -179,17 +195,22 @@ export function planPeriode(
   const dagelijkseVakken = prioriteit.filter((v) => v.dagelijks);
   function plaatsDagelijks(d: DagToewijzing) {
     for (const v of dagelijkseVakken) {
-      if (!mag(v, d)) continue;
-      if (v.isBoek) {
-        plaats(v, d, null, "boek");
-        continue;
+      if (mag(v, d)) {
+        if (v.isBoek) {
+          plaats(v, d, null, "boek");
+          continue;
+        }
+        // Vak mét trainer-content (bv. wiskunde): trek een écht blok uit de wachtrij,
+        // zodat de dagelijkse slot klikbare opgaven bevat. Is de stof op, dan een
+        // review-blok — wiskunde blijft zo elke dag terugkomen zonder lege kaart.
+        const q = queue.get(v.vak)!;
+        const blok = q.shift() ?? null;
+        plaats(v, d, blok, blok ? "trainer" : "review");
+      } else if (!magLeren(v, d.datum) && d.type !== "gereduceerd" && magReview(v, d)) {
+        // Laatste 3 dagen vóór de toets: het dagelijkse slot blijft bestaan,
+        // maar wordt herhalen/automatiseren in plaats van nieuwe stof.
+        plaats(v, d, null, "review");
       }
-      // Vak mét trainer-content (bv. wiskunde): trek een écht blok uit de wachtrij,
-      // zodat de dagelijkse slot klikbare opgaven bevat. Is de stof op, dan een
-      // review-blok — wiskunde blijft zo elke dag terugkomen zonder lege kaart.
-      const q = queue.get(v.vak)!;
-      const blok = q.shift() ?? null;
-      plaats(v, d, blok, blok ? "trainer" : "review");
     }
   }
 
@@ -212,13 +233,13 @@ export function planPeriode(
       if (boek) plaats(boek, d, null, "boek");
     }
     // 2) Vul met content in volgorde (hoogste prioriteit eerst), max 1/vak/dag.
-    while (d.blokken.length < CAP[d.type]) {
+    while (d.blokken.length < d.cap) {
       const v = prioriteit.find((v) => !v.isBoek && (queue.get(v.vak)!.length > 0) && mag(v, d));
       if (!v) break;
       plaats(v, d, queue.get(v.vak)!.shift()!, "trainer");
     }
     // 3) Nog ruimte over (content op) → extra boek.
-    while (d.blokken.length < CAP[d.type]) {
+    while (d.blokken.length < d.cap) {
       const boek = kiesBoek(d);
       if (!boek) break;
       plaats(boek, d, null, "boek");
@@ -231,23 +252,16 @@ export function planPeriode(
     }
   }
 
-  // Content die niet vóór de herhaalweek paste → waarschuwing (SPEC §7 pacing).
-  for (const v of vakken) {
-    const over = queue.get(v.vak)!.length;
-    if (!v.isBoek && over > 0) {
-      flags.push(`${v.vak}: ${over} leerblok(ken) passen niet meer vóór de herhaalweek — meer tijd of minder scope nodig.`);
-    }
-  }
-
-  // Herhaalweek: alleen review (geen nieuwe stof). Eventuele leftover content mag hier
-  // nog landen (vangnet); daarna review, gebalanceerd over álle vakken (minst-herhaald
-  // eerst), met content-vakken vóór boek-vakken op gelijke stand.
+  // Herhaalweek: primair review. Eventuele leftover content mag hier nog landen
+  // (vangnet, t/m 3 dagen vóór de toets van het vak — afspraak 2026-06-12); daarna
+  // review, gebalanceerd over álle vakken (minst-herhaald eerst), met content-vakken
+  // vóór boek-vakken op gelijke stand.
   for (const d of bufferDagen) {
     // Dagelijkse vakken (wiskunde) krijgen ook hier elke buffer-dag een slot
     // (geen gereduceerde dagen in de herhaalweek). Wordt geboekt als "boek" zodat
     // Stijn doorgaat in zijn boek; review van content-vakken vult de rest.
     plaatsDagelijks(d);
-    while (d.blokken.length < CAP[d.type]) {
+    while (d.blokken.length < d.cap) {
       const leftover = prioriteit.find((v) => !v.isBoek && (queue.get(v.vak)!.length > 0) && mag(v, d));
       if (leftover) {
         plaats(leftover, d, queue.get(leftover.vak)!.shift()!, "trainer");
@@ -263,6 +277,17 @@ export function planPeriode(
       const v = kandidaten[0];
       if (!v) break;
       plaats(v, d, null, v.isBoek ? "boek" : "review");
+    }
+  }
+
+  // Content die zelfs met uitloop (leren t/m 3 dagen vóór de toets) nergens meer
+  // past → harde waarschuwing (SPEC §7 pacing).
+  for (const v of vakken) {
+    const over = queue.get(v.vak)!.length;
+    if (!v.isBoek && over > 0) {
+      flags.push(
+        `${v.vak}: ${over} leerblok(ken) passen nergens meer (zelfs niet t/m 3 dagen vóór de toets) — minder scope of meer uren nodig.`,
+      );
     }
   }
 

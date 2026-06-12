@@ -145,7 +145,7 @@ describe("planPeriode — latere start + intensieve dagcap (Stijn 2026-06-11)", 
     vakken[0]!.pending = vakBlok("frans", 8);
     vakken[1]!.pending = vakBlok("biologie", 8);
     vakken[2]!.pending = vakBlok("aardrijkskunde", 8);
-    vakken[3]!.maxSessies = undefined;
+    delete vakken[3]!.maxSessies;
     vakken[3]!.pending = vakBlok("nederlands", 8);
     const res = planPeriode(vakken, WEEK1, "2026-06-08", { dagCap: 4 });
     const leer = res.dagen.filter((d) => d.type === "leer");
@@ -158,12 +158,80 @@ describe("planPeriode — latere start + intensieve dagcap (Stijn 2026-06-11)", 
     vakken[0]!.pending = vakBlok("frans", 8);
     vakken[1]!.pending = vakBlok("biologie", 8);
     vakken[2]!.pending = vakBlok("aardrijkskunde", 8);
-    vakken[3]!.maxSessies = undefined;
+    delete vakken[3]!.maxSessies;
     vakken[3]!.pending = vakBlok("nederlands", 8);
     const res = planPeriode(vakken, WEEK1, "2026-06-08");
     for (const d of res.dagen) {
       expect(new Set(d.blokken.map((b) => b.vak)).size).toBeLessThanOrEqual(3);
       expect(d.blokken.length).toBeLessThanOrEqual(d.type === "gereduceerd" ? 1 : 3);
+    }
+  });
+});
+
+describe("planPeriode — slot-cap override (verjaardagsfeest 13/6)", () => {
+  it("beperkt één dag tot de slot-cap terwijl andere leerdagen vol blijven", () => {
+    const slots = WEEK1.map((s) =>
+      s.datum === "2026-06-13" ? { ...s, type: "leer" as DagType, cap: 2 } : s,
+    );
+    const vakken = basisVakken();
+    vakken[0]!.pending = vakBlok("frans", 8);
+    vakken[1]!.pending = vakBlok("biologie", 8);
+    vakken[2]!.pending = vakBlok("aardrijkskunde", 8);
+    const res = planPeriode(vakken, slots, "2026-06-08");
+    const feest = res.dagen.find((d) => d.datum === "2026-06-13")!;
+    expect(feest.blokken.length).toBeLessThanOrEqual(2);
+    expect(feest.blokken.length).toBeGreaterThan(0); // wél wat doen, geen lege dag
+    const andereLeer = res.dagen.filter((d) => d.type === "leer" && d.datum !== "2026-06-13");
+    expect(andereLeer.some((d) => d.blokken.length === 3)).toBe(true);
+  });
+});
+
+describe("planPeriode — uitloop tot 3 dagen vóór de toets (afspraak 2026-06-12)", () => {
+  it("leftover content schuift zonder flag de herhaalweek in (vangnet)", () => {
+    const buffer: DagSlot[] = [
+      dag("2026-06-22", "buffer"), dag("2026-06-23", "buffer"), dag("2026-06-24", "buffer"),
+      dag("2026-06-25", "buffer"), dag("2026-06-26", "buffer"),
+    ];
+    const vakken = basisVakken();
+    vakken[0]!.pending = vakBlok("frans", 8); // past niet vóór de herhaalweek (toets 3/7)
+    const res = planPeriode(vakken, [...WEEK1, ...buffer], "2026-06-08");
+    const fransTrainer = res.dagen.flatMap((d) => d.blokken).filter((b) => b.vak === "frans" && b.soort === "trainer");
+    expect(fransTrainer.length).toBe(8); // alles geplaatst …
+    expect(res.flags).toHaveLength(0); // … dus geen harde flag
+    const inBuffer = res.dagen
+      .filter((d) => d.type === "buffer")
+      .flatMap((d) => d.blokken)
+      .filter((b) => b.vak === "frans" && b.soort === "trainer");
+    expect(inBuffer.length).toBeGreaterThan(0); // de uitloop landt in de herhaalweek
+  });
+
+  it("plaatst geen nieuwe stof in de laatste 3 dagen vóór de toets; rest → flag", () => {
+    const slots: DagSlot[] = [
+      dag("2026-06-20", "leer"), dag("2026-06-21", "leer"),
+      dag("2026-06-22", "buffer"), dag("2026-06-23", "buffer"), dag("2026-06-24", "buffer"),
+    ];
+    const vakken: VakInput[] = [
+      // Toets 25/6 → laatste leerdag is 21/6 (22–24 = laatste 3 dagen, review-only).
+      { vak: "engels", pwwDatum: "2026-06-25", moeilijkheid: 2, gereduceerdOk: false, isBoek: false, pending: vakBlok("engels", 5), alleBlokIds: ["e"] },
+    ];
+    const res = planPeriode(vakken, slots, "2026-06-20");
+    const perDag = new Map(res.dagen.map((d) => [d.datum, d.blokken.filter((b) => b.soort === "trainer").length]));
+    expect(perDag.get("2026-06-22")).toBe(0);
+    expect(perDag.get("2026-06-23")).toBe(0);
+    expect(perDag.get("2026-06-24")).toBe(0);
+    expect(res.flags.some((f) => f.includes("engels"))).toBe(true); // 3 blokken passen nergens
+  });
+
+  it("dagelijks vak krijgt in de laatste 3 dagen een review-slot i.p.v. nieuwe stof", () => {
+    const slots: DagSlot[] = [dag("2026-06-09", "leer"), dag("2026-06-10", "leer"), dag("2026-06-11", "leer")];
+    const vakken: VakInput[] = [
+      // Toets 12/6 → alle drie de dagen vallen in de laatste-3-dagen-zone.
+      { vak: "wiskunde", pwwDatum: "2026-06-12", moeilijkheid: 3, gereduceerdOk: false, isBoek: true, dagelijks: true, pending: [], alleBlokIds: ["w"] },
+    ];
+    const res = planPeriode(vakken, slots, "2026-06-09");
+    for (const d of res.dagen) {
+      expect(d.blokken.some((b) => b.vak === "wiskunde" && b.soort === "review")).toBe(true);
+      expect(d.blokken.some((b) => b.soort === "boek" || b.soort === "trainer")).toBe(false);
     }
   });
 });
