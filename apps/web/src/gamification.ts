@@ -69,14 +69,14 @@ export interface Mijlpaal {
 }
 
 // Mijlpalen + beloningen, door Ralph vastgesteld met Stijn (2026-06-12).
-// 9 stappen, ±elke 2 dagen één haalbaar (~65 pt/dag bij 3 blokken + bonussen);
-// bewust kleine stapjes aan het begin (1–3 binnen ~2 dagen) zodat Stijn aanhaakt.
+// 9 stappen, max 1 beloning per dag (~65 pt/dag bij 3 blokken + bonussen): de
+// eerste dagen elk één kleine stap zodat Stijn aanhaakt, daarna ±elke 2 dagen.
 export const MIJLPALEN: Mijlpaal[] = [
   { naam: "Aftrap", drempel: 25, beloning: "€5 extra zakgeld (Revolut) 💶" },
-  { naam: "Sprintje", drempel: 60, beloning: "IJsje eten in Duitsland, met een vriend of Lauren erbij 🍦" },
-  { naam: "Brons", drempel: 110, beloning: "€10 tegoed game-kaartje 🎮" },
-  { naam: "Volhouder", drempel: 200, beloning: "Zo laat gaan slapen als jij wilt — samen een gezellige avond! 🌙" },
-  { naam: "Zilver", drempel: 320, beloning: "Bowlen met een vriend erbij 🎳" },
+  { naam: "Sprintje", drempel: 90, beloning: "IJsje eten in Duitsland, met een vriend of Lauren erbij 🍦" },
+  { naam: "Brons", drempel: 170, beloning: "€10 tegoed game-kaartje 🎮" },
+  { naam: "Volhouder", drempel: 260, beloning: "Zo laat gaan slapen als jij wilt — samen een gezellige avond! 🌙" },
+  { naam: "Zilver", drempel: 350, beloning: "Bowlen met een vriend erbij 🎳" },
   { naam: "Doorzetter", drempel: 470, beloning: "Jij kiest wat of waar we gaan eten 🍽️" },
   { naam: "Goud", drempel: 650, beloning: "€15 extra zakgeld (cash of Revolut) 💶" },
   { naam: "Flapdrol", drempel: 850, beloning: "Lunchpauze Coffee Mundo ☕" },

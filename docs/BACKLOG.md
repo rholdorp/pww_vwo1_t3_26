@@ -106,9 +106,9 @@ _Laatst bijgewerkt: 2026-06-12_
   +75, dagdoel +15, weekstreak +50, **focus-bonus** (≥15 min +5, ≥30 min +15) (anti-grinding:
   hoogste per blok).
 - ✅ **Beloningsladder definitief (2026-06-12, door Ralph vastgesteld):** 9 stappen —
-  Aftrap 25 / Sprintje 60 / Brons 110 / Volhouder 200 / Zilver 320 / Doorzetter 470 /
-  Goud 650 / Flapdrol 850 / Eindbaas 1100 — ±elke 2 dagen één haalbaar (~65 pt/dag),
-  met extra kleine stapjes aan het begin (1–3 binnen ~2 dagen) om aan te haken. De
+  Aftrap 25 / Sprintje 90 / Brons 170 / Volhouder 260 / Zilver 350 / Doorzetter 470 /
+  Goud 650 / Flapdrol 850 / Eindbaas 1100 — **max 1 beloning per dag** (~65 pt/dag): de
+  eerste dagen elk één kleine stap om aan te haken, daarna ±elke 2 dagen één. De
   beloningen zijn échte, met Ralph afgesproken beloningen (zakgeld, ijsje in Duitsland,
   game-tegoed, bowlen, karten als eindbaas) — niet langer placeholders.
 - ✅ **Concreet beloningsadvies (`beloningAdvies`):** "nog X pt ≈ N blokken (±D dagen)" +
