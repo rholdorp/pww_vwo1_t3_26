@@ -3,7 +3,7 @@
 Lopende lijst van wat er t.o.v. [SPEC.md](../SPEC.md) nog open staat. Bijwerken bij
 elke afgeronde stap. Legenda: ✅ klaar · 🟡 deels · ❌ nog niet · 🔜 nu mee bezig.
 
-_Laatst bijgewerkt: 2026-06-08_
+_Laatst bijgewerkt: 2026-06-12_
 
 ## Nu mee bezig
 - (niets — volgende item kiezen)
@@ -24,11 +24,20 @@ _Laatst bijgewerkt: 2026-06-08_
   synthese-lock) + strikt nakijken (`mathClean.ts` `wiskundeGelijk`: alléén cosmetisch, geen
   CAS — de simpelste vorm uit het antwoordenboekje is het antwoord; `exacteVorm` voor wet.
   notatie) + `Cat2Trainer`-UI (✏️ maak op papier, helperrij, kralenketting, fout→antwoord +
-  vergelijkbare som). Content: `opgaven.json` (187 opgaven, Voorkennis+§8.1–8.4, **elke Q→A
-  met de hand door berekening geverifieerd**) + `flashcards.json` (8 regel-kaarten).
+  vergelijkbare som). Content: `opgaven.json` (312 opgaven, Voorkennis+§8.1–**8.5**, **elke Q→A
+  tegen het antwoordenboekje én door eigen berekening geverifieerd**) + `flashcards.json`
+  (15 regel-kaarten).
+  - **§8.5 (machten en letters) toegevoegd 2026-06-12:** 125 opgaven (opg 60–85 + leerroute
+    L10/L11/L12, p125–131) + 7 regelkaarten (vermenigvuldigen = exponenten optellen,
+    gelijksoortige termen, delen = exponenten aftrekken, optellen↔vermenigvuldigen↔delen).
+    "k.n." (kan niet) is conform het boek het antwoord bij niet-gelijksoortige termen;
+    de matcher accepteert ook "kan niet"/"kn" (acceptedForms, getest in `mathClean.test.ts`).
   - **Bewust NIET opgenomen (eerlijk, P8):** figuur-opgaven (oppervlakte/omtrek, priemfactor-
-    figuur), woordproblemen, breuk-coëfficiënt-antwoorden (matcher-onveilig), `*`-antwoorden
-    (tekening/uitwerking). **Herscan nodig:** opg 37 (geen vraag-scan), A55/L8 (geen antwoord-scan).
+    figuur, 65 piramide, 67 kubus), woordproblemen/open vragen (66a, 73, E76 dubbel-invul),
+    breuk-coëfficiënt-antwoorden (matcher-onveilig, o.a. 84a), `*`-antwoorden (tekening/
+    uitwerking). **Herscan nodig:** opg 37 (geen vraag-scan). De oude notitie "A55/L8 geen
+    antwoord-scan" was achterhaald: bijlage-foto's PXL_…064343217 (p30) en …064345600.MP (p31)
+    dekken opg 55–85 + Gemengd 1–4 (vastgesteld 2026-06-12).
   - **H9 meetkunde (2026-06-10):** **concept-flashcards LIVE** — 37 kaarten over §9.1–9.5
     (symmetrie, driehoeken, vierhoeken, Z/F-hoeken + reken-regels) in `flashcards.json`,
     getrouw uit de boek-theorie. Plumbing voor figuur-bij-opgave is gebouwd (`afbeelding`
@@ -39,9 +48,10 @@ _Laatst bijgewerkt: 2026-06-08_
     met de hand geverifieerd** tegen lesboek p167 + antwoordsleutel p41 + eigen geometrie-
     controle. NB: een eerdere agent-run koppelde figuur-nr ≠ opgave-nr (mismatch) — opgevangen
     bij verificatie (P8), niet geshipt. °-teken wordt door de matcher genegeerd (`70` = `70°`).
-  - **Nog open:** §8.5 (machten en letters), binair-onderzoek; **meer H9-hoek-opgaven**
+  - **Nog open:** binair-onderzoek (extensie, optioneel); **meer H9-hoek-opgaven**
     (rest van §9.3 + §9.5 Z/F-hoeken) — zelfde recept: figuur croppen + boek-antwoord +
-    zelf verifiëren. Validator-grounding voor Cat 2 niet gewired → `gevalideerd` blijft false.
+    zelf verifiëren; H8 Gemengde opgaven/Herhaling (p132–142, antwoordfoto's aanwezig) als
+    extra oefenvoorraad. Validator-grounding voor Cat 2 niet gewired → `gevalideerd` blijft false.
 - ✅ Cat 3 (begrip): flashcards + oefenvragen in flashcard-modus. **LLM-rubric +
   samenvatting-lees-fase DESCOPED** (besluit 2026-06-07: flashcards volstaan; alleen NL krijgt LLM).
 - ✅ Cat 4 — **Nederlands** schrijftrainer mét LLM-feedback via **Cloud Function**
@@ -56,6 +66,13 @@ _Laatst bijgewerkt: 2026-06-08_
   max 3 vakken/dag, 30-min vak-blokken (meerdere trainer-blokjes), content in volgorde,
   engels = boek-blokken; wiskunde is sinds 2026-06-10 een echt content-vak (H8 Cat-2),
   nederlands cap 3, herplannen bij falen (recompute op mastery), pacing-flags bij overflow.
+- ✅ **Uitloop-regel + dag-uitzonderingen (afspraak 2026-06-12):** za 13/6 (verjaardags-
+  feest) = leer-dag met cap 2 (~1 uur, slot-cap-override in `DagSlot.cap`). Past de stof
+  niet vóór de herhaalweek (ook niet op 2 u/dag), dan mag leren per vak uitlopen tot
+  uiterlijk **3 dagen vóór de toets**; de laatste 3 dagen zijn altijd herhalen/
+  automatiseren (dagelijkse vakken krijgen daar een review-slot i.p.v. nieuwe stof).
+  Escalatieladder in `kalenderSchema`: 1,5 u/dag → 2 u/dag → uitloop; harde flag alleen
+  voor stof die zelfs dan nergens past.
 - ✅ **Maandkalender** (Kalender-tab): vooruitblik (vak-chips per dag, toetsdagen 🎯,
   herhaalweek-tint) + terugblik (bevroren dagschema + status ✓/◐/○; vult zich naarmate
   dagen verstrijken). Dagdetail toont de trainer-blokjes + START voor vandaag.

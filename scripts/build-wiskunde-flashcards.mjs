@@ -19,6 +19,14 @@ const H8 = [
   ["Een macht (-a)ⁿ van een negatief grondtal is positief als de exponent n … is.", "even", "typen", "§8.3 Machten", "wiskunde-h08-p118.jpg"],
   ["Hoe ziet de wetenschappelijke notatie van een getal eruit?", "als a · 10^n, waarbij a een getal is met 1 ≤ a < 10 en n een geheel getal", "kaart", "§8.4 De wetenschappelijke notatie", "wiskunde-h08-p122.jpg"],
   ["Hoe werk je de haakjes weg in a(b + c)?", "ab + ac (vermenigvuldig a met élke term tussen de haakjes)", "kaart", "§8.2 Haakjes wegwerken", "wiskunde-h08-p107.jpg"],
+  // §8.5 Machten en letters (theorie-kaders p125/p127/p130/p131, toegevoegd 2026-06-12)
+  ["Hoe herleid je een product van machten met hetzelfde grondtal, bv. a⁵ · a²?", "tel de exponenten op, het grondtal blijft gelijk: a⁵ · a² = a⁷", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p125.jpg"],
+  ["Wat doe je bij 5a⁵ · 3a³ met de getallen ervoor en met de exponenten?", "getallen vermenigvuldigen (5 · 3 = 15), exponenten optellen (5 + 3 = 8): 5a⁵ · 3a³ = 15a⁸", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p125.jpg"],
+  ["Wat zijn gelijksoortige termen?", "termen waarin precies dezelfde letters met dezelfde exponenten voorkomen; alleen gelijksoortige termen kun je samennemen", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p127.jpg"],
+  ["Kun je 5a³ + 2a⁴ herleiden? En 5a³ + 2a³?", "5a³ + 2a⁴ kan niet (geen gelijksoortige termen); 5a³ + 2a³ = 7a³", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p127.jpg"],
+  ["Hoe herleid je een deling van machten met hetzelfde grondtal, bv. a⁵/a²?", "trek de exponenten van elkaar af, het grondtal blijft gelijk: a⁵/a² = a³", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p130.jpg"],
+  ["Wat is a⁵/a⁵? En 8a⁵/2a⁵?", "a⁵/a⁵ = 1 (iets gedeeld door zichzelf) en 8a⁵/2a⁵ = 4", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p130.jpg"],
+  ["Let op het verschil: wat is 3a³ + 5a³, wat is 3a³ · 5a³ en wat is a⁵/a³?", "optellen: 3a³ + 5a³ = 8a³ · vermenigvuldigen: 3a³ · 5a³ = 15a⁶ (exponenten optellen) · delen: a⁵/a³ = a² (exponenten aftrekken)", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p131.jpg"],
 ];
 
 const H9 = [

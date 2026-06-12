@@ -83,6 +83,76 @@
       "confidence": 0.9
     },
     {
+      "id": "wiskunde-h8-regel-009",
+      "vraag": "Hoe herleid je een product van machten met hetzelfde grondtal, bv. a⁵ · a²?",
+      "antwoord": "tel de exponenten op, het grondtal blijft gelijk: a⁵ · a² = a⁷",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p125.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-010",
+      "vraag": "Wat doe je bij 5a⁵ · 3a³ met de getallen ervoor en met de exponenten?",
+      "antwoord": "getallen vermenigvuldigen (5 · 3 = 15), exponenten optellen (5 + 3 = 8): 5a⁵ · 3a³ = 15a⁸",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p125.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-011",
+      "vraag": "Wat zijn gelijksoortige termen?",
+      "antwoord": "termen waarin precies dezelfde letters met dezelfde exponenten voorkomen; alleen gelijksoortige termen kun je samennemen",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p127.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-012",
+      "vraag": "Kun je 5a³ + 2a⁴ herleiden? En 5a³ + 2a³?",
+      "antwoord": "5a³ + 2a⁴ kan niet (geen gelijksoortige termen); 5a³ + 2a³ = 7a³",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p127.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-013",
+      "vraag": "Hoe herleid je een deling van machten met hetzelfde grondtal, bv. a⁵/a²?",
+      "antwoord": "trek de exponenten van elkaar af, het grondtal blijft gelijk: a⁵/a² = a³",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p130.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-014",
+      "vraag": "Wat is a⁵/a⁵? En 8a⁵/2a⁵?",
+      "antwoord": "a⁵/a⁵ = 1 (iets gedeeld door zichzelf) en 8a⁵/2a⁵ = 4",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p130.jpg",
+      "confidence": 0.9
+    },
+    {
+      "id": "wiskunde-h8-regel-015",
+      "vraag": "Let op het verschil: wat is 3a³ + 5a³, wat is 3a³ · 5a³ en wat is a⁵/a³?",
+      "antwoord": "optellen: 3a³ + 5a³ = 8a³ · vermenigvuldigen: 3a³ · 5a³ = 15a⁶ (exponenten optellen) · delen: a⁵/a³ = a² (exponenten aftrekken)",
+      "modus": "kaart",
+      "onderdeel": "§8.5 Machten en letters",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p131.jpg",
+      "confidence": 0.9
+    },
+    {
       "id": "wiskunde-h9-concept-001",
       "vraag": "Wat betekent de notatie k ⊥ m?",
       "antwoord": "k staat loodrecht op m.",

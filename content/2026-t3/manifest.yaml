@@ -40,9 +40,10 @@ pww:
 #   - engels      : VOLLEDIG UIT BOEK. Scope vastgelegd (2026-06-10), nog geen
 #                   screenshots/trainer. LET OP: eerste toets (ma 29/6).
 #   - biologie    : VOLLEDIG UIT BOEK. 35 screenshots binnen, nog niet verwerkt (geen trainer).
-#   - wiskunde    : H8 CAT-2-TRAINER LIVE (2026-06-10). Voorkennis+§8.1–8.4 geextraheerd:true
-#                   (187 geverifieerde opgaven + 8 regel-flashcards), gevalideerd:false. §8.5,
-#                   binair-onderzoek en heel H9 (meetkunde) nog geextraheerd:false (volgende slag).
+#   - wiskunde    : H8 CAT-2-TRAINER LIVE (2026-06-10). Voorkennis+§8.1–8.5 geextraheerd:true
+#                   (312 geverifieerde opgaven + 15 regel-flashcards; §8.5 toegevoegd 2026-06-12:
+#                   125 opgaven + 7 kaarten), gevalideerd:false. Binair-onderzoek en de H9-opgaven
+#                   buiten §9.3 (hoeken) nog geextraheerd:false (volgende slag).
 #   - geschiedenis: COMPLEET (2026-06-07, door Ralph/Stijn nagekeken). Begrippen +
 #                   jaartallen + vaardigheden (tijdvakken/periodes, chronologie, tijdbalk,
 #                   soorten geschiedenis, betrouwbaarheid). De eerder genoemde "7 ontbrekende
@@ -76,13 +77,16 @@ vakken:
     # Detailoverzicht van onderdelen-per-paragraaf in
     # raw/wiskunde/inventory.md (27 onderdelen totaal).
     scope:
-      # 2026-06-10: Cat-2-trainer H8 gebouwd (trainers/wiskunde/opgaven.json, 187 opgaven,
-      # alle Q→A door berekening geverifieerd) + regel-flashcards (flashcards.json).
-      # geextraheerd:true voor Voorkennis + §8.1–§8.4. BEWUST NIET opgenomen (eerlijk gevlagd,
-      # zie docs/BACKLOG.md): figuur-opgaven (oppervlakte/omtrek, priemfactor-figuur),
-      # woordproblemen, opgaven met breuk-coëfficiënt-antwoorden (matcher-onveilig) en
-      # antwoorden die in het boek een tekening/uitwerking zijn. Antwoordsleutel-foto dekt
-      # t/m opg 54; opg 37 (geen vraag-scan) + A55/L8 (geen antwoord-scan) wachten op herscan.
+      # 2026-06-10: Cat-2-trainer H8 gebouwd (trainers/wiskunde/opgaven.json) + regel-
+      # flashcards (flashcards.json), alle Q→A door berekening geverifieerd.
+      # 2026-06-12: §8.5 toegevoegd (125 opgaven, opg 60–85 + L10–L12, + 7 regelkaarten)
+      # → geextraheerd:true voor Voorkennis + §8.1–§8.5 (totaal 312 opgaven). De bijlage-
+      # foto's dekken wél heel H8 (opg 55+ op PXL_…064343217/064345600.MP); de oude notitie
+      # "A55/L8 geen antwoord-scan" was achterhaald. Opg 37 (geen vraag-scan) wacht nog op
+      # herscan. BEWUST NIET opgenomen (eerlijk gevlagd, zie docs/BACKLOG.md): figuur-opgaven
+      # (oppervlakte/omtrek, priemfactor-figuur, 65 piramide, 67 kubus), woordproblemen/open
+      # vragen (66a, 73, E76 dubbel-invul), opgaven met breuk-coëfficiënt-antwoorden
+      # (matcher-onveilig, o.a. 84a) en antwoorden die in het boek een tekening/uitwerking zijn.
       # gevalideerd blijft OVERAL false (validator-grounding niet gewired) → vak niet "live".
       - id: h8-voorkennis
         bron: "H8 Voorkennis 'Rekenen met letters' (p104)"
@@ -112,7 +116,7 @@ vakken:
       - id: h8-paragraaf-5-machten-en-letters
         bron: "§8.5 Machten en letters (p125-131). Onderdelen: vermenigvuldigen, som/verschil, delen."
         gefotografeerd: true
-        geextraheerd: false
+        geextraheerd: true
         gevalideerd: false
       - id: h8-onderzoek-binair
         bron: "Onderzoek 'Het binaire stelsel' (p143-145). Extensie — optioneel voor toets."

@@ -54,6 +54,28 @@ describe("wiskundeGelijk — niet-vereenvoudigd / anders is fout", () => {
   });
 });
 
+describe("wiskundeGelijk — §8.5 machten en letters (k.n., breuk-vragen, termvolgorde)", () => {
+  it("accepteert k.n. in alle gangbare schrijfwijzen via acceptedForms", () => {
+    const accepted = ["kan niet", "kn"];
+    expect(wiskundeGelijk("k.n.", "k.n.", accepted)).toBe(true);
+    expect(wiskundeGelijk("K.N.", "k.n.", accepted)).toBe(true);
+    expect(wiskundeGelijk("kan niet", "k.n.", accepted)).toBe(true);
+    expect(wiskundeGelijk("Kan Niet", "k.n.", accepted)).toBe(true);
+    expect(wiskundeGelijk("kn", "k.n.", accepted)).toBe(true);
+    expect(wiskundeGelijk("5x^3", "k.n.", accepted)).toBe(false);
+  });
+  it("kaal grondtal: 'a' goed, 'a^1' alleen via acceptedForms", () => {
+    expect(wiskundeGelijk("a", "a", ["a^1"])).toBe(true);
+    expect(wiskundeGelijk("a^1", "a", ["a^1"])).toBe(true);
+    expect(wiskundeGelijk("a¹", "a", ["a^1"])).toBe(true);
+  });
+  it("meerterm-antwoord met spaties en superscript matcht cosmetisch", () => {
+    expect(wiskundeGelijk("3a⁶+6a³", "3a^6 + 6a^3")).toBe(true);
+    expect(wiskundeGelijk("8y² - x²", "-x^2 + 8y^2", ["8y^2 - x^2"])).toBe(true);
+    expect(wiskundeGelijk("-x²+8y²", "-x^2 + 8y^2", ["8y^2 - x^2"])).toBe(true);
+  });
+});
+
 describe("wiskundeGelijk — exacteVorm (wetenschappelijke notatie)", () => {
   it("accepteert de gevraagde vorm en cosmetische varianten", () => {
     expect(wiskundeGelijk("4,8·10^5", "4,8*10^5", [], true)).toBe(true);

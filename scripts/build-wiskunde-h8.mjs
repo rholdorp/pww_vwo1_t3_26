@@ -7,8 +7,9 @@
 // geverifieerde, schone, zelfstandige opgaven. Bewust NIET opgenomen (gevlagd in
 // docs/BACKLOG.md + manifest): figuur-opgaven, woordproblemen, opgaven met
 // breuk-coëfficiënt-antwoorden (matcher-onveilig), en antwoorden die in het boek
-// een tekening/uitwerking ("*") zijn. Antwoordsleutel-foto's dekken t/m opg 54;
-// A55/L8 (wet. notatie) wachten op de antwoordfoto.
+// een tekening/uitwerking ("*") zijn. De bijlage-foto's dekken wél heel H8: opg 55+
+// staan op PXL_…064343217 (p30) en PXL_…064345600.MP (p31) — de oude notitie
+// "A55/L8 wachten op de antwoordfoto" was achterhaald (vastgesteld 2026-06-12).
 //
 // Draai: node scripts/build-wiskunde-h8.mjs
 import { writeFileSync, mkdirSync } from "node:fs";
@@ -170,6 +171,126 @@ const DATA = [
         ["e", "158", "1,58 · 10^2", ["1.58*10^2"]], ["f", "5390", "5,39 · 10^3", ["5.39*10^3"]] ] },
     ],
   },
+  {
+    // §8.5 toegevoegd 2026-06-12. Antwoorden uit de bijlage-foto's p30 (opg 55–70,
+    // L8–L10) en p31 (opg 71–85, L11/L12, gemengd 1–4); elk antwoord daarnaast zelf
+    // door berekening gecontroleerd. Overgeslagen (conventie, zie kop): 65 (piramide-
+    // figuur), 66a + 73 (open uitleg-/bedenk-vragen), 67 (kubus-figuur), 76 (twee
+    // invulvelden per item), 84a (breuk-coëfficiënt 4x^6/3, matcher-onveilig).
+    // "k.n." (kan niet) is in het boek het afgesproken antwoord bij niet-gelijksoortige
+    // termen (p128) — acceptedForms vangen "kan niet"/"kn" op.
+    onderdeel: "8.5",
+    titel: "§8.5 Machten en letters",
+    type: "machten-letters",
+    page: 125,
+    antw: "raw/wiskunde/PXL_20260610_064343217.jpg", // bijlage p30: t/m opg 70 + L10
+    opgaven: [
+      { n: "60", instr: "Herleid:", L: [
+        ["a", "5x · 2x", "10x^2"], ["b", "4x · x · 3x", "12x^3"], ["c", "2a · 5a · 3a · a", "30a^4"],
+        ["d", "5p · -p · -p", "5p^3"], ["e", "4x · -x", "-4x^2"], ["f", "-b · 2b · -b · 2b", "4b^4"] ] },
+      { n: "61", instr: "Herleid:", L: [
+        ["a", "p^3 · p^4", "p^7"], ["b", "p^5 · p^3", "p^8"] ] },
+      { n: "62", instr: "Herleid:", page: 126, L: [
+        ["a", "b^5 · b^8", "b^13"], ["b", "x · x^4", "x^5"], ["c", "x^3 · x^5 · x", "x^9"],
+        ["d", "x^5 · x · x · x^2", "x^9"], ["e", "p^8 · p^9", "p^17"], ["f", "p · p · p", "p^3"] ] },
+      { n: "63", instr: "Herleid:", page: 126, L: [
+        ["a", "2a^5 · 3a^7", "6a^12"], ["b", "8a^6 · -3a", "-24a^7"], ["c", "4m^6 · -2m^7", "-8m^13"],
+        ["d", "-y^3 · 2y^9", "-2y^12"], ["e", "5p^4 · 2p^12 · -p^7", "-10p^23"], ["f", "4p^5 · q^6 · 3q", "12p^5q^7"] ] },
+      { n: "64", instr: "Herleid:", page: 126, L: [
+        ["a", "5x^3 · -2x^4 · -x", "10x^8"], ["b", "a · b^3 · a^6 · b^2", "a^7b^5"],
+        ["c", "x^2y^3 · x^5y^2", "x^7y^5"], ["d", "2ab^3 · 5a^3b^2", "10a^4b^5"],
+        ["e", "3p^6 · -3p^6", "-9p^12"], ["f", "6x^2 · -3y · 2y^5 · -2x", "72x^3y^6"] ] },
+      { n: "66", instr: "Schrijf als één macht:", page: 127, L: [
+        ["b", "3^8 · 3^11", "3^19"], ["c", "2^2 · 4^8", "4^9", ["2^18"]], ["d", "2^6 · 8", "2^9", ["8^3"]] ] },
+      { n: "L10", instr: "Herleid:", page: 127, L: [
+        ["a", "a^4 · a^7", "a^11"], ["b", "b^6 · b · b^3", "b^10"],
+        ["c", "8c^3 · -c", "-8c^4"], ["d", "4p^4 · q^7 · 5p^5", "20p^9q^7"] ] },
+      { n: "68", instr: "Herleid:", page: 128, L: [
+        ["a", "7a^3 + 5a^3", "12a^3"], ["b", "3a^2 - 9a^2", "-6a^2"], ["c", "4a^4 - a^4", "3a^4"],
+        ["d", "c^5 - 5c^5", "-4c^5"], ["e", "2y^2 + y^2", "3y^2"], ["f", "x^2 + x^2", "2x^2"],
+        ["g", "6a + 8a", "14a"], ["h", "6a^2 - 8a^2", "-2a^2"], ["i", "2x^2 + 8x^2", "10x^2"] ] },
+      { n: "69", instr: "Herleid (kan het niet, typ dan k.n.):", page: 128, L: [
+        ["a", "8ab - 6ab", "2ab"], ["b", "13p^2 + p^2", "14p^2"], ["c", "5xy + 4xy", "9xy"],
+        ["d", "xy - 8x", "k.n.", ["kan niet", "kn"]], ["e", "5a^3 + 5a^3", "10a^3"], ["f", "6x^6 - 7x^6", "-x^6"],
+        ["g", "2x^2 + 8y^2 - 3x^2", "-x^2 + 8y^2", ["8y^2 - x^2"]],
+        ["h", "8a^2 - 2b^3 - 7a^2", "a^2 - 2b^3", ["-2b^3 + a^2"]],
+        ["i", "7a^3 + 3 + 5a^4", "k.n.", ["kan niet", "kn"]],
+        ["j", "6a^2 - 10a + 7a^3", "k.n.", ["kan niet", "kn"]],
+        ["k", "5x^2 - 5x^3 - 6x^2 + 11x^3", "-x^2 + 6x^3", ["6x^3 - x^2"]],
+        ["l", "7q^3 + 5p - 5q^3 + 6q^3", "8q^3 + 5p", ["5p + 8q^3"]] ] },
+      { n: "70", instr: "Herleid:", page: 128, L: [
+        ["a", "2a^3 - 5a^3 + 7a^3", "4a^3"], ["b", "-x^2 - 2x^2 + 3x^3", "-3x^2 + 3x^3", ["3x^3 - 3x^2"]],
+        ["c", "3p^4 - q^3 + p^4 - 2q^3", "4p^4 - 3q^3", ["-3q^3 + 4p^4"]],
+        ["d", "4m^3 - 3m^5 - 4m^3 + m^4", "m^4 - 3m^5", ["-3m^5 + m^4"]],
+        ["e", "ab + 7a - 6a - 3ab", "a - 2ab", ["-2ab + a"]],
+        ["f", "-7 - y^5 + 8 - 2y^5", "1 - 3y^5", ["-3y^5 + 1"]] ] },
+      { n: "71", instr: "Herleid (kan het niet, typ dan k.n.):", page: 128,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "3x^5 + 2x^5", "5x^5"], ["b", "3x^5 · 2x^5", "6x^10"], ["c", "5x^3 - 2x^5", "k.n.", ["kan niet", "kn"]],
+        ["d", "5x^3 · 2x^5", "10x^8"], ["e", "x^3 + 2x^3", "3x^3"], ["f", "x^3 · 2x^3", "2x^6"],
+        ["g", "-3x^4 + 3x^4", "0"], ["h", "-3x^4 · 3x^4", "-9x^8"], ["i", "-3x^4 - 3x^4", "-6x^4"] ] },
+      { n: "72", instr: "Vul in wat er op de puntjes hoort:", page: 128,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "8x^6 + … = 12x^6", "4x^6"], ["b", "6x^4 · … = 12x^6", "2x^2"], ["c", "x · … = 12x^6", "12x^5"],
+        ["d", "15x^6 - … = 12x^6", "3x^6"], ["e", "-2x^4 · … = 12x^6", "-6x^2"], ["f", "3x · … = 12x^6", "4x^5"] ] },
+      { n: "74", instr: "Herleid:", page: 129,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "a^3 · a^2 + 3a^5", "4a^5"], ["b", "2a^4 · a^2 + 5a^3 · a^3", "7a^6"],
+        ["c", "-7a^8 + 2a^2 · -3a^6", "-13a^8"], ["d", "8a^2 · 3a^5 - 2a^4 · -3a^3", "30a^7"] ] },
+      { n: "75", instr: "Herleid:", page: 129,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "3a^2(a^4 + 2a)", "3a^6 + 6a^3", ["6a^3 + 3a^6"]],
+        ["b", "5a(a^3 - 2a)", "5a^4 - 10a^2", ["-10a^2 + 5a^4"]],
+        ["c", "-3a^2(a - 2) + 5a^2", "-3a^3 + 11a^2", ["11a^2 - 3a^3"]],
+        ["d", "a^3(a^5 - a^4) - 3a^2 · 2a^6", "-5a^8 - a^7", ["-a^7 - 5a^8"]],
+        ["e", "a^3(2a - 1) + a^2(a^2 - 3a)", "3a^4 - 4a^3", ["-4a^3 + 3a^4"]],
+        ["f", "a^2(a^3 - 2a) - a^4(a - 1)", "a^4 - 2a^3", ["-2a^3 + a^4"]] ] },
+      { n: "L11", instr: "Herleid (kan het niet, typ dan k.n.):", page: 129,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "2x^5 + 3x^5", "5x^5"], ["b", "5ab - 6ab", "-ab"], ["c", "5c^3 - 5", "k.n.", ["kan niet", "kn"]],
+        ["d", "5p^2 - p^2", "4p^2"], ["e", "2a^3 + 3a^4 - 5a^3", "-3a^3 + 3a^4", ["3a^4 - 3a^3"]],
+        ["f", "3x^2 + 5y^3 + 6x^2 - 4y^3", "9x^2 + y^3", ["y^3 + 9x^2"]] ] },
+      { n: "77", instr: "Herleid:", page: 129,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "a^5 / a^3", "a^2"], ["b", "a^5 / a", "a^4"], ["c", "a^5 / a^4", "a", ["a^1"]] ] },
+      { n: "78", instr: "Herleid:", page: 130,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "x^7 / x^3", "x^4"], ["b", "a^12 / a", "a^11"], ["c", "b^9 / b^2", "b^7"], ["d", "p^8 / p^8", "1"] ] },
+      { n: "79", instr: "Herleid:", page: 130,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "3x^12 / x^7", "3x^5"], ["b", "-12b^7 / 4b^6", "-3b"],
+        ["c", "6a^7 / 2a", "3a^6"], ["d", "24p^7 / 4p^7", "6"] ] },
+      { n: "80", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "x^6y^5 / x^2y^3", "x^4y^2"], ["b", "3a^4b^11 / a^2b", "3a^2b^10"],
+        ["c", "-14p^5q / 2pq", "-7p^4"], ["d", "18x^4y^8 / -6x^3y^5", "-3xy^3"] ] },
+      { n: "81", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "-16x^12y^8 / -2x^3y^4", "8x^9y^4"], ["b", "21a^3b^5 / -7ab^3", "-3a^2b^2"],
+        ["c", "-18p^12q / 9p^12q", "-2"], ["d", "-24x^9yz^4 / -8x^8z^4", "3xy"] ] },
+      { n: "L12", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "a^13 / a^6", "a^7"], ["b", "20b^20 / 5b^5", "4b^15"],
+        ["c", "12c^5 / -2c^5", "-6"], ["d", "x^4y^8 / xy^7", "x^3y"] ] },
+      { n: "82", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "2p^2 · p^3 + p^5", "3p^5"], ["b", "p^2 + 2p^2 · p^5", "p^2 + 2p^7", ["2p^7 + p^2"]],
+        ["c", "3p^4 - p^8 / p^4", "2p^4"] ] },
+      { n: "83", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "a^8 / a^3 + 2a^5", "3a^5"], ["b", "a^9 / a^5 · 3a^3 - 7a^7", "-4a^7"],
+        ["c", "12a^9 / 4a^3 + 2a^7 / a", "5a^6"] ] },
+      { n: "84", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["b", "6a^4 + (7a^10 - 3a^10) / 2a^6", "8a^4"],
+        ["c", "6a^13 / 2a^3 - 4a^2 · 5a^5", "3a^10 - 20a^7", ["-20a^7 + 3a^10"]] ] },
+      { n: "85", instr: "Herleid:", page: 131,
+        antw: "raw/wiskunde/PXL_20260610_064345600.MP.jpg", L: [
+        ["a", "4a^6(5a^4 - 6a^7 / 2a^3)", "8a^10"],
+        ["b", "(6p^9q^5 / 2p^3q^4) · (15p^15q^15 / 5p^5q^5)", "9p^16q^11"],
+        ["c", "8y^6 / 2y · (6y^4 - 2y · 3y^4)", "24y^9 - 24y^10", ["-24y^10 + 24y^9"]] ] },
+    ],
+  },
 ];
 
 const APPENDIX = "raw/wiskunde/PXL_20260610_064323116.jpg"; // antwoorden-bijlage H8 (p104–123)
@@ -177,6 +298,7 @@ const opgaven = [];
 for (const groep of DATA) {
   for (const o of groep.opgaven) {
     const page = o.page ?? groep.page;
+    const antwoordBron = o.antw ?? groep.antw ?? APPENDIX;
     for (const [letter, vraagExpr, antwoord, accepted] of o.L) {
       opgaven.push({
         id: `wiskunde-h8-${groep.onderdeel}-${o.n}${letter}`,
@@ -191,7 +313,7 @@ for (const groep of DATA) {
         ...(o.exact ? { exacteVorm: true } : {}),
         isSynthese: false,
         bron: `raw/wiskunde/wiskunde-h08-p${page}.jpg`,
-        antwoordBron: APPENDIX,
+        antwoordBron,
         confidence: 0.95,
         verifiedBy: "boek",
       });
