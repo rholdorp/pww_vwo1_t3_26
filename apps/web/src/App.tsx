@@ -46,7 +46,7 @@ import {
   bewaarDagschema,
 } from "./progress";
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, dagdelen, type BlokStatusKind } from "./planner";
-import { logResultaat, beloningAdvies, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin } from "./gamification";
+import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
 import { startSync, stopSync, flushPush } from "./firestoreSync";
 
@@ -416,7 +416,8 @@ function Trainer({
           </div>
           {stand.volgende && (
             <p className="muted klein">
-              Nog {stand.restant} pt tot <b>{stand.volgende.naam}</b> ({stand.volgende.beloning}) — nog
+              Nog {stand.restant} pt tot <b>{stand.volgende.naam}</b>
+              {toontBeloningen(naam) ? ` (${stand.volgende.beloning})` : ""} — nog
               ±{stand.blokken} blok{stand.blokken === 1 ? "" : "ken"}!
             </p>
           )}
@@ -583,7 +584,8 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
           </div>
           {stand.volgende && (
             <p className="muted klein">
-              Nog {stand.restant} pt tot <b>{stand.volgende.naam}</b> ({stand.volgende.beloning}) — nog
+              Nog {stand.restant} pt tot <b>{stand.volgende.naam}</b>
+              {toontBeloningen(naam) ? ` (${stand.volgende.beloning})` : ""} — nog
               ±{stand.blokken} blok{stand.blokken === 1 ? "" : "ken"}!
             </p>
           )}
@@ -1444,7 +1446,11 @@ function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number;
             <div className="balk-vuller" style={{ width: `${Math.round(advies.fractie * 100)}%` }} />
           </div>
           <div className="muted klein">
-            Volgende beloning: <b>{advies.volgende.naam}</b> — {advies.volgende.beloning}
+            {toontBeloningen(naam) ? (
+              <>Volgende beloning: <b>{advies.volgende.naam}</b> — {advies.volgende.beloning}</>
+            ) : (
+              <>Volgende mijlpaal: <b>{advies.volgende.naam}</b></>
+            )}
           </div>
           <div className="muted klein">
             Nog {advies.restant} pt ≈ {advies.blokken} blok{advies.blokken === 1 ? "" : "ken"}
@@ -1452,7 +1458,7 @@ function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number;
           </div>
         </>
       ) : (
-        <div className="muted klein">🏆 Hoogste beloning ({advies.huidige?.naam}) bereikt!</div>
+        <div className="muted klein">🏆 Hoogste mijlpaal ({advies.huidige?.naam}) bereikt!</div>
       )}
     </div>
   );
@@ -1606,6 +1612,7 @@ function Voortgang({ naam }: { naam: string }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const datum = vandaagISO();
   const stand = beloningAdvies(naam);
+  const metBeloningen = toontBeloningen(naam);
   const [alleenRood, setAlleenRood] = useState(false);
   return (
     <main className="lijst">
@@ -1617,14 +1624,15 @@ function Voortgang({ naam }: { naam: string }) {
       </div>
 
       <div className="card">
-        <div className="card-titel">Beloningen · {stand.punten} pt</div>
+        <div className="card-titel">{metBeloningen ? "Beloningen" : "Mijlpalen"} · {stand.punten} pt</div>
         {stand.volgende && (
           <>
             <div className="balk dun">
               <div className="balk-vuller" style={{ width: `${Math.round(stand.fractie * 100)}%` }} />
             </div>
             <p className="muted klein">
-              Volgende: <b>{stand.volgende.naam}</b> ({stand.volgende.beloning}) — nog {stand.restant} pt
+              Volgende: <b>{stand.volgende.naam}</b>
+              {metBeloningen ? ` (${stand.volgende.beloning})` : ""} — nog {stand.restant} pt
               ≈ {stand.blokken} blok{stand.blokken === 1 ? "" : "ken"} afronden
               {stand.dagen <= 1 ? ". Dat kan vandaag al! 💪" : ` (±${stand.dagen} dagen).`}
               {" "}Elk blok ✓ = 10–15 pt, alles van vandaag af = +15, een kwartier focus = +5.
@@ -1638,12 +1646,15 @@ function Voortgang({ naam }: { naam: string }) {
             return (
               <div key={m.naam} className={`mijlpaal-rij ${behaald ? "behaald" : ""} ${volgende ? "volgende" : ""}`}>
                 <span className="mijlpaal-naam">{behaald ? "🏅" : volgende ? "⭐" : "🔒"} {m.naam} <span className="muted klein">{m.drempel} pt</span></span>
-                <span className="muted klein">{m.beloning}</span>
+                {metBeloningen && <span className="muted klein">{m.beloning}</span>}
               </div>
             );
           })}
         </div>
-        <p className="muted klein">🔥 {streakDagen(naam)} dagen-streak (volle week = +50 pt). Beloningen in overleg met papa/mama.</p>
+        <p className="muted klein">
+          🔥 {streakDagen(naam)} dagen-streak (volle week = +50 pt).
+          {metBeloningen ? " Beloningen in overleg met papa/mama." : ""}
+        </p>
       </div>
 
       {groepen.map((g) => {

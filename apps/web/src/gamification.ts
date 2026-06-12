@@ -68,6 +68,16 @@ export interface Mijlpaal {
   beloning: string;
 }
 
+/**
+ * Beloningen zijn privé-afspraken tussen Ralph en Stijn: alleen Stijn (en
+ * test-gebruikers) krijgen de beloningsteksten te zien. Klasgenoten zien wél de
+ * punten en mijlpaal-namen, maar niet de beloningen (Ralph 2026-06-12).
+ */
+export function toontBeloningen(naam: string): boolean {
+  const s = slug(naam);
+  return s === "stijn" || s === "test" || s.startsWith("test-");
+}
+
 // Mijlpalen + beloningen, door Ralph vastgesteld met Stijn (2026-06-12).
 // 9 stappen, max 1 beloning per dag (~65 pt/dag bij 3 blokken + bonussen): de
 // eerste dagen elk één kleine stap zodat Stijn aanhaakt, daarna ±elke 2 dagen.
