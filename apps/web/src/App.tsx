@@ -45,8 +45,8 @@ import {
   laadDagschema,
   bewaarDagschema,
 } from "./progress";
-import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, type BlokStatusKind } from "./planner";
-import { logResultaat, mijlpaalStand, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd } from "./gamification";
+import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, dagdelen, type BlokStatusKind } from "./planner";
+import { logResultaat, beloningAdvies, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
 import { startSync, stopSync, flushPush } from "./firestoreSync";
 
@@ -400,7 +400,7 @@ function Trainer({
   if (sessieKlaar) {
     const m = Math.round(blokMastery(naam, blok.ids) * 100);
     const focus = focusPunten(elapsedSec);
-    const stand = mijlpaalStand(naam);
+    const stand = beloningAdvies(naam);
     const uitmuntend = m >= 90;
     return (
       <main className="lijst center">
@@ -415,7 +415,10 @@ function Trainer({
             <span>{stand.punten} pt totaal</span>
           </div>
           {stand.volgende && (
-            <p className="muted klein">Nog {stand.restant} pt tot {stand.volgende.naam}.</p>
+            <p className="muted klein">
+              Nog {stand.restant} pt tot <b>{stand.volgende.naam}</b> ({stand.volgende.beloning}) — nog
+              ±{stand.blokken} blok{stand.blokken === 1 ? "" : "ken"}!
+            </p>
           )}
           <div className="knoppen">
             <button
@@ -565,7 +568,7 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
     const m = Math.round(onderdeelMastery(naam, blok.id, blok.onderdelen ?? []) * 100);
     const focus = focusPunten(elapsedSec);
     const klaarN = state.voortgang.filter((v) => v.status === "klaar").length;
-    const stand = mijlpaalStand(naam);
+    const stand = beloningAdvies(naam);
     return (
       <main className="lijst center">
         <div className="card narrow afronding">
@@ -578,6 +581,12 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
             {focus > 0 && <span>🔥 focus +{focus}</span>}
             <span>{stand.punten} pt totaal</span>
           </div>
+          {stand.volgende && (
+            <p className="muted klein">
+              Nog {stand.restant} pt tot <b>{stand.volgende.naam}</b> ({stand.volgende.beloning}) — nog
+              ±{stand.blokken} blok{stand.blokken === 1 ? "" : "ken"}!
+            </p>
+          )}
           <div className="knoppen">
             <button
               className="knop primair"
@@ -1415,8 +1424,8 @@ function Sparkline({ data, kleur }: { data: number[]; kleur: string }) {
 
 function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number; totaal?: number }) {
   // klaar/totaal optioneel: alleen Vandaag-tab geeft 'm mee. Op Kalender/Oefenen
-  // tonen we alleen streak + punten + volgende mijlpaal (geen vandaag-teller).
-  const stand = useMemo(() => mijlpaalStand(naam), [naam, klaar]);
+  // tonen we alleen streak + punten + volgende beloning (geen vandaag-teller).
+  const advies = useMemo(() => beloningAdvies(naam), [naam, klaar]);
   const streak = useMemo(() => streakDagen(naam), [naam, klaar]);
   const toonDagdoel = typeof klaar === "number" && typeof totaal === "number";
   const dagDoel = toonDagdoel && totaal! > 0 && klaar === totaal;
@@ -1424,22 +1433,26 @@ function ProgressWidget({ naam, klaar, totaal }: { naam: string; klaar?: number;
     <div className="card widget">
       <div className="widget-rij">
         <span className="widget-streak" title="dagen-streak">🔥 {streak}</span>
-        <span className="widget-punten">{stand.punten} pt</span>
+        <span className="widget-punten">{advies.punten} pt</span>
         {toonDagdoel && (
           <span className="muted klein">Vandaag {klaar}/{totaal} {dagDoel ? "🎉" : "✓"}</span>
         )}
       </div>
-      {stand.volgende ? (
+      {advies.volgende ? (
         <>
           <div className="balk dun">
-            <div className="balk-vuller" style={{ width: `${Math.round(stand.fractie * 100)}%` }} />
+            <div className="balk-vuller" style={{ width: `${Math.round(advies.fractie * 100)}%` }} />
           </div>
           <div className="muted klein">
-            Volgende mijlpaal: <b>{stand.volgende.naam}</b> — nog {stand.restant} pt
+            Volgende beloning: <b>{advies.volgende.naam}</b> — {advies.volgende.beloning}
+          </div>
+          <div className="muted klein">
+            Nog {advies.restant} pt ≈ {advies.blokken} blok{advies.blokken === 1 ? "" : "ken"}
+            {advies.dagen <= 1 ? " — kan vandaag al! 💪" : ` (±${advies.dagen} dagen)`}
           </div>
         </>
       ) : (
-        <div className="muted klein">🏆 Hoogste mijlpaal ({stand.huidige?.naam}) bereikt!</div>
+        <div className="muted klein">🏆 Hoogste beloning ({advies.huidige?.naam}) bereikt!</div>
       )}
     </div>
   );
@@ -1461,17 +1474,28 @@ function Vandaag({
   // Vandaag leunt op dezelfde engine + het bevroren dagschema als de Kalender,
   // zodat beide schermen identiek zijn. Boek-blokken (wiskunde/engels) leveren geen
   // trainer-blokjes → die verschijnen op de kalender, niet als startbare items hier.
-  const [planIds] = useState<string[]>(() => {
+  const [dagBlokken] = useState<GeplandBlok[]>(() => {
     let dag = laadDagschema(naam, datum);
     if (!dag) {
       dag = kalenderSchema(naam, datum).dagen.find((d) => d.datum === datum)?.blokken ?? [];
       bewaarDagschema(naam, datum, dag);
     }
-    return dag.flatMap((b) => b.trainerBlokIds);
+    return dag;
   });
+  const planIds = useMemo(() => dagBlokken.flatMap((b) => b.trainerBlokIds), [dagBlokken]);
   const items = planIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
   const statussen = items.map((b) => ({ blok: b, st: blokStatus(naam, b) }));
   const klaar = statussen.filter((s) => s.st.status === "afgevinkt").length;
+  // Dagdeel-suggestie + minuten-indicatie per gepland blok (zelfcorrigerend op de
+  // resultaten-log, afspraak 2026-06-12). Volgorde = planner-prioriteit.
+  const factoren = useMemo(() => duurFactoren(naam), [naam, klaar]);
+  const momenten = dagdelen(datum, dagBlokken.length);
+  const sectieMin = (gb: GeplandBlok): number => {
+    if (gb.soort === "review") return 15;
+    const blokken = gb.trainerBlokIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
+    return blokken.reduce((s, b) => s + geschatteMin(factoren, b), 0);
+  };
+  const totaalMin = dagBlokken.filter((gb) => gb.soort !== "boek").reduce((s, gb) => s + sectieMin(gb), 0);
 
   const komende = [...new Set(items.map((b) => b.vak))]
     .map((v) => ({ vak: v, dagen: dagenTot(datum, PWW_DATUM[v] ?? "2026-07-03") }))
@@ -1500,6 +1524,7 @@ function Vandaag({
       <div className="card vandaag-kop">
         <div className="vandaag-datum">{datumLabel}</div>
         <div className="vandaag-tel">{klaar}/{items.length} ✓</div>
+        {totaalMin > 0 && <div className="muted klein">Samen ±{totaalMin} min leerwerk vandaag</div>}
         {komende && komende.dagen >= 0 && (
           <div className="muted klein">
             Volgende toets: {vakLabel(komende.vak)}{" "}
@@ -1516,9 +1541,19 @@ function Vandaag({
           <button className="knop primair" onClick={onNaarOefenen}>Vrij oefenen</button>
         </div>
       ) : (
-        statussen.map(({ blok, st }) => {
-          const kleur = vakKleur(blok.vak);
+        dagBlokken.map((gb, gi) => {
+          if (gb.soort === "boek") return null; // boek-blokken staan op de Kalender
+          const sectieBlokken = gb.trainerBlokIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
+          if (sectieBlokken.length === 0) return null;
           return (
+            <div key={`${gb.vakBlokId}-${gi}`} className="moment-sectie">
+              <div className="moment-kop muted klein">
+                {momenten[gi]} · {vakLabel(gb.vak)}{gb.soort === "review" ? " herhalen ↻" : ""} · ±{sectieMin(gb)} min
+              </div>
+              {sectieBlokken.map((blok) => {
+                const st = blokStatus(naam, blok);
+                const kleur = vakKleur(blok.vak);
+                return (
             <div key={blok.id} className="card blok">
               <div className="blok-kop">
                 <span className="blok-icon">{SOORT_ICON[blok.soort]}</span>
@@ -1554,6 +1589,9 @@ function Vandaag({
                 )}
               </div>
             </div>
+                );
+              })}
+            </div>
           );
         })
       )}
@@ -1567,7 +1605,7 @@ function Vandaag({
 function Voortgang({ naam }: { naam: string }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const datum = vandaagISO();
-  const stand = mijlpaalStand(naam);
+  const stand = beloningAdvies(naam);
   const [alleenRood, setAlleenRood] = useState(false);
   return (
     <main className="lijst">
@@ -1579,19 +1617,33 @@ function Voortgang({ naam }: { naam: string }) {
       </div>
 
       <div className="card">
-        <div className="card-titel">Mijlpalen · {stand.punten} pt</div>
+        <div className="card-titel">Beloningen · {stand.punten} pt</div>
+        {stand.volgende && (
+          <>
+            <div className="balk dun">
+              <div className="balk-vuller" style={{ width: `${Math.round(stand.fractie * 100)}%` }} />
+            </div>
+            <p className="muted klein">
+              Volgende: <b>{stand.volgende.naam}</b> ({stand.volgende.beloning}) — nog {stand.restant} pt
+              ≈ {stand.blokken} blok{stand.blokken === 1 ? "" : "ken"} afronden
+              {stand.dagen <= 1 ? ". Dat kan vandaag al! 💪" : ` (±${stand.dagen} dagen).`}
+              {" "}Elk blok ✓ = 10–15 pt, alles van vandaag af = +15, een kwartier focus = +5.
+            </p>
+          </>
+        )}
         <div className="mijlpalen">
           {MIJLPALEN.map((m) => {
             const behaald = stand.punten >= m.drempel;
+            const volgende = stand.volgende?.naam === m.naam;
             return (
-              <div key={m.naam} className={`mijlpaal-rij ${behaald ? "behaald" : ""}`}>
-                <span className="mijlpaal-naam">{behaald ? "🏅" : "🔒"} {m.naam} <span className="muted klein">{m.drempel} pt</span></span>
+              <div key={m.naam} className={`mijlpaal-rij ${behaald ? "behaald" : ""} ${volgende ? "volgende" : ""}`}>
+                <span className="mijlpaal-naam">{behaald ? "🏅" : volgende ? "⭐" : "🔒"} {m.naam} <span className="muted klein">{m.drempel} pt</span></span>
                 <span className="muted klein">{m.beloning}</span>
               </div>
             );
           })}
         </div>
-        <p className="muted klein">🔥 {streakDagen(naam)} dagen-streak. Beloningen instellen kan later (ouder).</p>
+        <p className="muted klein">🔥 {streakDagen(naam)} dagen-streak (volle week = +50 pt). Beloningen in overleg met papa/mama.</p>
       </div>
 
       {groepen.map((g) => {
@@ -1755,6 +1807,9 @@ function KalenderDag({
   blokById: Map<string, Blok>; onStart: (blok: Blok, richting?: Richting) => void; onLeer: (blok: Blok) => void;
 }) {
   const isToekomst = datum > vandaagISO();
+  // Dagdeel-suggestie + minuten per gepland blok (zelfde logica als Vandaag).
+  const factoren = useMemo(() => duurFactoren(naam), [naam]);
+  const momenten = dagdelen(datum, blokken.length);
   return (
     <div className="card kal-detail">
       <div className="card-titel" style={{ textTransform: "capitalize" }}>
@@ -1772,14 +1827,17 @@ function KalenderDag({
             const kleur = vakKleur(b.vak);
             if (b.soort === "boek") {
               return (
-                <div key={i} className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
-                  <div className="blok-kop">
-                    <span className="vak-stip" style={{ background: kleur }} />
-                    <div className="blok-tekst">
-                      <div className="card-titel" style={{ color: kleur }}>
-                        {vakLabel(b.vak)} — uit boek
+                <div key={i} className="moment-sectie">
+                  <div className="moment-kop muted klein">{momenten[i]} · ±30 min</div>
+                  <div className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
+                    <div className="blok-kop">
+                      <span className="vak-stip" style={{ background: kleur }} />
+                      <div className="blok-tekst">
+                        <div className="card-titel" style={{ color: kleur }}>
+                          {vakLabel(b.vak)} — uit boek
+                        </div>
+                        <div className="muted klein">Werk ~30 min uit je boek (nog geen trainer).</div>
                       </div>
-                      <div className="muted klein">Werk ~30 min uit je boek (nog geen trainer).</div>
                     </div>
                   </div>
                 </div>
@@ -1787,23 +1845,32 @@ function KalenderDag({
             }
             if (b.soort === "review") {
               return (
-                <div key={i} className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
-                  <div className="blok-kop">
-                    <span className="vak-stip" style={{ background: kleur }} />
-                    <div className="blok-tekst">
-                      <div className="card-titel" style={{ color: kleur }}>
-                        {vakLabel(b.vak)} — herhalen
+                <div key={i} className="moment-sectie">
+                  <div className="moment-kop muted klein">{momenten[i]} · ±15 min</div>
+                  <div className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
+                    <div className="blok-kop">
+                      <span className="vak-stip" style={{ background: kleur }} />
+                      <div className="blok-tekst">
+                        <div className="card-titel" style={{ color: kleur }}>
+                          {vakLabel(b.vak)} — herhalen
+                        </div>
+                        <div className="muted klein">Snelle review van wat je al hebt geleerd.</div>
                       </div>
-                      <div className="muted klein">Snelle review van wat je al hebt geleerd.</div>
                     </div>
                   </div>
                 </div>
               );
             }
             // Echte trainer-blokken: render elk als volwaardige BlokKaart, altijd klikbaar.
-            return trainers.map((t) => (
-              <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} onLeer={onLeer} />
-            ));
+            const minuten = trainers.reduce((s, t) => s + geschatteMin(factoren, t), 0);
+            return (
+              <div key={i} className="moment-sectie">
+                <div className="moment-kop muted klein">{momenten[i]} · ±{minuten} min</div>
+                {trainers.map((t) => (
+                  <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} onLeer={onLeer} />
+                ))}
+              </div>
+            );
           })}
         </>
       )}

@@ -269,7 +269,12 @@ circle.region.target { fill: rgba(245,158,11,0.92); stroke: #f59e0b; stroke-widt
 .mijlpalen { display: flex; flex-direction: column; gap: 4px; margin: 8px 0; }
 .mijlpaal-rij { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; opacity: .55; }
 .mijlpaal-rij.behaald { opacity: 1; }
+.mijlpaal-rij.volgende { opacity: 1; background: rgba(99,102,241,0.12); border-radius: 6px; padding: 2px 6px; margin: 0 -6px; }
 .mijlpaal-naam { font-weight: 700; }
+
+/* Dagdeel-secties (Vandaag + Kalender-dagdetail) */
+.moment-sectie { display: flex; flex-direction: column; gap: 8px; }
+.moment-kop { font-weight: 700; letter-spacing: .02em; margin-top: 4px; }
 
 /* Sessie-timer + afronding */
 .balk-tekst { display: flex; justify-content: space-between; gap: 10px; }

@@ -151,6 +151,20 @@ const DAGELIJKS = new Set(["wiskunde"]);
 // Spreiding: minimaal aantal dagen tussen twee leerblokken van een vak (anti-clustering).
 const MIN_INTERVAL: Record<string, number> = { nederlands: 4 };
 
+/**
+ * Dagdeel-suggesties voor de geplande blokken van een dag (afspraak Ralph 2026-06-12):
+ * blok 1 na school / 's ochtends, blok 2 vóór het eten, blok 3+ na het eten. Het is een
+ * suggestie — de volgorde volgt de planner-prioriteit (urgentste blok eerst).
+ */
+export function dagdelen(datum: string, n: number): string[] {
+  const dow = new Date(`${datum}T00:00:00Z`).getUTCDay(); // 0=zo, 6=za
+  const weekend = dow === 0 || dow === 6;
+  const basis = weekend
+    ? ["🌅 's Ochtends", "🕑 's Middags", "🌙 Na het eten", "🌙 Later op de avond"]
+    : ["🕓 Na school", "🍽️ Voor het eten", "🌙 Na het eten", "🌙 Later op de avond"];
+  return Array.from({ length: n }, (_, i) => basis[Math.min(i, basis.length - 1)]!);
+}
+
 /** Grove tijdsschatting per trainer-blok (min). Heuristiek; later te finetunen. */
 export function duurMin(blok: Blok): number {
   if (blok.soort === "schrijven") return 30;

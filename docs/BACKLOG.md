@@ -76,8 +76,14 @@ _Laatst bijgewerkt: 2026-06-12_
 - ✅ **Maandkalender** (Kalender-tab): vooruitblik (vak-chips per dag, toetsdagen 🎯,
   herhaalweek-tint) + terugblik (bevroren dagschema + status ✓/◐/○; vult zich naarmate
   dagen verstrijken). Dagdetail toont de trainer-blokjes + START voor vandaag.
-- 🟡 Resten: vaste **tijdslots/klokuren** + **huiswerk/pauze-blokken** + **timer** + de
-  **`duurMin`-heuristiek finetunen** (nu optimistisch). Vandaag-scherm leunt nog op de
+- ✅ **Dagdeel-suggesties + minuten-indicatie (2026-06-12):** elk gepland blok krijgt op
+  Vandaag + Kalender-dagdetail een moment-suggestie (na school / voor het eten / na het
+  eten; weekend: ochtend/middag) en een ±minuten-schatting; de dag-kop toont het totaal.
+  De schatting is **zelfcorrigerend**: `duurFactoren`/`geschatteMin` (gamification.ts)
+  vergelijken werkelijke sessieduren uit de resultaten-log met de `duurMin`-heuristiek
+  (mediaan per soort, ≥3 metingen, geklemd 0,5–2,5×).
+- 🟡 Resten: vaste **klokuren** + **huiswerk/pauze-blokken**; de gecorrigeerde duur
+  voedt nog niet de planner-inpakking (alleen weergave). Vandaag-scherm leunt nog op de
   oude `planVandaag` (kan later op de engine's "vandaag" gezet worden).
 
 ## UI / schermen (§7, §10)
@@ -98,9 +104,15 @@ _Laatst bijgewerkt: 2026-06-12_
   loggen elk afgerond blok.
 - ✅ **Punten/streaks/mijlpalen** als pure afgeleide view: blok ✓ 10/15, deels 2, vak-klaar
   +75, dagdoel +15, weekstreak +50, **focus-bonus** (≥15 min +5, ≥30 min +15) (anti-grinding:
-  hoogste per blok). Mijlpalen Brons/Zilver/Goud/Platina (100/300/600/1000) met standaard-
-  beloningen, getoond in Voortgang + widget. **Mijlpaal-getallen + beloningen: Ralph kalibreert
-  nog met Stijn (geparkeerd).**
+  hoogste per blok).
+- ✅ **Beloningsladder verfijnd (2026-06-12, Ralph):** 10 stappen i.p.v. 4 — Aftrap 30 /
+  Sprintje 80 / Brons 150 / Volhouder 280 / Zilver 420 / Doorzetter 560 / Goud 700 /
+  Kanjer 850 / Platina 1000 / Legende 1200 — zodat er ±elke 2 dagen een beloning haalbaar
+  is (~65 pt/dag), met kleine stapjes aan het begin om aan te haken. Beloningsteksten zijn
+  suggesties; Ralph kalibreert met Stijn.
+- ✅ **Concreet beloningsadvies (`beloningAdvies`):** "nog X pt ≈ N blokken (±D dagen)" +
+  de beloning zelf, overal verwerkt: widget (alle tabs), beide afrondings-modals en de
+  Voortgang-tab (ladder met ⭐-volgende + voortgangsbalk + puntenuitleg).
 - 🟡 Afvink-criterium per blok = mastery-drempels (coverage-criterium niet apart).
 - ❌ **Ouder-configureerbare beloningen** (nu standaard-tekst, niet bewerkbaar) — later, met de
   Instellingen-tab.

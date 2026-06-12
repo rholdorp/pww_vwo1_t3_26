@@ -3,8 +3,8 @@
 // view daarover (+ huidige mastery). Beloon kwaliteit (mastery), niet "tijd in stoel";
 // per blok telt het hoogste niveau (anti-grinding), niet de som van pogingen.
 
-import { BLOKKEN } from "./content";
-import { blokStatus } from "./planner";
+import { BLOKKEN, type Blok } from "./content";
+import { blokStatus, duurMin } from "./planner";
 import { slug, vandaagISO, laadDagschema, dagschemaDatums } from "./progress";
 
 export interface Resultaat {
@@ -69,11 +69,20 @@ export interface Mijlpaal {
 }
 
 // Standaard-mijlpalen (SPEC §8). Ouder-configureerbare beloningen: later.
+// Ladder verfijnd 2026-06-12 (Ralph): ±elke 2 dagen een beloning haalbaar (~65 pt/dag
+// bij 3 blokken + bonussen), met extra kleine stapjes aan het begin om aan te haken.
+// De beloningsteksten zijn startersuggesties — Ralph kalibreert ze met Stijn.
 export const MIJLPALEN: Mijlpaal[] = [
-  { naam: "Brons", drempel: 100, beloning: "IJsje na het avondeten" },
-  { naam: "Zilver", drempel: 300, beloning: "Zaterdagavond bowlen met een vriend" },
-  { naam: "Goud", drempel: 600, beloning: "€15 extra zakgeld" },
+  { naam: "Aftrap", drempel: 30, beloning: "Snack naar keuze 🍪" },
+  { naam: "Sprintje", drempel: 80, beloning: "30 min extra schermtijd" },
+  { naam: "Brons", drempel: 150, beloning: "IJsje na het avondeten" },
+  { naam: "Volhouder", drempel: 280, beloning: "Jij kiest de film vanavond 🎬" },
+  { naam: "Zilver", drempel: 420, beloning: "Zaterdagavond bowlen met een vriend" },
+  { naam: "Doorzetter", drempel: 560, beloning: "Patat- of pizza-avond naar keuze 🍕" },
+  { naam: "Goud", drempel: 700, beloning: "€15 extra zakgeld" },
+  { naam: "Kanjer", drempel: 850, beloning: "Vriend mag blijven slapen" },
   { naam: "Platina", drempel: 1000, beloning: "Concertje / dagje uit naar keuze" },
+  { naam: "Legende", drempel: 1200, beloning: "Grote verrassing van papa & mama 🎁" },
 ];
 
 const blokById = new Map(BLOKKEN.map((b) => [b.id, b]));
@@ -151,4 +160,64 @@ export function mijlpaalStand(naam: string): MijlpaalStand {
   const restant = volgende ? volgende.drempel - punten : 0;
   const fractie = boven > onder ? (punten - onder) / (boven - onder) : 1;
   return { punten, huidige, volgende, restant, fractie };
+}
+
+export interface BeloningAdvies extends MijlpaalStand {
+  /** Geschat aantal nog af te ronden blokken tot de volgende beloning. */
+  blokken: number;
+  /** Geschat aantal dagen daarvoor (à ~3 blokken/dag). */
+  dagen: number;
+}
+
+/**
+ * Vertaal "nog X pt" naar iets concreets voor Stijn: hoeveel blokken (en dagen)
+ * nog tot de volgende beloning. Rekenregel: een afgerond blok levert gemiddeld
+ * ~15 pt op (10–15 per blok ✓ + dagdoel-/focus-bonussen uitgesmeerd).
+ */
+export function beloningAdvies(naam: string): BeloningAdvies {
+  const stand = mijlpaalStand(naam);
+  const blokken = stand.volgende ? Math.max(1, Math.ceil(stand.restant / 15)) : 0;
+  const dagen = stand.volgende ? Math.max(1, Math.ceil(blokken / 3)) : 0;
+  return { ...stand, blokken, dagen };
+}
+
+// ── Tijdschatting per blok, zelfcorrigerend ─────────────────────────────────────
+// `duurMin` (planner) is een vaste heuristiek. De resultaten-log weet hoe lang
+// Stijns sessies écht duurden (duurSec) → per soort een correctiefactor
+// (mediaan van werkelijk/geschat), zodat de minuten-indicaties met de praktijk
+// meegroeien. Defensief: korte/afgebroken sessies en uitschieters tellen niet mee,
+// pas corrigeren vanaf 3 metingen, factor geklemd op 0,5–2,5×.
+
+function mediaan(xs: number[]): number {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m]! : (s[m - 1]! + s[m]!) / 2;
+}
+
+/** Correctiefactor per soort (sleutel "*" = alle soorten samen, als fallback). */
+export function duurFactoren(naam: string): Record<string, number> {
+  const perSoort: Record<string, number[]> = {};
+  const alle: number[] = [];
+  for (const r of laadLog(naam)) {
+    if (!r.duurSec || r.duurSec < 90) continue; // <1,5 min: (half) afgebroken sessie
+    const blk = blokById.get(r.blokId);
+    if (!blk) continue;
+    const ratio = r.duurSec / 60 / duurMin(blk);
+    if (ratio < 0.2 || ratio > 6) continue; // uitschieter (tab open laten staan e.d.)
+    (perSoort[r.soort] ??= []).push(ratio);
+    alle.push(ratio);
+  }
+  const klem = (x: number) => Math.min(2.5, Math.max(0.5, x));
+  const uit: Record<string, number> = {};
+  for (const [soort, ratios] of Object.entries(perSoort)) {
+    if (ratios.length >= 3) uit[soort] = klem(mediaan(ratios));
+  }
+  if (alle.length >= 3) uit["*"] = klem(mediaan(alle));
+  return uit;
+}
+
+/** Geschatte duur (min) van een trainer-blok, gecorrigeerd met de log-factoren. */
+export function geschatteMin(factoren: Record<string, number>, blok: Blok): number {
+  const factor = factoren[blok.soort] ?? factoren["*"] ?? 1;
+  return Math.max(4, Math.round(duurMin(blok) * factor));
 }
