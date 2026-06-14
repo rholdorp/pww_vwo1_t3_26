@@ -373,7 +373,7 @@ function buildRuw(): Blok[] {
         hoofdstuk: b.hoofdstuk,
         onderdeel: "Zinnen vertalen",
         soort: "vertalen",
-        titel: "Zinnen vertalen (NL → FR)",
+        titel: `Zinnen vertalen (NL → ${vakLabel(vak)})`,
         ids: b.items.map((it) => it.id),
         sessieLimiet: b.sessieLimiet ?? 10,
         bouwCards: () =>

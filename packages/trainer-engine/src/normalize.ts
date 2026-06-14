@@ -41,6 +41,11 @@ export function normalize(input: string, profiel: NormalisatieProfiel): string {
       // (elisie/inversie: j'habite, qu'est-ce que, peux-tu).
       s = s.replace(/[.,;:!?«»""„"…]/g, " ").replace(/\s+/g, " ").trim();
       break;
+    case "en-zin":
+      // Engelse zinnen: als "zin" (leestekens negeren) maar accenten optioneel; geen
+      // Franse accent-helperrij in de UI. Apostrof/koppelteken blijven (don't, can't).
+      s = stripAccents(s).replace(/[.,;:!?«»""„"…]/g, " ").replace(/\s+/g, " ").trim();
+      break;
     case "engels":
       // Accenten optioneel.
       s = stripAccents(s);
@@ -89,6 +94,7 @@ function nearMissDrempel(profiel: NormalisatieProfiel): number {
     case "frans":
       return 1; // strikt: alleen 1-teken-typo telt als "bijna"
     case "zin":
+    case "en-zin":
     case "engels":
     case "begrip":
       return 2; // langere antwoorden: iets meer coulance

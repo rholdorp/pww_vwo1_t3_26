@@ -225,7 +225,9 @@ function Home({
                 ? "Uitleg & verbanden"
                 : h.hoofdstuk === "schrijven"
                   ? "Schrijven"
-                  : `Hoofdstuk ${h.hoofdstuk}`}
+                  : h.hoofdstuk === "zinnen"
+                    ? "Zinnen maken & vertalen"
+                    : `Hoofdstuk ${h.hoofdstuk}`}
             </h3>
             {h.blokken.map((blok) => (
               <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} onLeer={onLeer} />

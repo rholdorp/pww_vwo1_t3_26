@@ -1,0 +1,191 @@
+{
+  "vak": "engels",
+  "hoofdstuk": "zinnen",
+  "normalisatie": "en-zin",
+  "sessieLimiet": 8,
+  "notitie": "SAMENGESTELD (geen boekbron): Nederlandse zinnen → Engels die de grammatica van units 1-5 + past simple combineren met de woorden van unit 4 (natuur/dieren/weer/sport) en unit 5 (eten/bestek/meningen). Engelse zin door de assistent gemaakt en nagekeken; acceptedAnswers vangen samentrekkingen en gangbare varianten op.",
+  "items": [
+    {
+      "id": "engels-zin-01",
+      "nl": "Mijn broer houdt van pizza met champignons.",
+      "vreemd": "My brother likes mushroom pizza.",
+      "acceptedAnswers": [
+        "My brother likes mushroom pizza"
+      ]
+    },
+    {
+      "id": "engels-zin-02",
+      "nl": "Ik eet elke dag een ham-sandwich.",
+      "vreemd": "I eat a ham sandwich every day.",
+      "acceptedAnswers": [
+        "Every day I eat a ham sandwich"
+      ]
+    },
+    {
+      "id": "engels-zin-03",
+      "nl": "Zij drinkt 's ochtends een glas sinaasappelsap.",
+      "vreemd": "She drinks a glass of orange juice in the morning.",
+      "acceptedAnswers": [
+        "In the morning she drinks a glass of orange juice"
+      ]
+    },
+    {
+      "id": "engels-zin-04",
+      "nl": "We kijken nu naar de olifanten.",
+      "vreemd": "We are watching the elephants now.",
+      "acceptedAnswers": [
+        "We're watching the elephants now",
+        "We are watching the elephants at the moment"
+      ]
+    },
+    {
+      "id": "engels-zin-05",
+      "nl": "Het regent en het is koud vandaag.",
+      "vreemd": "It is raining and it is cold today.",
+      "acceptedAnswers": [
+        "It's raining and it's cold today",
+        "Today it is raining and it is cold"
+      ]
+    },
+    {
+      "id": "engels-zin-06",
+      "nl": "Kun jij snowboarden?",
+      "vreemd": "Can you snowboard?",
+      "acceptedAnswers": [
+        "Can you go snowboarding"
+      ]
+    },
+    {
+      "id": "engels-zin-07",
+      "nl": "Mijn zus kan niet paardrijden.",
+      "vreemd": "My sister can't ride a horse.",
+      "acceptedAnswers": [
+        "My sister cannot ride a horse",
+        "My sister can not ride a horse"
+      ]
+    },
+    {
+      "id": "engels-zin-08",
+      "nl": "Er zit een spin op de bloem.",
+      "vreemd": "There is a spider on the flower.",
+      "acceptedAnswers": [
+        "There's a spider on the flower"
+      ]
+    },
+    {
+      "id": "engels-zin-09",
+      "nl": "Er zijn veel bergen in het zuiden.",
+      "vreemd": "There are a lot of mountains in the south.",
+      "acceptedAnswers": [
+        "There are many mountains in the south"
+      ]
+    },
+    {
+      "id": "engels-zin-10",
+      "nl": "Gisteren zag ik een beer in het bos.",
+      "vreemd": "Yesterday I saw a bear in the forest.",
+      "acceptedAnswers": [
+        "I saw a bear in the forest yesterday"
+      ]
+    },
+    {
+      "id": "engels-zin-11",
+      "nl": "Zij aten gisteravond een chocoladetaart.",
+      "vreemd": "They ate a chocolate cake last night.",
+      "acceptedAnswers": [
+        "Last night they ate a chocolate cake",
+        "They ate a chocolate cake yesterday evening"
+      ]
+    },
+    {
+      "id": "engels-zin-12",
+      "nl": "Hij ging naar de woestijn.",
+      "vreemd": "He went to the desert.",
+      "acceptedAnswers": [
+        "He went to the desert."
+      ]
+    },
+    {
+      "id": "engels-zin-13",
+      "nl": "Deze fruitsalade is heerlijk.",
+      "vreemd": "This fruit salad is delicious.",
+      "acceptedAnswers": [
+        "This fruit salad is lovely"
+      ]
+    },
+    {
+      "id": "engels-zin-14",
+      "nl": "Die film was eng.",
+      "vreemd": "That film was scary.",
+      "acceptedAnswers": [
+        "That movie was scary"
+      ]
+    },
+    {
+      "id": "engels-zin-15",
+      "nl": "Er zit niet veel suiker in de thee.",
+      "vreemd": "There isn't much sugar in the tea.",
+      "acceptedAnswers": [
+        "There is not much sugar in the tea"
+      ]
+    },
+    {
+      "id": "engels-zin-16",
+      "nl": "Er zit een beetje melk in mijn koffie.",
+      "vreemd": "There is a little milk in my coffee.",
+      "acceptedAnswers": [
+        "There's a little milk in my coffee"
+      ]
+    },
+    {
+      "id": "engels-zin-17",
+      "nl": "Ik heb maar een paar druiven.",
+      "vreemd": "I have only a few grapes.",
+      "acceptedAnswers": [
+        "I only have a few grapes",
+        "I have got only a few grapes",
+        "I've got only a few grapes"
+      ]
+    },
+    {
+      "id": "engels-zin-18",
+      "nl": "Deze vork is van mij.",
+      "vreemd": "This fork is mine.",
+      "acceptedAnswers": [
+        "This fork is mine."
+      ]
+    },
+    {
+      "id": "engels-zin-19",
+      "nl": "Is dit jouw mes?",
+      "vreemd": "Is this your knife?",
+      "acceptedAnswers": [
+        "Is this your knife"
+      ]
+    },
+    {
+      "id": "engels-zin-20",
+      "nl": "De kat van mijn vriend is wit.",
+      "vreemd": "My friend's cat is white.",
+      "acceptedAnswers": [
+        "My friend's cat is white."
+      ]
+    },
+    {
+      "id": "engels-zin-21",
+      "nl": "De tijger jaagt 's nachts.",
+      "vreemd": "The tiger hunts at night.",
+      "acceptedAnswers": [
+        "The tiger hunts at night."
+      ]
+    },
+    {
+      "id": "engels-zin-22",
+      "nl": "Wij gingen vorig weekend mountainbiken.",
+      "vreemd": "We went mountain biking last weekend.",
+      "acceptedAnswers": [
+        "Last weekend we went mountain biking"
+      ]
+    }
+  ]
+}

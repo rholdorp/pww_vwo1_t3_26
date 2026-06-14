@@ -6,6 +6,7 @@
 export type NormalisatieProfiel =
   | "frans" // accenten strikt vereist (été ≠ ete); 1-teken-typo → "bijna goed"
   | "zin" // hele zinnen: accenten strikt, leestekens (. , ? !) genegeerd, apostrof/koppelteken behouden (j'habite, qu'est-ce que)
+  | "en-zin" // Engelse zinnen: als "zin" maar accenten optioneel, géén Franse accent-helperrij
   | "engels" // accenten optioneel, getallen exact
   | "begrip" // toleranter: leestekens negeren, lidwoorden optioneel (de cel = cel)
   | "wiskunde" // Cat 2: alléén cosmetische verschillen (²→^2, ·→*, komma→punt, breuk/getal-canonical); strikt de simpelste vorm uit het antwoordenboekje. Geen "bijna".

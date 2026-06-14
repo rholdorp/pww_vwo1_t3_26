@@ -37,8 +37,11 @@ pww:
 # ===== SCOPE-AUDIT 2026-06-07 (status per vak) =====
 #   gevalideerd is OVERAL nog false (validator-grounding niet gewired) → géén vak
 #   geldt als "vertrouwd compleet". Eerlijke dekking-status:
-#   - engels      : VOLLEDIG UIT BOEK. Scope vastgelegd (2026-06-10), nog geen
-#                   screenshots/trainer. LET OP: eerste toets (ma 29/6).
+#   - engels      : TRAINERS LIVE (2026-06-14): flashcards.json 166 kaarten (grammatica
+#                   units 1-5 + past simple + 26 onregelmatige werkwoorden + 104 vocab
+#                   definitie→woord unit 4&5) + vertaalzinnen.json (22 NL→EN-zinnen).
+#                   gevalideerd:false (nog geen review). LET OP: eerste toets (ma 29/6).
+#                   Blijft GEPAUZEERD in de planner tot menselijke review; vrij te oefenen.
 #   - biologie    : VOLLEDIG UIT BOEK. 35 screenshots binnen, nog niet verwerkt (geen trainer).
 #   - wiskunde    : H8 CAT-2-TRAINER LIVE (2026-06-10). Voorkennis+§8.1–8.5 geextraheerd:true
 #                   (312 geverifieerde opgaven + 15 regel-flashcards; §8.5 toegevoegd 2026-06-12:
@@ -252,29 +255,41 @@ vakken:
     moeilijkheid: 2
     methode: TBD
     # Officiële toetsscope (PWW ma 29-06 — VROEGSTE deadline, docentinfo agenda-
-    # afspraak "PW Engels", vastgelegd 2026-06-10). Nog GEEN screenshots in
-    # raw/engels/ — alles gefotografeerd:false. Benodigde foto's: WB blz. 112-121,
-    # 126-127, 139-141 + alle aantekeningen (schrift Stijn).
+    # afspraak "PW Engels"; scope-foto + materiaal binnen 2026-06-14). Methode:
+    # insight elementary. Materiaal in raw/engels/: WB-grammaticafoto's blz. 112-121 +
+    # 126-127 (hernoemd engels-wb-pNN.jpg) + de boek-woordenlijst (wordlist-insight-
+    # elementary.pdf, per unit). Zie raw/engels/inventory.md.
+    # STAND 2026-06-14: grammatica (units 1-5 + past simple) + onregelmatige werkwoorden
+    # geextraheerd naar trainers/engels/flashcards.json (61 kaarten). gevalideerd overal
+    # false (validator-gate niet gedraaid + menselijke review nog niet gedaan) → engels
+    # blijft GEPAUZEERD in de planner; flashcards zijn wel vrij te oefenen (Oefenen-tab).
     scope:
       - id: words-unit-4-5
-        bron: "Words unit 4 & 5 — WB blz. 139, 140 & 141"
-        gefotografeerd: false
-        geextraheerd: false
+        # Aanpak (Ralph 2026-06-14): definitie → woord (Stijns toetsvorm + zwakke plek),
+        # gegrond op de boek-woordenlijst (geen verzonnen NL). 104 kaarten via
+        # scripts/build-engels-vocab.mjs. Dit is de VOLLEDIGE unit-4/5-lijst (superset van
+        # de exacte WB-selectie blz. 139-141, niet als foto) → dekking gegarandeerd.
+        # Daarnaast NL→EN-zinnen (vertaalzinnen.json) die woorden + grammatica combineren.
+        bron: "Words unit 4 & 5 — WB blz. 139, 140 & 141 (bron: wordlist-insight-elementary.pdf, unit 4 = 57 + unit 5 = 47 woorden → definitie→woord)"
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
       - id: grammar-unit-1-5-past-simple
-        bron: "Grammar unit 1 t/m 5 & past simple — WB blz. 112 t/m 121 & 126+127"
-        gefotografeerd: false
-        geextraheerd: false
+        bron: "Grammar unit 1 t/m 5 & past simple — WB blz. 112 t/m 121 & 126+127 (engels-wb-p112..p121, p126, p127). Regels + tabellen → flashcards.json."
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
       - id: aantekeningen
+        # Schrift/klas-aantekeningen van Stijn nog niet aangeleverd; de gefotografeerde
+        # WB-grammaticapagina's dekken de regels, maar eventuele extra klas-notities niet.
         bron: "Alle aantekeningen (klas/schrift) bij grammar unit 1 t/m 5 & past simple"
         gefotografeerd: false
         geextraheerd: false
         gevalideerd: false
       - id: onregelmatige-werkwoorden
-        bron: "Onregelmatige werkwoorden — WB blz. 126"
-        gefotografeerd: false
-        geextraheerd: false
+        bron: "Onregelmatige werkwoorden — WB blz. 126 (26 werkwoorden infinitief → past simple, engels-wb-p126.jpg)"
+        gefotografeerd: true
+        geextraheerd: true
         gevalideerd: false
 
   geschiedenis:

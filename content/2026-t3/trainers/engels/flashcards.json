@@ -1,0 +1,1669 @@
+{
+  "vak": "engels",
+  "normalisatie": "engels",
+  "kaarten": [
+    {
+      "id": "engels-irr-become",
+      "vraag": "Past simple van: become",
+      "antwoord": "became",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-buy",
+      "vraag": "Past simple van: buy",
+      "antwoord": "bought",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-catch",
+      "vraag": "Past simple van: catch",
+      "antwoord": "caught",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-come",
+      "vraag": "Past simple van: come",
+      "antwoord": "came",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-do",
+      "vraag": "Past simple van: do",
+      "antwoord": "did",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-eat",
+      "vraag": "Past simple van: eat",
+      "antwoord": "ate",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-find",
+      "vraag": "Past simple van: find",
+      "antwoord": "found",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-get",
+      "vraag": "Past simple van: get",
+      "antwoord": "got",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-give",
+      "vraag": "Past simple van: give",
+      "antwoord": "gave",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-go",
+      "vraag": "Past simple van: go",
+      "antwoord": "went",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-grow",
+      "vraag": "Past simple van: grow",
+      "antwoord": "grew",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-have",
+      "vraag": "Past simple van: have",
+      "antwoord": "had",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-hear",
+      "vraag": "Past simple van: hear",
+      "antwoord": "heard",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (1/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-know",
+      "vraag": "Past simple van: know",
+      "antwoord": "knew",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-leave",
+      "vraag": "Past simple van: leave",
+      "antwoord": "left",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-make",
+      "vraag": "Past simple van: make",
+      "antwoord": "made",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-meet",
+      "vraag": "Past simple van: meet",
+      "antwoord": "met",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-put",
+      "vraag": "Past simple van: put",
+      "antwoord": "put",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-run",
+      "vraag": "Past simple van: run",
+      "antwoord": "ran",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-see",
+      "vraag": "Past simple van: see",
+      "antwoord": "saw",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-sing",
+      "vraag": "Past simple van: sing",
+      "antwoord": "sang",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-teach",
+      "vraag": "Past simple van: teach",
+      "antwoord": "taught",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-think",
+      "vraag": "Past simple van: think",
+      "antwoord": "thought",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-understand",
+      "vraag": "Past simple van: understand",
+      "antwoord": "understood",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-wear",
+      "vraag": "Past simple van: wear",
+      "antwoord": "wore",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-irr-write",
+      "vraag": "Past simple van: write",
+      "antwoord": "wrote",
+      "modus": "typen",
+      "onderdeel": "Onregelmatige werkwoorden (2/2)",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.97
+    },
+    {
+      "id": "engels-ps-regel-ed",
+      "vraag": "Hoe maak je de past simple van een REGELMATIG werkwoord?",
+      "antwoord": "werkwoord + -ed (walk → walked). Spelling: op -e → +d (live → lived); medeklinker + -y → -ied (study → studied); korte klinker + medeklinker → laatste medeklinker dubbel + -ed (stop → stopped).",
+      "modus": "kaart",
+      "onderdeel": "Past simple: vorm & gebruik",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-ps-onregelmatig",
+      "vraag": "Hebben alle werkwoorden een past simple op -ed?",
+      "antwoord": "Nee. Veel veelvoorkomende werkwoorden zijn onregelmatig (go → went, have → had, see → saw); die moet je uit je hoofd leren (zie de lijst).",
+      "modus": "kaart",
+      "onderdeel": "Past simple: vorm & gebruik",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-ps-gebruik",
+      "vraag": "Wanneer gebruik je de past simple?",
+      "antwoord": "voor een afgeronde actie of toestand in het verleden, vaak met tijdsbepalingen als yesterday, last week, in 2008, two days ago.",
+      "modus": "kaart",
+      "onderdeel": "Past simple: vorm & gebruik",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p126.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-ps-negatief",
+      "vraag": "Hoe maak je de past simple ONTKENNEND (negative)?",
+      "antwoord": "didn't (= did not) + heel werkwoord (infinitive zonder to): She didn't like the film. Geldt voor regelmatige én onregelmatige werkwoorden.",
+      "modus": "kaart",
+      "onderdeel": "Past simple: vorm & gebruik",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p127.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-ps-vraag",
+      "vraag": "Hoe maak je een VRAAG in de past simple?",
+      "antwoord": "Did + onderwerp + heel werkwoord (infinitive) + ? — bv. Did you understand the homework? Wh-vraag: vraagwoord + did + onderwerp + infinitive.",
+      "modus": "kaart",
+      "onderdeel": "Past simple: vorm & gebruik",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p127.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-ps-kortantwoord",
+      "vraag": "Korte antwoorden op een past simple ja/nee-vraag?",
+      "antwoord": "Yes, + onderwerp + did. / No, + onderwerp + didn't. (bv. Yes, I did. / No, we didn't.)",
+      "modus": "kaart",
+      "onderdeel": "Past simple: vorm & gebruik",
+      "hoofdstuk": "8",
+      "bron": "raw/engels/engels-wb-p127.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-be-vorm",
+      "vraag": "Wat zijn de vormen van het werkwoord *be* in de tegenwoordige tijd?",
+      "antwoord": "I am · you/we/they are · he/she/it is. Ontkennend: 'm not / aren't / isn't.",
+      "modus": "kaart",
+      "onderdeel": "Basis: be, have got, lidwoorden",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p112.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-havegot-vorm",
+      "vraag": "Hoe vervoeg je *have got*?",
+      "antwoord": "I/you/we/they have got · he/she/it has got. Ontkennend: haven't got / hasn't got. Vraag: Have/Has + onderwerp + got …?",
+      "modus": "kaart",
+      "onderdeel": "Basis: be, have got, lidwoorden",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-artikel-aan",
+      "vraag": "Wanneer gebruik je *a* en wanneer *an*?",
+      "antwoord": "a vóór een medeklinkerklank (a ball, a desk); an vóór een klinkerklank (an apple, an insect).",
+      "modus": "kaart",
+      "onderdeel": "Basis: be, have got, lidwoorden",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-presimple-gebruik",
+      "vraag": "Wanneer gebruik je de present simple?",
+      "antwoord": "voor gewoontes/routines (vaak met every day, on Mondays, always) en algemene feiten/toestanden (believe, like, know, want).",
+      "modus": "kaart",
+      "onderdeel": "Present simple & present continuous",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p114.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-presimple-3e",
+      "vraag": "Wat gebeurt er met het werkwoord bij he/she/it in de present simple?",
+      "antwoord": "+ -s (works). Meeste +-s; op -ss/-sh/-ch/-o/-x → +-es; medeklinker + -y → -ies; have → has.",
+      "modus": "kaart",
+      "onderdeel": "Present simple & present continuous",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p114.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-presimple-vraag",
+      "vraag": "Hoe maak je een vraag/ontkenning in de present simple?",
+      "antwoord": "met do/does: Do/Does + onderwerp + infinitive …? · ontkennend don't/doesn't + infinitive. (does/doesn't bij he/she/it).",
+      "modus": "kaart",
+      "onderdeel": "Present simple & present continuous",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p114.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-precont-vorm",
+      "vraag": "Hoe vorm je de present continuous, en wanneer gebruik je 'm?",
+      "antwoord": "am/is/are + werkwoord+-ing. Voor wat nu/rond nu aan de gang is (now, at the moment).",
+      "modus": "kaart",
+      "onderdeel": "Present simple & present continuous",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p119.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-precont-ing",
+      "vraag": "Spellingregels voor de -ing-vorm?",
+      "antwoord": "meeste +-ing; op -e → -e weg +-ing (live → living); korte klinker + medeklinker → medeklinker dubbel +-ing (sit → sitting).",
+      "modus": "kaart",
+      "onderdeel": "Present simple & present continuous",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p119.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-simple-vs-cont",
+      "vraag": "Verschil present simple en present continuous?",
+      "antwoord": "present simple = gewoontes/feiten (every day); present continuous = nu/tijdelijk aan de gang (at the moment).",
+      "modus": "kaart",
+      "onderdeel": "Present simple & present continuous",
+      "hoofdstuk": "1",
+      "bron": "raw/engels/engels-wb-p120.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-wh-words",
+      "vraag": "Noem de Wh-vraagwoorden uit de tabel + waar ze naar vragen.",
+      "antwoord": "where = places · what = things · when = times · who = people · why = reasons · how old = ages · how many = numbers.",
+      "modus": "kaart",
+      "onderdeel": "Vraagwoorden & bijwoorden",
+      "hoofdstuk": "2",
+      "bron": "raw/engels/engels-wb-p115.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-freq-volgorde",
+      "vraag": "Waar staat een adverb of frequency (always, usually, often, sometimes, never)?",
+      "antwoord": "vóór het hoofdwerkwoord (I usually walk), maar ná het werkwoord be (He is never late). sometimes/usually mag ook vooraan.",
+      "modus": "kaart",
+      "onderdeel": "Vraagwoorden & bijwoorden",
+      "hoofdstuk": "2",
+      "bron": "raw/engels/engels-wb-p115.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-can-vorm",
+      "vraag": "Hoe gebruik je can / can't voor ability?",
+      "antwoord": "can/can't + heel werkwoord zonder to (I can swim. He can't drive.). Geen -s bij he/she/it (NIET: he cans). Vraag: Can + onderwerp + infinitive?",
+      "modus": "kaart",
+      "onderdeel": "Vraagwoorden & bijwoorden",
+      "hoofdstuk": "2",
+      "bron": "raw/engels/engels-wb-p116.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-manner-vorm",
+      "vraag": "Hoe maak je een adverb of manner (bijwoord van wijze)?",
+      "antwoord": "bijv.nw. + -ly (quiet → quietly, bad → badly); op -y → -ily (happy → happily). Onregelmatig: good → well, fast → fast, hard → hard.",
+      "modus": "kaart",
+      "onderdeel": "Vraagwoorden & bijwoorden",
+      "hoofdstuk": "2",
+      "bron": "raw/engels/engels-wb-p117.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-manner-good",
+      "vraag": "Wat is het (onregelmatige) bijwoord van wijze bij 'good'?",
+      "antwoord": "well",
+      "modus": "typen",
+      "onderdeel": "Vraagwoorden & bijwoorden",
+      "hoofdstuk": "2",
+      "bron": "raw/engels/engels-wb-p117.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-objpron-i",
+      "vraag": "Object pronoun (voorwerpsvorm) van: I",
+      "antwoord": "me",
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-objpron-he",
+      "vraag": "Object pronoun (voorwerpsvorm) van: he",
+      "antwoord": "him",
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-objpron-she",
+      "vraag": "Object pronoun (voorwerpsvorm) van: she",
+      "antwoord": "her",
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-objpron-we",
+      "vraag": "Object pronoun (voorwerpsvorm) van: we",
+      "antwoord": "us",
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-objpron-they",
+      "vraag": "Object pronoun (voorwerpsvorm) van: they",
+      "antwoord": "them",
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p113.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-posadj-tabel",
+      "vraag": "Noem de possessive adjectives (bezittelijk bijv.nw.) bij I, you, he, she, it, we, they.",
+      "antwoord": "my, your, his, her, its, our, their",
+      "modus": "kaart",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p112.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-pospron-tabel",
+      "vraag": "Noem de possessive pronouns (bezittelijk vnw.) bij I, you, he, she, we, they.",
+      "antwoord": "mine, yours, his, hers, ours, theirs",
+      "modus": "kaart",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p118.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-pospron-her",
+      "vraag": "Possessive pronoun (bezittelijk vnw.) van 'she' — \"It's ___\"",
+      "antwoord": "hers",
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p118.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "engels-whose",
+      "vraag": "Welk vraagwoord gebruik je om naar bezit te vragen?",
+      "antwoord": "whose",
+      "acceptedAnswers": [
+        "whose?"
+      ],
+      "modus": "typen",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p118.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-possessive-s",
+      "vraag": "Hoe toon je bezit met 's? (enkelvoud, meervoud op -s, onregelmatig meervoud)",
+      "antwoord": "enkelvoud: + 's (the boy's dog); meervoud op -s: alleen ' (the girls' computer); onregelmatig meervoud: + 's (the children's ball).",
+      "modus": "kaart",
+      "onderdeel": "Voornaamwoorden & bezit",
+      "hoofdstuk": "3",
+      "bron": "raw/engels/engels-wb-p118.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-there-is-are",
+      "vraag": "Wanneer there is en wanneer there are (met some/any/a/an)?",
+      "antwoord": "There is + a/an bij enkelvoud (There is a book). There are + some bij meervoud (There are some posters). Ontkennend/vraag: any (Is there any …? There aren't any …).",
+      "modus": "kaart",
+      "onderdeel": "Telbaar & hoeveelheden",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/engels-wb-p117.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-count-uncount",
+      "vraag": "Verschil countable en uncountable nouns?",
+      "antwoord": "countable = telbaar, heeft enkelvoud én meervoud (apple/apples), met a/an of getal. uncountable = ontelbaar, alleen enkelvoud, geen a/an (bread, water); met some/any.",
+      "modus": "kaart",
+      "onderdeel": "Telbaar & hoeveelheden",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/engels-wb-p120.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-much-many",
+      "vraag": "Wanneer gebruik je much, many en a lot of?",
+      "antwoord": "much + uncountable (in vragen/ontkenningen: How much bread …?); many + countable meervoud (How many flowers …?); a lot of + beide, vooral in bevestigende zinnen.",
+      "modus": "kaart",
+      "onderdeel": "Telbaar & hoeveelheden",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/engels-wb-p121.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-little-few",
+      "vraag": "Verschil a little en a few?",
+      "antwoord": "a little + uncountable (a little sugar); a few + countable meervoud (a few problems).",
+      "modus": "kaart",
+      "onderdeel": "Telbaar & hoeveelheden",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/engels-wb-p121.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-this-that",
+      "vraag": "Wanneer this/these en wanneer that/those?",
+      "antwoord": "this (enkelvoud) / these (meervoud) voor dichtbij; that (enkelvoud) / those (meervoud) voor veraf.",
+      "modus": "kaart",
+      "onderdeel": "Telbaar & hoeveelheden",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/engels-wb-p112.jpg",
+      "confidence": 0.93
+    },
+    {
+      "id": "engels-some-any",
+      "vraag": "Wanneer gebruik je some en wanneer any?",
+      "antwoord": "some in bevestigende zinnen (There are some apples); any in vragen en ontkenningen (Is there any bread? There aren't any apples).",
+      "modus": "kaart",
+      "onderdeel": "Telbaar & hoeveelheden",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/engels-wb-p117.jpg",
+      "confidence": 0.92
+    },
+    {
+      "id": "engels-voc-u4-background",
+      "vraag": "the things at the back in a picture (n)",
+      "antwoord": "background",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-bear",
+      "vraag": "a big wild animal with thick fur (n)",
+      "antwoord": "bear",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-bite",
+      "vraag": "If an insect or snake ___ you, it hurts you by pushing a small sharp part into your skin (v)",
+      "antwoord": "bite",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-bouldering",
+      "vraag": "the sport of rock climbing on low rocks without special equipment (n)",
+      "antwoord": "bouldering",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-budgie",
+      "vraag": "a small blue or green bird that people often keep as a pet (n)",
+      "antwoord": "budgie",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-bungee-jumping",
+      "vraag": "a sport in which you jump from a high place, for example a bridge, with a thick elastic (= material that can stretch) rope tied round your feet (n)",
+      "antwoord": "bungee jumping",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-butterfly",
+      "vraag": "an insect with big coloured wings (n)",
+      "antwoord": "butterfly",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cactus",
+      "vraag": "a plant with a lot of sharp points that grows in hot dry places (n)",
+      "antwoord": "cactus",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-carry",
+      "vraag": "to hold sth and take it to another place or keep it with you (v)",
+      "antwoord": "carry",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cat",
+      "vraag": "a small animal with soft fur that people keep as a pet (n)",
+      "antwoord": "cat",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-caving",
+      "vraag": "the sport of walking and climbing through caves under the ground (n)",
+      "antwoord": "caving",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-centre",
+      "vraag": "the part in the middle of sth (n)",
+      "antwoord": "centre",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-chicken",
+      "vraag": "a bird that people often keep for its eggs and its meat (n)",
+      "antwoord": "chicken",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cloud",
+      "vraag": "a white or grey shape in the sky that is made of small drops of water (n)",
+      "antwoord": "cloud",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cloudy",
+      "vraag": "If the weather is ___, the sky is full of clouds (adj)",
+      "antwoord": "cloudy",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cold",
+      "vraag": "not hot or warm; with a low temperature (adj)",
+      "antwoord": "cold",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (1/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cool",
+      "vraag": "a little cold; not hot or warm (adj)",
+      "antwoord": "cool",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-cow",
+      "vraag": "a big female farm animal that is kept for its milk or meat (n)",
+      "antwoord": "cow",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-desert",
+      "vraag": "a large, dry area of land with very few plants (n)",
+      "antwoord": "desert",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-dig",
+      "vraag": "to move earth and make a hole in the ground (v)",
+      "antwoord": "dig",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-diving",
+      "vraag": "the sport of swimming underwater wearing breathing equipment, collecting or looking at things (n)",
+      "antwoord": "diving",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-dog",
+      "vraag": "an animal that many people keep as a pet or to guard buildings (n)",
+      "antwoord": "dog",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-eagle",
+      "vraag": "a large bird that can see very well. It catches and eats small birds and animals (n)",
+      "antwoord": "eagle",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-elephant",
+      "vraag": "a very big wild animal from Africa or Asia, with a long nose (called a trunk) that hangs down (n)",
+      "antwoord": "elephant",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-fish",
+      "vraag": "an animal that lives and breathes in water, and has thin flat parts (called fins) that help it to swim (n)",
+      "antwoord": "fish",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-flower",
+      "vraag": "the brightly coloured part of a plant that comes before the seeds or fruit (n)",
+      "antwoord": "flower",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-follow",
+      "vraag": "to come or go after sb or sth (v)",
+      "antwoord": "follow",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-foreground",
+      "vraag": "the part of a picture that seems nearest to you (n)",
+      "antwoord": "foreground",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-forest",
+      "vraag": "a large area of land covered with trees (n)",
+      "antwoord": "forest",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-giraffe",
+      "vraag": "a big animal from Africa with a very long neck, long legs and big dark spots on their skin (n)",
+      "antwoord": "giraffe",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-grass",
+      "vraag": "a plant with thin green leaves that covers fields and gardens. Cows and sheep eat ___ (n)",
+      "antwoord": "grass",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-grassland",
+      "vraag": "a large area of land where grass grows (n)",
+      "antwoord": "grassland",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (2/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-guinea-pig",
+      "vraag": "a small animal with short ears and no tail, that people often keep as a pet (n)",
+      "antwoord": "guinea pig",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-hamster",
+      "vraag": "a small animal that people keep as a pet. A ___ can keep food in the sides of its mouth (n)",
+      "antwoord": "hamster",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-horse",
+      "vraag": "a big animal that can carry people and pull heavy things (n)",
+      "antwoord": "horse",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-horse-riding",
+      "vraag": "the sport or activity of ___ a ___ for pleasure (n)",
+      "antwoord": "horse riding",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-hot",
+      "vraag": "having a high temperature (adj)",
+      "antwoord": "hot",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-hunt",
+      "vraag": "to chase animals to kill them for food (v)",
+      "antwoord": "hunt",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-left",
+      "vraag": "the ___ side or direction (n)",
+      "antwoord": "left",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-lizard",
+      "vraag": "a small animal that has four legs, a long tail and rough skin (n)",
+      "antwoord": "lizard",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-middle",
+      "vraag": "the part that is the same distance from the sides or ends of sth (n)",
+      "antwoord": "middle",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-mountain",
+      "vraag": "a very high hill (n)",
+      "antwoord": "mountain",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-mountain-biking",
+      "vraag": "the sport of riding a bicycle with a strong frame and wide tyres over rough ground (n)",
+      "antwoord": "mountain biking",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-rainy",
+      "vraag": "with a lot of rain (adj)",
+      "antwoord": "rainy",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-right",
+      "vraag": "the ___ side or direction (n)",
+      "antwoord": "right",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-run-away",
+      "vraag": "to go quickly ___ from sb or sth (v)",
+      "antwoord": "run away",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-snowboarding",
+      "vraag": "the sport of moving down mountains that are covered in snow using a large board that you fasten to both your feet (n)",
+      "antwoord": "snowboarding",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-snowy",
+      "vraag": "with a lot of snow (adj)",
+      "antwoord": "snowy",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (3/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-spider",
+      "vraag": "a small animal with eight legs, that catches and eats insects (n)",
+      "antwoord": "spider",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-stormy",
+      "vraag": "with strong wind and rain (adj)",
+      "antwoord": "stormy",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-sunny",
+      "vraag": "bright and warm with light from the sun (adj)",
+      "antwoord": "sunny",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-surfing",
+      "vraag": "the sport of riding on waves while standing on a board (called a surfboard) (n)",
+      "antwoord": "surfing",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-tiger",
+      "vraag": "a wild animal like a big cat, with yellow fur and black stripes. ___ live in Asia (n)",
+      "antwoord": "tiger",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-white-water-rafting",
+      "vraag": "the sport of travelling in a rubber boat down a section of a river where ___ is moving very fast (n)",
+      "antwoord": "white water rafting",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-windy",
+      "vraag": "with a lot of wind (adj)",
+      "antwoord": "windy",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-wolf",
+      "vraag": "a wild animal like a big dog (n)",
+      "antwoord": "wolf",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u4-zorbing",
+      "vraag": "the sport or activity of rolling down a hill in a large clear plastic ball (n)",
+      "antwoord": "zorbing",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 4 — definitie → woord (4/4)",
+      "hoofdstuk": "4",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-boring",
+      "vraag": "not interesting (adj)",
+      "antwoord": "boring",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-chocolate-cake",
+      "vraag": "a sweet food that you make from flour, eggs, sugar and butter and ___, and bake in the oven (n)",
+      "antwoord": "chocolate cake",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-coffee",
+      "vraag": "a brown drink that you make by adding water to a powder made from cocoa beans (= seeds from a tree that grows in hot countries) (n)",
+      "antwoord": "coffee",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-cream",
+      "vraag": "the thick liquid on the top of milk (n)",
+      "antwoord": "cream",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-crisps",
+      "vraag": "very thin pieces of potato cooked in hot oil and eaten cold. ___ are sold in bags and have many different flavours (n)",
+      "antwoord": "crisps",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-cucumber",
+      "vraag": "a long vegetable with a green skin, that we often eat in salads (n)",
+      "antwoord": "cucumber",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-cup",
+      "vraag": "a small round container with a handle, that you can drink from (n)",
+      "antwoord": "cup",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-delicious",
+      "vraag": "very good to eat (adj)",
+      "antwoord": "delicious",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-disgusting",
+      "vraag": "very unpleasant (adj)",
+      "antwoord": "disgusting",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-exciting",
+      "vraag": "Sth that is ___ makes you have strong feelings of happiness and enthusiasm (adj)",
+      "antwoord": "exciting",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-fork",
+      "vraag": "an object with long points at one end, that you use for putting food in your mouth (n)",
+      "antwoord": "fork",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-fruit-salad",
+      "vraag": "a mixture of prepared ___ that you eat as a dessert (n)",
+      "antwoord": "fruit salad",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-glass",
+      "vraag": "a cup without a handle that is made of ___ (n)",
+      "antwoord": "glass",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-grape",
+      "vraag": "a small green or purple fruit that we eat or make into wine (n)",
+      "antwoord": "grape",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-ham-sandwich",
+      "vraag": "two pieces of bread with a slice of ___ between them (n)",
+      "antwoord": "ham sandwich",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-interesting",
+      "vraag": "enjoyable and entertaining; holding your attention (adj)",
+      "antwoord": "interesting",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (1/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-jug",
+      "vraag": "a container with a handle that you use for holding or pouring liquids (n)",
+      "antwoord": "jug",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-ketchup",
+      "vraag": "a cold sauce made from tomatoes (n)",
+      "antwoord": "ketchup",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-knife",
+      "vraag": "a sharp metal object with a handle that you use for cutting things (n)",
+      "antwoord": "knife",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-lettuce",
+      "vraag": "a plant with big green leaves that you eat cold in salads (n)",
+      "antwoord": "lettuce",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-lovely",
+      "vraag": "beautiful or very nice (adj)",
+      "antwoord": "lovely",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-mug",
+      "vraag": "a big cup with straight sides (n)",
+      "antwoord": "mug",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-mushroom",
+      "vraag": "a plant with a flat top and no leaves that you can eat as a vegetable (n)",
+      "antwoord": "mushroom",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-mushroom-pizza",
+      "vraag": "a flat round piece of bread with tomatoes, cheese and ___ on top, that is cooked in an oven (n)",
+      "antwoord": "mushroom pizza",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-nut",
+      "vraag": "a dry fruit that has a hard outside part with a seed inside This chocolate contains ___ (n)",
+      "antwoord": "nut",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-olive-oil",
+      "vraag": "___ that is produced from ___ (= small green or black fruit) (n)",
+      "antwoord": "olive oil",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-onion",
+      "vraag": "a round vegetable with many layers and a strong smell. Cutting ___ can make you cry (n)",
+      "antwoord": "onion",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-orange",
+      "vraag": "a round fruit with a colour between red and yellow, and a thick skin (n)",
+      "antwoord": "orange",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-orange-juice",
+      "vraag": "the liquid from an ___ that you can drink (n)",
+      "antwoord": "orange juice",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-pasta",
+      "vraag": "an Italian food that is made from flour, water and sometimes eggs, which comes in many different shapes (n)",
+      "antwoord": "pasta",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-peach",
+      "vraag": "a soft round fruit with a yellow and red skin and a large stone in the centre (n)",
+      "antwoord": "peach",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-peas",
+      "vraag": "very small round green vegetables. ___ grow in long, thin cases (called pods) (n)",
+      "antwoord": "peas",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (2/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-pepper",
+      "vraag": "a red, green or yellow vegetable that is almost empty inside (n)",
+      "antwoord": "pepper",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-plate",
+      "vraag": "a round dish that you put food on (n)",
+      "antwoord": "plate",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-potato",
+      "vraag": "a white vegetable with a brown or red skin that grows underground (n)",
+      "antwoord": "potato",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-rice",
+      "vraag": "short, thin white or brown grain from a plant that grows on wet land in hot countries. We cook and eat ___ (n)",
+      "antwoord": "rice",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-salmon",
+      "vraag": "a big fish with pink meat that lives in the sea and in rivers (n)",
+      "antwoord": "salmon",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-salt",
+      "vraag": "a white substance that comes from sea water and from the earth. We put it on food to make it taste better (n)",
+      "antwoord": "salt",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-scary",
+      "vraag": "frightening (adj)",
+      "antwoord": "scary",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-spinach",
+      "vraag": "a vegetable with big green leaves (n)",
+      "antwoord": "spinach",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-spoon",
+      "vraag": "an object with a round end that you use for eating, serving or mixing food (n)",
+      "antwoord": "spoon",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-steak",
+      "vraag": "a wide flat piece of meat, especially meat from a cow (called beef) (n)",
+      "antwoord": "steak",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-strange",
+      "vraag": "unusual or surprising (adj)",
+      "antwoord": "strange",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-strawberry",
+      "vraag": "a soft red fruit with seeds near the surface (n)",
+      "antwoord": "strawberry",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-sugar",
+      "vraag": "a sweet substance that comes from certain plants (n)",
+      "antwoord": "sugar",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-sweets",
+      "vraag": "small pieces of sweet food (n)",
+      "antwoord": "sweets",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    },
+    {
+      "id": "engels-voc-u5-tomato",
+      "vraag": "a soft red fruit that you cook or eat cold in salads (n)",
+      "antwoord": "tomato",
+      "modus": "typen",
+      "onderdeel": "Woorden unit 5 — definitie → woord (3/3)",
+      "hoofdstuk": "5",
+      "bron": "raw/engels/wordlist-insight-elementary.pdf",
+      "confidence": 0.9
+    }
+  ]
+}

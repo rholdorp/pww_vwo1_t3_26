@@ -143,7 +143,16 @@ _Laatst bijgewerkt: 2026-06-12_
 ## Vak-scope status (P8)
 - ✅ Geschiedenis: compleet (door Ralph/Stijn nagekeken).
 - 🟡 Biologie / Frans / Aardrijkskunde / Nederlands: gedekt, `gevalideerd=false`.
-- ❌ Engels: nog leeg — content komt zodra Stijn de stof van de docent heeft.
+- 🟡 **Engels (2026-06-14):** drie trainers, vrij te oefenen. (a) Grammatica units 1-5 +
+  past simple + 26 onregelmatige werkwoorden + 104 vocab **definitie→woord** (unit 4 & 5)
+  in `trainers/engels/flashcards.json` (166 kaarten; vocab gegenereerd via
+  `scripts/build-engels-vocab.mjs` uit de boek-woordenlijst, voorbeeldzin weg + kopwoord
+  gemaskeerd). (b) `vertaalzinnen.json`: 22 **NL→EN-zinnen** die woorden + grammatica
+  combineren (nieuw normalisatieprofiel `en-zin`: leestekens negeren, geen Franse accent-
+  rij; loader-label "NL → <vak>" gegeneraliseerd). Materiaal + mapping in
+  `raw/engels/inventory.md`. **Open:** klas-aantekeningen nog niet aangeleverd; exacte
+  WB-woordselectie (blz. 139-141) niet als foto (superset gebruikt); menselijke review.
+  Blijft `GEPAUZEERD` in de planner (P8) tot review; eerste toets is ma 29/6.
 
 ## Open (Ralph, niet-blokkerend)
 - ❌ Externe beloningen koppelen aan mijlpalen (brons/zilver/goud/platina).
