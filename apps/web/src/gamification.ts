@@ -7,6 +7,13 @@ import { BLOKKEN, type Blok } from "./content";
 import { blokStatus, duurMin } from "./planner";
 import { slug, vandaagISO, laadDagschema, dagschemaDatums } from "./progress";
 
+// Lazy import (zoals progress.ts) zodat gamification geen statische Firebase-dependency
+// heeft. De resultaten-log is een bonus-bron (focus/streak) → moet mee gesynct worden.
+let pushSync: ((naam: string) => void) | null = null;
+void import("./firestoreSync").then((m) => {
+  pushSync = m.schedulePush;
+});
+
 export interface Resultaat {
   afgerondOp: string; // ISO-timestamp
   datum: string; // ISO-datum (YYYY-MM-DD)
@@ -43,6 +50,7 @@ export function logResultaat(naam: string, r: Omit<Resultaat, "afgerondOp" | "da
   const log = laadLog(naam);
   log.push({ ...r, afgerondOp: new Date().toISOString(), datum: vandaagISO() });
   localStorage.setItem(logKey(naam), JSON.stringify(log));
+  pushSync?.(naam); // bonus-data (focus/streak) cross-device syncen
 }
 
 /** Activiteit per dag over de laatste 7 dagen (oud→vandaag): # afgeronde sessies van dit vak. */

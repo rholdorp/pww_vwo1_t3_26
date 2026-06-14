@@ -204,6 +204,7 @@ export function laadDagschema(naam: string, datum: string): GeplandBlok[] | null
 }
 export function bewaarDagschema(naam: string, datum: string, blokken: GeplandBlok[]): void {
   localStorage.setItem(dagschemaKey(naam, datum), JSON.stringify(blokken));
+  pushSync?.(naam); // dagschema = bron voor de dagdoel-bonus → mee syncen
 }
 
 /** Alle datums waarvoor een dagschema is bevroren (voor de dagdoel-bonus). */
