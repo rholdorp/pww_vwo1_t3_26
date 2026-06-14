@@ -224,3 +224,8 @@ export function huidigeNaam(): string | null {
 export function zetNaam(naam: string): void {
   localStorage.setItem("pww-naam", naam.trim());
 }
+/** Wis de actieve naam (uitloggen). Voortgang in localStorage/Firestore blijft staan
+ * onder de slug, dus opnieuw inloggen met dezelfde naam haalt alles terug. */
+export function wisNaam(): void {
+  localStorage.removeItem("pww-naam");
+}

@@ -30,6 +30,7 @@ import {
 import {
   blokMastery,
   huidigeNaam,
+  wisNaam,
   record,
   zetOnderdeelStatus,
   onderdeelMastery,
@@ -93,6 +94,14 @@ export default function App() {
     return <NaamPoort onKlaar={(n) => { zetNaam(n); setNaam(n); }} />;
   }
 
+  function logout() {
+    if (naam) flushPush(naam); // resterende voortgang nog wegschrijven
+    wisNaam();
+    setActief(null);
+    setTab("vandaag");
+    setNaam(null); // useEffect-cleanup roept stopSync aan
+  }
+
   function startBlok(blok: Blok, richting?: Richting) {
     if (blok.soort === "schrijven" && blok.opdrachtId) {
       const opdracht = SCHRIJFOPDRACHTEN.get(blok.opdrachtId);
@@ -151,7 +160,7 @@ export default function App() {
       {tab === "vandaag" && <Vandaag naam={naam} onStart={startBlok} onLeer={startLeer} onNaarOefenen={() => setTab("oefenen")} />}
       {tab === "kalender" && <Kalender naam={naam} onStart={startBlok} onLeer={startLeer} />}
       {tab === "oefenen" && <Home naam={naam} onStart={startBlok} onLeer={startLeer} />}
-      {tab === "voortgang" && <Voortgang naam={naam} />}
+      {tab === "voortgang" && <Voortgang naam={naam} onLogout={logout} />}
 
       <nav className="bottomnav">
         {([["vandaag", "📅", "Vandaag"], ["kalender", "🗓️", "Kalender"], ["oefenen", "🎯", "Oefenen"], ["voortgang", "📈", "Voortgang"]] as const).map(
@@ -1610,7 +1619,7 @@ function Vandaag({
   );
 }
 
-function Voortgang({ naam }: { naam: string }) {
+function Voortgang({ naam, onLogout }: { naam: string; onLogout: () => void }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const datum = vandaagISO();
   const stand = beloningAdvies(naam);
@@ -1697,6 +1706,21 @@ function Voortgang({ naam }: { naam: string }) {
       })}
       <p className="muted klein voetnoot">
         Vakken zonder eigen trainer (Engels, Biologie, Wiskunde) leer je voorlopig uit het boek.
+      </p>
+      {/* Bewust onopvallend (onderaan Voortgang): voorkomt per ongeluk uitloggen.
+          Tik op de naam → bevestigen → terug naar het naam-scherm. Voortgang blijft
+          bewaard onder de naam, dus opnieuw inloggen haalt alles terug. */}
+      <p className="muted klein voetnoot uitlog-regel">
+        Ingelogd als{" "}
+        <button
+          type="button"
+          className="uitlog-link"
+          onClick={() => {
+            if (window.confirm(`Uitloggen als ${naam}? Je voortgang blijft bewaard onder deze naam.`)) onLogout();
+          }}
+        >
+          {naam}
+        </button>
       </p>
     </main>
   );
