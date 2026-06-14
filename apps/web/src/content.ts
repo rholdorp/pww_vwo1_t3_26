@@ -198,6 +198,9 @@ export interface Blok {
   richtingen?: Richting[];
   /** Alleen bij soort "opgaven" (Cat 2): de onderdeel-sleutels (paragrafen) in dit blok. */
   onderdelen?: string[];
+  /** Stabiele leervolgorde binnen een (vak, hoofdstuk); stuurt de paragraaf-volgorde +
+   * de unlock-keten van de opgaven-trainers. Lager = eerder. */
+  volgorde?: number;
   /** Alleen bij soort "schrijven": verwijzing naar de schrijfopdracht. */
   opdrachtId?: string;
   /** Optioneel: maximaal aantal kaarten per ronde (bv. "kies 10 willekeurig"). */
@@ -412,35 +415,40 @@ function buildRuw(): Blok[] {
           })),
       });
     } else if (file === "opgaven.json") {
-      // Cat 2 (wiskunde): één blok per hoofdstuk; de Cat-2-engine doet adaptief
-      // per onderdeel (paragraaf). Synthese-onderdelen pas vrij na de losse.
+      // Cat 2 (wiskunde): één blok PER PARAGRAAF (onderdeel), zodat elke paragraaf
+      // los bereikbaar is en via unlock-progressie opengaat (8.1 → 8.2 → …). De
+      // Cat-2-engine draait per blok adaptief over dat ene onderdeel.
       const b = data as OpgavenBestand;
+      let volg = 0;
       for (const [hfd, opg] of groupBy(b.opgaven, (o) => o.hoofdstuk)) {
-        const onderdelen = [...new Set(opg.map((o) => o.onderdeel))];
-        blokken.push({
-          id: `${vak}/opgaven/h${hfd}`,
-          vak,
-          hoofdstuk: hfd,
-          onderdeel: `Hoofdstuk ${hfd} — opgaven`,
-          soort: "opgaven",
-          titel: `Opgaven oefenen (H${hfd})`,
-          ids: opg.map((o) => o.id),
-          onderdelen,
-          bouwCards: () =>
-            opg.map((o): Card => ({
-              kind: "opgave",
-              id: o.id,
-              onderdeel: o.onderdeel,
-              onderdeelTitel: o.onderdeelTitel,
-              isSynthese: !!o.isSynthese,
-              vraag: o.vraag,
-              image: resolveImage(o.afbeelding),
-              answer: o.antwoord,
-              accepted: o.acceptedForms ?? [],
-              exacteVorm: !!o.exacteVorm,
-              type: o.type,
-            })),
-        });
+        for (const [ond, lijst] of groupBy(opg, (o) => o.onderdeel)) {
+          const titel = lijst[0]?.onderdeelTitel ?? `§${ond}`;
+          blokken.push({
+            id: `${vak}/opgaven/h${hfd}/${ond}`,
+            vak,
+            hoofdstuk: hfd,
+            onderdeel: titel,
+            soort: "opgaven",
+            titel,
+            ids: lijst.map((o) => o.id),
+            onderdelen: [ond],
+            volgorde: volg++,
+            bouwCards: () =>
+              lijst.map((o): Card => ({
+                kind: "opgave",
+                id: o.id,
+                onderdeel: o.onderdeel,
+                onderdeelTitel: o.onderdeelTitel,
+                isSynthese: !!o.isSynthese,
+                vraag: o.vraag,
+                image: resolveImage(o.afbeelding),
+                answer: o.antwoord,
+                accepted: o.acceptedForms ?? [],
+                exacteVorm: !!o.exacteVorm,
+                type: o.type,
+              })),
+          });
+        }
       }
     } else if (file === "oefenvragen.json") {
       const b = data as OefenvraagBestand;
@@ -607,7 +615,11 @@ export function vakGroepen(): VakGroep[] {
       .map(([hoofdstuk, bl]) => ({
         hoofdstuk,
         blokken: bl.sort(
-          (a, b) => SOORT_ORDER[a.soort] - SOORT_ORDER[b.soort] || a.onderdeel.localeCompare(b.onderdeel),
+          (a, b) =>
+            SOORT_ORDER[a.soort] - SOORT_ORDER[b.soort] ||
+            (a.volgorde != null && b.volgorde != null
+              ? a.volgorde - b.volgorde
+              : a.onderdeel.localeCompare(b.onderdeel)),
         ),
       }))
       .sort((a, b) => hfdNum(a.hoofdstuk) - hfdNum(b.hoofdstuk));

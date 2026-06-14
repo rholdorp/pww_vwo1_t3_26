@@ -25,6 +25,7 @@ import {
   SCHRIJFOPDRACHTEN,
   BLOKKEN,
   type Blok,
+  type BlokSoort,
   type Card,
 } from "./content";
 import {
@@ -47,7 +48,7 @@ import {
   bewaarDagschema,
 } from "./progress";
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, dagdelen, type BlokStatusKind } from "./planner";
-import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin } from "./gamification";
+import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin, opgaveUnlockKeten } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
 import { startSync, stopSync, flushPush } from "./firestoreSync";
 
@@ -199,6 +200,19 @@ function NaamPoort({ onKlaar }: { onKlaar: (naam: string) => void }) {
   );
 }
 
+// Sub-kopjes per soort binnen een hoofdstuk (Oefenen-drilldown). Scheidt o.a. de
+// wiskunde-flashcards (begrippen) van de echte opgaven-trainers.
+const SUBKOP: Record<BlokSoort, string> = {
+  opgaven: "Sommen maken",
+  begrippen: "Begrippen & regels (flashcards)",
+  woordjes: "Woordjes",
+  invullen: "Invuloefeningen",
+  vertalen: "Zinnen vertalen",
+  diagram: "Op de afbeelding",
+  uitlegvragen: "Uitleg & verbanden",
+  schrijven: "Schrijven",
+};
+
 function Home({
   naam,
   onStart,
@@ -227,22 +241,71 @@ function Home({
           <span className="vak-stip" style={{ background: kleur, verticalAlign: "middle", marginRight: 8 }} />
           {vakLabel(g.vak)}
         </h1>
-        {g.hoofdstukken.map((h) => (
-          <div key={h.hoofdstuk} className="hfd-groep">
-            <h3 className="hfd">
-              {h.hoofdstuk === "uitleg"
-                ? "Uitleg & verbanden"
-                : h.hoofdstuk === "schrijven"
-                  ? "Schrijven"
-                  : h.hoofdstuk === "zinnen"
-                    ? "Zinnen maken & vertalen"
-                    : `Hoofdstuk ${h.hoofdstuk}`}
-            </h3>
-            {h.blokken.map((blok) => (
-              <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} onLeer={onLeer} />
-            ))}
-          </div>
-        ))}
+        {g.hoofdstukken.map((h) => {
+          // Binnen een hoofdstuk de blokken per soort groeperen (volgorde al gesorteerd:
+          // opgaven eerst, dan flashcards e.d.) en een sub-kopje tonen zodra er meer dan
+          // één soort is — zo zijn de échte sommen visueel gescheiden van de flashcards.
+          const secties: { soort: BlokSoort; blokken: Blok[] }[] = [];
+          for (const blok of h.blokken) {
+            const laatste = secties[secties.length - 1];
+            if (laatste && laatste.soort === blok.soort) laatste.blokken.push(blok);
+            else secties.push({ soort: blok.soort, blokken: [blok] });
+          }
+          const toonSub = new Set(secties.map((s) => s.soort)).size > 1;
+          return (
+            <div key={h.hoofdstuk} className="hfd-groep">
+              <h3 className="hfd">
+                {h.hoofdstuk === "uitleg"
+                  ? "Uitleg & verbanden"
+                  : h.hoofdstuk === "schrijven"
+                    ? "Schrijven"
+                    : h.hoofdstuk === "zinnen"
+                      ? "Zinnen maken & vertalen"
+                      : `Hoofdstuk ${h.hoofdstuk}`}
+              </h3>
+              {secties.map((sec, si) => {
+                // Opgaven (Cat 2): paragraaf-voor-paragraaf ontgrendelen.
+                const slots = sec.soort === "opgaven" ? opgaveUnlockKeten(naam, sec.blokken) : null;
+                return (
+                  <div key={si} className="soort-sectie">
+                    {toonSub && (
+                      <div className="subhfd">
+                        {SOORT_ICON[sec.soort]} {SUBKOP[sec.soort]}
+                      </div>
+                    )}
+                    {slots
+                      ? slots.map((slot) =>
+                          slot.ontgrendeld ? (
+                            <BlokKaart
+                              key={slot.blok.id}
+                              naam={naam}
+                              blok={slot.blok}
+                              kleur={kleur}
+                              onStart={onStart}
+                              onLeer={onLeer}
+                              badge={
+                                slot.afgekoeld ? (
+                                  <span className="badge badge-warm">🔄 opfrissen</span>
+                                ) : slot.beheerst ? (
+                                  <span className="badge">✓ beheerst</span>
+                                ) : slot.huidig ? (
+                                  <span className="badge badge-nu">▶ nu</span>
+                                ) : undefined
+                              }
+                            />
+                          ) : (
+                            <LockKaart key={slot.blok.id} blok={slot.blok} reden={slot.redenLocked} />
+                          ),
+                        )
+                      : sec.blokken.map((blok) => (
+                          <BlokKaart key={blok.id} naam={naam} blok={blok} kleur={kleur} onStart={onStart} onLeer={onLeer} />
+                        ))}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
         <p className="muted klein voetnoot">Voortgang lokaal op dit apparaat bewaard.</p>
       </main>
     );
@@ -283,18 +346,35 @@ function Home({
   );
 }
 
+/** Vergrendelde opgaven-paragraaf: zichtbaar maar nog niet te starten. */
+function LockKaart({ blok, reden }: { blok: Blok; reden?: string }) {
+  return (
+    <div className="card blok op-slot">
+      <div className="blok-kop">
+        <span className="blok-icon">🔒</span>
+        <div className="blok-tekst">
+          <div className="card-titel">{blok.titel}</div>
+          <div className="muted klein">Op slot — {reden ?? "eerst de vorige paragraaf afronden"}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function BlokKaart({
   naam,
   blok,
   kleur,
   onStart,
   onLeer,
+  badge,
 }: {
   naam: string;
   blok: Blok;
   kleur: string;
   onStart: (blok: Blok, richting?: Richting) => void;
   onLeer?: (blok: Blok) => void;
+  badge?: React.ReactNode;
 }) {
   if (blok.soort === "schrijven") {
     const score = blok.opdrachtId ? laatsteScore(naam, blok.opdrachtId) : undefined;
@@ -329,7 +409,7 @@ function BlokKaart({
           <div className="card-titel">{blok.titel}</div>
           <div className="muted klein">{blok.ids.length} kaarten · {m}% beheerst</div>
         </div>
-        {beheerst && <span className="badge">✓ beheerst</span>}
+        {badge ?? (beheerst && <span className="badge">✓ beheerst</span>)}
       </div>
       <div className="balk dun">
         <div className="balk-vuller" style={{ width: `${m}%`, background: kleur }} />
@@ -1513,6 +1593,10 @@ function Vandaag({
     return blokken.reduce((s, b) => s + geschatteMin(factoren, b), 0);
   };
   const totaalMin = dagBlokken.filter((gb) => gb.soort !== "boek").reduce((s, gb) => s + sectieMin(gb), 0);
+  // Resterende tijd: alleen de trainer-blokken die nog niet afgevinkt zijn.
+  const restMin = statussen
+    .filter((x) => x.st.status !== "afgevinkt")
+    .reduce((s, x) => s + geschatteMin(factoren, x.blok), 0);
 
   const komende = [...new Set(items.map((b) => b.vak))]
     .map((v) => ({ vak: v, dagen: dagenTot(datum, PWW_DATUM[v] ?? "2026-07-03") }))
@@ -1540,8 +1624,20 @@ function Vandaag({
       <ProgressWidget naam={naam} klaar={klaar} totaal={items.length} />
       <div className="card vandaag-kop">
         <div className="vandaag-datum">{datumLabel}</div>
-        <div className="vandaag-tel">{klaar}/{items.length} ✓</div>
-        {totaalMin > 0 && <div className="muted klein">Samen ±{totaalMin} min leerwerk vandaag</div>}
+        <div className="vandaag-stats">
+          <div className="vandaag-tel">{klaar}/{items.length} ✓</div>
+          {totaalMin > 0 && (
+            <div className="vandaag-tijd" title="geschatte tijd voor de opgaven van vandaag">
+              ⏱️ {restMin > 0 ? `nog ±${restMin} min` : "klaar! 🎉"}
+            </div>
+          )}
+        </div>
+        {totaalMin > 0 && (
+          <div className="muted klein">
+            {restMin > 0 && restMin !== totaalMin ? `van ±${totaalMin} min in totaal · ` : ""}
+            verdeeld over de dagdelen hieronder
+          </div>
+        )}
         {komende && komende.dagen >= 0 && (
           <div className="muted klein">
             Volgende toets: {vakLabel(komende.vak)}{" "}

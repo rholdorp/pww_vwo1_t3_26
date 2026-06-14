@@ -5,7 +5,7 @@
 
 import { BLOKKEN, type Blok } from "./content";
 import { blokStatus, duurMin } from "./planner";
-import { slug, vandaagISO, laadDagschema, dagschemaDatums } from "./progress";
+import { slug, vandaagISO, laadDagschema, dagschemaDatums, onderdeelMastery } from "./progress";
 
 // Lazy import (zoals progress.ts) zodat gamification geen statische Firebase-dependency
 // heeft. De resultaten-log is een bonus-bron (focus/streak) → moet mee gesynct worden.
@@ -51,6 +51,71 @@ export function logResultaat(naam: string, r: Omit<Resultaat, "afgerondOp" | "da
   log.push({ ...r, afgerondOp: new Date().toISOString(), datum: vandaagISO() });
   localStorage.setItem(logKey(naam), JSON.stringify(log));
   pushSync?.(naam); // bonus-data (focus/streak) cross-device syncen
+}
+
+/** Laatste ISO-datum waarop dit blok geoefend is (uit de resultaten-log), of null. */
+export function laatstGeoefendOp(naam: string, blokId: string): string | null {
+  let max: string | null = null;
+  for (const r of laadLog(naam)) {
+    if (r.blokId === blokId && (max === null || r.datum > max)) max = r.datum;
+  }
+  return max;
+}
+
+// ── Opgaven-unlock-progressie (Cat 2, wiskunde) ─────────────────────────────────
+// Paragrafen gaan één voor één open: 8.2 pas als 8.1 "voldoende gedaan" is, enz.
+// "Voldoende" = onderdeel ✓ (onderdeelMastery ≥ drempel). Het ontgrendelde niveau
+// zakt een stap terug als het hoofdstuk >2 dagen niet geoefend is (afkoeling); bij
+// fouten blijft de paragraaf onvoldoende → de volgende blijft dicht (geen vooruitgang).
+const OPG_DREMPEL = 0.7; // = DREMPEL.opgaven (SPEC §8)
+const WARM_DAGEN = 2;
+
+export interface OpgaveSlot {
+  blok: Blok;
+  ontgrendeld: boolean;
+  beheerst: boolean;
+  /** De eerstvolgende te doen paragraaf (de "frontier"). */
+  huidig: boolean;
+  /** Frontier is teruggezakt omdat het hoofdstuk is afgekoeld (>2 dagen). */
+  afgekoeld: boolean;
+  /** Reden waarom dit slot nog op slot zit (voor de UI). */
+  redenLocked?: string;
+}
+
+/**
+ * Bepaal per opgaven-paragraaf (in leervolgorde) of die ontgrendeld is. Pure functie
+ * van de Cat-2-voortgang + de resultaten-log + de datum.
+ */
+export function opgaveUnlockKeten(naam: string, blokkenInVolgorde: Blok[]): OpgaveSlot[] {
+  const vandaag = vandaagISO();
+  const dagenGeleden = (iso: string) => Math.round((Date.parse(vandaag) - Date.parse(iso)) / 86_400_000);
+  // Lengte van de aaneengesloten reeks beheerste paragrafen vanaf het begin.
+  let beheerstPrefix = 0;
+  for (const b of blokkenInVolgorde) {
+    if (onderdeelMastery(naam, b.id, b.onderdelen ?? []) >= OPG_DREMPEL) beheerstPrefix++;
+    else break;
+  }
+  // Is er ergens in dit hoofdstuk recent (≤2 dagen) geoefend?
+  const warm = blokkenInVolgorde.some((b) => {
+    const d = laatstGeoefendOp(naam, b.id);
+    return d != null && dagenGeleden(d) <= WARM_DAGEN;
+  });
+  const afgekoeld = !warm && beheerstPrefix > 0;
+  // Afgekoeld → frontier één stap terug (laatste beheerste paragraaf moet eerst weer
+  // opgefrist worden voordat de volgende opengaat).
+  const frontier = afgekoeld ? beheerstPrefix - 1 : beheerstPrefix;
+  return blokkenInVolgorde.map((blok, i) => {
+    const ontgrendeld = i <= frontier;
+    const beheerst = i < beheerstPrefix;
+    return {
+      blok,
+      ontgrendeld,
+      beheerst,
+      huidig: i === frontier,
+      afgekoeld: afgekoeld && i === frontier,
+      redenLocked: ontgrendeld ? undefined : `eerst ${blokkenInVolgorde[i - 1]?.titel ?? "de vorige paragraaf"} afronden`,
+    };
+  });
 }
 
 /** Activiteit per dag over de laatste 7 dagen (oud→vandaag): # afgeronde sessies van dit vak. */
