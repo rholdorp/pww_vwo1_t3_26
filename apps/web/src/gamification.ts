@@ -126,6 +126,42 @@ export function activiteit7dagen(naam: string, vak: string): number[] {
   return Array.from({ length: 7 }, (_, i) => perDag.get(isoMinus(vandaag, 6 - i)) ?? 0);
 }
 
+// ── Bestede studietijd (afgeleide van de resultaten-log) ────────────────────────
+// Som van de sessie-duren (duurSec) die de trainers loggen — "actieve studietijd",
+// niet "tab open". Eén sessie wordt geklemd op MAX_SESSIE_SEC zodat een vergeten
+// open tab de totalen niet opblaast (zelfde defensieve gedachte als duurFactoren).
+// Alle drie de functies geven minuten terug (afgerond).
+const MAX_SESSIE_SEC = 120 * 60;
+
+function sessieSec(r: Resultaat): number {
+  return r.duurSec ? Math.min(r.duurSec, MAX_SESSIE_SEC) : 0;
+}
+
+/** Totaal bestede studietijd (minuten) over alle gelogde sessies. */
+export function tijdTotaalMin(naam: string): number {
+  let sec = 0;
+  for (const r of laadLog(naam)) sec += sessieSec(r);
+  return Math.round(sec / 60);
+}
+
+/** Bestede studietijd (minuten) per vak. */
+export function tijdPerVakMin(naam: string): Record<string, number> {
+  const sec: Record<string, number> = {};
+  for (const r of laadLog(naam)) sec[r.vak] = (sec[r.vak] ?? 0) + sessieSec(r);
+  const uit: Record<string, number> = {};
+  for (const [vak, s] of Object.entries(sec)) uit[vak] = Math.round(s / 60);
+  return uit;
+}
+
+/** Bestede studietijd (minuten) per ISO-datum. */
+export function tijdPerDagMin(naam: string): Record<string, number> {
+  const sec: Record<string, number> = {};
+  for (const r of laadLog(naam)) sec[r.datum] = (sec[r.datum] ?? 0) + sessieSec(r);
+  const uit: Record<string, number> = {};
+  for (const [d, s] of Object.entries(sec)) uit[d] = Math.round(s / 60);
+  return uit;
+}
+
 // Confetti-burst bij dagdoel: 1× per dag.
 const gevierdKey = (naam: string, datum: string) => `pww-gevierd:${slug(naam)}:${datum}`;
 export function alGevierd(naam: string, datum: string): boolean {

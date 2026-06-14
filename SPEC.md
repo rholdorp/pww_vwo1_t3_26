@@ -844,6 +844,14 @@ progress/<user-id>/
 
 > `blok-resultaten.jsonl` is de bron-van-waarheid die de trainers vanaf v0.1 schrijven; `points-log` en mijlpalen zijn er later een **pure functie** over (retroactief berekenbaar over de volledige historie).
 
+### Bestede studietijd (afgeleid, 2026-06-14)
+
+Elke trainer logt al de **sessieduur** (`duurSec`) per afgerond blok (gebruikt voor de focus-bonus). "Bestede studietijd" per vak / per dag / totaal is dus een **pure afgeleide** over diezelfde resultaten-log — geen extra opslag. Keuzes:
+
+- **Maat = actieve studietijd**, niet "app open": alleen de som van afgeronde trainer-sessies telt. Eerlijk en moeilijk te manipuleren door een tab open te laten staan.
+- **Cap van 120 min per sessie** (`MAX_SESSIE_SEC`) zodat een vergeten open tab de totalen niet opblaast — zelfde defensieve lijn als de uitschieter-filtering in `duurFactoren`.
+- De leerling ziet z'n eigen tijd in **Voortgang** (per vak + totaal); Ralph ziet alle leerlingen in de **Monitor** (zie §9).
+
 ## 9. Multi-user (P6)
 
 - **Verwachte schaal:** halve klas, ~10–15 gebruikers.
@@ -860,6 +868,15 @@ progress/<user-id>/
 - Stijn moet de URL niet op social media zetten — alleen rechtstreeks delen.
 - Naam-veld kan flauwekul-input bevatten (geen verificatie). Acceptabel voor deze schaal.
 - LLM-kosten per gebruiker (Cat 3/4 beoordeling) lopen op — quota per account nodig? Zie §11 open punten.
+
+### Monitor (Ralph) — 2026-06-14
+
+Een **dashboard over alle leerlingen** voor Ralph. Geen apart account-systeem: inloggen met de **geheime naam `ralph-monitor`** opent de monitor i.p.v. de leerling-app (`isMonitor()` in `apps/web/src/monitor.ts`).
+
+- **Wat het toont, per leerling:** punten + mijlpaal, dagen-streak, bestede studietijd (totaal, per vak, per dag), voortgang (% blokken klaar, per vak), schema-naleving (aantal dagen met een bevroren dagschema waarvan álle geplande trainer-blokken zijn afgevinkt), en laatst-actief-datum. Overzichtslijst (gesorteerd op punten) → detailscherm per leerling.
+- **Hoe het rekent (geen duplicatie):** de monitor leest alle `/progress/*` docs, hydrateert elk doc in localStorage onder zijn eigen slug, en roept dan de **bestaande** gamification/planner-functies aan (die zijn al per-slug gesleuteld). Eén rekenpad voor leerling én monitor.
+- **Schrijft nooit terug:** `schedulePush` wordt alleen via `logResultaat` getriggerd; de monitor logt niets.
+- **Beveiliging = bewust geen.** De repo is publiek en Firestore-reads staan open (§9 / firestore.rules), dus `ralph-monitor` is alleen een drempel tegen per ongeluk, geen echte afscherming. Net als de rest van het multi-user-model bewust geaccepteerd voor deze schaal; een echte auth-laag + rol is de nette upgrade.
 
 ## 10. UI / UX (P7)
 

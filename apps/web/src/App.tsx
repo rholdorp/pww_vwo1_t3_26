@@ -48,9 +48,10 @@ import {
   bewaarDagschema,
 } from "./progress";
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, dagdelen, type BlokStatusKind } from "./planner";
-import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin, opgaveUnlockKeten } from "./gamification";
+import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin, opgaveUnlockKeten, tijdTotaalMin, tijdPerVakMin } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
 import { startSync, stopSync, flushPush } from "./firestoreSync";
+import { isMonitor, laadAlleStudenten, type StudentSamenvatting } from "./monitor";
 
 type Tab = "vandaag" | "kalender" | "oefenen" | "voortgang";
 type Actief =
@@ -101,6 +102,11 @@ export default function App() {
     setActief(null);
     setTab("vandaag");
     setNaam(null); // useEffect-cleanup roept stopSync aan
+  }
+
+  // Geheime naam → monitor-dashboard i.p.v. de leerling-app (geen trainers/nav).
+  if (isMonitor(naam)) {
+    return <MonitorApp onLogout={logout} />;
   }
 
   function startBlok(blok: Blok, richting?: Richting) {
@@ -174,6 +180,167 @@ export default function App() {
         )}
       </nav>
     </div>
+  );
+}
+
+// ── Monitor (Ralph): dashboard over alle leerlingen ─────────────────────────────
+
+/** Minuten → "45m" / "1u 23m" / "2u". */
+function tijdLabel(min: number): string {
+  if (min <= 0) return "0m";
+  if (min < 60) return `${min}m`;
+  const u = Math.floor(min / 60);
+  const m = min % 60;
+  return m ? `${u}u ${m}m` : `${u}u`;
+}
+
+/** ISO-datum → "3/7" (dag/maand). */
+function kortDatum(iso: string): string {
+  const [, m, d] = iso.split("-");
+  return `${Number(d)}/${Number(m)}`;
+}
+
+/** Laatste 7 dagen (oud→vandaag) studietijd in minuten, uit een per-dag-map. */
+function laatste7(perDag: Record<string, number>): number[] {
+  const vandaag = vandaagISO();
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(Date.parse(`${vandaag}T00:00:00Z`) - (6 - i) * 86_400_000).toISOString().slice(0, 10);
+    return perDag[d] ?? 0;
+  });
+}
+
+const MONITOR_KLEUR = "#6366f1";
+
+function MonitorApp({ onLogout }: { onLogout: () => void }) {
+  const [studenten, setStudenten] = useState<StudentSamenvatting[] | null>(null);
+  const [sel, setSel] = useState<string | null>(null);
+  const [status, setStatus] = useState<"laadt" | "klaar" | "fout">("laadt");
+  const [versie, setVersie] = useState(0);
+
+  useEffect(() => {
+    let actief = true;
+    setStatus("laadt");
+    laadAlleStudenten()
+      .then((s) => {
+        if (!actief) return;
+        setStudenten(s);
+        setStatus("klaar");
+      })
+      .catch(() => actief && setStatus("fout"));
+    return () => {
+      actief = false;
+    };
+  }, [versie]);
+
+  const gekozen = sel ? studenten?.find((s) => s.slug === sel) ?? null : null;
+
+  return (
+    <div className="app">
+      <header className="topbar">
+        <span className="logo">PWW Monitor</span>
+        <button className="link" onClick={() => setVersie((v) => v + 1)}>↻ Ververs</button>
+      </header>
+      <main className="lijst">
+        {status === "laadt" && <p className="muted">Laden…</p>}
+        {status === "fout" && <p className="muted">Kon de gegevens niet laden. Probeer ↻ Ververs.</p>}
+        {status === "klaar" && studenten && !gekozen && <MonitorLijst studenten={studenten} onKies={setSel} />}
+        {gekozen && <MonitorDetail s={gekozen} onTerug={() => setSel(null)} />}
+        <p className="muted klein voetnoot uitlog-regel">
+          Monitor —{" "}
+          <button className="uitlog-link" onClick={() => window.confirm("Monitor afsluiten?") && onLogout()}>
+            afsluiten
+          </button>
+        </p>
+      </main>
+    </div>
+  );
+}
+
+function MonitorLijst({ studenten, onKies }: { studenten: StudentSamenvatting[]; onKies: (slug: string) => void }) {
+  if (!studenten.length) return <p className="muted">Nog geen leerlingen met voortgang.</p>;
+  return (
+    <>
+      <h1>Leerlingen ({studenten.length})</h1>
+      {studenten.map((s) => {
+        const procent = s.blokkenTotaal ? Math.round((s.klaarTotaal / s.blokkenTotaal) * 100) : 0;
+        return (
+          <button key={s.slug} className="card" style={{ textAlign: "left", cursor: "pointer", width: "100%" }} onClick={() => onKies(s.slug)}>
+            <div className="blok-kop">
+              <div className="blok-tekst">
+                <div className="card-titel">{s.slug}</div>
+                <div className="muted klein">
+                  {s.punten} pt{s.mijlpaal ? ` · ${s.mijlpaal}` : ""} · 🔥 {s.streak}d · ⏱️ {tijdLabel(s.tijdTotaalMin)}
+                </div>
+              </div>
+              <Sparkline data={laatste7(s.tijdPerDagMin)} kleur={MONITOR_KLEUR} />
+            </div>
+            <div className="balk dun">
+              <div className="balk-vuller" style={{ width: `${procent}%`, background: MONITOR_KLEUR }} />
+            </div>
+            <div className="muted klein">
+              {procent}% klaar · schema {s.schemaBehaald}/{s.schemaGepland} dagen
+              {s.laatstActief ? ` · laatst ${kortDatum(s.laatstActief)}` : ""}
+            </div>
+          </button>
+        );
+      })}
+    </>
+  );
+}
+
+function MonitorDetail({ s, onTerug }: { s: StudentSamenvatting; onTerug: () => void }) {
+  const vakken = Object.keys(s.voortgangPerVak).sort();
+  const dagen = Object.entries(s.tijdPerDagMin).sort(([a], [b]) => a.localeCompare(b));
+  const maxDag = Math.max(1, ...dagen.map(([, m]) => m));
+  const procent = s.blokkenTotaal ? Math.round((s.klaarTotaal / s.blokkenTotaal) * 100) : 0;
+  return (
+    <>
+      <button className="link" onClick={onTerug}>← Alle leerlingen</button>
+      <h1>{s.slug}</h1>
+
+      <div className="card">
+        <div className="card-titel">{s.punten} pt · {s.mijlpaal ?? "—"}</div>
+        <div className="muted klein">
+          🔥 {s.streak} dagen-streak · ⏱️ {tijdLabel(s.tijdTotaalMin)} totaal · {procent}% klaar ·
+          schema {s.schemaBehaald}/{s.schemaGepland} dagen gehaald
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-titel">Tijd & voortgang per vak</div>
+        {vakken.map((vak) => {
+          const v = s.voortgangPerVak[vak]!;
+          const kleur = vakKleur(vak);
+          return (
+            <div key={vak} style={{ marginBottom: 8 }}>
+              <div className="voortgang-rij">
+                <span>
+                  <span className="vak-stip" style={{ background: kleur }} /> {vakLabel(vak)}
+                </span>
+                <span className="muted klein">{v.procent}% · ⏱️ {tijdLabel(s.tijdPerVakMin[vak] ?? 0)}</span>
+              </div>
+              <div className="balk dun">
+                <div className="balk-vuller" style={{ width: `${v.procent}%`, background: kleur }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="card">
+        <div className="card-titel">Tijd per dag</div>
+        {dagen.length === 0 && <p className="muted klein">Nog geen gelogde studietijd.</p>}
+        {dagen.map(([d, min]) => (
+          <div key={d} style={{ display: "flex", alignItems: "center", gap: 8, margin: "4px 0" }}>
+            <span className="muted klein" style={{ width: 36 }}>{kortDatum(d)}</span>
+            <span style={{ flex: 1, height: 8, background: "rgba(0,0,0,0.06)", borderRadius: 4 }}>
+              <span style={{ display: "block", height: 8, borderRadius: 4, background: MONITOR_KLEUR, width: `${Math.round((min / maxDag) * 100)}%` }} />
+            </span>
+            <span className="muted klein" style={{ width: 52, textAlign: "right" }}>{tijdLabel(min)}</span>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -1720,6 +1887,8 @@ function Voortgang({ naam, onLogout }: { naam: string; onLogout: () => void }) {
   const datum = vandaagISO();
   const stand = beloningAdvies(naam);
   const metBeloningen = toontBeloningen(naam);
+  const tijdVak = tijdPerVakMin(naam);
+  const tijdTotaal = tijdTotaalMin(naam);
   const [alleenRood, setAlleenRood] = useState(false);
   return (
     <main className="lijst">
@@ -1759,7 +1928,7 @@ function Voortgang({ naam, onLogout }: { naam: string; onLogout: () => void }) {
           })}
         </div>
         <p className="muted klein">
-          🔥 {streakDagen(naam)} dagen-streak (volle week = +50 pt).
+          🔥 {streakDagen(naam)} dagen-streak (volle week = +50 pt). ⏱️ {tijdLabel(tijdTotaal)} totaal gestudeerd.
           {metBeloningen ? " Beloningen in overleg met papa/mama." : ""}
         </p>
       </div>
@@ -1779,7 +1948,7 @@ function Voortgang({ naam, onLogout }: { naam: string; onLogout: () => void }) {
               <span className="vak-stip" style={{ background: kleur }} />
               <div className="blok-tekst">
                 <div className="card-titel" style={{ color: kleur }}>{vakLabel(g.vak)}</div>
-                <div className="muted klein">{gem}% klaar{dagen >= 0 ? ` · toets over ${dagen} dagen` : ""}</div>
+                <div className="muted klein">{gem}% klaar · ⏱️ {tijdLabel(tijdVak[g.vak] ?? 0)}{dagen >= 0 ? ` · toets over ${dagen} dagen` : ""}</div>
               </div>
               <Sparkline data={activiteit7dagen(naam, g.vak)} kleur={kleur} />
             </div>
