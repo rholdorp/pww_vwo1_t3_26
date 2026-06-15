@@ -48,6 +48,16 @@ _Laatst bijgewerkt: 2026-06-12_
     met de hand geverifieerd** tegen lesboek p167 + antwoordsleutel p41 + eigen geometrie-
     controle. NB: een eerdere agent-run koppelde figuur-nr ≠ opgave-nr (mismatch) — opgevangen
     bij verificatie (P8), niet geshipt. °-teken wordt door de matcher genegeerd (`70` = `70°`).
+  - **Teken-/doe-opgaven-trainer (2026-06-15, afvinken):** eigen 📐-blok, los van Cat-2.
+    Ralph cropt figuren + markeert type in de bestandsnaam (`-teken` / `-nakijk`) via de
+    croptool (`npm run croptool`). LIVE: Voorkennis + §9.1 (opg 1–11) + §9.2 (opg 14, 17, 20)
+    + §9.3 (opg 28, 29, 31) — `scripts/build-wiskunde-h9-teken.mjs`. Nakijkbaar erbij:
+    §9.3 opg 33 (∠E/∠F) + 34 c/d (gelijkbenige driehoek, zonder figuur).
+  - **Bewust weggelaten (Ralph 2026-06-15):** opg 23 (R23, "waarom"-redeneervraag) en
+    24 (E24, "noem álle draaihoeken") — niet schoon auto-nakijkbaar.
+  - **Open (tekst niet uit foto leesbaar, niet gegokt):** opg 27 (§9.3 teken) en opg 32
+    (§9.3 nakijk; antwoord a=130°, b=∠L=65° wél bekend) — opdracht viel buiten/over de
+    fotorand; Ralph levert de opdracht-tekst aan.
   - **Nog open:** binair-onderzoek (extensie, optioneel); **meer H9-hoek-opgaven**
     (rest van §9.3 + §9.5 Z/F-hoeken) — zelfde recept: figuur croppen + boek-antwoord +
     zelf verifiëren; H8 Gemengde opgaven/Herhaling (p132–142, antwoordfoto's aanwezig) als
