@@ -64,6 +64,9 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 12px;
+  /* Expliciet, want een <button class="card"> (bv. monitor-leerlinglijst) zou
+     anders de zwarte UA-knoptekst gebruiken i.p.v. de lichte thematekst. */
+  color: var(--tekst);
 }
 .card.narrow { max-width: 420px; width: 100%; text-align: center; }
 
