@@ -10,6 +10,7 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "dev": "npm run dev --workspace=apps/web",
+    "croptool": "node scripts/serve-croptool.mjs",
     "validate": "npm run start --workspace=apps/validator --",
     "solve-math": "npm run solve-math --workspace=apps/validator --",
     "lint": "npm run lint --workspaces --if-present",
