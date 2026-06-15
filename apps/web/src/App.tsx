@@ -627,6 +627,11 @@ function Trainer({
   const [input, setInput] = useState("");
   const [feedback, setFeedback] = useState<{ uitkomst: Uitkomst; answer: string } | null>(null);
   const [onthuld, setOnthuld] = useState(false);
+  // Telt elke beurt op. Onderdeel van de kaart-`key`, zodat een kaart die
+  // opnieuw wordt ingepland (bv. de láátste kaart na een 2e-poging-"fout")
+  // echt opnieuw mount — anders blijft een hotspot-kaart "vastzitten" op zijn
+  // oude feedback en lijkt de Volgende-knop dood. Zie session.submit (requeue).
+  const [stap, setStap] = useState(0);
   const startRef = useRef<number>(Date.now());
   const [elapsedSec, setElapsedSec] = useState(0);
 
@@ -687,6 +692,7 @@ function Trainer({
                 startRef.current = Date.now();
                 setElapsedSec(0);
                 setState(startSession(maakOrder()));
+                setStap(0);
                 setInput("");
                 setFeedback(null);
                 setOnthuld(false);
@@ -708,6 +714,7 @@ function Trainer({
   function volgende(uitkomst: Uitkomst) {
     record(naam, currentId!, uitkomst);
     setState((s) => submit(s, uitkomst));
+    setStap((n) => n + 1);
     setInput("");
     setFeedback(null);
     setOnthuld(false);
@@ -748,7 +755,7 @@ function Trainer({
             onVolgende={() => feedback && volgende(feedback.uitkomst)}
           />
         ) : card.kind === "hotspot" ? (
-          <HotspotKaart key={card.id + card.richting} card={card} kleur={kleur} onResultaat={volgende} />
+          <HotspotKaart key={card.id + card.richting + ":" + stap} card={card} kleur={kleur} onResultaat={volgende} />
         ) : card.kind === "flip" ? (
           <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
         ) : card.kind === "teken" ? (
