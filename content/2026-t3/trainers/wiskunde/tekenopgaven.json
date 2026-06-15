@@ -87,6 +87,38 @@
       "vraag": "a Teken de punten A(-4, 0), B(0, -2) en D(-2, 3) en teken △ABD. b Teken lijn s door B en D; △ABD wordt in s gespiegeld. c Waar liggen de beelden van B en D? d △ABD is de helft van de symmetrische vierhoek ABA'D — teken die vierhoek.",
       "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
       "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg10",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "10",
+      "vraag": "a Teken de punten A(0, 1), B(-2, 0), C(-2, -2), D(1, -3) en E(3, -1). b Teken de lijn s door A en E. c De vijfhoek ABCDE is de helft van de symmetrische achthoek ABCDEFGH — teken die achthoek.",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg11",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "11",
+      "vraag": "Punt B' is het beeld van hoekpunt B van △ABC bij spiegeling in een lijn (zie figuur). Teken het spiegelbeeld △A'B'C'.",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg11-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.2-opg14",
+      "hoofdstuk": "9",
+      "paragraaf": "9.2",
+      "onderdeelTitel": "§9.2 Draai- en puntsymmetrie",
+      "opgave": "14",
+      "vraag": "Bekijk de logo's (zie figuur). a Welke logo's zijn lijnsymmetrisch? Teken de symmetrieassen. b Welke logo's zijn draaisymmetrisch? Bereken de kleinste draaihoek.",
+      "afbeelding": "assets/wiskunde/h9/h9-9.2-opg14-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p155.jpg",
+      "confidence": 0.95
     }
   ]
 }

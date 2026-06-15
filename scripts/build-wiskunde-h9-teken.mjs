@@ -10,8 +10,16 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const UIT = join(ROOT, "content/2026-t3/trainers/wiskunde/tekenopgaven.json");
 
-const TITEL = { voorkennis: "Voorkennis: Loodlijnen", "9.1": "§9.1 Lijnsymmetrie" };
-const BRON = { voorkennis: "raw/wiskunde/wiskunde-h09-p147.jpg", "9.1": "raw/wiskunde/wiskunde-h09-p148.jpg" };
+const TITEL = {
+  voorkennis: "Voorkennis: Loodlijnen",
+  "9.1": "§9.1 Lijnsymmetrie",
+  "9.2": "§9.2 Draai- en puntsymmetrie",
+};
+const BRON = {
+  voorkennis: "raw/wiskunde/wiskunde-h09-p147.jpg",
+  "9.1": "raw/wiskunde/wiskunde-h09-p148.jpg",
+  "9.2": "raw/wiskunde/wiskunde-h09-p155.jpg",
+};
 
 // [paragraaf, opgave, vraag, heeftFiguur, tip?]
 const DATA = [
@@ -23,6 +31,9 @@ const DATA = [
   ["9.1", "7", "△PQR wordt gespiegeld in lijn s (zie figuur). Teken op papier het beeld △P'Q'R'.", true],
   ["9.1", "8", "Rechthoek ABCD wordt gespiegeld in lijn s (zie figuur). a Teken op papier het beeld A'B'C'D'. b Controleer met je geodriehoek dat het spiegelbeeld ook een rechthoek is.", true],
   ["9.1", "9", "a Teken de punten A(-4, 0), B(0, -2) en D(-2, 3) en teken △ABD. b Teken lijn s door B en D; △ABD wordt in s gespiegeld. c Waar liggen de beelden van B en D? d △ABD is de helft van de symmetrische vierhoek ABA'D — teken die vierhoek.", false],
+  ["9.1", "10", "a Teken de punten A(0, 1), B(-2, 0), C(-2, -2), D(1, -3) en E(3, -1). b Teken de lijn s door A en E. c De vijfhoek ABCDE is de helft van de symmetrische achthoek ABCDEFGH — teken die achthoek.", false],
+  ["9.1", "11", "Punt B' is het beeld van hoekpunt B van △ABC bij spiegeling in een lijn (zie figuur). Teken het spiegelbeeld △A'B'C'.", true],
+  ["9.2", "14", "Bekijk de logo's (zie figuur). a Welke logo's zijn lijnsymmetrisch? Teken de symmetrieassen. b Welke logo's zijn draaisymmetrisch? Bereken de kleinste draaihoek.", true],
 ];
 
 const opgaven = DATA.map(([paragraaf, opgave, vraag, heeftFiguur, tip]) => ({
