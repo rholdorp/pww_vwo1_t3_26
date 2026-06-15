@@ -5042,6 +5042,66 @@
       "antwoordBron": "raw/wiskunde/PXL_20260610_064423657.jpg",
       "confidence": 0.95,
       "verifiedBy": "boek"
+    },
+    {
+      "id": "wiskunde-h9-9.3-33-E",
+      "hoofdstuk": "9",
+      "onderdeel": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgavenummer": "33 (∠E)",
+      "vraag": "Gegeven: in △DEF is DF = EF en ∠D = 68°. Bereken ∠E in graden.",
+      "antwoord": "68",
+      "type": "hoeken",
+      "isSynthese": false,
+      "bron": "raw/wiskunde/wiskunde-h09-p164.jpg",
+      "antwoordBron": "raw/wiskunde/PXL_20260610_064423657.jpg",
+      "confidence": 0.95,
+      "verifiedBy": "boek"
+    },
+    {
+      "id": "wiskunde-h9-9.3-33-F",
+      "hoofdstuk": "9",
+      "onderdeel": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgavenummer": "33 (∠F)",
+      "vraag": "Gegeven: in △DEF is DF = EF en ∠D = 68°. Bereken ∠F in graden.",
+      "antwoord": "44",
+      "type": "hoeken",
+      "isSynthese": false,
+      "bron": "raw/wiskunde/wiskunde-h09-p164.jpg",
+      "antwoordBron": "raw/wiskunde/PXL_20260610_064423657.jpg",
+      "confidence": 0.95,
+      "verifiedBy": "boek"
+    },
+    {
+      "id": "wiskunde-h9-9.3-34-B",
+      "hoofdstuk": "9",
+      "onderdeel": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgavenummer": "34 (∠B)",
+      "vraag": "Gegeven: in △ABC is AC = BC en ∠A = 35°. Bereken ∠B in graden.",
+      "antwoord": "35",
+      "type": "hoeken",
+      "isSynthese": false,
+      "bron": "raw/wiskunde/wiskunde-h09-p164.jpg",
+      "antwoordBron": "raw/wiskunde/PXL_20260610_064423657.jpg",
+      "confidence": 0.95,
+      "verifiedBy": "boek"
+    },
+    {
+      "id": "wiskunde-h9-9.3-34-C",
+      "hoofdstuk": "9",
+      "onderdeel": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgavenummer": "34 (∠C)",
+      "vraag": "Gegeven: in △ABC is AC = BC en ∠A = 35°. Bereken ∠C in graden.",
+      "antwoord": "110",
+      "type": "hoeken",
+      "isSynthese": false,
+      "bron": "raw/wiskunde/wiskunde-h09-p164.jpg",
+      "antwoordBron": "raw/wiskunde/PXL_20260610_064423657.jpg",
+      "confidence": 0.95,
+      "verifiedBy": "boek"
     }
   ]
 }

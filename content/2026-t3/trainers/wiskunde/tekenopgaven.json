@@ -119,6 +119,56 @@
       "afbeelding": "assets/wiskunde/h9/h9-9.2-opg14-teken.jpg",
       "bron": "raw/wiskunde/wiskunde-h09-p155.jpg",
       "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.2-opg17",
+      "hoofdstuk": "9",
+      "paragraaf": "9.2",
+      "onderdeelTitel": "§9.2 Draai- en puntsymmetrie",
+      "opgave": "17",
+      "vraag": "a Teken de punten A(2, 4), B(1, 4) en M(2, 2). b M is het midden van AC — teken C. c M is het midden van BD — teken D. d Teken vierhoek ABCD. e Is ABCD lijnsymmetrisch? f Is ABCD draaisymmetrisch? Zo ja, bereken de kleinste draaihoek en geef de coördinaten van het draaipunt.",
+      "bron": "raw/wiskunde/wiskunde-h09-p155.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.2-opg20",
+      "hoofdstuk": "9",
+      "paragraaf": "9.2",
+      "onderdeelTitel": "§9.2 Draai- en puntsymmetrie",
+      "opgave": "20",
+      "vraag": "a Teken de punten A(-2, 2), B(-1, 1), C(2, 1) en M(1, 2) en teken △ABC. b Spiegel △ABC in M — teken het beeld △A'B'C' rood. c Teken N(-1, 0) en spiegel △ABC in N — teken het beeld △A''B''C'' blauw.",
+      "bron": "raw/wiskunde/wiskunde-h09-p155.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.3-opg28",
+      "hoofdstuk": "9",
+      "paragraaf": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgave": "28",
+      "vraag": "a Teken de rechthoekige driehoek ABC met ∠B = 90°, AB = 2 cm en BC = 4 cm. b Spiegel △ABC in lijn BC; het beeld van A is punt D. Wat voor bijzondere driehoek is △ADC?",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.3-opg29",
+      "hoofdstuk": "9",
+      "paragraaf": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgave": "29",
+      "vraag": "a Teken de gelijkbenige driehoek PQR met ∠P = 90°, PQ = 3 cm en PR = 3 cm. b Welke hoek is de tophoek? c Hoeveel graden is een basishoek?",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.3-opg31",
+      "hoofdstuk": "9",
+      "paragraaf": "9.3",
+      "onderdeelTitel": "§9.3 Bijzondere driehoeken",
+      "opgave": "31",
+      "vraag": "Van de gelijkbenige driehoek PQR is ∠R = 100° en PQ = 8 cm. Teken △PQR.",
+      "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
+      "confidence": 0.95
     }
   ]
 }
