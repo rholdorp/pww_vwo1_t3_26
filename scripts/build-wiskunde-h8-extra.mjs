@@ -40,6 +40,32 @@ const NIEUW = [
   { ond: "8.5", n: "L9", instr: "Bereken en schrijf in de wetenschappelijke notatie (rond af op 2 decimalen):", type: "wet-notatie", page: 124, L: [
     ["a", "3,7^21", "8,56 · 10^11", ["8.56*10^11"]], ["b", "4,76 · 6,1^17", "1,07 · 10^14", ["1.07*10^14"]],
     ["c", "3,1^31 : 0,13^13", "5,64 · 10^26", ["5.64*10^26"]] ] },
+
+  // Woordproblemen met een KALE expressie/getal als antwoord (Ralph 2026-06-15: "alleen
+  // schoon-antwoord-types"). `vol:true` → de hele vraagtekst staat in het L-veld (geen instr-prefix).
+  { ond: "8.2", n: "26", vol: true, type: "toepassing", page: 112, L: [
+    ["d", "Tamara vermenigvuldigt het getal y met 3 en trekt er vervolgens 8 van af. Welke uitkomst krijgt ze?", "3y - 8"] ] },
+  { ond: "8.2", n: "27", vol: true, type: "toepassing", page: 112, L: [
+    ["b", "Jappie telt 5 op bij het getal p en vermenigvuldigt de uitkomst met 4. Wat krijgt hij?", "4p + 20"] ] },
+  { ond: "8.2", n: "28", vol: true, type: "toepassing", page: 112, L: [
+    ["a", "Ga uit van het getal a. Tel er 2 bij op en vermenigvuldig de uitkomst met 3. Wat krijg je?", "3a + 6"],
+    ["b", "Ga uit van het getal b. Vermenigvuldig dat met 2 en trek er vervolgens 10 van af. Vermenigvuldig de uitkomst met 3. Wat krijg je?", "6b - 30"],
+    ["c", "Ga uit van het getal c. Tel er 5 bij op en vermenigvuldig de uitkomst met 4. Trek er vervolgens 4 keer het getal c van af. Wat krijg je?", "20"] ] },
+  { ond: "8.2", n: "29", vol: true, type: "toepassing", page: 113, L: [
+    ["a", "Ga uit van het getal a. Vermenigvuldig dat met 3 en tel er 5 keer het getal b bij op. Vermenigvuldig de uitkomst met 2. Wat krijg je?", "6a + 10b"],
+    ["c", "Trish gaat uit van drie opeenvolgende gehele getallen. Het kleinste getal is n. Ze vermenigvuldigt elk van de drie getallen met 2 en telt de uitkomsten bij elkaar op. Wat krijgt ze?", "6n + 6"] ] },
+  { ond: "8.4", n: "52", vol: true, type: "toepassing", page: 122, L: [
+    ["", "Tijdens corona verdubbelde bij reproductiegetal 2 elke dag het aantal besmettingen. In een week met reproductiegetal 1,15 waren er aan het eind 100 000 mensen besmet. Bereken hoeveel mensen er aan het begin van die week besmet waren (rond af op honderdtallen).", "37594"] ] },
+  { ond: "8.4", n: "L7", vol: true, type: "toepassing", page: 122, L: [
+    ["a", "Bereken (-4,3)^4 - 2,7^3. Rond af op gehelen.", "322"] ] },
+  { ond: "8.4", n: "51", vol: true, type: "machten", page: 121, exact: true, L: [
+    ["b", "Johan heeft per generatie terug 2× zoveel voorouders. Schrijf het aantal voorouders van tien generaties terug als macht van 2.", "2^10"] ] },
+  { ond: "8.4", n: "55", vol: true, type: "wet-notatie", page: 123, exact: true, L: [
+    ["a", "Een volwassen olifant kan 6 900 000 gram wegen. Schrijf dit getal in de wetenschappelijke notatie.", "6,9 · 10^6", ["6.9*10^6"]],
+    ["b", "Per dag maakt je lichaam 225 000 000 rode bloedlichaampjes aan. Schrijf dit getal in de wetenschappelijke notatie.", "2,25 · 10^8", ["2.25*10^8"]],
+    ["c", "In een mensenleven slaat het hart ongeveer 2 800 000 000 keer. Schrijf dit getal in de wetenschappelijke notatie.", "2,8 · 10^9", ["2.8*10^9"]],
+    ["d", "Het aantal haren op een hoofd is ongeveer 140 000. Schrijf dit getal in de wetenschappelijke notatie.", "1,4 · 10^5", ["1.4*10^5"]],
+    ["e", "Medio 2022 zijn er via Ecosia al 163 000 000 bomen geplant. Schrijf dit getal in de wetenschappelijke notatie.", "1,63 · 10^8", ["1.63*10^8"]] ] },
 ];
 
 const nieuw = [];
@@ -51,7 +77,7 @@ for (const o of NIEUW) {
       onderdeel: o.ond,
       onderdeelTitel: TITEL[o.ond],
       opgavenummer: `${o.n}${letter}`,
-      vraag: `${o.instr} ${vraag}`,
+      vraag: o.vol ? vraag : `${o.instr} ${vraag}`,
       antwoord,
       ...(accepted ? { acceptedForms: accepted } : {}),
       type: o.type,

@@ -142,8 +142,17 @@
     $("fotomap").disabled = true; $("opslagmap").disabled = true;
   }
 
-  // ── lesboek-pagina → sectie (uit manifest-scope) ──
-  function sectieVoorPagina(p) {
+  // ── lesboek-pagina → sectie (uit manifest-scope), per hoofdstuk ──
+  function sectieVoorPagina(p, hfd) {
+    if (hfd === "8") {
+      if (p === 104) return "voorkennis";
+      if (p >= 105 && p <= 106) return "8.1";
+      if (p >= 107 && p <= 113) return "8.2";
+      if (p >= 114 && p <= 118) return "8.3";
+      if (p >= 119 && p <= 123) return "8.4";
+      if (p >= 124 && p <= 131) return "8.5";
+      return ""; // gemengd/herhaling/diagnostisch
+    }
     if (p === 147) return "voorkennis";
     if (p >= 148 && p <= 153) return "9.1";
     if (p >= 154 && p <= 160) return "9.2";
@@ -288,11 +297,12 @@
       const dir = await window.showDirectoryPicker({ id: "rawwis", mode: "read" });
       fotos = [];
       for await (const [naam, handle] of dir.entries()) {
-        if (handle.kind === "file" && /^wiskunde-h09-p\d+.*\.jpe?g$/i.test(naam)) fotos.push({ naam, handle });
+        if (handle.kind === "file" && /^wiskunde-h0\d-p\d+.*\.jpe?g$/i.test(naam)) fotos.push({ naam, handle });
       }
       fotos.sort((a, b) => {
+        const ha = +(a.naam.match(/h0(\d)/i)?.[1] ?? 0), hb = +(b.naam.match(/h0(\d)/i)?.[1] ?? 0);
         const pa = +(a.naam.match(/p(\d+)/i)?.[1] ?? 0), pb = +(b.naam.match(/p(\d+)/i)?.[1] ?? 0);
-        return pa - pb;
+        return ha - hb || pa - pb;
       });
       const kies = $("kies"); kies.innerHTML = "";
       fotos.forEach((f, i) => { const o = document.createElement("option"); o.value = i; o.textContent = f.naam; kies.appendChild(o); });
@@ -308,8 +318,10 @@
     $("kies").value = String(i);
     $("vorige").disabled = i === 0;
     $("volgende").disabled = i === fotos.length - 1;
+    const hfd = fotos[i].naam.match(/h0(\d)/i)?.[1] ?? "9";
     const p = +(fotos[i].naam.match(/p(\d+)/i)?.[1] ?? 0);
-    const s = sectieVoorPagina(p);
+    $("hfd").value = hfd;
+    const s = sectieVoorPagina(p, hfd);
     if (s) { $("sectie").value = s; zetType(standaardType(s)); }
     $("opg").value = ""; versNaam();
     rot = 270;

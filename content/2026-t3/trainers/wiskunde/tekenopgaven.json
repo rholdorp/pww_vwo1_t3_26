@@ -169,6 +169,107 @@
       "vraag": "Van de gelijkbenige driehoek PQR is ∠R = 100° en PQ = 8 cm. Teken △PQR.",
       "bron": "raw/wiskunde/wiskunde-h09-p161.jpg",
       "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.2-opg17",
+      "hoofdstuk": "8",
+      "paragraaf": "8.2",
+      "onderdeelTitel": "§8.2 Haakjes wegwerken",
+      "opgave": "17",
+      "vraag": "Werk de haakjes weg (let op de breuken): a -⅓a(½b − 6c)   b -¼(-4q − ⅓r)   c ⅔b(⅕c − 1½d)",
+      "tip": "Schrijf de breuk-coëfficiënten netjes uit.",
+      "bron": "raw/wiskunde/wiskunde-h08-p110.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.2-opg21",
+      "hoofdstuk": "8",
+      "paragraaf": "8.2",
+      "onderdeelTitel": "§8.2 Haakjes wegwerken",
+      "opgave": "21",
+      "vraag": "Vul in: a 5(a + ▢) = ▢ + 10b   b 7p − 2(▢ − 3q) = p + ▢   c −4(x − ▢) − 3y = ▢ + 9y",
+      "bron": "raw/wiskunde/wiskunde-h08-p110.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.2-opg30",
+      "hoofdstuk": "8",
+      "paragraaf": "8.2",
+      "onderdeelTitel": "§8.2 Haakjes wegwerken",
+      "opgave": "30",
+      "vraag": "Je kent de regel a(b + c) = ab + ac. Acht beweringen, vijf zijn juist. Onderzoek welke juist zijn en geef bij de onjuiste een tegenvoorbeeld: 1 (a+b)c = ac+bc  2 (a+b):c = a:c+b:c  3 a:(b+c) = a:b+a:c  4 a−(b+c) = a−b+a−c  5 a·(b:c) = (a·b):(a·c)  6 a(b+c+d+e) = ab+ac+ad+ae  7 a:(b:c) = a·c:b  8 a:(b·c) = a:b:c",
+      "bron": "raw/wiskunde/wiskunde-h08-p110.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.3-opg36",
+      "hoofdstuk": "8",
+      "paragraaf": "8.3",
+      "onderdeelTitel": "§8.3 Machten",
+      "opgave": "36",
+      "vraag": "a Maak een lijst met machten van 2 tot en met 2^15. b Bekijk het laatste cijfer van elke uitkomst — wat valt je op? c Welke van 2^19, 2^23, 2^38, 2^55 eindigen op een 8? d Schrijf vijf machten van 2 die op een 6 eindigen. e Op welk cijfer eindigt 2^94? f 9^23? g 5^37? h 6^128?",
+      "bron": "raw/wiskunde/wiskunde-h08-p117.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.3-opg42",
+      "hoofdstuk": "8",
+      "paragraaf": "8.3",
+      "onderdeelTitel": "§8.3 Machten",
+      "opgave": "42",
+      "vraag": "a Bereken (−1)^2, (−1)^3, (−1)^4, (−1)^5 en (−1)^6 — wat valt je op? b Bepaal zonder te rekenen of de uitkomst positief of negatief is: (−4)^6, (−0,3)^9, (−11)^19, (−7)^10, (−5)^7, (−1)^10, (−1,5)^12, (−12)^15. c Wat heb je bij a en b ontdekt? d Waarom geldt deze regel niet voor −7^4?",
+      "bron": "raw/wiskunde/wiskunde-h08-p117.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.4-opg53",
+      "hoofdstuk": "8",
+      "paragraaf": "8.4",
+      "onderdeelTitel": "§8.4 De wetenschappelijke notatie",
+      "opgave": "53",
+      "vraag": "a Bereken 10^5 — hoeveel nullen staan er in het antwoord? b En bij 10^7? c Hoeveel nullen krijg je bij 10^9? d Hoeveel nullen heeft een miljoen? Schrijf miljoen als macht van 10. e Schrijf miljard als macht van 10.",
+      "bron": "raw/wiskunde/wiskunde-h08-p122.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.5-opg66",
+      "hoofdstuk": "8",
+      "paragraaf": "8.5",
+      "onderdeelTitel": "§8.5 Machten en letters",
+      "opgave": "66",
+      "vraag": "Luuk zegt: 2^5 · 2^3 = 2^8. Stan zegt: 2^5 · 2^3 = 4^8. a Wie heeft gelijk? Waarom? Schrijf telkens als één macht: b 3^8 · 3^11   c 2^2 · 4^8   d 2^6 · 8",
+      "bron": "raw/wiskunde/wiskunde-h08-p127.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.5-opg72",
+      "hoofdstuk": "8",
+      "paragraaf": "8.5",
+      "onderdeelTitel": "§8.5 Machten en letters",
+      "opgave": "72",
+      "vraag": "Vul in: a 8x^6 + ▢ = 12x^6   b 6x^4 · ▢ = 12x^6   c x · ▢ = 12x^6   d 15x^6 − ▢ = 12x^6   e −2x^4 · ▢ = 12x^6   f 3x · ▢ = 12x^6",
+      "bron": "raw/wiskunde/wiskunde-h08-p127.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.5-opg73",
+      "hoofdstuk": "8",
+      "paragraaf": "8.5",
+      "onderdeelTitel": "§8.5 Machten en letters",
+      "opgave": "73",
+      "vraag": "Bedenk een s.o. van zes herleidingen die elk 18a^8 als uitkomst hebben: twee vermenigvuldigingen, twee optellingen en twee aftrekkingen.",
+      "bron": "raw/wiskunde/wiskunde-h08-p127.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h8-8.5-opg76",
+      "hoofdstuk": "8",
+      "paragraaf": "8.5",
+      "onderdeelTitel": "§8.5 Machten en letters",
+      "opgave": "76",
+      "vraag": "Vul in: a ▢(a^5 + 3a) = ▢ + 15a^2   b 8a^4 − 2a^3(a − ▢) = 6a^4 + 12a^7   c a^3 · a^6 + ▢(a^9 − 3a^7) = 3a^11 − 8a^9   d 2a^5(3a − ▢) − a^4(▢ + 4a) = 5a^6",
+      "bron": "raw/wiskunde/wiskunde-h08-p127.jpg",
+      "confidence": 0.95
     }
   ]
 }
