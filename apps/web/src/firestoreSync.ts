@@ -35,6 +35,11 @@ let timer: ReturnType<typeof setTimeout> | null = null;
 let pendingNaam: string | null = null;
 let unsubscribe: Unsubscribe | null = null;
 let lastIncomingSerialized: string | null = null;
+// Anti-clobber: we pushen NIET voordat de cloud-staat één keer door de server is
+// bevestigd. Anders kan een vers/leeg device (geen lokale voortgang) bij het
+// opstarten een lege `items` over de cloud schrijven en alle voortgang wissen.
+let hydrated = false;
+let deferredPush = false;
 
 interface Resultaat {
   afgerondOp: string;
@@ -101,11 +106,78 @@ function mergeResultaten(a: Resultaat[], b: Resultaat[]): Resultaat[] {
   return out;
 }
 
-function writeLocal(naam: string, data: ProgressDoc): void {
+type ItemRec = { box?: number; laatstGezien?: string; aantalGoed?: number; aantalFout?: number };
+
+/** Kies van twee versies van hetzelfde item de "rijkste": meeste antwoorden (= meest
+ * complete historie), dan recentste datum, dan hoogste box. We gooien nooit voortgang weg. */
+function beterItem(a: ItemRec, b: ItemRec): ItemRec {
+  const ta = (a.aantalGoed ?? 0) + (a.aantalFout ?? 0);
+  const tb = (b.aantalGoed ?? 0) + (b.aantalFout ?? 0);
+  if (ta !== tb) return ta > tb ? a : b;
+  const la = a.laatstGezien ?? "";
+  const lb = b.laatstGezien ?? "";
+  if (la !== lb) return la > lb ? a : b;
+  return (a.box ?? 1) >= (b.box ?? 1) ? a : b;
+}
+
+/** Union van twee item-stores; per item de rijkste versie. Voorkomt dat een lege/oudere
+ * cloud-staat lokale voortgang wegvaagt (én omgekeerd) — dé oorzaak van zoekgeraakte voortgang. */
+function mergeItems(a: Record<string, unknown>, b: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = { ...a };
+  for (const [id, v] of Object.entries(b)) {
+    out[id] = id in out ? beterItem(out[id] as ItemRec, v as ItemRec) : v;
+  }
+  return out;
+}
+
+type SchrijfRec = { score?: number; concept?: Record<string, string> };
+
+/** Union van twee schrijf-stores; per opdracht de hoogste score en het langste concept
+ * per stap — zodat een lokaal getypt concept nooit door een lege cloud-versie sneuvelt. */
+function mergeSchrijf(a: Record<string, unknown>, b: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = { ...a };
+  for (const [id, vv] of Object.entries(b)) {
+    const v = vv as SchrijfRec;
+    const cur = out[id] as SchrijfRec | undefined;
+    if (!cur) {
+      out[id] = v;
+      continue;
+    }
+    const score = Math.max(cur.score ?? Number.NEGATIVE_INFINITY, v.score ?? Number.NEGATIVE_INFINITY);
+    const concept: Record<string, string> = {};
+    const keys = new Set([...Object.keys(cur.concept ?? {}), ...Object.keys(v.concept ?? {})]);
+    for (const k of keys) {
+      const lc = cur.concept?.[k] ?? "";
+      const cc = v.concept?.[k] ?? "";
+      concept[k] = lc.length >= cc.length ? lc : cc;
+    }
+    const rec: SchrijfRec = {};
+    if (Number.isFinite(score)) rec.score = score;
+    if (keys.size) rec.concept = concept;
+    out[id] = rec;
+  }
+  return out;
+}
+
+/** Schrijf cloud-data terug naar localStorage. Retourneert `true` als lokaal ná de merge
+ * méér bevat dan de cloud (dan moet de samengevoegde unie teruggepusht worden om te genezen). */
+function writeLocal(naam: string, data: ProgressDoc): boolean {
   const s = slug(naam);
-  // items + schrijf: cloud hydrateert (overschrijven, bestaand gedrag).
-  if (data.items) localStorage.setItem(localKey(s), JSON.stringify(data.items));
-  if (data.schrijf) localStorage.setItem(schrijfLocalKey(s), JSON.stringify(data.schrijf));
+  let lokaalRijker = false;
+  // items + schrijf: UNION met lokaal (nooit blind overschrijven — anders wist een
+  // lege/oudere cloud-staat de lokale voortgang).
+  if (data.items) {
+    const lokaal = parse(localStorage.getItem(localKey(s)), {} as Record<string, unknown>);
+    const samen = mergeItems(lokaal, data.items);
+    localStorage.setItem(localKey(s), JSON.stringify(samen));
+    if (Object.keys(samen).length > Object.keys(data.items).length) lokaalRijker = true;
+  }
+  if (data.schrijf) {
+    const lokaal = parse(localStorage.getItem(schrijfLocalKey(s)), {} as Record<string, unknown>);
+    const samen = mergeSchrijf(lokaal, data.schrijf);
+    localStorage.setItem(schrijfLocalKey(s), JSON.stringify(samen));
+    if (Object.keys(samen).length > Object.keys(data.schrijf).length) lokaalRijker = true;
+  }
   // resultaten: UNION met lokaal zodat geen enkele bonus-sessie verloren gaat.
   if (data.resultaten) {
     const lokaal = parse(localStorage.getItem(resultatenLocalKey(s)), [] as Resultaat[]);
@@ -125,6 +197,7 @@ function writeLocal(naam: string, data: ProgressDoc): void {
       if (localStorage.getItem(k) === null) localStorage.setItem(k, JSON.stringify(blokken));
     }
   }
+  return lokaalRijker;
 }
 
 /** Stabiele serialisatie van alle gesyncte velden (voor echo-detectie). */
@@ -134,10 +207,32 @@ function serialize(d: Partial<LocalState>): string {
     .join("|");
 }
 
+/** Markeer dat de cloud-staat door de server is bevestigd; flush een eventueel
+ * uitgestelde push. Vanaf nu is pushen veilig (we kunnen niet meer blind clobberen). */
+function markHydrated(s: string): void {
+  if (hydrated) return;
+  hydrated = true;
+  if (deferredPush) {
+    deferredPush = false;
+    doSchedule(s);
+  }
+}
+
+function doSchedule(s: string): void {
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(() => {
+    timer = null;
+    pushNow(s).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.warn("[firestoreSync] push failed:", err);
+    });
+  }, DEBOUNCE_MS);
+}
+
 /**
- * Pakt de huidige naam-doc en zet een live listener op. Cloud-state overschrijft
- * lokaal bij eerste hit; daarna wint elke push. Roep eenmaal aan bij naam-claim
- * (of bij app-boot als naam bekend is uit localStorage).
+ * Pakt de huidige naam-doc en zet een live listener op. Cloud-state wordt bij elke
+ * hit met lokaal samengevoegd (union — nooit blind overschrijven). Roep eenmaal aan
+ * bij naam-claim (of bij app-boot als naam bekend is uit localStorage).
  */
 export function startSync(naam: string): void {
   if (!firebaseEnabled || !db) return;
@@ -149,18 +244,35 @@ export function startSync(naam: string): void {
   }
   pendingNaam = s;
   lastIncomingSerialized = null;
+  hydrated = false;
+  deferredPush = false;
   const ref = doc(db, "progress", s);
+  // includeMetadataChanges: zo krijgen we óók de overgang cache→server-bevestigd,
+  // wat de `hydrated`-vlag betrouwbaar zet (anti-clobber, zie boven).
   unsubscribe = onSnapshot(
     ref,
+    { includeMetadataChanges: true },
     (snap) => {
-      if (!snap.exists()) return;
+      const vanServer = !snap.metadata.fromCache;
+      if (!snap.exists()) {
+        // Server bevestigt: doc bestaat (nog) niet → pushen mag (doc aanmaken).
+        if (vanServer) markHydrated(s);
+        return;
+      }
       const data = snap.data() as ProgressDoc;
       const serialized = serialize(data);
-      if (serialized === lastIncomingSerialized) return; // eigen echo
+      if (serialized === lastIncomingSerialized) {
+        if (vanServer) markHydrated(s); // eigen echo / ongewijzigd, maar wél hydratie
+        return;
+      }
       lastIncomingSerialized = serialized;
-      writeLocal(naam, data);
+      const lokaalRijker = writeLocal(naam, data);
       // Notify React tree dat localStorage is bijgewerkt — App.tsx luistert.
       window.dispatchEvent(new CustomEvent("pww-progress-updated", { detail: { naam: s } }));
+      if (vanServer) markHydrated(s);
+      // Had lokaal méér dan de cloud? Push de samengevoegde unie terug — zo geneest
+      // een eerder leeggelopen cloud-doc zodra een device met data weer online komt.
+      if (lokaalRijker) schedulePush(naam);
     },
     (err) => {
       // eslint-disable-next-line no-console
@@ -173,25 +285,25 @@ export function stopSync(): void {
   if (unsubscribe) unsubscribe();
   unsubscribe = null;
   pendingNaam = null;
+  hydrated = false;
+  deferredPush = false;
   if (timer) clearTimeout(timer);
   timer = null;
 }
 
 /**
  * Debounced push: roep aan na elke lokale save. Verzamelt edits binnen
- * DEBOUNCE_MS en doet één setDoc-merge.
+ * DEBOUNCE_MS en doet één setDoc-merge. Pusht NIET voordat de cloud is gehydrateerd
+ * (anti-clobber) — de push wordt dan uitgesteld tot de eerste server-bevestiging.
  */
 export function schedulePush(naam: string): void {
   if (!firebaseEnabled || !db) return;
   const s = slug(naam);
-  if (timer) clearTimeout(timer);
-  timer = setTimeout(() => {
-    timer = null;
-    pushNow(s).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.warn("[firestoreSync] push failed:", err);
-    });
-  }, DEBOUNCE_MS);
+  if (!hydrated) {
+    deferredPush = true; // wacht op cloud-hydratie vóór we (mogelijk leeg) pushen
+    return;
+  }
+  doSchedule(s);
 }
 
 async function pushNow(s: string): Promise<void> {
@@ -200,19 +312,19 @@ async function pushNow(s: string): Promise<void> {
   // Onze eigen push komt straks terug via onSnapshot — markeren zodat we 'm niet
   // als "incoming" verwerken.
   lastIncomingSerialized = serialize(local);
-  await setDoc(
-    doc(db, "progress", s),
-    {
-      naam: s,
-      items: local.items,
-      schrijf: local.schrijf,
-      resultaten: local.resultaten,
-      cat2: local.cat2,
-      dagschema: local.dagschema,
-      updated: serverTimestamp(),
-    },
-    { merge: true }
-  );
+  // Laatste vangnet tegen dataverlies: schrijf `items`/`schrijf` alléén mee als er
+  // iets ín zit. Een (tijdelijk) lege lokale staat mag NOOIT een gevulde cloud-staat
+  // wegvagen; merge:true behoudt dan het bestaande cloud-veld.
+  const payload: Record<string, unknown> = {
+    naam: s,
+    resultaten: local.resultaten,
+    cat2: local.cat2,
+    dagschema: local.dagschema,
+    updated: serverTimestamp(),
+  };
+  if (Object.keys(local.items).length > 0) payload.items = local.items;
+  if (Object.keys(local.schrijf).length > 0) payload.schrijf = local.schrijf;
+  await setDoc(doc(db, "progress", s), payload, { merge: true });
 }
 
 /** Forceer een directe push (bv. bij window unload). Negeer fouten. */
