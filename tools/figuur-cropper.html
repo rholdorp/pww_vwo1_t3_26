@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wiskunde figuur-cropper</title>
+<style>
+  :root { --rand:#cbd5e1; --primair:#2563eb; --paneel:#f8fafc; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui,sans-serif; color:#0f172a; background:#eef2f7; }
+  header { background:#0f172a; color:#fff; padding:12px 18px; }
+  header h1 { margin:0; font-size:17px; }
+  header p { margin:4px 0 0; font-size:13px; opacity:.8; }
+  main { display:grid; grid-template-columns: 1fr 320px; gap:16px; padding:16px; align-items:start; }
+  .doek-wrap { background:var(--paneel); border:1px solid var(--rand); border-radius:10px; padding:10px; overflow:auto; }
+  canvas#doek { max-width:100%; cursor:crosshair; touch-action:none; background:#fff; display:block; }
+  .paneel { background:#fff; border:1px solid var(--rand); border-radius:10px; padding:14px; position:sticky; top:16px; }
+  .rij { margin-bottom:12px; }
+  label { display:block; font-weight:600; font-size:13px; margin-bottom:4px; }
+  input[type=text] { width:100%; padding:8px; border:1px solid var(--rand); border-radius:7px; font:inherit; }
+  .knoppen { display:flex; gap:6px; flex-wrap:wrap; }
+  button { appearance:none; border:1px solid var(--rand); background:#fff; border-radius:7px; padding:8px 10px; cursor:pointer; font:inherit; }
+  button.primair { background:var(--primair); color:#fff; border-color:var(--primair); font-weight:700; }
+  button:disabled { opacity:.45; cursor:not-allowed; }
+  .naam { font-family:ui-monospace,Menlo,monospace; background:#f1f5f9; padding:6px 8px; border-radius:6px; word-break:break-all; font-size:13px; }
+  .hint { font-size:12px; color:#64748b; }
+  .gedaan { margin-top:10px; max-height:180px; overflow:auto; font-size:12px; }
+  .gedaan div { font-family:ui-monospace,Menlo,monospace; padding:2px 0; color:#15803d; }
+  .pad { font-family:ui-monospace,Menlo,monospace; font-size:11px; color:#64748b; word-break:break-all; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Wiskunde figuur-cropper</h1>
+  <p>Laad een lesboekfoto → zet rechtop → sleep een kader om de figuur → vul opgave in → download. Geen server nodig, alles lokaal.</p>
+</header>
+<main>
+  <div class="doek-wrap">
+    <canvas id="doek" width="900" height="600"></canvas>
+  </div>
+
+  <div class="paneel">
+    <div class="rij">
+      <label>1 · Foto laden</label>
+      <input type="file" id="bestand" accept="image/*" />
+      <p class="hint">Of sleep een foto op het canvas.</p>
+    </div>
+
+    <div class="rij">
+      <label>2 · Rechtop zetten</label>
+      <div class="knoppen">
+        <button data-rot="270" class="primair">↻ 270° (lesboek)</button>
+        <button data-rot="90">↺ 90°</button>
+        <button data-rot="180">180°</button>
+        <button data-rot="0">0°</button>
+      </div>
+      <p class="hint">Lesboekpagina's staan meestal liggend → 270°.</p>
+    </div>
+
+    <div class="rij">
+      <label>3 · Sleep een kader om de figuur</label>
+      <p class="hint">Klik-sleep op de afbeelding. Ruim nemen: alle hoeken/labels erin.</p>
+    </div>
+
+    <div class="rij">
+      <label>4 · Opgave benoemen</label>
+      <div style="display:flex; gap:6px;">
+        <span style="flex:0 0 auto;"><label style="font-weight:400">hfd</label><input type="text" id="hfd" value="9" style="width:46px" /></span>
+        <span style="flex:1"><label style="font-weight:400">sectie</label><input type="text" id="sectie" value="9.3" placeholder="9.3" /></span>
+        <span style="flex:1"><label style="font-weight:400">opgave</label><input type="text" id="opg" placeholder="41" /></span>
+        <span style="flex:0 0 64px"><label style="font-weight:400">extra</label><input type="text" id="extra" placeholder="" /></span>
+      </div>
+      <p class="hint" style="margin-top:6px">Bestandsnaam:</p>
+      <div class="naam" id="naamPreview">h9-9.3-opg?.jpg</div>
+    </div>
+
+    <div class="rij">
+      <button class="primair" id="knip" disabled>✂︎ Knip &amp; download</button>
+    </div>
+
+    <div class="rij">
+      <p class="hint">Sla de gedownloade bestanden op in:</p>
+      <div class="pad">content/2026-t3/assets/wiskunde/h9/</div>
+    </div>
+
+    <div class="rij">
+      <label>Deze sessie geknipt</label>
+      <div class="gedaan" id="gedaan"><span class="hint">— nog niets —</span></div>
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const doek = document.getElementById("doek");
+  const ctx = doek.getContext("2d");
+  let bron = null;       // originele Image
+  let rot = 270;         // huidige rotatie
+  let werk = null;       // full-res rechtop canvas
+  let schaal = 1;        // werk → display
+  let sel = null;        // selectie in DISPLAY-px {x,y,w,h}
+  let sleep = null;      // actieve sleep-start
+
+  const MAX_W = 900, MAX_H = 640; // displaygrootte
+
+  function bouwWerk() {
+    if (!bron) return;
+    const w = bron.naturalWidth, h = bron.naturalHeight;
+    werk = document.createElement("canvas");
+    const wctx = werk.getContext("2d");
+    if (rot === 90 || rot === 270) { werk.width = h; werk.height = w; }
+    else { werk.width = w; werk.height = h; }
+    wctx.save();
+    wctx.translate(werk.width / 2, werk.height / 2);
+    wctx.rotate((rot * Math.PI) / 180);
+    wctx.drawImage(bron, -w / 2, -h / 2);
+    wctx.restore();
+    sel = null;
+    teken();
+  }
+
+  function teken() {
+    if (!werk) return;
+    schaal = Math.min(MAX_W / werk.width, MAX_H / werk.height, 1);
+    doek.width = Math.round(werk.width * schaal);
+    doek.height = Math.round(werk.height * schaal);
+    ctx.drawImage(werk, 0, 0, doek.width, doek.height);
+    if (sel) {
+      ctx.strokeStyle = "#2563eb";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 4]);
+      ctx.strokeRect(sel.x, sel.y, sel.w, sel.h);
+      ctx.fillStyle = "rgba(37,99,235,.12)";
+      ctx.fillRect(sel.x, sel.y, sel.w, sel.h);
+    }
+    document.getElementById("knip").disabled = !(sel && sel.w > 5 && sel.h > 5);
+  }
+
+  function posVan(e) {
+    const r = doek.getBoundingClientRect();
+    const cx = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    const cy = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
+    return { x: Math.max(0, Math.min(doek.width, cx)), y: Math.max(0, Math.min(doek.height, cy)) };
+  }
+  function start(e) { if (!werk) return; e.preventDefault(); sleep = posVan(e); sel = null; }
+  function beweeg(e) {
+    if (!sleep) return; e.preventDefault();
+    const p = posVan(e);
+    sel = { x: Math.min(sleep.x, p.x), y: Math.min(sleep.y, p.y), w: Math.abs(p.x - sleep.x), h: Math.abs(p.y - sleep.y) };
+    teken();
+  }
+  function stop() { sleep = null; }
+  doek.addEventListener("mousedown", start);
+  doek.addEventListener("mousemove", beweeg);
+  window.addEventListener("mouseup", stop);
+  doek.addEventListener("touchstart", start, { passive: false });
+  doek.addEventListener("touchmove", beweeg, { passive: false });
+  window.addEventListener("touchend", stop);
+
+  function laad(file) {
+    const img = new Image();
+    img.onload = () => { bron = img; bouwWerk(); };
+    img.src = URL.createObjectURL(file);
+  }
+  document.getElementById("bestand").addEventListener("change", (e) => { if (e.target.files[0]) laad(e.target.files[0]); });
+  doek.addEventListener("dragover", (e) => e.preventDefault());
+  doek.addEventListener("drop", (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) laad(f); });
+
+  document.querySelectorAll("[data-rot]").forEach((b) => b.addEventListener("click", () => {
+    rot = Number(b.dataset.rot);
+    document.querySelectorAll("[data-rot]").forEach((x) => x.classList.toggle("primair", x === b));
+    bouwWerk();
+  }));
+
+  function naam() {
+    const hfd = document.getElementById("hfd").value.trim() || "9";
+    const sectie = document.getElementById("sectie").value.trim() || "0";
+    const opg = document.getElementById("opg").value.trim() || "?";
+    const extra = document.getElementById("extra").value.trim();
+    return `h${hfd}-${sectie}-opg${opg}${extra ? "-" + extra : ""}.jpg`;
+  }
+  function versNaam() { document.getElementById("naamPreview").textContent = naam(); }
+  ["hfd", "sectie", "opg", "extra"].forEach((id) => document.getElementById(id).addEventListener("input", versNaam));
+  versNaam();
+
+  document.getElementById("knip").addEventListener("click", () => {
+    if (!werk || !sel) return;
+    // display-px → werk-px (full-res)
+    const sx = sel.x / schaal, sy = sel.y / schaal, sw = sel.w / schaal, sh = sel.h / schaal;
+    const uit = document.createElement("canvas");
+    uit.width = Math.round(sw); uit.height = Math.round(sh);
+    uit.getContext("2d").drawImage(werk, sx, sy, sw, sh, 0, 0, uit.width, uit.height);
+    const bestandsnaam = naam();
+    uit.toBlob((blob) => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = bestandsnaam;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      const lijst = document.getElementById("gedaan");
+      if (lijst.querySelector(".hint")) lijst.innerHTML = "";
+      const d = document.createElement("div");
+      d.textContent = "✓ " + bestandsnaam + "  (" + uit.width + "×" + uit.height + ")";
+      lijst.prepend(d);
+    }, "image/jpeg", 0.92);
+  });
+})();
+</script>
+</body>
+</html>
