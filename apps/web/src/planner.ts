@@ -24,6 +24,7 @@ const DREMPEL: Record<BlokSoort, number> = {
   uitlegvragen: 0.6,
   schrijven: 0.7,
   opgaven: 0.7, // Cat 2 (SPEC §8): afgevinkt bij ≥70% onderdelen ✓
+  tekenen: 0.8, // teken-opgaven: afvinken (op papier gedaan)
 };
 
 export type BlokStatusKind = "open" | "deels" | "afgevinkt";

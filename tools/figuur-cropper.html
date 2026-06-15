@@ -100,8 +100,16 @@
         <span style="flex:1"><label style="font-weight:400">opgave</label><input type="text" id="opg" placeholder="41" /></span>
         <span style="flex:0 0 64px"><label style="font-weight:400">extra</label><input type="text" id="extra" placeholder="" /></span>
       </div>
+      <div style="margin-top:8px">
+        <label style="font-weight:400">Type opgave</label>
+        <div class="knoppen">
+          <button id="type-nakijk" data-type="nakijk">✅ Nakijkbaar (typ-antwoord)</button>
+          <button id="type-teken" data-type="teken">📐 Teken / afvinken</button>
+        </div>
+        <p class="hint" style="margin-top:4px">Nakijkbaar → opgaven-trainer (app controleert). Teken → teken-trainer (op papier, afvinken).</p>
+      </div>
       <p class="hint" style="margin-top:6px">Bestandsnaam:</p>
-      <div class="naam" id="naamPreview">h9-9.3-opg?.jpg</div>
+      <div class="naam" id="naamPreview">h9-9.3-opg?-nakijk.jpg</div>
     </div>
 
     <div class="rij">
@@ -241,17 +249,28 @@
     bouwWerk();
   }));
 
-  // ── naam ──
+  // ── naam + type ──
+  let type = "nakijk"; // "nakijk" (typ-antwoord → opgaven-trainer) | "teken" (afvinken → teken-trainer)
+  function zetType(t) {
+    type = t;
+    $("type-nakijk").classList.toggle("primair", t === "nakijk");
+    $("type-teken").classList.toggle("primair", t === "teken");
+    versNaam();
+  }
+  // §9.1/§9.2 (symmetrie) zijn standaard teken-opgaven; de rest nakijkbaar.
+  function standaardType(sectie) { return sectie === "9.1" || sectie === "9.2" ? "teken" : "nakijk"; }
   function naam() {
     const hfd = $("hfd").value.trim() || "9";
     const sectie = $("sectie").value.trim() || "0";
     const opg = $("opg").value.trim() || "?";
     const extra = $("extra").value.trim();
-    return `h${hfd}-${sectie}-opg${opg}${extra ? "-" + extra : ""}.jpg`;
+    return `h${hfd}-${sectie}-opg${opg}${extra ? "-" + extra : ""}-${type}.jpg`;
   }
   function versNaam() { $("naamPreview").textContent = naam(); }
   ["hfd", "sectie", "opg", "extra"].forEach((id) => $(id).addEventListener("input", versNaam));
-  versNaam();
+  $("type-nakijk").addEventListener("click", () => zetType("nakijk"));
+  $("type-teken").addEventListener("click", () => zetType("teken"));
+  zetType("nakijk");
 
   // ── beeld laden (blob/file) ──
   function laadBlob(blob) {
@@ -291,7 +310,7 @@
     $("volgende").disabled = i === fotos.length - 1;
     const p = +(fotos[i].naam.match(/p(\d+)/i)?.[1] ?? 0);
     const s = sectieVoorPagina(p);
-    if (s) { $("sectie").value = s; versNaam(); }
+    if (s) { $("sectie").value = s; zetType(standaardType(s)); }
     $("opg").value = ""; versNaam();
     rot = 270;
     document.querySelectorAll("[data-rot]").forEach((x) => x.classList.toggle("primair", x.dataset.rot === "270"));

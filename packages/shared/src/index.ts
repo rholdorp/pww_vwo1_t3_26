@@ -9,6 +9,8 @@ export type {
   OefenvraagBestand,
   Opgave,
   OpgavenBestand,
+  Tekenopgave,
+  TekenopgaveBestand,
   SchrijfStap,
   Schrijfopdracht,
   SchrijfopdrachtBestand,

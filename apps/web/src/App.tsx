@@ -751,6 +751,8 @@ function Trainer({
           <HotspotKaart key={card.id + card.richting} card={card} kleur={kleur} onResultaat={volgende} />
         ) : card.kind === "flip" ? (
           <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
+        ) : card.kind === "teken" ? (
+          <TekenKaart card={card} kleur={kleur} onKlaar={() => volgende("goed")} />
         ) : null}
       </div>
 
@@ -1276,6 +1278,34 @@ function TypedKaart({
           Nakijken
         </button>
       )}
+    </>
+  );
+}
+
+// Teken-/doe-opgave (meetkunde): figuur + opdracht, op papier doen, dan afvinken.
+// Geen automatisch nakijken/zelfbeoordeling (besluit Ralph 2026-06-15).
+function TekenKaart({
+  card,
+  kleur,
+  onKlaar,
+}: {
+  card: Extract<Card, { kind: "teken" }>;
+  kleur: string;
+  onKlaar: () => void;
+}) {
+  return (
+    <>
+      <div className="muted klein kaart-subtitel">✏️ Doe deze opgave op papier (in je schrift).</div>
+      {card.image && <img className="kaart-beeld" src={card.image} alt="figuur bij de opgave" />}
+      <div className="prompt">{card.vraag}</div>
+      {card.tip && <div className="muted klein hint">💡 {card.tip}</div>}
+      <button
+        className="knop primair"
+        style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
+        onClick={onKlaar}
+      >
+        Klaar — gedaan ✓
+      </button>
     </>
   );
 }

@@ -1,0 +1,92 @@
+{
+  "vak": "wiskunde",
+  "opgaven": [
+    {
+      "id": "wiskunde-h9-voorkennis-opg1",
+      "hoofdstuk": "9",
+      "paragraaf": "voorkennis",
+      "onderdeelTitel": "Voorkennis: Loodlijnen",
+      "opgave": "1",
+      "vraag": "De figuur hiernaast: a Teken door punt P de lijn l die loodrecht op k staat (denk aan het rechte-hoekteken). b Teken door Q de loodlijn m op k. c Teken door R de lijn n zodat n ⊥ k. d Teken door P de lijn q zodat q ⊥ l.",
+      "afbeelding": "assets/wiskunde/h9/h9-voorkennis-opg1-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p147.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg2",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "2",
+      "vraag": "a Teken in elk van de drie afbeeldingen de symmetrieassen. b Hoeveel symmetrieassen heeft elke afbeelding?",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg2-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg4",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "4",
+      "vraag": "Hoeveel vierkantjes moet je minstens blauw kleuren zodat de figuur één symmetrieas heeft? Kleur die vierkantjes.",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg4-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg5",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "5",
+      "vraag": "Samira vouwt een vierkant vel papier twee keer om en knipt het daarna twee keer door (zie figuur). Ze krijgt zo een aantal stukken papier. Hoeveel van die stukken zijn vierkanten?",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg5-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg6",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "6",
+      "vraag": "Van drie symmetrische figuren is één helft getekend; de symmetrieas is rood. Maak de figuren op papier af.",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg6-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg7",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "7",
+      "vraag": "△PQR wordt gespiegeld in lijn s (zie figuur). Teken op papier het beeld △P'Q'R'.",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg7-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg8",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "8",
+      "vraag": "Rechthoek ABCD wordt gespiegeld in lijn s (zie figuur). a Teken op papier het beeld A'B'C'D'. b Controleer met je geodriehoek dat het spiegelbeeld ook een rechthoek is.",
+      "afbeelding": "assets/wiskunde/h9/h9-9.1-opg8-teken.jpg",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    },
+    {
+      "id": "wiskunde-h9-9.1-opg9",
+      "hoofdstuk": "9",
+      "paragraaf": "9.1",
+      "onderdeelTitel": "§9.1 Lijnsymmetrie",
+      "opgave": "9",
+      "vraag": "a Teken de punten A(-4, 0), B(0, -2) en D(-2, 3) en teken △ABD. b Teken lijn s door B en D; △ABD wordt in s gespiegeld. c Waar liggen de beelden van B en D? d △ABD is de helft van de symmetrische vierhoek ABA'D — teken die vierhoek.",
+      "bron": "raw/wiskunde/wiskunde-h09-p148.jpg",
+      "confidence": 0.95
+    }
+  ]
+}

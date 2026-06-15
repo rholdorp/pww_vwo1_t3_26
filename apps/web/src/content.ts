@@ -3,6 +3,7 @@ import type {
   FlashcardBestand,
   OefenvraagBestand,
   OpgavenBestand,
+  TekenopgaveBestand,
   SchrijfopdrachtBestand,
   Schrijfopdracht,
   DiagramBestand,
@@ -129,6 +130,16 @@ export type Card =
       type: string;
     }
   | {
+      kind: "teken";
+      id: string;
+      /** De opdracht (instructie). */
+      vraag: string;
+      /** Optionele figuur — URL. */
+      image?: string;
+      /** Optionele 'let op'-tip (geen antwoord). */
+      tip?: string;
+    }
+  | {
       kind: "hotspot";
       id: string;
       /** "benoem" = regio licht op, typ de naam; "aanwijs" = naam gegeven, klik de regio. */
@@ -149,7 +160,7 @@ export type Card =
     };
 
 /** Interne categorie (niet tonen in UI). */
-export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven" | "diagram" | "opgaven";
+export type BlokSoort = "woordjes" | "begrippen" | "uitlegvragen" | "invullen" | "vertalen" | "schrijven" | "diagram" | "opgaven" | "tekenen";
 
 /** Stijn-vriendelijk label per soort — géén "Cat 1/3". */
 export const SOORT_LABEL: Record<BlokSoort, string> = {
@@ -161,6 +172,7 @@ export const SOORT_LABEL: Record<BlokSoort, string> = {
   schrijven: "Schrijfoefening",
   diagram: "Op de afbeelding",
   opgaven: "Opgaven oefenen",
+  tekenen: "Teken-oefeningen",
 };
 /**
  * Soorten met een aparte leer-weergave: eerst de stof bekijken (samenvatting /
@@ -181,6 +193,7 @@ export const SOORT_ICON: Record<BlokSoort, string> = {
   schrijven: "✍️",
   diagram: "🖼️",
   opgaven: "✏️",
+  tekenen: "📐",
 };
 
 /** Schrijfopdrachten (Cat 4), opzoekbaar op id voor de schrijftrainer. */
@@ -450,6 +463,28 @@ function buildRuw(): Blok[] {
           });
         }
       }
+    } else if (file === "tekenopgaven.json") {
+      // Teken-/doe-opgaven (afvinken, geen automatisch antwoord): één blok per hoofdstuk.
+      const b = data as TekenopgaveBestand;
+      for (const [hfd, opg] of groupBy(b.opgaven, (o) => o.hoofdstuk)) {
+        blokken.push({
+          id: `${vak}/tekenen/h${hfd}`,
+          vak,
+          hoofdstuk: hfd,
+          onderdeel: `Hoofdstuk ${hfd} — teken-oefeningen`,
+          soort: "tekenen",
+          titel: `Teken-oefeningen (H${hfd})`,
+          ids: opg.map((o) => o.id),
+          bouwCards: () =>
+            opg.map((o): Card => ({
+              kind: "teken",
+              id: o.id,
+              vraag: o.vraag,
+              image: resolveImage(o.afbeelding),
+              tip: o.tip,
+            })),
+        });
+      }
     } else if (file === "oefenvragen.json") {
       const b = data as OefenvraagBestand;
       for (const [onderdeel, vragen] of groupBy(b.vragen, (v) => v.onderdeel ?? `Hoofdstuk ${v.hoofdstuk}`)) {
@@ -575,7 +610,8 @@ function buildBlokken(): Blok[] {
         b.soort === "vertalen" ||
         b.soort === "schrijven" ||
         b.soort === "diagram" ||
-        b.soort === "opgaven",
+        b.soort === "opgaven" ||
+        b.soort === "tekenen",
     ),
   );
 
@@ -599,7 +635,7 @@ function buildBlokken(): Blok[] {
 
 export const BLOKKEN: Blok[] = buildBlokken();
 
-const SOORT_ORDER: Record<BlokSoort, number> = { opgaven: 0, woordjes: 1, invullen: 2, vertalen: 3, begrippen: 4, diagram: 5, uitlegvragen: 6, schrijven: 7 };
+const SOORT_ORDER: Record<BlokSoort, number> = { opgaven: 0, tekenen: 1, woordjes: 2, invullen: 3, vertalen: 4, begrippen: 5, diagram: 6, uitlegvragen: 7, schrijven: 8 };
 
 function hfdNum(h: string): number {
   const n = parseInt(h, 10);

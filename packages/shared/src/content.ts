@@ -258,6 +258,40 @@ export interface OpgavenBestand {
   opgaven: Opgave[];
 }
 
+// ── Teken-/doe-opgaven (meetkunde H9) — afvinken, geen automatisch antwoord ──
+// Opgaven met een figuur maar zonder eenduidig typbaar antwoord (spiegelen,
+// symmetrieassen tekenen, construeren). Stijn doet ze op papier en vinkt af; geen
+// nakijk/zelfbeoordeling (besluit Ralph 2026-06-15). Onderscheiden van Cat 2
+// (nakijkbare opgaven) via de bestandsnaam-marker bij het croppen (…-teken vs …-nakijk).
+
+/** Eén teken-/doe-opgave. Bestand: content/<editie>/trainers/<vak>/tekenopgaven.json. */
+export interface Tekenopgave {
+  /** Stabiele id: <vak>-h<hoofdstuk>-<paragraaf>-opg<nummer>, bv. "wiskunde-h9-9.1-opg2". */
+  id: string;
+  hoofdstuk: string;
+  /** Paragraaf/onderdeel, bv. "9.1" of "voorkennis". */
+  paragraaf: string;
+  /** Leesbare onderdeel-titel, bv. "§9.1 Lijnsymmetrie". */
+  onderdeelTitel: string;
+  /** Opgavenummer, bv. "2" of "L1". */
+  opgave: string;
+  /** De opdracht ("Teken alle symmetrieassen.", "Teken het spiegelbeeld van P in lijn s."). */
+  vraag: string;
+  /** Optionele figuur bij de opgave (relatief t.o.v. editie-root). */
+  afbeelding?: string;
+  /** Optionele 'let op'-tip (geen antwoord, alleen een aandachtspunt bij het doen). */
+  tip?: string;
+  /** Pad naar de raw screenshot/lesboekpagina. */
+  bron: string;
+  confidence: number;
+}
+
+/** Bestand content/<editie>/trainers/<vak>/tekenopgaven.json. */
+export interface TekenopgaveBestand {
+  vak: string;
+  opgaven: Tekenopgave[];
+}
+
 // ── Cat 4 (Nederlands / Engels — productieve schrijfvaardigheid) ─────────────
 // Een schrijfopdracht: lees een tekstfragment, schrijf (informele) brief, krijg
 // LLM-feedback, herzie één keer, krijg dan een score + verbeterpunten (SPEC §5 Cat 4).
