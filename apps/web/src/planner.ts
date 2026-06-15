@@ -142,10 +142,13 @@ const MOEILIJKHEID: Record<string, 1 | 2 | 3> = {
 const GEREDUCEERD_OK = new Set(["biologie", "aardrijkskunde"]);
 
 // Vakken die (nog) niet ingepland worden — handmatige knoppen (Ralph 2026-06-08).
-//  - engels: geen content/materiaal → voorlopig helemaal uit het plan.
-const GEPAUZEERD = new Set(["engels"]);
+// (Leeg sinds 2026-06-15: engels heeft nu trainers en doet weer mee, zie hieronder.)
+const GEPAUZEERD = new Set<string>([]);
 //  - wiskunde heeft nu een echte Cat-2-trainer (H8) → geen boek/uitstel meer.
-const VAK_NIET_VOOR: Record<string, string> = {};
+//  - engels: trainers zijn er nu → terug in de planning, maar pas vanaf morgen
+//    (2026-06-16), zodat het schema van vandaag en de bevroren vorige dagen
+//    onaangeroerd blijven (afspraak Ralph 2026-06-15).
+const VAK_NIET_VOOR: Record<string, string> = { engels: "2026-06-16" };
 // Afspraak Ralph/Stijn: wiskunde elke niet-gereduceerde dag (5/7 per week), ook in
 // de herhaalweek. Dagelijkse vakken tellen niet mee als "uitloop" (zie kalenderSchema).
 const DAGELIJKS = new Set(["wiskunde"]);
