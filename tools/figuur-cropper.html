@@ -12,10 +12,14 @@
   header h1 { margin:0; font-size:17px; }
   header p { margin:4px 0 0; font-size:13px; opacity:.8; }
   main { display:grid; grid-template-columns: 1fr 340px; gap:16px; padding:16px; align-items:start; }
-  .doek-wrap { background:var(--paneel); border:1px solid var(--rand); border-radius:10px; padding:10px; overflow:auto; }
-  canvas#doek { max-width:100%; cursor:crosshair; touch-action:none; background:#fff; display:block; }
+  .doek-wrap { background:var(--paneel); border:1px solid var(--rand); border-radius:10px; padding:10px; overflow:auto; max-height:82vh; }
+  canvas#doek { cursor:crosshair; touch-action:none; background:#fff; display:block; image-rendering:auto; }
   .nav { display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; }
   .nav select { flex:1; padding:6px; border:1px solid var(--rand); border-radius:6px; }
+  .zoombar { display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; }
+  .zoombar .zlabel { min-width:52px; text-align:center; font-variant-numeric:tabular-nums; }
+  .zoombar .spacer { flex:1; }
+  .zoombar .tip { color:#64748b; font-size:12px; }
   .paneel { background:#fff; border:1px solid var(--rand); border-radius:10px; padding:14px; position:sticky; top:16px; }
   .rij { margin-bottom:12px; }
   label { display:block; font-weight:600; font-size:13px; margin-bottom:4px; }
@@ -46,6 +50,15 @@
       <button id="vorige" disabled>◀</button>
       <select id="kies"></select>
       <button id="volgende" disabled>▶</button>
+    </div>
+    <div class="zoombar">
+      <button id="zoomuit">−</button>
+      <span class="zlabel" id="zlabel">100%</span>
+      <button id="zoomin">+</button>
+      <button id="zoomfit">Passend</button>
+      <button id="zoom100">1:1</button>
+      <span class="spacer"></span>
+      <span class="tip">scrollwiel = zoom · sleep scrollbalken om te pannen</span>
     </div>
     <canvas id="doek" width="900" height="600"></canvas>
   </div>
@@ -109,11 +122,11 @@
   const doek = $("doek"), ctx = doek.getContext("2d");
   const heeftFS = "showDirectoryPicker" in window;
 
-  let bron = null, rot = 270, werk = null, schaal = 1, sel = null, sleep = null;
+  let bron = null, rot = 270, werk = null, schaal = 1, zoom = 1, sel = null, sleep = null;
   let fotos = [];        // [{naam, handle}]
   let idx = -1;
   let outDir = null;     // opslag-map handle
-  const MAX_W = 900, MAX_H = 640;
+  const wrap = doek.parentElement; // .doek-wrap (scrollende viewport)
 
   if (!heeftFS) {
     $("fsStatus").innerHTML = "⚠︎ Je browser ondersteunt map-koppeling niet (gebruik Chrome of Edge). Download-modus actief.";
@@ -145,13 +158,41 @@
     wctx.drawImage(bron, -w / 2, -h / 2);
     wctx.restore();
     sel = null;
+    zoom = fitZoom();        // start passend; daarna kan de gebruiker inzoomen
     teken();
+    updateZoomLabel();
+  }
+  // Zoom waarbij de hele (geroteerde) pagina in de viewport past.
+  function fitZoom() {
+    if (!werk) return 1;
+    const availW = wrap.clientWidth - 24, availH = wrap.clientHeight - 24;
+    return Math.max(0.03, Math.min(availW / werk.width, availH / werk.height));
+  }
+  // Bovengrens: tot 1:1 (= elke bronpixel), met een vaste veiligheidsmarge op de
+  // canvasgrootte zodat we de browser-canvaslimiet niet raken.
+  function capZoom() {
+    if (!werk) return 1;
+    return Math.min(1, 12000 / werk.width, 12000 / werk.height);
+  }
+  function updateZoomLabel() { $("zlabel").textContent = Math.round(zoom * 100) + "%"; }
+  // Zet de zoom; `anchor` (viewport-px t.o.v. de wrap) blijft onder de cursor staan.
+  function zetZoom(z, anchor) {
+    if (!werk) return;
+    const oud = zoom;
+    zoom = Math.max(fitZoom() * 0.9, Math.min(z, capZoom()));
+    teken();
+    updateZoomLabel();
+    if (anchor) {
+      const f = zoom / oud;
+      wrap.scrollLeft = (wrap.scrollLeft + anchor.x) * f - anchor.x;
+      wrap.scrollTop = (wrap.scrollTop + anchor.y) * f - anchor.y;
+    }
   }
   function teken() {
     if (!werk) return;
-    schaal = Math.min(MAX_W / werk.width, MAX_H / werk.height, 1);
-    doek.width = Math.round(werk.width * schaal);
-    doek.height = Math.round(werk.height * schaal);
+    schaal = zoom; // crop-mapping gebruikt schaal (display-px → werk-px)
+    doek.width = Math.round(werk.width * zoom);
+    doek.height = Math.round(werk.height * zoom);
     ctx.drawImage(werk, 0, 0, doek.width, doek.height);
     if (sel) {
       ctx.strokeStyle = "#2563eb"; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
@@ -160,6 +201,17 @@
     }
     $("knip").disabled = !(sel && sel.w > 5 && sel.h > 5 && werk);
   }
+  // Zoom-knoppen + scrollwiel.
+  $("zoomin").addEventListener("click", () => zetZoom(zoom * 1.3));
+  $("zoomuit").addEventListener("click", () => zetZoom(zoom / 1.3));
+  $("zoomfit").addEventListener("click", () => { zoom = fitZoom(); teken(); updateZoomLabel(); });
+  $("zoom100").addEventListener("click", () => zetZoom(capZoom()));
+  doek.addEventListener("wheel", (e) => {
+    if (!werk) return;
+    e.preventDefault();
+    const r = wrap.getBoundingClientRect();
+    zetZoom(zoom * (e.deltaY < 0 ? 1.15 : 0.87), { x: e.clientX - r.left, y: e.clientY - r.top });
+  }, { passive: false });
   function posVan(e) {
     const r = doek.getBoundingClientRect();
     const cx = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
