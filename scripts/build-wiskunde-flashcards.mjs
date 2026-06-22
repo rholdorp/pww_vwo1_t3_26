@@ -27,6 +27,8 @@ const H8 = [
   ["Hoe herleid je een deling van machten met hetzelfde grondtal, bv. a⁵/a²?", "trek de exponenten van elkaar af, het grondtal blijft gelijk: a⁵/a² = a³", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p130.jpg"],
   ["Wat is a⁵/a⁵? En 8a⁵/2a⁵?", "a⁵/a⁵ = 1 (iets gedeeld door zichzelf) en 8a⁵/2a⁵ = 4", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p130.jpg"],
   ["Let op het verschil: wat is 3a³ + 5a³, wat is 3a³ · 5a³ en wat is a⁵/a³?", "optellen: 3a³ + 5a³ = 8a³ · vermenigvuldigen: 3a³ · 5a³ = 15a⁶ (exponenten optellen) · delen: a⁵/a³ = a² (exponenten aftrekken)", "kaart", "§8.5 Machten en letters", "wiskunde-h08-p131.jpg"],
+  // §8.3 priemfactoren (bij opgave 39) — factorboom-methode.
+  ["Hoe schrijf je een getal als product van priemfactoren? (bv. 1125)", "Maak een factorboom: blijf het getal delen door het kleinste priemgetal dat erin past (2, dan 3, 5, 7, …) tot je alleen priemgetallen overhoudt. Schrijf het resultaat met machten. Bv. 1125 = 5 · 5 · 5 · 3 · 3 = 5³ · 3².", "kaart", "§8.3 Machten", "wiskunde-h08-p117.jpg"],
 ];
 
 const H9 = [

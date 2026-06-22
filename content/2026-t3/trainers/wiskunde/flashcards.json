@@ -153,6 +153,16 @@
       "confidence": 0.9
     },
     {
+      "id": "wiskunde-h8-regel-016",
+      "vraag": "Hoe schrijf je een getal als product van priemfactoren? (bv. 1125)",
+      "antwoord": "Maak een factorboom: blijf het getal delen door het kleinste priemgetal dat erin past (2, dan 3, 5, 7, …) tot je alleen priemgetallen overhoudt. Schrijf het resultaat met machten. Bv. 1125 = 5 · 5 · 5 · 3 · 3 = 5³ · 3².",
+      "modus": "kaart",
+      "onderdeel": "§8.3 Machten",
+      "hoofdstuk": "8",
+      "bron": "raw/wiskunde/wiskunde-h08-p117.jpg",
+      "confidence": 0.9
+    },
+    {
       "id": "wiskunde-h9-concept-001",
       "vraag": "Wat betekent de notatie k ⊥ m?",
       "antwoord": "k staat loodrecht op m.",
