@@ -378,6 +378,7 @@ const SUBKOP: Record<BlokSoort, string> = {
   diagram: "Op de afbeelding",
   uitlegvragen: "Uitleg & verbanden",
   schrijven: "Schrijven",
+  tekenen: "Teken-opgaven (op papier)",
 };
 
 function Home({
