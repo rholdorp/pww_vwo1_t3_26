@@ -222,6 +222,43 @@ export function planPeriode(
       .filter((v) => v.isBoek && mag(v, d))
       .sort((a, b) => (sessies.get(a.vak) ?? 0) - (sessies.get(b.vak) ?? 0))[0];
 
+  // Resterende dagen (vanaf `datum`, inclusief) waarop dit vak nog níéuwe stof mag
+  // leren — d.w.z. de dagen die het vak nog als leer-slot kan benutten. Dit is meteen
+  // de bovengrens op hoeveel leerblokken er nog passen (max 1/vak/dag).
+  function resterendeLeerDagen(v: VakInput, datum: string): number {
+    let n = 0;
+    for (const dd of dagen) {
+      if (dd.datum < datum) continue;
+      if (dd.type !== "leer" && dd.type !== "gereduceerd" && dd.type !== "buffer") continue;
+      if (dd.type === "gereduceerd" && !v.gereduceerdOk) continue;
+      if (v.nietVoor && dd.datum < v.nietVoor) continue;
+      if (!magLeren(v, dd.datum)) continue;
+      n++;
+    }
+    return n;
+  }
+  // Kies het content-vak met de hoogste *druk* op deze dag: resterende leerblokken ÷
+  // resterende leerdagen. Zo krijgen vakken die veel stof in weinig dagen moeten kwijt
+  // (incl. late-toets-vakken als frans/geschiedenis, wier venster ook krimpt) een
+  // eerlijke, gespreide beurt — i.p.v. strikt-op-toetsdatum leeggetrokken te worden,
+  // waardoor de laatste vakken in de rij verhongerden. Tiebreak: vroegste toets, dan
+  // moeilijkste vak. Vervangt de oude `prioriteit.find`-volgorde in beide leerlussen.
+  function kiesContent(d: DagToewijzing): VakInput | undefined {
+    let beste: VakInput | undefined;
+    let besteDruk = -1;
+    for (const v of prioriteit) {
+      if (v.isBoek || queue.get(v.vak)!.length === 0 || !mag(v, d)) continue;
+      const druk = queue.get(v.vak)!.length / Math.max(1, resterendeLeerDagen(v, d.datum));
+      // `prioriteit` is al op (toets, moeilijkheid) gesorteerd → strikte `>` houdt bij
+      // gelijke druk de urgentste/moeilijkste vóór (eerste in de volgorde wint).
+      if (druk > besteDruk) {
+        besteDruk = druk;
+        beste = v;
+      }
+    }
+    return beste;
+  }
+
   for (const d of leerDagen) {
     // 0) Dagelijkse vakken (wiskunde) eerst — gegarandeerd slot op leer/zondag,
     //    overgeslagen op gereduceerde dagen via `mag`.
@@ -232,9 +269,9 @@ export function planPeriode(
       const boek = kiesBoek(d);
       if (boek) plaats(boek, d, null, "boek");
     }
-    // 2) Vul met content in volgorde (hoogste prioriteit eerst), max 1/vak/dag.
+    // 2) Vul met content, gebalanceerd op druk (zie kiesContent), max 1/vak/dag.
     while (d.blokken.length < d.cap) {
-      const v = prioriteit.find((v) => !v.isBoek && (queue.get(v.vak)!.length > 0) && mag(v, d));
+      const v = kiesContent(d);
       if (!v) break;
       plaats(v, d, queue.get(v.vak)!.shift()!, "trainer");
     }
@@ -262,7 +299,7 @@ export function planPeriode(
     // Stijn doorgaat in zijn boek; review van content-vakken vult de rest.
     plaatsDagelijks(d);
     while (d.blokken.length < d.cap) {
-      const leftover = prioriteit.find((v) => !v.isBoek && (queue.get(v.vak)!.length > 0) && mag(v, d));
+      const leftover = kiesContent(d);
       if (leftover) {
         plaats(leftover, d, queue.get(leftover.vak)!.shift()!, "trainer");
         continue;

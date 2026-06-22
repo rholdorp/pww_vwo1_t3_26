@@ -236,6 +236,56 @@ describe("planPeriode — uitloop tot 3 dagen vóór de toets (afspraak 2026-06-
   });
 });
 
+describe("planPeriode — druk-balans (late-toets-vakken niet verhongeren)", () => {
+  // Reproductie van Stijns klacht (2026-06-22): vanaf de herhaalweek werden frans &
+  // geschiedenis (toets 3/7, dus achteraan op toetsdatum) door engels/biologie
+  // weggedrukt — frans kwam nooit in het dagschema. De druk-balans moet ze spreiden.
+  function herhaalweek(): DagSlot[] {
+    return [
+      dag("2026-06-23", "buffer"), dag("2026-06-24", "buffer"), dag("2026-06-25", "buffer"),
+      dag("2026-06-26", "buffer"), dag("2026-06-27", "buffer"), dag("2026-06-28", "buffer"),
+    ];
+  }
+  function vakkenMetContent(): VakInput[] {
+    // Alle vakken hebben nog flink wat stof open (zoals bij Stijn halverwege).
+    return [
+      { vak: "engels", pwwDatum: "2026-06-29", moeilijkheid: 2, gereduceerdOk: false, isBoek: false, dagelijks: false, pending: vakBlok("engels", 3), alleBlokIds: ["e"] },
+      { vak: "biologie", pwwDatum: "2026-06-30", moeilijkheid: 1, gereduceerdOk: true, isBoek: false, pending: vakBlok("biologie", 4), alleBlokIds: ["b"] },
+      { vak: "wiskunde", pwwDatum: "2026-07-02", moeilijkheid: 3, gereduceerdOk: false, isBoek: false, dagelijks: true, pending: vakBlok("wiskunde", 4), alleBlokIds: ["w"] },
+      { vak: "frans", pwwDatum: "2026-07-03", moeilijkheid: 3, gereduceerdOk: false, isBoek: false, pending: vakBlok("frans", 4), alleBlokIds: ["f"] },
+      { vak: "geschiedenis", pwwDatum: "2026-07-03", moeilijkheid: 2, gereduceerdOk: false, isBoek: false, pending: vakBlok("geschiedenis", 4), alleBlokIds: ["g"] },
+    ];
+  }
+
+  it("frans verschijnt nu wél, en gespreid (niet pas op de laatste dag)", () => {
+    const res = planPeriode(vakkenMetContent(), herhaalweek(), "2026-06-23", { dagCap: 4 });
+    const fransDagen = res.dagen.filter((d) => d.blokken.some((b) => b.vak === "frans"));
+    expect(fransDagen.length).toBeGreaterThanOrEqual(2);
+    // Gespreid: de eerste frans-beurt valt vroeg in de week, niet pas op de laatste dag.
+    expect(fransDagen[0]!.datum < "2026-06-28").toBe(true);
+  });
+
+  it("geschiedenis krijgt meerdere momenten in de week", () => {
+    const res = planPeriode(vakkenMetContent(), herhaalweek(), "2026-06-23", { dagCap: 4 });
+    const geDagen = res.dagen.filter((d) => d.blokken.some((b) => b.vak === "geschiedenis"));
+    expect(geDagen.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("urgent vak (engels, toets 29/6) krijgt z'n stof nog vóór de leer-cutoff geplaatst", () => {
+    const res = planPeriode(vakkenMetContent(), herhaalweek(), "2026-06-23", { dagCap: 4 });
+    // Engels mag leren t/m 25/6 (3 dagen vóór 29/6) → 3 dagen × 1/dag = precies 3 blokken.
+    // Alle 3 moeten geplaatst zijn vóór de cutoff; de balans mag de urgente toets niet
+    // de das omdoen.
+    const engelsTrainer = res.dagen.flatMap((d) => d.blokken).filter((b) => b.vak === "engels" && b.soort === "trainer");
+    expect(engelsTrainer.length).toBe(3);
+    for (const d of res.dagen) {
+      const heeftEngelsTrainer = d.blokken.some((b) => b.vak === "engels" && b.soort === "trainer");
+      if (heeftEngelsTrainer) expect(d.datum < "2026-06-26").toBe(true);
+    }
+    expect(res.flags.some((f) => f.includes("engels"))).toBe(false);
+  });
+});
+
 describe("planPeriode — dagelijks (wiskunde-afspraak)", () => {
   function metDagelijksWiskunde(): VakInput[] {
     const v = basisVakken();
