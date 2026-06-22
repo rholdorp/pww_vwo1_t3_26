@@ -190,11 +190,19 @@ function writeLocal(naam: string, data: ProgressDoc): boolean {
     for (const [k, v] of Object.entries(data.cat2)) if (samen[k] !== "klaar") samen[k] = v;
     localStorage.setItem(cat2LocalKey(s), JSON.stringify(samen));
   }
-  // dagschema: per datum terugschrijven (bevroren snapshots; niet overschrijven als al aanwezig).
+  // dagschema: verleden = bevroren historie (dagdoel-bonus) → nooit aanraken. Vandaag +
+  // toekomst = de cloud is leidend → altijd terugschrijven, zodat apparaten convergeren op
+  // hetzelfde "vandaag"-schema (samen met de write-once in bewaarDagschema pusht geen enkel
+  // apparaat nog een gekrompen variant terug, dus de eerst-bevroren lijst blijft canoniek).
   if (data.dagschema) {
+    const vandaag = new Date().toISOString().slice(0, 10);
     for (const [datum, blokken] of Object.entries(data.dagschema)) {
       const k = `${schemaPrefix(s)}${datum}`;
-      if (localStorage.getItem(k) === null) localStorage.setItem(k, JSON.stringify(blokken));
+      if (datum < vandaag) {
+        if (localStorage.getItem(k) === null) localStorage.setItem(k, JSON.stringify(blokken));
+      } else {
+        localStorage.setItem(k, JSON.stringify(blokken));
+      }
     }
   }
   return lokaalRijker;
@@ -212,6 +220,9 @@ function serialize(d: Partial<LocalState>): string {
 function markHydrated(s: string): void {
   if (hydrated) return;
   hydrated = true;
+  // Signaleer aan de UI dat de cloud-staat binnen is — componenten die het dagschema
+  // voor vandaag bevriezen wachten hierop (anders bevriezen ze pre-hydratie staat).
+  window.dispatchEvent(new CustomEvent("pww-hydrated", { detail: { naam: s } }));
   if (deferredPush) {
     deferredPush = false;
     doSchedule(s);
@@ -279,6 +290,16 @@ export function startSync(naam: string): void {
       console.warn("[firestoreSync] onSnapshot error:", err);
     }
   );
+}
+
+/**
+ * Is de cloud-staat minstens één keer door de server bevestigd? Componenten die het
+ * dagschema voor vandaag bevriezen wachten hierop, zodat ze niet pre-hydratie (uit
+ * lege/oude lokale staat) een verkeerd schema vastleggen. Zonder Firebase: altijd `true`
+ * (localStorage-only, niets om op te wachten).
+ */
+export function isHydrated(): boolean {
+  return !firebaseEnabled || hydrated;
 }
 
 export function stopSync(): void {

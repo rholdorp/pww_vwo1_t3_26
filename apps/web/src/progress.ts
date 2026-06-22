@@ -203,7 +203,13 @@ export function laadDagschema(naam: string, datum: string): GeplandBlok[] | null
   }
 }
 export function bewaarDagschema(naam: string, datum: string, blokken: GeplandBlok[]): void {
-  localStorage.setItem(dagschemaKey(naam, datum), JSON.stringify(blokken));
+  const key = dagschemaKey(naam, datum);
+  // Write-once: de eerste bevriezing van een dag wint. Anders zou de Kalender-tab
+  // het schema bij elk bezoek overschrijven met een verse herberekening — die láát
+  // afgevinkte blokken weg (planner.ts `nietAf`-filter), waardoor de "bevroren" lijst
+  // krimpt en tussen apparaten gaat divergeren.
+  if (localStorage.getItem(key) !== null) return;
+  localStorage.setItem(key, JSON.stringify(blokken));
   pushSync?.(naam); // dagschema = bron voor de dagdoel-bonus → mee syncen
 }
 

@@ -50,7 +50,7 @@ import {
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, dagdelen, type BlokStatusKind } from "./planner";
 import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin, opgaveUnlockKeten, tijdTotaalMin, tijdPerVakMin } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
-import { startSync, stopSync, flushPush } from "./firestoreSync";
+import { startSync, stopSync, flushPush, isHydrated } from "./firestoreSync";
 import { isMonitor, laadAlleStudenten, type StudentSamenvatting } from "./monitor";
 
 type Tab = "vandaag" | "kalender" | "oefenen" | "voortgang";
@@ -1775,28 +1775,54 @@ function Vandaag({
   // Vandaag leunt op dezelfde engine + het bevroren dagschema als de Kalender,
   // zodat beide schermen identiek zijn. Boek-blokken (wiskunde/engels) leveren geen
   // trainer-blokjes → die verschijnen op de kalender, niet als startbare items hier.
-  const [dagBlokken] = useState<GeplandBlok[]>(() => {
-    let dag = laadDagschema(naam, datum);
-    if (!dag) {
-      dag = kalenderSchema(naam, datum).dagen.find((d) => d.datum === datum)?.blokken ?? [];
-      bewaarDagschema(naam, datum, dag);
-    }
-    return dag;
-  });
-  const planIds = useMemo(() => dagBlokken.flatMap((b) => b.trainerBlokIds), [dagBlokken]);
+  // Bevries het dagschema van vandaag, maar pas wanneer Firestore is gehydrateerd
+  // (isHydrated) — anders zou een vers geopend apparaat een schema uit pre-hydratie
+  // (lege/oude) staat vastleggen, met een verkeerde blokkenset/noemer. Bestaat er al
+  // een (lokaal of via de cloud binnengekomen) schema, dan nemen we dat direct over.
+  const [dagBlokken, setDagBlokken] = useState<GeplandBlok[] | null>(() => laadDagschema(naam, datum));
+  useEffect(() => {
+    // Stem het dagschema af op de opslag: neem een bestaand (lokaal of via de cloud
+    // binnengekomen) schema over, of bevries er één zodra Firestore gehydrateerd is.
+    // Draait ook op sync-events, zodat een nog-niet-gehydrateerd apparaat het canonieke
+    // cloud-schema alsnog oppakt — en een eerder gedivergeerd schema in-sessie heelt
+    // (writeLocal maakt vandaag/toekomst cloud-leidend). De JSON-vergelijking voorkomt
+    // onnodige re-renders / schema-geflikker.
+    const sync = () => {
+      let next = laadDagschema(naam, datum);
+      if (!next && isHydrated()) {
+        next = kalenderSchema(naam, datum).dagen.find((d) => d.datum === datum)?.blokken ?? [];
+        bewaarDagschema(naam, datum, next);
+        next = laadDagschema(naam, datum) ?? next;
+      }
+      if (!next) return; // nog niet gehydrateerd én niets lokaal → wacht op de cloud
+      setDagBlokken((huidig) => (huidig && JSON.stringify(huidig) === JSON.stringify(next) ? huidig : next));
+    };
+    sync();
+    window.addEventListener("pww-hydrated", sync);
+    window.addEventListener("pww-progress-updated", sync);
+    return () => {
+      window.removeEventListener("pww-hydrated", sync);
+      window.removeEventListener("pww-progress-updated", sync);
+    };
+  }, [naam, datum]);
+  // Nog niet bevroren (wacht op hydratie) → lege lijst; de useEffect hierboven vult 'm zodra
+  // het schema bekend is. `aanHetLaden` onderscheidt "nog niet klaar" van "echt 0 blokken".
+  const aanHetLaden = dagBlokken === null;
+  const blokkenLijst = dagBlokken ?? [];
+  const planIds = useMemo(() => blokkenLijst.flatMap((b) => b.trainerBlokIds), [dagBlokken]);
   const items = planIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
   const statussen = items.map((b) => ({ blok: b, st: blokStatus(naam, b) }));
   const klaar = statussen.filter((s) => s.st.status === "afgevinkt").length;
   // Dagdeel-suggestie + minuten-indicatie per gepland blok (zelfcorrigerend op de
   // resultaten-log, afspraak 2026-06-12). Volgorde = planner-prioriteit.
   const factoren = useMemo(() => duurFactoren(naam), [naam, klaar]);
-  const momenten = dagdelen(datum, dagBlokken.length);
+  const momenten = dagdelen(datum, blokkenLijst.length);
   const sectieMin = (gb: GeplandBlok): number => {
     if (gb.soort === "review") return 15;
     const blokken = gb.trainerBlokIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
     return blokken.reduce((s, b) => s + geschatteMin(factoren, b), 0);
   };
-  const totaalMin = dagBlokken.filter((gb) => gb.soort !== "boek").reduce((s, gb) => s + sectieMin(gb), 0);
+  const totaalMin = blokkenLijst.filter((gb) => gb.soort !== "boek").reduce((s, gb) => s + sectieMin(gb), 0);
   // Resterende tijd: alleen de trainer-blokken die nog niet afgevinkt zijn.
   const restMin = statussen
     .filter((x) => x.st.status !== "afgevinkt")
@@ -1829,7 +1855,7 @@ function Vandaag({
       <div className="card vandaag-kop">
         <div className="vandaag-datum">{datumLabel}</div>
         <div className="vandaag-stats">
-          <div className="vandaag-tel">{klaar}/{items.length} ✓</div>
+          <div className="vandaag-tel">{aanHetLaden ? "…" : <>{klaar}/{items.length} ✓</>}</div>
           {totaalMin > 0 && (
             <div className="vandaag-tijd" title="geschatte tijd voor de opgaven van vandaag">
               ⏱️ {restMin > 0 ? `nog ±${restMin} min` : "klaar! 🎉"}
@@ -1852,13 +1878,17 @@ function Vandaag({
 
       <p className="muted klein banner">⚠️ Content nog niet gevalideerd — controleer bij twijfel met je boek.</p>
 
-      {items.length === 0 ? (
+      {aanHetLaden ? (
+        <div className="card narrow">
+          <p className="muted">Je schema voor vandaag laden…</p>
+        </div>
+      ) : items.length === 0 ? (
         <div className="card narrow">
           <p>Niks meer ingepland voor vandaag 🎉</p>
           <button className="knop primair" onClick={onNaarOefenen}>Vrij oefenen</button>
         </div>
       ) : (
-        dagBlokken.map((gb, gi) => {
+        blokkenLijst.map((gb, gi) => {
           if (gb.soort === "boek") return null; // boek-blokken staan op de Kalender
           const sectieBlokken = gb.trainerBlokIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
           if (sectieBlokken.length === 0) return null;
@@ -2042,10 +2072,21 @@ function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blo
   const rooster = useMemo(() => new Map(roosterSlots().map((s) => [s.datum, s])), []);
   const [sel, setSel] = useState<string | null>(vandaag);
 
-  // Bevries het schema van vandaag, zodat de terugblik later stabiel is.
+  // Bevries het schema van vandaag, zodat de terugblik later stabiel is. Pas ná
+  // Firestore-hydratie (isHydrated) — anders zou het openen van de Kalender-tab op een
+  // vers apparaat een pre-hydratie schema kunnen vastleggen. bewaarDagschema is write-once,
+  // dus dit overschrijft een al-bevroren (bv. via Vandaag of de cloud) schema nooit.
   useEffect(() => {
-    const t = toekomst.get(vandaag);
-    if (t) bewaarDagschema(naam, vandaag, t.blokken);
+    const freeze = () => {
+      if (!isHydrated()) return false;
+      const t = toekomst.get(vandaag);
+      if (t) bewaarDagschema(naam, vandaag, t.blokken);
+      return true;
+    };
+    if (freeze()) return;
+    const handler = () => freeze();
+    window.addEventListener("pww-hydrated", handler);
+    return () => window.removeEventListener("pww-hydrated", handler);
   }, [naam, vandaag, toekomst]);
 
   // Grid: ma 8 juni t/m zo 5 juli (4 weken).
@@ -2059,6 +2100,9 @@ function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blo
 
   function dagBlokken(datum: string): GeplandBlok[] {
     if (datum < vandaag) return laadDagschema(naam, datum) ?? [];
+    // Vandaag: toon het bevroren schema (identiek aan de Vandaag-tab), val terug op de
+    // verse projectie tot het bevroren is. Toekomst: altijd de verse projectie.
+    if (datum === vandaag) return laadDagschema(naam, datum) ?? toekomst.get(datum)?.blokken ?? [];
     return toekomst.get(datum)?.blokken ?? [];
   }
   function chipStatus(b: GeplandBlok, datum: string): "afgevinkt" | "deels" | "open" | "boek" | "review" | null {
