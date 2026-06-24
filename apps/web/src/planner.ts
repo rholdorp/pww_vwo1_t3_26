@@ -237,15 +237,18 @@ export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaa
   // hij al begonnen is blijven staan; de rest vult zijn plan aan (Franse werkwoorden).
   if (slug(naam) === STIJN1) {
     const blokById = new Map(BLOKKEN.map((b) => [b.id, b]));
-    const begonnenVandaag = (laadDagschema(naam, vandaagISO) ?? []).filter(
-      (gb: GeplandBlok) =>
-        gb.soort === "trainer" &&
-        gb.vakBlokId !== "frans/werkwoorden/h6" &&
-        gb.trainerBlokIds.some((id) => {
+    // Begonnen trainer-werk van vandaag behouden (de stijn1-bundel voegt het per vak
+    // samen met de Franse werkwoorden). Alleen blokken met daadwerkelijk begonnen stof.
+    const begonnenVandaag = (laadDagschema(naam, vandaagISO) ?? [])
+      .filter((gb: GeplandBlok) => gb.soort === "trainer")
+      .map((gb: GeplandBlok) => ({
+        ...gb,
+        trainerBlokIds: gb.trainerBlokIds.filter((id) => {
           const b = blokById.get(id);
           return b && blokStatus(naam, b).status !== "open";
         }),
-    );
+      }))
+      .filter((gb: GeplandBlok) => gb.trainerBlokIds.length > 0);
     return bouwStijn1Schema(BLOKKEN, vandaagISO, begonnenVandaag);
   }
 
