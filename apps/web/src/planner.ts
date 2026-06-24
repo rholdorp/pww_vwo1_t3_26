@@ -1,6 +1,6 @@
 import { BLOKKEN, type Blok, type BlokSoort } from "./content";
-import { blokMastery, isGezien, laatsteScore, onderdeelMastery, onderdeelGezien, slug, laadDagschema } from "./progress";
-import { planPeriode, type DagSlot, type DagType, type GeplandBlok, type SchemaResultaat, type VakInput, type VakBlok } from "@pww/planner-engine";
+import { blokMastery, isGezien, laatsteScore, onderdeelMastery, onderdeelGezien, slug } from "./progress";
+import { planPeriode, type DagSlot, type DagType, type SchemaResultaat, type VakInput, type VakBlok } from "@pww/planner-engine";
 import { STIJN1, bouwStijn1Schema } from "./stijn1-plan";
 
 // PWW-rooster (SPEC §7, manifest.yaml). Bepaalt prioriteit: vak met de vroegste
@@ -233,23 +233,33 @@ export function roosterSlots(): DagSlot[] {
 /** Bouw vak-inputs uit BLOKKEN + huidige voortgang en draai de engine. */
 export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaat {
   // Stijn (stijn1) volgt zijn eigen, met-de-hand-gemaakte vaste schema i.p.v. de
-  // AI-planner (afspraak Ralph 2026-06-24). Today-merge: de blokken van vandaag die
-  // hij al begonnen is blijven staan; de rest vult zijn plan aan (Franse werkwoorden).
+  // AI-planner (afspraak Ralph 2026-06-24).
   if (slug(naam) === STIJN1) {
     const blokById = new Map(BLOKKEN.map((b) => [b.id, b]));
-    // Begonnen trainer-werk van vandaag behouden (de stijn1-bundel voegt het per vak
-    // samen met de Franse werkwoorden). Alleen blokken met daadwerkelijk begonnen stof.
-    const begonnenVandaag = (laadDagschema(naam, vandaagISO) ?? [])
-      .filter((gb: GeplandBlok) => gb.soort === "trainer")
-      .map((gb: GeplandBlok) => ({
-        ...gb,
-        trainerBlokIds: gb.trainerBlokIds.filter((id) => {
-          const b = blokById.get(id);
-          return b && blokStatus(naam, b).status !== "open";
-        }),
-      }))
-      .filter((gb: GeplandBlok) => gb.trainerBlokIds.length > 0);
-    return bouwStijn1Schema(BLOKKEN, vandaagISO, begonnenVandaag);
+    const sch = bouwStijn1Schema(BLOKKEN, vandaagISO);
+    // Focus-filter (afspraak Ralph 2026-06-24): plan per dag alléén de nog-onaangeraakte
+    // (0% mastery) trainers — zodat de aandacht naar de onbekende stof gaat. UITZONDERING:
+    // op de laatste herhaaldag, de dag vóór de toets van dát vak (dagenTot === 1), wordt
+    // álle stof van het vak ingepland (volledige herhaling; de weergave zet moeilijkste
+    // bovenaan). Afvink-blokken (wiskunde/handvaardigheid) blijven altijd staan.
+    return {
+      ...sch,
+      dagen: sch.dagen.map((dag) => ({
+        ...dag,
+        blokken: dag.blokken
+          .map((b) => {
+            if (b.soort !== "trainer") return b;
+            const laatsteHerhaling = dagenTot(dag.datum, PWW_DATUM[b.vak] ?? PWW_EIND) === 1;
+            if (laatsteHerhaling) return b;
+            const ids = b.trainerBlokIds.filter((id) => {
+              const blk = blokById.get(id);
+              return blk && blokStatus(naam, blk).mastery === 0;
+            });
+            return { ...b, trainerBlokIds: ids };
+          })
+          .filter((b) => b.soort !== "trainer" || b.trainerBlokIds.length > 0),
+      })),
+    };
   }
 
   const perVak = new Map<string, Blok[]>();

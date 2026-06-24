@@ -168,6 +168,12 @@ _Laatst bijgewerkt: 2026-06-12_
 Stijn maakte zelf een leerplanning; die is vastgelegd in `apps/web/src/stijn1-plan.ts`
 en vervangt voor gebruiker `stijn1` de AI-planner (`kalenderSchema` short-circuit). Vast
 (deterministisch) schema 24/6 → 2/7, voedt de bestaande dagdoel-bonus. Bijzonderheden:
+- **Focus-filter** (Ralph 2026-06-24): per dag worden alléén de nog-onaangeraakte
+  (0% mastery) trainers ingepland — focus op onbekende stof. UITZONDERING: op de
+  laatste herhaaldag (de dag vóór de toets van dát vak, `dagenTot===1`) wordt álle
+  stof van het vak ingepland (volledige herhaling). Weergave: moeilijkste/minst
+  beheerst bovenaan, daaronder "✓ al beheerst — herhaal als je tijd hebt". Verleden
+  blijft volledige terugblik. Geïmplementeerd in `kalenderSchema` (stijn1-tak).
 - **Optionele blokken** (`optioneel:true`): staan achteraan, tellen NIET voor dagdoel/
   streak. Za = geschiedenis-rest; zo = aardrijkskunde.
 - **Afvink-blokken** (`soort:"afvink"`, store `pww-afvink:<slug>`, gesynct via OR-union):
