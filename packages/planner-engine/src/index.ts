@@ -13,7 +13,10 @@
 //  - Nederlands max `maxSessies`. Content per vak in de aangeleverde volgorde.
 
 export type DagType = "leer" | "gereduceerd" | "buffer" | "toets" | "vrij";
-export type GeplandeSoort = "trainer" | "boek" | "review";
+// "afvink" = een blok zonder trainer dat met de hand wordt afgevinkt (offline werk,
+// bv. zelf-gekozen wiskunde-boekoefeningen of handvaardigheid). Alleen gebruikt door
+// het vaste schema van Stijn (stijn1-plan); de gewone planner levert het nooit.
+export type GeplandeSoort = "trainer" | "boek" | "review" | "afvink";
 
 /** Eén ingepakt vak-blok (~30 min) met de trainer-blok-ids erin. */
 export interface VakBlok {
@@ -67,6 +70,18 @@ export interface GeplandBlok {
   vakBlokId: string;
   trainerBlokIds: string[];
   soort: GeplandeSoort;
+  /**
+   * Optioneel blok: staat achteraan op de dag en telt NIET mee voor de dagdoel-bonus
+   * of de streak (bv. "geschiedenis als 't nodig is", "aardrijkskunde als er tijd is").
+   * Alleen door het vaste schema van Stijn gezet.
+   */
+  optioneel?: boolean;
+  /**
+   * Alleen bij soort "afvink": het met-de-hand-af-te-vinken item. `ouderGoedkeuring`
+   * → alleen een ouder mag afvinken (Stijn kan niet zelf punten pakken), bv. zelf-
+   * gekozen wiskunde-boekoefeningen.
+   */
+  afvink?: { id: string; label: string; ouderGoedkeuring?: boolean };
 }
 
 export interface DagToewijzing {

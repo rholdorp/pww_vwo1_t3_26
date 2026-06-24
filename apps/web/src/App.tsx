@@ -46,10 +46,14 @@ import {
   bewaarDagplan,
   laadDagschema,
   bewaarDagschema,
+  isAfgevinkt,
+  zetAfvink,
+  slug,
 } from "./progress";
 import { planVandaag, blokStatus, PWW_DATUM, dagenTot, kalenderSchema, roosterSlots, dagdelen, type BlokStatusKind } from "./planner";
 import { logResultaat, beloningAdvies, toontBeloningen, streakDagen, MIJLPALEN, focusPunten, activiteit7dagen, alGevierd, zetGevierd, duurFactoren, geschatteMin, opgaveUnlockKeten, tijdTotaalMin, tijdPerVakMin } from "./gamification";
 import type { GeplandBlok } from "@pww/planner-engine";
+import { STIJN1 } from "./stijn1-plan";
 import { startSync, stopSync, flushPush, isHydrated } from "./firestoreSync";
 import { isMonitor, laadAlleStudenten, type StudentSamenvatting } from "./monitor";
 
@@ -90,6 +94,28 @@ export default function App() {
       window.removeEventListener("beforeunload", beforeUnload);
       stopSync();
     };
+  }, [naam]);
+
+  // Stijn (stijn1) volgt zijn eigen vaste schema. Dat moet het AI-schema van vandaag —
+  // dat eerder al kan zijn bevroren — eenmalig vervangen, ongeacht welke tab eerst opent.
+  // Force-write ná hydratie (bewaarDagschema schrijft niet als de inhoud al klopt → geen lus);
+  // daarna een progress-event zodat Vandaag/Kalender meteen het nieuwe schema oppakken.
+  useEffect(() => {
+    if (!naam || slug(naam) !== STIJN1) return;
+    const datum = vandaagISO();
+    const force = (): boolean => {
+      if (!isHydrated()) return false;
+      const t = kalenderSchema(naam, datum).dagen.find((d) => d.datum === datum);
+      if (t) {
+        bewaarDagschema(naam, datum, t.blokken, true);
+        window.dispatchEvent(new CustomEvent("pww-progress-updated"));
+      }
+      return true;
+    };
+    if (force()) return;
+    const h = () => { if (force()) window.removeEventListener("pww-hydrated", h); };
+    window.addEventListener("pww-hydrated", h);
+    return () => window.removeEventListener("pww-hydrated", h);
   }, [naam]);
 
   if (!naam) {
@@ -1318,6 +1344,49 @@ function TekenKaart({
   );
 }
 
+// Afvink-blok (offline werk zonder trainer): zelf-gekozen wiskunde-boekoefeningen of
+// handvaardigheid. ouderGoedkeuring → alleen een ouder vinkt af (read-only voor Stijn,
+// zodat hij niet zomaar punten pakt); anders mag hij het zelf afvinken.
+function AfvinkKaart({ naam, gb, onChange }: { naam: string; gb: GeplandBlok; onChange: () => void }) {
+  if (!gb.afvink) return null;
+  const kleur = vakKleur(gb.vak);
+  const af = isAfgevinkt(naam, gb.afvink.id);
+  const ouder = gb.afvink.ouderGoedkeuring;
+  return (
+    <div className="card blok" style={{ borderLeft: `4px solid ${kleur}` }}>
+      <div className="blok-kop">
+        <span className="blok-icon">{af ? "✅" : ouder ? "🔒" : "📝"}</span>
+        <div className="blok-tekst">
+          <div className="card-titel">{vakLabel(gb.vak)} · {gb.afvink.label}</div>
+          <div className="muted klein">
+            {gb.optioneel ? "optioneel · telt niet mee · " : ""}
+            {af
+              ? ouder ? "✓ nagekeken door papa/mama" : "✓ gedaan"
+              : ouder ? "papa of mama vinkt dit af" : "doe het, vink het dan hier af"}
+          </div>
+        </div>
+      </div>
+      {!ouder && (
+        <div className="knoppen">
+          {af ? (
+            <button className="knop" onClick={() => { zetAfvink(naam, gb.afvink!.id, false); onChange(); }}>
+              Toch niet
+            </button>
+          ) : (
+            <button
+              className="knop primair"
+              style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
+              onClick={() => { zetAfvink(naam, gb.afvink!.id, true); onChange(); }}
+            >
+              Klaar — gedaan ✓
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function FlipKaart({
   card,
   kleur,
@@ -1810,10 +1879,25 @@ function Vandaag({
   // het schema bekend is. `aanHetLaden` onderscheidt "nog niet klaar" van "echt 0 blokken".
   const aanHetLaden = dagBlokken === null;
   const blokkenLijst = dagBlokken ?? [];
+  // Afvink-toggles forceren een re-render zodat klaar/dagdoel meteen bijwerken.
+  const [, setAfvinkTick] = useState(0);
   const planIds = useMemo(() => blokkenLijst.flatMap((b) => b.trainerBlokIds), [dagBlokken]);
   const items = planIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
   const statussen = items.map((b) => ({ blok: b, st: blokStatus(naam, b) }));
-  const klaar = statussen.filter((s) => s.st.status === "afgevinkt").length;
+  // Meetellende blokken voor "klaar"/dagdoel: niet-optioneel, mét trainer of afvink.
+  // Optionele blokken (bv. "geschiedenis als 't nodig is") en boek-blokken tellen niet.
+  const blokAf = (gb: GeplandBlok): boolean =>
+    gb.soort === "afvink"
+      ? !!gb.afvink && isAfgevinkt(naam, gb.afvink.id)
+      : gb.trainerBlokIds.length > 0 &&
+        gb.trainerBlokIds.every((id) => {
+          const b = blokById.get(id);
+          return !!b && blokStatus(naam, b).status === "afgevinkt";
+        });
+  const telBlokken = blokkenLijst.filter((gb) => !gb.optioneel && (gb.soort === "afvink" || gb.trainerBlokIds.length > 0));
+  const klaar = telBlokken.filter(blokAf).length;
+  const totaalTel = telBlokken.length;
+  const heeftZichtbaar = blokkenLijst.some((gb) => gb.soort === "afvink" || gb.trainerBlokIds.length > 0);
   // Dagdeel-suggestie + minuten-indicatie per gepland blok (zelfcorrigerend op de
   // resultaten-log, afspraak 2026-06-12). Volgorde = planner-prioriteit.
   const factoren = useMemo(() => duurFactoren(naam), [naam, klaar]);
@@ -1838,7 +1922,7 @@ function Vandaag({
     month: "long",
   });
 
-  const dagDoel = items.length > 0 && klaar === items.length;
+  const dagDoel = totaalTel > 0 && klaar === totaalTel;
   const [confetti, setConfetti] = useState(false);
   useEffect(() => {
     if (dagDoel && !alGevierd(naam, datum)) {
@@ -1852,11 +1936,11 @@ function Vandaag({
   return (
     <main className="lijst">
       {confetti && <Confetti />}
-      <ProgressWidget naam={naam} klaar={klaar} totaal={items.length} />
+      <ProgressWidget naam={naam} klaar={klaar} totaal={totaalTel} />
       <div className="card vandaag-kop">
         <div className="vandaag-datum">{datumLabel}</div>
         <div className="vandaag-stats">
-          <div className="vandaag-tel">{aanHetLaden ? "…" : <>{klaar}/{items.length} ✓</>}</div>
+          <div className="vandaag-tel">{aanHetLaden ? "…" : <>{klaar}/{totaalTel} ✓</>}</div>
           {totaalMin > 0 && (
             <div className="vandaag-tijd" title="geschatte tijd voor de opgaven van vandaag">
               ⏱️ {restMin > 0 ? `nog ±${restMin} min` : "klaar! 🎉"}
@@ -1883,7 +1967,7 @@ function Vandaag({
         <div className="card narrow">
           <p className="muted">Je schema voor vandaag laden…</p>
         </div>
-      ) : items.length === 0 ? (
+      ) : !heeftZichtbaar ? (
         <div className="card narrow">
           <p>Niks meer ingepland voor vandaag 🎉</p>
           <button className="knop primair" onClick={onNaarOefenen}>Vrij oefenen</button>
@@ -1891,12 +1975,22 @@ function Vandaag({
       ) : (
         blokkenLijst.map((gb, gi) => {
           if (gb.soort === "boek") return null; // boek-blokken staan op de Kalender
+          if (gb.soort === "afvink") {
+            return (
+              <div key={`${gb.vakBlokId}-${gi}`} className="moment-sectie">
+                <div className="moment-kop muted klein">
+                  {momenten[gi]} · {vakLabel(gb.vak)}{gb.optioneel ? " · optioneel" : ""}
+                </div>
+                <AfvinkKaart naam={naam} gb={gb} onChange={() => setAfvinkTick((t) => t + 1)} />
+              </div>
+            );
+          }
           const sectieBlokken = gb.trainerBlokIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
           if (sectieBlokken.length === 0) return null;
           return (
             <div key={`${gb.vakBlokId}-${gi}`} className="moment-sectie">
               <div className="moment-kop muted klein">
-                {momenten[gi]} · {vakLabel(gb.vak)}{gb.soort === "review" ? " herhalen ↻" : ""} · ±{sectieMin(gb)} min
+                {momenten[gi]} · {vakLabel(gb.vak)}{gb.optioneel ? " · optioneel" : ""}{gb.soort === "review" ? " herhalen ↻" : ""} · ±{sectieMin(gb)} min
               </div>
               {sectieBlokken.map((blok) => {
                 const st = blokStatus(naam, blok);
@@ -2061,7 +2155,7 @@ function Voortgang({ naam, onLogout }: { naam: string; onLogout: () => void }) {
 
 const VAK_AFK: Record<string, string> = {
   frans: "Fr", engels: "En", nederlands: "Ne", wiskunde: "Wi",
-  biologie: "Bio", aardrijkskunde: "Ak", geschiedenis: "Ge",
+  biologie: "Bio", aardrijkskunde: "Ak", geschiedenis: "Ge", handvaardigheid: "Hv",
 };
 const WEEKDAGEN = ["ma", "di", "wo", "do", "vr", "za", "zo"];
 
@@ -2077,11 +2171,14 @@ function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blo
   // Firestore-hydratie (isHydrated) — anders zou het openen van de Kalender-tab op een
   // vers apparaat een pre-hydratie schema kunnen vastleggen. bewaarDagschema is write-once,
   // dus dit overschrijft een al-bevroren (bv. via Vandaag of de cloud) schema nooit.
+  // Uitzondering: Stijns vaste schema (stijn1) mág het AI-schema van vandaag eenmalig
+  // vervangen (force) — bewaarDagschema schrijft niet als de inhoud al gelijk is.
   useEffect(() => {
+    const isStijn1 = slug(naam) === STIJN1;
     const freeze = () => {
       if (!isHydrated()) return false;
       const t = toekomst.get(vandaag);
-      if (t) bewaarDagschema(naam, vandaag, t.blokken);
+      if (t) bewaarDagschema(naam, vandaag, t.blokken, isStijn1);
       return true;
     };
     if (freeze()) return;
@@ -2109,6 +2206,7 @@ function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blo
   function chipStatus(b: GeplandBlok, datum: string): "afgevinkt" | "deels" | "open" | "boek" | "review" | null {
     if (b.soort === "boek") return "boek";
     if (b.soort === "review") return "review";
+    if (b.soort === "afvink") return b.afvink && isAfgevinkt(naam, b.afvink.id) ? "afgevinkt" : datum > vandaag ? null : "open";
     if (datum > vandaag) return null; // toekomst: nog geen status
     const sts = b.trainerBlokIds.map((id) => blokById.get(id)).filter((x): x is Blok => !!x).map((blk) => blokStatus(naam, blk).status);
     if (!sts.length) return null;
@@ -2194,6 +2292,7 @@ function KalenderDag({
   // Dagdeel-suggestie + minuten per gepland blok (zelfde logica als Vandaag).
   const factoren = useMemo(() => duurFactoren(naam), [naam]);
   const momenten = dagdelen(datum, blokken.length);
+  const [, setAfvinkTick] = useState(0);
   return (
     <div className="card kal-detail">
       <div className="card-titel" style={{ textTransform: "capitalize" }}>
@@ -2209,6 +2308,14 @@ function KalenderDag({
           {blokken.map((b, i) => {
             const trainers = b.trainerBlokIds.map((id) => blokById.get(id)).filter((x): x is Blok => !!x);
             const kleur = vakKleur(b.vak);
+            if (b.soort === "afvink") {
+              return (
+                <div key={i} className="moment-sectie">
+                  <div className="moment-kop muted klein">{momenten[i]}{b.optioneel ? " · optioneel" : ""}</div>
+                  <AfvinkKaart naam={naam} gb={b} onChange={() => setAfvinkTick((t) => t + 1)} />
+                </div>
+              );
+            }
             if (b.soort === "boek") {
               return (
                 <div key={i} className="moment-sectie">
@@ -2249,7 +2356,7 @@ function KalenderDag({
             const minuten = trainers.reduce((s, t) => s + geschatteMin(factoren, t), 0);
             return (
               <div key={i} className="moment-sectie">
-                <div className="moment-kop muted klein">{momenten[i]} · ±{minuten} min</div>
+                <div className="moment-kop muted klein">{momenten[i]}{b.optioneel ? " · optioneel" : ""} · ±{minuten} min</div>
                 {trainers.map((t) => (
                   <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} onLeer={onLeer} />
                 ))}

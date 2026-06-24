@@ -164,5 +164,26 @@ _Laatst bijgewerkt: 2026-06-12_
   WB-woordselectie (blz. 139-141) niet als foto (superset gebruikt); menselijke review.
   Blijft `GEPAUZEERD` in de planner (P8) tot review; eerste toets is ma 29/6.
 
+## Stijns vaste schema (stijn1) — 2026-06-24
+Stijn maakte zelf een leerplanning; die is vastgelegd in `apps/web/src/stijn1-plan.ts`
+en vervangt voor gebruiker `stijn1` de AI-planner (`kalenderSchema` short-circuit). Vast
+(deterministisch) schema 24/6 → 2/7, voedt de bestaande dagdoel-bonus. Bijzonderheden:
+- **Optionele blokken** (`optioneel:true`): staan achteraan, tellen NIET voor dagdoel/
+  streak. Za = geschiedenis-rest; zo = aardrijkskunde.
+- **Afvink-blokken** (`soort:"afvink"`, store `pww-afvink:<slug>`, gesynct via OR-union):
+  - **Wiskunde** elke dag = `wiskunde-boek:<datum>`, `ouderGoedkeuring:true` → Stijn ziet
+    "papa of mama vinkt dit af" (read-only); een ouder vinkt af → +punten/dagdoel.
+  - **Handvaardigheid** (zo 28/6) = zelf afvinken.
+- **Geschiedenis** in twee even zware delen: deel 1 (do) = H5 (§5.1/§5.2/§5.3+5.4) +
+  chronologie/soorten + oefenvragen; deel 2 (vr) = H6 §6.1 + tijdvakken + tijdbalk.
+  wo 1/7 = chronologie-herhaling; do 2/7 = alle onderdelen.
+- **Wiskunde afvinken als ouder (Firestore REST, open rules):** zet het dagveld op true:
+  ```
+  curl -X PATCH "https://firestore.googleapis.com/v1/projects/pww-vwo1-t3-26/databases/(default)/documents/progress/stijn1?updateMask.fieldPaths=afvink.wiskunde-boek%3A2026-06-25" \
+    -H "Content-Type: application/json" \
+    -d '{"fields":{"afvink":{"mapValue":{"fields":{"wiskunde-boek:2026-06-25":{"booleanValue":true}}}}}}'
+  ```
+  (datum aanpassen; OR-union-merge in firestoreSync laat een `true` nooit terugdraaien.)
+
 ## Open (Ralph, niet-blokkerend)
 - ❌ Externe beloningen koppelen aan mijlpalen (brons/zilver/goud/platina).

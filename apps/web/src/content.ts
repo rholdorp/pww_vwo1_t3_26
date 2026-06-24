@@ -238,6 +238,7 @@ const VAK_LABEL: Record<string, string> = {
   nederlands: "Nederlands",
   biologie: "Biologie",
   wiskunde: "Wiskunde",
+  handvaardigheid: "Handvaardigheid",
 };
 // Vak-accentkleuren overgenomen uit de vorige trainer (look & feel Stijn).
 const VAK_KLEUR: Record<string, string> = {
@@ -248,6 +249,7 @@ const VAK_KLEUR: Record<string, string> = {
   geschiedenis: "#E74C3C",
   biologie: "#27AE60",
   aardrijkskunde: "#F1C40F",
+  handvaardigheid: "#16A085",
 };
 export function vakLabel(vak: string): string {
   return VAK_LABEL[vak] ?? vak;

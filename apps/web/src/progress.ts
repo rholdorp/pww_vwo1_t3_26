@@ -202,15 +202,45 @@ export function laadDagschema(naam: string, datum: string): GeplandBlok[] | null
     return null;
   }
 }
-export function bewaarDagschema(naam: string, datum: string, blokken: GeplandBlok[]): void {
+export function bewaarDagschema(naam: string, datum: string, blokken: GeplandBlok[], force = false): void {
   const key = dagschemaKey(naam, datum);
   // Write-once: de eerste bevriezing van een dag wint. Anders zou de Kalender-tab
   // het schema bij elk bezoek overschrijven met een verse herberekening — die láát
   // afgevinkte blokken weg (planner.ts `nietAf`-filter), waardoor de "bevroren" lijst
   // krimpt en tussen apparaten gaat divergeren.
-  if (localStorage.getItem(key) !== null) return;
-  localStorage.setItem(key, JSON.stringify(blokken));
+  // `force` doorbreekt write-once bewust: alléén voor Stijns vaste schema, dat het
+  // (AI-)schema van vandaag eenmalig moet vervangen. Schrijft niet als de inhoud al
+  // gelijk is (voorkomt sync-lussen).
+  const huidig = localStorage.getItem(key);
+  if (huidig !== null && !force) return;
+  const nieuw = JSON.stringify(blokken);
+  if (huidig === nieuw) return;
+  localStorage.setItem(key, nieuw);
   pushSync?.(naam); // dagschema = bron voor de dagdoel-bonus → mee syncen
+}
+
+// ── Handmatige afvink-items (offline werk: zelf-gekozen wiskunde-boekoefeningen,
+// handvaardigheid). Los van mastery; per (naam, item-id) een bool. Wiskunde-items
+// worden door een ouder gezet (zie stijn1-plan), handvaardigheid door Stijn zelf. ──
+const afvinkKey = (naam: string) => `pww-afvink:${slug(naam)}`;
+
+export function laadAfvink(naam: string): Record<string, boolean> {
+  try {
+    return JSON.parse(localStorage.getItem(afvinkKey(naam)) ?? "{}") as Record<string, boolean>;
+  } catch {
+    return {};
+  }
+}
+export function isAfgevinkt(naam: string, id: string): boolean {
+  return laadAfvink(naam)[id] === true;
+}
+export function zetAfvink(naam: string, id: string, waarde: boolean): void {
+  const huidig = laadAfvink(naam);
+  if (!!huidig[id] === waarde) return;
+  if (waarde) huidig[id] = true;
+  else delete huidig[id];
+  localStorage.setItem(afvinkKey(naam), JSON.stringify(huidig));
+  pushSync?.(naam);
 }
 
 /** Alle datums waarvoor een dagschema is bevroren (voor de dagdoel-bonus). */

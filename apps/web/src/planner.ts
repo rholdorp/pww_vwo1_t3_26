@@ -1,6 +1,7 @@
 import { BLOKKEN, type Blok, type BlokSoort } from "./content";
-import { blokMastery, isGezien, laatsteScore, onderdeelMastery, onderdeelGezien } from "./progress";
-import { planPeriode, type DagSlot, type DagType, type SchemaResultaat, type VakInput, type VakBlok } from "@pww/planner-engine";
+import { blokMastery, isGezien, laatsteScore, onderdeelMastery, onderdeelGezien, slug, laadDagschema } from "./progress";
+import { planPeriode, type DagSlot, type DagType, type GeplandBlok, type SchemaResultaat, type VakInput, type VakBlok } from "@pww/planner-engine";
+import { STIJN1, bouwStijn1Schema } from "./stijn1-plan";
 
 // PWW-rooster (SPEC §7, manifest.yaml). Bepaalt prioriteit: vak met de vroegste
 // toets eerst. (Hardcoded uit content/2026-t3/manifest.yaml → pww.)
@@ -231,6 +232,23 @@ export function roosterSlots(): DagSlot[] {
 
 /** Bouw vak-inputs uit BLOKKEN + huidige voortgang en draai de engine. */
 export function kalenderSchema(naam: string, vandaagISO: string): SchemaResultaat {
+  // Stijn (stijn1) volgt zijn eigen, met-de-hand-gemaakte vaste schema i.p.v. de
+  // AI-planner (afspraak Ralph 2026-06-24). Today-merge: de blokken van vandaag die
+  // hij al begonnen is blijven staan; de rest vult zijn plan aan (Franse werkwoorden).
+  if (slug(naam) === STIJN1) {
+    const blokById = new Map(BLOKKEN.map((b) => [b.id, b]));
+    const begonnenVandaag = (laadDagschema(naam, vandaagISO) ?? []).filter(
+      (gb: GeplandBlok) =>
+        gb.soort === "trainer" &&
+        gb.vakBlokId !== "frans/werkwoorden/h6" &&
+        gb.trainerBlokIds.some((id) => {
+          const b = blokById.get(id);
+          return b && blokStatus(naam, b).status !== "open";
+        }),
+    );
+    return bouwStijn1Schema(BLOKKEN, vandaagISO, begonnenVandaag);
+  }
+
   const perVak = new Map<string, Blok[]>();
   for (const b of BLOKKEN) {
     if (!perVak.has(b.vak)) perVak.set(b.vak, []);

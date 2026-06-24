@@ -30,6 +30,8 @@ const schrijfLocalKey = (s: string) => `pww-schrijf:${s}`;
 const resultatenLocalKey = (s: string) => `pww-resultaten:${s}`;
 const cat2LocalKey = (s: string) => `pww-cat2:${s}`;
 const schemaPrefix = (s: string) => `pww-schema:${s}:`;
+// Handmatige afvink-items (offline werk: wiskunde-boekoefeningen, handvaardigheid).
+const afvinkLocalKey = (s: string) => `pww-afvink:${s}`;
 
 let timer: ReturnType<typeof setTimeout> | null = null;
 let pendingNaam: string | null = null;
@@ -57,6 +59,8 @@ interface ProgressDoc {
   cat2?: Record<string, string>;
   /** Bevroren dagschema's: ISO-datum → geplande blokken (dagdoel-bonus). */
   dagschema?: Record<string, unknown>;
+  /** Handmatige afvink-items: item-id → true (offline werk, dagdoel-bonus). */
+  afvink?: Record<string, boolean>;
   updated?: unknown;
 }
 
@@ -66,6 +70,7 @@ interface LocalState {
   resultaten: Resultaat[];
   cat2: Record<string, string>;
   dagschema: Record<string, unknown>;
+  afvink: Record<string, boolean>;
 }
 
 function parse<T>(raw: string | null, fallback: T): T {
@@ -90,6 +95,7 @@ function readLocal(naam: string): LocalState {
     resultaten: parse(localStorage.getItem(resultatenLocalKey(s)), [] as Resultaat[]),
     cat2: parse(localStorage.getItem(cat2LocalKey(s)), {} as Record<string, string>),
     dagschema,
+    afvink: parse(localStorage.getItem(afvinkLocalKey(s)), {} as Record<string, boolean>),
   };
 }
 
@@ -190,6 +196,14 @@ function writeLocal(naam: string, data: ProgressDoc): boolean {
     for (const [k, v] of Object.entries(data.cat2)) if (samen[k] !== "klaar") samen[k] = v;
     localStorage.setItem(cat2LocalKey(s), JSON.stringify(samen));
   }
+  // afvink: OR-union — eenmaal afgevinkt blijft afgevinkt (een ouder-goedkeuring of
+  // afgerond offline werk mag niet door een lege/oudere staat teruggedraaid worden).
+  if (data.afvink) {
+    const lokaal = parse(localStorage.getItem(afvinkLocalKey(s)), {} as Record<string, boolean>);
+    const samen = { ...lokaal };
+    for (const [k, v] of Object.entries(data.afvink)) if (v) samen[k] = true;
+    localStorage.setItem(afvinkLocalKey(s), JSON.stringify(samen));
+  }
   // dagschema: verleden = bevroren historie (dagdoel-bonus) → nooit aanraken. Vandaag +
   // toekomst = de cloud is leidend → altijd terugschrijven, zodat apparaten convergeren op
   // hetzelfde "vandaag"-schema (samen met de write-once in bewaarDagschema pusht geen enkel
@@ -210,7 +224,7 @@ function writeLocal(naam: string, data: ProgressDoc): boolean {
 
 /** Stabiele serialisatie van alle gesyncte velden (voor echo-detectie). */
 function serialize(d: Partial<LocalState>): string {
-  return [d.items ?? {}, d.schrijf ?? {}, d.resultaten ?? [], d.cat2 ?? {}, d.dagschema ?? {}]
+  return [d.items ?? {}, d.schrijf ?? {}, d.resultaten ?? [], d.cat2 ?? {}, d.dagschema ?? {}, d.afvink ?? {}]
     .map((x) => JSON.stringify(x))
     .join("|");
 }
@@ -341,6 +355,7 @@ async function pushNow(s: string): Promise<void> {
     resultaten: local.resultaten,
     cat2: local.cat2,
     dagschema: local.dagschema,
+    afvink: local.afvink,
     updated: serverTimestamp(),
   };
   if (Object.keys(local.items).length > 0) payload.items = local.items;

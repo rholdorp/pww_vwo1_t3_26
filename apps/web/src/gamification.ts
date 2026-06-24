@@ -5,7 +5,7 @@
 
 import { BLOKKEN, type Blok } from "./content";
 import { blokStatus, duurMin } from "./planner";
-import { slug, vandaagISO, laadDagschema, dagschemaDatums, onderdeelMastery } from "./progress";
+import { slug, vandaagISO, laadDagschema, dagschemaDatums, onderdeelMastery, isAfgevinkt } from "./progress";
 
 // Lazy import (zoals progress.ts) zodat gamification geen statische Firebase-dependency
 // heeft. De resultaten-log is een bonus-bron (focus/streak) → moet mee gesynct worden.
@@ -240,18 +240,21 @@ export function totaalPunten(naam: string): number {
   }
   // Vak helemaal klaar → bonus.
   for (const [, sts] of perVak) if (sts.length && sts.every((s) => s === "afgevinkt")) p += 75;
-  // Dagdoel: een dag waarvan álle geplande trainer-blokken afgevinkt zijn.
+  // Dagdoel: een dag waarvan álle geplande, meetellende blokken af zijn. Optionele
+  // blokken tellen niet mee (bv. "geschiedenis als 't nodig is"); afvink-blokken
+  // (offline werk, bv. wiskunde-boekoefeningen) tellen als af zodra ze afgevinkt zijn.
   for (const d of dagschemaDatums(naam)) {
-    const trainerIds = (laadDagschema(naam, d) ?? []).flatMap((b) => b.trainerBlokIds);
-    if (
-      trainerIds.length &&
-      trainerIds.every((id) => {
-        const blk = blokById.get(id);
-        return blk && blokStatus(naam, blk).status === "afgevinkt";
-      })
-    ) {
-      p += 15;
-    }
+    const blokken = (laadDagschema(naam, d) ?? []).filter(
+      (b) => !b.optioneel && (b.soort === "afvink" || b.trainerBlokIds.length > 0),
+    );
+    const af = (b: (typeof blokken)[number]): boolean =>
+      b.soort === "afvink"
+        ? !!b.afvink && isAfgevinkt(naam, b.afvink.id)
+        : b.trainerBlokIds.every((id) => {
+            const blk = blokById.get(id);
+            return blk && blokStatus(naam, blk).status === "afgevinkt";
+          });
+    if (blokken.length && blokken.every(af)) p += 15;
   }
   // Weekstreak: +50 per volle 7-daagse streak.
   p += Math.floor(streakDagen(naam) / 7) * 50;
