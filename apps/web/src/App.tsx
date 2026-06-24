@@ -1985,7 +1985,11 @@ function Vandaag({
               </div>
             );
           }
-          const sectieBlokken = gb.trainerBlokIds.map((id) => blokById.get(id)).filter((b): b is Blok => !!b);
+          // Moeilijkste/minst beheerste eerst, het al-beheerste eronder (herhaling).
+          const sectieBlokken = gb.trainerBlokIds
+            .map((id) => blokById.get(id))
+            .filter((b): b is Blok => !!b)
+            .sort((x, y) => blokStatus(naam, x).mastery - blokStatus(naam, y).mastery);
           if (sectieBlokken.length === 0) return null;
           return (
             <div key={`${gb.vakBlokId}-${gi}`} className="moment-sectie">
@@ -2203,24 +2207,12 @@ function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blo
     if (datum === vandaag) return laadDagschema(naam, datum) ?? toekomst.get(datum)?.blokken ?? [];
     return toekomst.get(datum)?.blokken ?? [];
   }
-  // Deze week verbergt de kalender al-beheerste trainers (focus op wat Stijn nog niet
-  // kent); het verleden blijft een volledige terugblik. Per trainer-bundel; afvink/boek/
-  // review-blokken blijven altijd staan.
-  const zichtbareTrainerIds = (b: GeplandBlok, datum: string): string[] =>
-    datum < vandaag
-      ? b.trainerBlokIds
-      : b.trainerBlokIds.filter((id) => {
-          const blk = blokById.get(id);
-          return blk && blokStatus(naam, blk).status !== "afgevinkt";
-        });
-  const toonBlok = (b: GeplandBlok, datum: string): boolean =>
-    b.soort !== "trainer" || zichtbareTrainerIds(b, datum).length > 0;
   function chipStatus(b: GeplandBlok, datum: string): "afgevinkt" | "deels" | "open" | "boek" | "review" | null {
     if (b.soort === "boek") return "boek";
     if (b.soort === "review") return "review";
     if (b.soort === "afvink") return b.afvink && isAfgevinkt(naam, b.afvink.id) ? "afgevinkt" : datum > vandaag ? null : "open";
     if (datum > vandaag) return null; // toekomst: nog geen status
-    const sts = zichtbareTrainerIds(b, datum).map((id) => blokById.get(id)).filter((x): x is Blok => !!x).map((blk) => blokStatus(naam, blk).status);
+    const sts = b.trainerBlokIds.map((id) => blokById.get(id)).filter((x): x is Blok => !!x).map((blk) => blokStatus(naam, blk).status);
     if (!sts.length) return null;
     if (sts.every((s) => s === "afgevinkt")) return "afgevinkt";
     if (sts.some((s) => s !== "open")) return "deels";
@@ -2270,7 +2262,7 @@ function Kalender({ naam, onStart, onLeer }: { naam: string; onStart: (blok: Blo
                   <div className="kal-toets">🎯 {toetsen.map((v) => VAK_AFK[v] ?? v).join(" ")}</div>
                 )}
                 <div className="kal-chips">
-                  {blokken.filter((b) => toonBlok(b, datum)).map((b, i) => {
+                  {blokken.map((b, i) => {
                     const st = chipStatus(b, datum);
                     return (
                       <span key={i} className="kal-chip" style={{ background: `${vakKleur(b.vak)}26`, color: vakKleur(b.vak), borderColor: `${vakKleur(b.vak)}80` }}>
@@ -2318,13 +2310,14 @@ function KalenderDag({
             <p className="muted klein">Vooruit oefenen kan — items komen later gewoon weer terug in je planning.</p>
           )}
           {blokken.map((b, i) => {
-            // Deze week (vandaag + toekomst): verberg al-beheerste trainers → focus op
-            // wat nog niet kent. Verleden = volledige terugblik (alles tonen).
-            const verbergBeheerst = datum >= vandaagISO();
+            // Alle trainers per vak blijven zichtbaar (zodat Stijn vóór de toets álles kan
+            // herhalen en niets stiekem verdwijnt). Volgorde: moeilijkste/minst beheerste
+            // eerst, het al-beheerste eronder als "herhaling als je tijd hebt".
             const trainers = b.trainerBlokIds
               .map((id) => blokById.get(id))
               .filter((x): x is Blok => !!x)
-              .filter((t) => !verbergBeheerst || blokStatus(naam, t).status !== "afgevinkt");
+              .sort((x, y) => blokStatus(naam, x).mastery - blokStatus(naam, y).mastery);
+            const eersteBeheerst = trainers.findIndex((t) => blokStatus(naam, t).status === "afgevinkt");
             const kleur = vakKleur(b.vak);
             if (b.soort === "afvink") {
               return (
@@ -2371,14 +2364,18 @@ function KalenderDag({
               );
             }
             // Echte trainer-blokken: render elk als volwaardige BlokKaart, altijd klikbaar.
-            // Vak helemaal beheerst (deze week) → sectie overslaan.
             if (trainers.length === 0) return null;
             const minuten = trainers.reduce((s, t) => s + geschatteMin(factoren, t), 0);
             return (
               <div key={i} className="moment-sectie">
                 <div className="moment-kop muted klein">{momenten[i]}{b.optioneel ? " · optioneel" : ""} · ±{minuten} min</div>
-                {trainers.map((t) => (
-                  <BlokKaart key={`${i}-${t.id}`} naam={naam} blok={t} kleur={kleur} onStart={onStart} onLeer={onLeer} />
+                {trainers.map((t, ti) => (
+                  <div key={`${i}-${t.id}`}>
+                    {ti === eersteBeheerst && eersteBeheerst > 0 && (
+                      <div className="muted klein" style={{ margin: "6px 2px 2px" }}>✓ al beheerst — herhaal als je tijd hebt</div>
+                    )}
+                    <BlokKaart naam={naam} blok={t} kleur={kleur} onStart={onStart} onLeer={onLeer} />
+                  </div>
                 ))}
               </div>
             );
