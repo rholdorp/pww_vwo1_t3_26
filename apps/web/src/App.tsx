@@ -1361,8 +1361,8 @@ function AfvinkKaart({ naam, gb, onChange }: { naam: string; gb: GeplandBlok; on
           <div className="muted klein">
             {gb.optioneel ? "optioneel · telt niet mee · " : ""}
             {af
-              ? ouder ? "✓ nagekeken door papa/mama" : "✓ gedaan"
-              : ouder ? "papa of mama vinkt dit af" : "doe het, vink het dan hier af"}
+              ? ouder ? "✓ nagekeken" : "✓ gedaan"
+              : ouder ? "wordt nagekeken voordat het meetelt" : "doe het, vink het dan hier af"}
           </div>
         </div>
       </div>
@@ -2095,7 +2095,7 @@ function Voortgang({ naam, onLogout }: { naam: string; onLogout: () => void }) {
         </div>
         <p className="muted klein">
           🔥 {streakDagen(naam)} dagen-streak (volle week = +50 pt). ⏱️ {tijdLabel(tijdTotaal)} totaal gestudeerd.
-          {metBeloningen ? " Beloningen in overleg met papa/mama." : ""}
+          {metBeloningen ? " Beloningen in overleg thuis." : ""}
         </p>
       </div>
 
