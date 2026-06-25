@@ -6,6 +6,11 @@
       "id": "biologie-t4-b1-001",
       "vraag": "Het geheel van ongeveer tweehonderd botten waaruit het lichaam is opgebouwd.",
       "antwoord": "skelet",
+      "wrongAnswers": [
+        "spierstelsel",
+        "wervelkolom",
+        "beenmerg"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -19,6 +24,11 @@
       "id": "biologie-t4-b1-002",
       "vraag": "Een ander woord voor de botten samen / het materiaal waaruit het skelet bestaat.",
       "antwoord": "beenderen",
+      "wrongAnswers": [
+        "kraakbeen",
+        "pezen",
+        "spieren"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -32,6 +42,11 @@
       "id": "biologie-t4-b1-003",
       "vraag": "De botten van het hoofd die samen de hersenen beschermen (inclusief boven- en onderkaak).",
       "antwoord": "schedel",
+      "wrongAnswers": [
+        "borstkas",
+        "wervelkolom",
+        "schoudergordel"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -44,6 +59,11 @@
       "id": "biologie-t4-b1-004",
       "vraag": "De rij wervels in de romp die het lichaam ondersteunt; ook ruggengraat genoemd.",
       "antwoord": "wervelkolom",
+      "wrongAnswers": [
+        "borstkas",
+        "bekken",
+        "schoudergordel"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -57,6 +77,11 @@
       "id": "biologie-t4-b1-005",
       "vraag": "In welke drie delen kun je het lichaam van een mens verdelen?",
       "antwoord": "hoofd, romp en ledematen",
+      "wrongAnswers": [
+        "hoofd, hals en buik",
+        "schedel, wervelkolom en bekken",
+        "borst, buik en benen"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -70,6 +95,11 @@
       "id": "biologie-t4-b1-006",
       "vraag": "Hoe noem je samen de armen en de benen?",
       "antwoord": "ledematen",
+      "wrongAnswers": [
+        "gewrichten",
+        "ledemaatgordels",
+        "romp"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -82,6 +112,11 @@
       "id": "biologie-t4-b1-007",
       "vraag": "Welke beendergordel verbindt de armen met de romp (sleutelbeen + schouderblad)?",
       "antwoord": "schoudergordel",
+      "wrongAnswers": [
+        "bekkengordel",
+        "borstkas",
+        "wervelkolom"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -94,6 +129,11 @@
       "id": "biologie-t4-b1-008",
       "vraag": "Welk type dier heeft een inwendig skelet met een wervelkolom (zoals de mens)?",
       "antwoord": "zoogdieren",
+      "wrongAnswers": [
+        "insecten",
+        "weekdieren",
+        "schaaldieren"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -107,6 +147,11 @@
       "id": "biologie-t4-b1-009",
       "vraag": "Noem de vier functies van het skelet.",
       "antwoord": "stevigheid, beweging, bescherming en vorm geven",
+      "wrongAnswers": [
+        "ademen, verteren, groeien en bewegen",
+        "stevigheid, groei, warmte en bescherming",
+        "beweging, voortplanting, bescherming en vorm"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -120,6 +165,11 @@
       "id": "biologie-t4-b1-010",
       "vraag": "Welke functie van het skelet zorgt ervoor dat je rechtop kunt staan?",
       "antwoord": "stevigheid",
+      "wrongAnswers": [
+        "beweging",
+        "bescherming",
+        "vorm geven"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -133,6 +183,11 @@
       "id": "biologie-t4-b1-011",
       "vraag": "Door welke functie van het skelet beschermt de borstkas de longen en het hart, en de schedel de hersenen?",
       "antwoord": "bescherming",
+      "wrongAnswers": [
+        "stevigheid",
+        "beweging",
+        "vorm geven"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -146,6 +201,11 @@
       "id": "biologie-t4-b1-012",
       "vraag": "Welke functie heeft het skelet doordat er spieren aan de botten vastzitten?",
       "antwoord": "beweging",
+      "wrongAnswers": [
+        "bescherming",
+        "stevigheid",
+        "vorm geven"
+      ],
       "onderdeel": "§4.1 Het skelet",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101657948.jpg",
@@ -159,6 +219,11 @@
       "id": "biologie-t4-b2-001",
       "vraag": "Een bot met een mergholte erin, zoals het dijbeen.",
       "antwoord": "pijpbeen",
+      "wrongAnswers": [
+        "plat been",
+        "kort been",
+        "wervel"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -172,6 +237,11 @@
       "id": "biologie-t4-b2-002",
       "vraag": "Een bot zoals het heupbeen of het schouderblad, dat rood beenmerg bevat.",
       "antwoord": "plat been",
+      "wrongAnswers": [
+        "pijpbeen",
+        "kort been",
+        "kraakbeen"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -185,6 +255,11 @@
       "id": "biologie-t4-b2-003",
       "vraag": "De holte in een pijpbeen waarin geel beenmerg (vet) wordt opgeslagen.",
       "antwoord": "mergholte",
+      "wrongAnswers": [
+        "gewrichtskom",
+        "fontanel",
+        "groeischijf"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -197,6 +272,11 @@
       "id": "biologie-t4-b2-004",
       "vraag": "Het gelige vet dat in de mergholte van een pijpbeen is opgeslagen.",
       "antwoord": "geel beenmerg",
+      "wrongAnswers": [
+        "rood beenmerg",
+        "kraakbeen",
+        "collageen"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -209,6 +289,11 @@
       "id": "biologie-t4-b2-005",
       "vraag": "Het weefsel in het sponsachtige bot waar nieuwe bloedcellen worden gevormd.",
       "antwoord": "rood beenmerg",
+      "wrongAnswers": [
+        "geel beenmerg",
+        "kraakbeen",
+        "botweefsel"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -221,6 +306,11 @@
       "id": "biologie-t4-b2-006",
       "vraag": "Waar worden in het bot nieuwe bloedcellen gevormd?",
       "antwoord": "in het rood beenmerg",
+      "wrongAnswers": [
+        "in het geel beenmerg",
+        "in de mergholte",
+        "in het kraakbeen"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -234,6 +324,11 @@
       "id": "biologie-t4-b2-007",
       "vraag": "Het harde, niet-buigzame weefsel waarvan botten gemaakt zijn; de cellen liggen in kringen rond kanaaltjes.",
       "antwoord": "botweefsel",
+      "wrongAnswers": [
+        "kraakbeenweefsel",
+        "spierweefsel",
+        "bindweefsel"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -246,6 +341,11 @@
       "id": "biologie-t4-b2-008",
       "vraag": "Het buigzame weefsel waarvan de cellen in groepjes in elastische tussencelstof liggen (in neus, oor, tussen ribben en wervels).",
       "antwoord": "kraakbeenweefsel",
+      "wrongAnswers": [
+        "botweefsel",
+        "spierweefsel",
+        "beenmerg"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -258,6 +358,11 @@
       "id": "biologie-t4-b2-009",
       "vraag": "De stof in botweefsel die zorgt voor stevigheid en hardheid.",
       "antwoord": "kalkzouten",
+      "wrongAnswers": [
+        "collageen",
+        "kraakbeen",
+        "geel beenmerg"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -271,6 +376,11 @@
       "id": "biologie-t4-b2-010",
       "vraag": "De lijmstof in botweefsel die ervoor zorgt dat een bot een beetje buigzaam blijft.",
       "antwoord": "collageen",
+      "wrongAnswers": [
+        "kalkzouten",
+        "kraakbeen",
+        "myosine"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -283,6 +393,11 @@
       "id": "biologie-t4-b2-011",
       "vraag": "De met bindweefsel gevulde ruimten tussen de schedelbeenderen van een baby.",
       "antwoord": "fontanellen",
+      "wrongAnswers": [
+        "groeischijven",
+        "naden",
+        "mergholten"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -296,6 +411,11 @@
       "id": "biologie-t4-b2-012",
       "vraag": "Het schijfvormige stukje kraakbeen aan de uiteinden van botten bij kinderen, waar nieuw kraakbeen (groei) wordt gevormd.",
       "antwoord": "groeischijf",
+      "wrongAnswers": [
+        "fontanel",
+        "tussenwervelschijf",
+        "mergholte"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -309,6 +429,11 @@
       "id": "biologie-t4-b2-013",
       "vraag": "De aandoening waarbij bot poreuzer wordt doordat er meer bot wordt afgebroken dan opgebouwd.",
       "antwoord": "osteoporose",
+      "wrongAnswers": [
+        "hernia",
+        "reuma",
+        "artrose"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -321,6 +446,11 @@
       "id": "biologie-t4-b2-014",
       "vraag": "Wat gebeurt er bij het ouder worden met de hoeveelheid collageen en kalkzouten in de botten?",
       "antwoord": "collageen neemt af en kalkzouten nemen toe",
+      "wrongAnswers": [
+        "collageen neemt toe en kalkzouten nemen af",
+        "beide nemen toe",
+        "beide nemen af"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -334,6 +464,11 @@
       "id": "biologie-t4-b2-015",
       "vraag": "Waaruit bestaat het skelet van een baby vooral, waardoor het soepel is?",
       "antwoord": "kraakbeen",
+      "wrongAnswers": [
+        "kalkzouten",
+        "botweefsel",
+        "geel beenmerg"
+      ],
       "onderdeel": "§4.2 De bouw van botten",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101757207.jpg",
@@ -346,6 +481,11 @@
       "id": "biologie-t4-b3-001",
       "vraag": "Noem de vier manieren waarop botten met elkaar verbonden kunnen zijn.",
       "antwoord": "vergroeid, naad, kraakbeen en gewricht",
+      "wrongAnswers": [
+        "pees, spier, kraakbeen en gewricht",
+        "naad, kogel, kom en scharnier",
+        "vergroeid, naad, pees en spier"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -359,6 +499,11 @@
       "id": "biologie-t4-b3-002",
       "vraag": "De verbinding waarbij botten zijn samengegroeid tot één geheel (zoals de wervels van het heiligbeen), zonder beweging.",
       "antwoord": "vergroeid",
+      "wrongAnswers": [
+        "naad",
+        "gewricht",
+        "kraakbeenverbinding"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -372,6 +517,11 @@
       "id": "biologie-t4-b3-003",
       "vraag": "De onbeweeglijke verbinding waarmee de schedelbeenderen aan elkaar vastzitten.",
       "antwoord": "naad",
+      "wrongAnswers": [
+        "gewricht",
+        "vergroeiing",
+        "pees"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -385,6 +535,11 @@
       "id": "biologie-t4-b3-004",
       "vraag": "Een beweegbare verbinding tussen twee botten, met een kogel en een kom.",
       "antwoord": "gewricht",
+      "wrongAnswers": [
+        "naad",
+        "pees",
+        "vergroeiing"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -397,6 +552,11 @@
       "id": "biologie-t4-b3-005",
       "vraag": "Het bolle deel van een gewricht dat in de kom beweegt.",
       "antwoord": "gewrichtskogel",
+      "wrongAnswers": [
+        "gewrichtskom",
+        "gewrichtskapsel",
+        "gewrichtssmeer"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -410,6 +570,11 @@
       "id": "biologie-t4-b3-006",
       "vraag": "Het holle deel van een gewricht waarin de kogel beweegt.",
       "antwoord": "gewrichtskom",
+      "wrongAnswers": [
+        "gewrichtskogel",
+        "gewrichtskapsel",
+        "mergholte"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -423,6 +588,11 @@
       "id": "biologie-t4-b3-007",
       "vraag": "Waarmee zitten de twee botten van een gewricht aan elkaar vast?",
       "antwoord": "het gewrichtskapsel",
+      "wrongAnswers": [
+        "het gewrichtssmeer",
+        "het kraakbeen",
+        "de pees"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -435,6 +605,11 @@
       "id": "biologie-t4-b3-008",
       "vraag": "De vloeistof in een gewricht die zorgt dat de botten soepel bewegen.",
       "antwoord": "gewrichtssmeer",
+      "wrongAnswers": [
+        "gewrichtskapsel",
+        "geel beenmerg",
+        "nectar"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -447,6 +622,11 @@
       "id": "biologie-t4-b3-009",
       "vraag": "Welk laagje zit op de kogel en in de kom van een gewricht, voor soepele beweging en tegen slijtage?",
       "antwoord": "kraakbeen",
+      "wrongAnswers": [
+        "botweefsel",
+        "gewrichtssmeer",
+        "collageen"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -460,6 +640,11 @@
       "id": "biologie-t4-b3-010",
       "vraag": "Het gewricht waarbij een kogel in een kom draait, zodat beweging in alle richtingen mogelijk is (schouder, heup).",
       "antwoord": "kogelgewricht",
+      "wrongAnswers": [
+        "scharniergewricht",
+        "rolgewricht",
+        "naad"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -472,6 +657,11 @@
       "id": "biologie-t4-b3-011",
       "vraag": "Het gewricht waarbij je alleen een beweging heen en terug kunt maken (elleboog, knie).",
       "antwoord": "scharniergewricht",
+      "wrongAnswers": [
+        "kogelgewricht",
+        "rolgewricht",
+        "vergroeiing"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -484,6 +674,11 @@
       "id": "biologie-t4-b3-012",
       "vraag": "Het gewricht waarbij het ene bot in de lengteas van het andere draait, zodat je je hand kunt draaien.",
       "antwoord": "rolgewricht",
+      "wrongAnswers": [
+        "kogelgewricht",
+        "scharniergewricht",
+        "naad"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -496,6 +691,11 @@
       "id": "biologie-t4-b3-013",
       "vraag": "Welk soort gewricht zit er in de schouder?",
       "antwoord": "kogelgewricht",
+      "wrongAnswers": [
+        "scharniergewricht",
+        "rolgewricht",
+        "naad"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -508,6 +708,11 @@
       "id": "biologie-t4-b3-014",
       "vraag": "Welk soort gewricht zit er in de elleboog of de knie?",
       "antwoord": "scharniergewricht",
+      "wrongAnswers": [
+        "kogelgewricht",
+        "rolgewricht",
+        "vergroeiing"
+      ],
       "onderdeel": "§4.3 Beenverbindingen",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_101920404.jpg",
@@ -520,6 +725,11 @@
       "id": "biologie-t4-b4-001",
       "vraag": "Alle spieren van het lichaam samen.",
       "antwoord": "spierstelsel",
+      "wrongAnswers": [
+        "skelet",
+        "beenderstelsel",
+        "zenuwstelsel"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -532,6 +742,11 @@
       "id": "biologie-t4-b4-002",
       "vraag": "Het stevige, niet-rekbare weefsel waarmee een spier aan een bot vastzit.",
       "antwoord": "pees",
+      "wrongAnswers": [
+        "kraakbeen",
+        "gewrichtskapsel",
+        "collageen"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -545,6 +760,11 @@
       "id": "biologie-t4-b4-003",
       "vraag": "De plaats waar een spier aan een bot vastzit.",
       "antwoord": "aanhechtingsplaats",
+      "wrongAnswers": [
+        "gewrichtskom",
+        "groeischijf",
+        "mergholte"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -558,6 +778,11 @@
       "id": "biologie-t4-b4-004",
       "vraag": "Wat gebeurt er met een spier als hij zich samentrekt?",
       "antwoord": "hij wordt korter en dikker",
+      "wrongAnswers": [
+        "hij wordt langer en dunner",
+        "hij wordt langer en dikker",
+        "hij blijft even lang maar wordt harder"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -571,6 +796,11 @@
       "id": "biologie-t4-b4-005",
       "vraag": "De buigspier van de bovenarm.",
       "antwoord": "biceps",
+      "wrongAnswers": [
+        "triceps",
+        "pees",
+        "hartspier"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -584,6 +814,11 @@
       "id": "biologie-t4-b4-006",
       "vraag": "De strekspier van de bovenarm.",
       "antwoord": "triceps",
+      "wrongAnswers": [
+        "biceps",
+        "pees",
+        "hartspier"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -597,6 +832,11 @@
       "id": "biologie-t4-b4-007",
       "vraag": "Hoe heet een buigspier en strekspier die samen één beweging mogelijk maken?",
       "antwoord": "antagonistisch paar",
+      "wrongAnswers": [
+        "spierstelsel",
+        "aanhechtingsplaats",
+        "synergisten"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -610,6 +850,11 @@
       "id": "biologie-t4-b4-008",
       "vraag": "Waarom heb je voor elke beweging twee spieren (een buig- en een strekspier) nodig?",
       "antwoord": "een spier kan alleen trekken, niet duwen",
+      "wrongAnswers": [
+        "een spier kan alleen duwen, niet trekken",
+        "een spier is te zwak om alleen te werken",
+        "anders raakt de spier te snel vermoeid"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -623,6 +868,11 @@
       "id": "biologie-t4-b4-009",
       "vraag": "De twee eiwitten in een spierfibril die in elkaar schuiven waardoor de spier samentrekt.",
       "antwoord": "actine en myosine",
+      "wrongAnswers": [
+        "collageen en kalkzouten",
+        "actine en collageen",
+        "myosine en keratine"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -636,6 +886,11 @@
       "id": "biologie-t4-b4-010",
       "vraag": "Het spierweefsel van de skeletspieren, waarmee je bewuste bewegingen maakt.",
       "antwoord": "dwarsgestreept spierweefsel",
+      "wrongAnswers": [
+        "glad spierweefsel",
+        "hartspierweefsel",
+        "kraakbeenweefsel"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -649,6 +904,11 @@
       "id": "biologie-t4-b4-011",
       "vraag": "Het spierweefsel in de wand van organen, waarmee onbewuste bewegingen worden gemaakt.",
       "antwoord": "glad spierweefsel",
+      "wrongAnswers": [
+        "dwarsgestreept spierweefsel",
+        "hartspierweefsel",
+        "botweefsel"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -662,6 +922,11 @@
       "id": "biologie-t4-b4-012",
       "vraag": "Het spierweefsel waaruit het hart bestaat en dat niet snel vermoeid raakt.",
       "antwoord": "hartspierweefsel",
+      "wrongAnswers": [
+        "glad spierweefsel",
+        "dwarsgestreept spierweefsel",
+        "botweefsel"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -675,6 +940,11 @@
       "id": "biologie-t4-b4-013",
       "vraag": "Welke spiervezels trekken snel en krachtig samen, maar raken sneller vermoeid?",
       "antwoord": "snelle spiervezels",
+      "wrongAnswers": [
+        "langzame spiervezels",
+        "gladde spiervezels",
+        "hartspiervezels"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -688,6 +958,11 @@
       "id": "biologie-t4-b4-014",
       "vraag": "Welke spiervezels kunnen lang doorgaan met samentrekken (voor de lichaamshouding), maar zetten minder kracht?",
       "antwoord": "langzame spiervezels",
+      "wrongAnswers": [
+        "snelle spiervezels",
+        "gladde spiervezels",
+        "hartspiervezels"
+      ],
       "onderdeel": "§4.4 Spieren",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260524_102026478.jpg",
@@ -701,6 +976,11 @@
       "id": "biologie-t4-b5-001",
       "vraag": "De vorm van de wervelkolom van opzij gezien, die op tweemaal de letter S boven elkaar lijkt.",
       "antwoord": "dubbele-S-vorm",
+      "wrongAnswers": [
+        "rechte vorm",
+        "C-vorm",
+        "enkele-S-vorm"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -714,6 +994,11 @@
       "id": "biologie-t4-b5-002",
       "vraag": "Welke spieren houden de dubbele-S-vorm van de wervelkolom in stand?",
       "antwoord": "de rugspieren",
+      "wrongAnswers": [
+        "de armspieren",
+        "de hartspier",
+        "de gladde spieren"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -726,6 +1011,11 @@
       "id": "biologie-t4-b5-003",
       "vraag": "De schijfjes kraakbeen tussen de wervels die als schokbrekers werken en buigen mogelijk maken.",
       "antwoord": "tussenwervelschijven",
+      "wrongAnswers": [
+        "groeischijven",
+        "fontanellen",
+        "gewrichtskommen"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -739,6 +1029,11 @@
       "id": "biologie-t4-b5-004",
       "vraag": "Het zachte binnenste van een tussenwervelschijf dat de schijf veerkracht geeft.",
       "antwoord": "geleiachtige kern",
+      "wrongAnswers": [
+        "kraakbeenring",
+        "mergholte",
+        "kalkzouten"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -752,6 +1047,11 @@
       "id": "biologie-t4-b5-005",
       "vraag": "De manier waarop je staat en zit.",
       "antwoord": "lichaamshouding",
+      "wrongAnswers": [
+        "beweging",
+        "spierspanning",
+        "dubbele-S-vorm"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -765,6 +1065,11 @@
       "id": "biologie-t4-b5-006",
       "vraag": "Wat is het kenmerk van een goede lichaamshouding?",
       "antwoord": "een rechte rug met de dubbele-S-vorm",
+      "wrongAnswers": [
+        "een gebogen rug zonder bochten",
+        "een volledig rechte wervelkolom",
+        "een rug met een enkele C-vorm"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -778,6 +1083,11 @@
       "id": "biologie-t4-b5-007",
       "vraag": "Bij een goede zithouding maken de armen en benen welke hoek?",
       "antwoord": "een rechte hoek",
+      "wrongAnswers": [
+        "een scherpe hoek",
+        "een stompe hoek",
+        "een hoek van 45 graden"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -791,6 +1101,11 @@
       "id": "biologie-t4-b5-008",
       "vraag": "De rugaandoening waarbij de geleiachtige kern via een zwakke plek lekt en op een zenuw drukt.",
       "antwoord": "hernia",
+      "wrongAnswers": [
+        "osteoporose",
+        "reuma",
+        "artrose"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -803,6 +1118,11 @@
       "id": "biologie-t4-b5-009",
       "vraag": "Uit hoeveel wervels is de wervelkolom ongeveer opgebouwd?",
       "antwoord": "ongeveer 30",
+      "wrongAnswers": [
+        "ongeveer 10",
+        "ongeveer 50",
+        "ongeveer 200"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -817,6 +1137,11 @@
       "id": "biologie-t4-b5-010",
       "vraag": "Hoe kun je rugproblemen voorkomen (twee manieren)?",
       "antwoord": "goed bewegen (lopen/fietsen) en je buik- en rugspieren trainen",
+      "wrongAnswers": [
+        "veel zitten en zwaar tillen",
+        "vooral rusten en weinig bewegen",
+        "alleen je armspieren trainen"
+      ],
       "onderdeel": "§4.5 De wervelkolom",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_103938176.jpg",
@@ -830,6 +1155,11 @@
       "id": "biologie-t4-lo1-001",
       "vraag": "Hoe voorkom je meetfouten bij een onderzoek?",
       "antwoord": "precies en telkens op dezelfde manier meten",
+      "wrongAnswers": [
+        "snel en uit het hoofd schatten",
+        "elke keer op een andere manier meten",
+        "maar één meting doen"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104319639.jpg",
@@ -843,6 +1173,11 @@
       "id": "biologie-t4-lo1-002",
       "vraag": "Hoe moet je naar de liniaal kijken om nauwkeurig te meten?",
       "antwoord": "horizontaal (recht van opzij)",
+      "wrongAnswers": [
+        "schuin van boven",
+        "schuin van onderen",
+        "met één oog dicht van veraf"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104319639.jpg",
@@ -856,6 +1191,11 @@
       "id": "biologie-t4-lo1-003",
       "vraag": "Waarom noteer je je metingen telkens in dezelfde eenheid?",
       "antwoord": "zodat je later gemakkelijk het gemiddelde kunt berekenen",
+      "wrongAnswers": [
+        "zodat het er netter uitziet",
+        "zodat je sneller kunt meten",
+        "om minder ruimte op papier te gebruiken"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104319639.jpg",
@@ -869,6 +1209,11 @@
       "id": "biologie-t4-lo1-004",
       "vraag": "Hoe noteer je een meting van een digitaal apparaat?",
       "antwoord": "met een of meer decimalen",
+      "wrongAnswers": [
+        "altijd afgerond op hele getallen",
+        "alleen met breuken",
+        "in woorden in plaats van cijfers"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104319639.jpg",
@@ -882,6 +1227,11 @@
       "id": "biologie-t4-lo2-001",
       "vraag": "Welk diagram gebruik je om de gemiddelden van groepen met elkaar te vergelijken?",
       "antwoord": "staafdiagram",
+      "wrongAnswers": [
+        "lijndiagram",
+        "cirkeldiagram",
+        "tabel"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104322642.jpg",
@@ -894,6 +1244,11 @@
       "id": "biologie-t4-lo2-002",
       "vraag": "Welk diagram gebruik je om een ontwikkeling over tijd of afstand weer te geven?",
       "antwoord": "lijndiagram",
+      "wrongAnswers": [
+        "staafdiagram",
+        "cirkeldiagram",
+        "tabel"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104322642.jpg",
@@ -906,6 +1261,11 @@
       "id": "biologie-t4-lo2-003",
       "vraag": "Welk diagram gebruik je om het aandeel van groepen in een geheel te vergelijken (met percentages)?",
       "antwoord": "cirkeldiagram",
+      "wrongAnswers": [
+        "staafdiagram",
+        "lijndiagram",
+        "tabel"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104322642.jpg",
@@ -919,6 +1279,11 @@
       "id": "biologie-t4-lo2-004",
       "vraag": "Waarvoor gebruik je een tabel bij een onderzoek?",
       "antwoord": "om resultaten overzichtelijk te noteren",
+      "wrongAnswers": [
+        "om een ontwikkeling over tijd te tonen",
+        "om percentages van een geheel te tonen",
+        "om gemiddelden grafisch te vergelijken"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104322642.jpg",
@@ -932,6 +1297,11 @@
       "id": "biologie-t4-lo2-005",
       "vraag": "Wat zet je bij een lijndiagram op de x-as?",
       "antwoord": "de tijd of de afstand",
+      "wrongAnswers": [
+        "de gemeten waarde",
+        "het percentage",
+        "het gemiddelde"
+      ],
       "onderdeel": "Leren onderzoeken: meten & grafieken",
       "hoofdstuk": "4",
       "bron": "raw/biologie/PXL_20260607_104322642.jpg",
@@ -945,6 +1315,11 @@
       "id": "biologie-t6-b1-001",
       "vraag": "Welk orgaan van een zaadplant zorgt voor de voortplanting?",
       "antwoord": "de bloem",
+      "wrongAnswers": [
+        "het blad",
+        "de wortel",
+        "de stengel"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -957,6 +1332,11 @@
       "id": "biologie-t6-b1-002",
       "vraag": "De meestal groene bladen aan de buitenkant van de bloem die de knop beschermen tegen uitdroging en kou.",
       "antwoord": "kelkbladen",
+      "wrongAnswers": [
+        "kroonbladen",
+        "meeldraden",
+        "stempels"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -970,6 +1350,11 @@
       "id": "biologie-t6-b1-003",
       "vraag": "De vaak grote, opvallend gekleurde bladen van de bloem die insecten lokken voor de bestuiving.",
       "antwoord": "kroonbladen",
+      "wrongAnswers": [
+        "kelkbladen",
+        "meeldraden",
+        "stampers"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -983,6 +1368,11 @@
       "id": "biologie-t6-b1-004",
       "vraag": "Het mannelijke voortplantingsorgaan van een plant, bestaande uit een helmhokje en een helmdraad.",
       "antwoord": "meeldraad",
+      "wrongAnswers": [
+        "stamper",
+        "stempel",
+        "kroonblad"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -996,6 +1386,11 @@
       "id": "biologie-t6-b1-005",
       "vraag": "De mannelijke geslachtscellen van een plant, die in de helmhokjes worden gevormd (ook pollen genoemd).",
       "antwoord": "stuifmeelkorrels",
+      "wrongAnswers": [
+        "eicellen",
+        "nectar",
+        "zaadbeginsels"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1010,6 +1405,11 @@
       "id": "biologie-t6-b1-006",
       "vraag": "Het vrouwelijke voortplantingsorgaan van een plant, bestaande uit stempel, stijl en vruchtbeginsel.",
       "antwoord": "stamper",
+      "wrongAnswers": [
+        "meeldraad",
+        "kroonblad",
+        "kelkblad"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1022,6 +1422,11 @@
       "id": "biologie-t6-b1-007",
       "vraag": "Het bovenste deel van de stamper dat het stuifmeel opvangt.",
       "antwoord": "stempel",
+      "wrongAnswers": [
+        "stijl",
+        "vruchtbeginsel",
+        "helmhokje"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1034,6 +1439,11 @@
       "id": "biologie-t6-b1-008",
       "vraag": "Het onderste deel van de stamper waarin één of meer zaadbeginsels zitten.",
       "antwoord": "vruchtbeginsel",
+      "wrongAnswers": [
+        "stempel",
+        "stijl",
+        "helmhokje"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1046,6 +1456,11 @@
       "id": "biologie-t6-b1-009",
       "vraag": "Wat zit er in elk zaadbeginsel?",
       "antwoord": "een eicel",
+      "wrongAnswers": [
+        "een stuifmeelkorrel",
+        "nectar",
+        "een kiemplantje"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1059,6 +1474,11 @@
       "id": "biologie-t6-b1-010",
       "vraag": "Hoe noem je de vrouwelijke geslachtscel van een plant?",
       "antwoord": "de eicel",
+      "wrongAnswers": [
+        "de stuifmeelkorrel",
+        "het zaadbeginsel",
+        "de stamper"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1071,6 +1491,11 @@
       "id": "biologie-t6-b1-011",
       "vraag": "Welk deel van de stamper verbindt de stempel met het vruchtbeginsel?",
       "antwoord": "de stijl",
+      "wrongAnswers": [
+        "de helmdraad",
+        "het zaadbeginsel",
+        "het kroonblad"
+      ],
       "onderdeel": "§6.1 Bloemen",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104030758.jpg",
@@ -1083,6 +1508,11 @@
       "id": "biologie-t6-b2-001",
       "vraag": "Het terechtkomen van stuifmeel van een meeldraad op een stempel.",
       "antwoord": "bestuiving",
+      "wrongAnswers": [
+        "bevruchting",
+        "kieming",
+        "voortplanting"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1095,6 +1525,11 @@
       "id": "biologie-t6-b2-002",
       "vraag": "Het zoete sap dat bloemen vormen om insecten aan te trekken.",
       "antwoord": "nectar",
+      "wrongAnswers": [
+        "stuifmeel",
+        "vruchtvlees",
+        "honing"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1107,6 +1542,11 @@
       "id": "biologie-t6-b2-003",
       "vraag": "De bestuiving waarbij stuifmeel op de stempel van dezelfde bloem (of een andere bloem van dezelfde plant) terechtkomt.",
       "antwoord": "zelfbestuiving",
+      "wrongAnswers": [
+        "kruisbestuiving",
+        "windbestuiving",
+        "bevruchting"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1119,6 +1559,11 @@
       "id": "biologie-t6-b2-004",
       "vraag": "De bestuiving waarbij stuifmeel op de stempel van een bloem van een andere plant van dezelfde soort terechtkomt.",
       "antwoord": "kruisbestuiving",
+      "wrongAnswers": [
+        "zelfbestuiving",
+        "windbestuiving",
+        "bevruchting"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1131,6 +1576,11 @@
       "id": "biologie-t6-b2-005",
       "vraag": "Bloemen waarbij insecten zorgen voor de bestuiving.",
       "antwoord": "insectenbloemen",
+      "wrongAnswers": [
+        "windbloemen",
+        "waterbloemen",
+        "zelfbloemen"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1143,6 +1593,11 @@
       "id": "biologie-t6-b2-006",
       "vraag": "Bloemen waarbij de wind zorgt voor de bestuiving.",
       "antwoord": "windbloemen",
+      "wrongAnswers": [
+        "insectenbloemen",
+        "waterbloemen",
+        "kruisbloemen"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1155,6 +1610,11 @@
       "id": "biologie-t6-b2-007",
       "vraag": "Noem twee kenmerken van insectenbloemen.",
       "antwoord": "grote opvallend gekleurde kroonbladen en nectar",
+      "wrongAnswers": [
+        "kleine onopvallende kroonbladen en veel stuifmeel",
+        "geen kroonbladen en helmknoppen buiten de bloem",
+        "groene kelkbladen en geen geur"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1168,6 +1628,11 @@
       "id": "biologie-t6-b2-008",
       "vraag": "Noem een kenmerk van windbloemen wat betreft de kroonbladeren.",
       "antwoord": "kleine of onopvallende kroonbladeren",
+      "wrongAnswers": [
+        "grote, fel gekleurde kroonbladeren",
+        "kroonbladeren met veel nectar",
+        "sterk geurende kroonbladeren"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1181,6 +1646,11 @@
       "id": "biologie-t6-b2-009",
       "vraag": "Waarom hangen bij windbloemen de helmknoppen vaak buiten de bloem?",
       "antwoord": "zodat de wind het stuifmeel gemakkelijk kan wegblazen",
+      "wrongAnswers": [
+        "zodat insecten het stuifmeel beter kunnen vinden",
+        "zodat de nectar beter ruikt",
+        "om het stuifmeel droog te houden"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1194,6 +1664,11 @@
       "id": "biologie-t6-b2-010",
       "vraag": "Maken windbloemen veel of weinig stuifmeel?",
       "antwoord": "veel stuifmeel",
+      "wrongAnswers": [
+        "weinig stuifmeel",
+        "helemaal geen stuifmeel",
+        "evenveel als insectenbloemen"
+      ],
       "onderdeel": "§6.2 Bestuiving",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104058552.jpg",
@@ -1207,6 +1682,11 @@
       "id": "biologie-t6-b3-001",
       "vraag": "De buis die uit een stuifmeelkorrel groeit, door de stijl naar het zaadbeginsel toe.",
       "antwoord": "stuifmeelbuis",
+      "wrongAnswers": [
+        "stijl",
+        "helmdraad",
+        "vruchtbeginsel"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1219,6 +1699,11 @@
       "id": "biologie-t6-b3-002",
       "vraag": "Het versmelten van de kern van de eicel met de kern van de stuifmeelkorrel.",
       "antwoord": "bevruchting",
+      "wrongAnswers": [
+        "bestuiving",
+        "kieming",
+        "celdeling"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1231,6 +1716,11 @@
       "id": "biologie-t6-b3-003",
       "vraag": "Wat ontstaat er door de bevruchting?",
       "antwoord": "een bevruchte eicel",
+      "wrongAnswers": [
+        "een stuifmeelkorrel",
+        "een zaadbeginsel",
+        "een vrucht"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1243,6 +1733,11 @@
       "id": "biologie-t6-b3-004",
       "vraag": "Wat groeit er uit de bevruchte eicel door celdelingen?",
       "antwoord": "een kiem",
+      "wrongAnswers": [
+        "een vrucht",
+        "een stuifmeelbuis",
+        "een zaadbeginsel"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1256,6 +1751,11 @@
       "id": "biologie-t6-b3-005",
       "vraag": "Waartoe groeit het zaadbeginsel na de bevruchting uit?",
       "antwoord": "tot een zaad",
+      "wrongAnswers": [
+        "tot een vrucht",
+        "tot een bloem",
+        "tot een stempel"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1269,6 +1769,11 @@
       "id": "biologie-t6-b3-006",
       "vraag": "Wat groeit er bij het kiemen van een zaad uit de kiem?",
       "antwoord": "een kiemplantje",
+      "wrongAnswers": [
+        "een bloem",
+        "een vrucht",
+        "een zaadbeginsel"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1281,6 +1786,11 @@
       "id": "biologie-t6-b3-007",
       "vraag": "Waar groeit de stuifmeelbuis doorheen op weg naar het zaadbeginsel?",
       "antwoord": "door de stijl",
+      "wrongAnswers": [
+        "door de stempel",
+        "door het kroonblad",
+        "door de helmdraad"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1293,6 +1803,11 @@
       "id": "biologie-t6-b3-008",
       "vraag": "Welke twee kernen versmelten bij de bevruchting?",
       "antwoord": "de kern van de eicel en de kern van de stuifmeelkorrel",
+      "wrongAnswers": [
+        "de kern van de stempel en de kern van de stijl",
+        "twee eicelkernen",
+        "twee stuifmeelkernen"
+      ],
       "onderdeel": "§6.3 Bevruchting",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104131581.jpg",
@@ -1306,6 +1821,11 @@
       "id": "biologie-t6-b4-001",
       "vraag": "Waartoe groeit het vruchtbeginsel na de bevruchting uit?",
       "antwoord": "tot een vrucht",
+      "wrongAnswers": [
+        "tot een zaad",
+        "tot een bloem",
+        "tot een kiem"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1319,6 +1839,11 @@
       "id": "biologie-t6-b4-002",
       "vraag": "Wat gebeurt er na de bevruchting met de zaadbeginsels waarin de eicel is bevrucht?",
       "antwoord": "ze groeien uit tot zaden",
+      "wrongAnswers": [
+        "ze verschrompelen",
+        "ze vallen af",
+        "ze groeien uit tot vruchten"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1332,6 +1857,11 @@
       "id": "biologie-t6-b4-003",
       "vraag": "Wat gebeurt er na de bevruchting met de kroonbladeren en de meeldraden?",
       "antwoord": "ze vallen af",
+      "wrongAnswers": [
+        "ze groeien uit tot zaden",
+        "ze worden de vrucht",
+        "ze vormen nieuwe nectar"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1345,6 +1875,11 @@
       "id": "biologie-t6-b4-004",
       "vraag": "Hoe heet de vrucht van de bonenplant?",
       "antwoord": "peulvrucht",
+      "wrongAnswers": [
+        "steenvrucht",
+        "bes",
+        "nootvrucht"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1358,6 +1893,11 @@
       "id": "biologie-t6-b4-005",
       "vraag": "Het zachte, soms eetbare deel van een vrucht, dat uit het vruchtbeginsel of de bloembodem ontstaat.",
       "antwoord": "vruchtvlees",
+      "wrongAnswers": [
+        "reservevoedsel",
+        "nectar",
+        "vruchtbeginsel"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1370,6 +1910,11 @@
       "id": "biologie-t6-b4-006",
       "vraag": "Wat bevat een zaad voor het kiemplantje?",
       "antwoord": "reservevoedsel",
+      "wrongAnswers": [
+        "nectar",
+        "stuifmeel",
+        "vruchtvlees"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1383,6 +1928,11 @@
       "id": "biologie-t6-b4-007",
       "vraag": "Wat gebeurt er met de zaadbeginsels waarin de eicel niet bevrucht is?",
       "antwoord": "ze verschrompelen",
+      "wrongAnswers": [
+        "ze groeien uit tot zaden",
+        "ze worden de vrucht",
+        "ze vormen nieuwe eicellen"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",
@@ -1396,6 +1946,11 @@
       "id": "biologie-t6-b4-008",
       "vraag": "Uit welk deel van de bloem ontstaat de vrucht?",
       "antwoord": "uit het vruchtbeginsel",
+      "wrongAnswers": [
+        "uit het zaadbeginsel",
+        "uit de stempel",
+        "uit de meeldraad"
+      ],
       "onderdeel": "§6.4 Vruchten en zaden",
       "hoofdstuk": "6",
       "bron": "raw/biologie/PXL_20260607_104203321.jpg",

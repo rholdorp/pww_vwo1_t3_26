@@ -329,17 +329,25 @@ function seededShuffle<T>(arr: readonly T[], seed: number): T[] {
 }
 const woordAantal = (s: string) => s.trim().split(/\s+/).length;
 
-/** Bouwt een meerkeuze-kaart: het juiste begrip + 3 afleiders (andere begrippen van het
- * vak, bij voorkeur even lang qua woorden zodat het juiste antwoord niet opvalt). */
+/** Bouwt een meerkeuze-kaart: het juiste begrip + 3 afleiders. Voorkeur voor curated
+ * `wrongAnswers` (passen ín de context); anders/aanvullend uit de vak-woordenschat,
+ * bij voorkeur even lang qua woorden zodat het juiste antwoord niet opvalt. */
 function meerkeuzeFlashcard(k: FlashcardBestand["kaarten"][number], pool: string[]): Card {
   const answer = k.antwoord;
   const verboden = new Set([answer, ...(k.acceptedAnswers ?? [])].map((s) => s.toLowerCase()));
-  const kandidaten = [...new Set(pool)].filter((a) => !verboden.has(a.toLowerCase()));
-  const aw = woordAantal(answer);
-  const dichtbij = kandidaten.filter((a) => Math.abs(woordAantal(a) - aw) <= 1);
-  const bron = dichtbij.length >= 3 ? dichtbij : kandidaten;
   const seed = seedFromId(k.id);
-  const afleiders = seededShuffle(bron, seed).slice(0, 3);
+  // 1) Curated afleiders (Cowork/handmatig), ontdaan van toevallige antwoord-duplicaten.
+  const afleiders = (k.wrongAnswers ?? []).filter((a) => !verboden.has(a.toLowerCase())).slice(0, 3);
+  // 2) Aanvullen tot 3 met begrippen uit het vak (lengte-gematcht) als er te weinig zijn.
+  if (afleiders.length < 3) {
+    const gebruikt = new Set([...verboden, ...afleiders.map((a) => a.toLowerCase())]);
+    const kandidaten = [...new Set(pool)].filter((a) => !gebruikt.has(a.toLowerCase()));
+    const aw = woordAantal(answer);
+    const nodig = 3 - afleiders.length;
+    const dichtbij = kandidaten.filter((a) => Math.abs(woordAantal(a) - aw) <= 1);
+    const bron = dichtbij.length >= nodig ? dichtbij : kandidaten;
+    afleiders.push(...seededShuffle(bron, seed).slice(0, nodig));
+  }
   const options = seededShuffle([answer, ...afleiders], seed ^ 0x9e3779b9);
   const isVraag = k.vraag.includes("?");
   return {

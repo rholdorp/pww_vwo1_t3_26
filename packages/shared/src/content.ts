@@ -78,6 +78,12 @@ export interface Flashcard {
   /** Extra geaccepteerde vormen van het antwoord (synoniemen, met/zonder lidwoord). */
   acceptedAnswers?: string[];
   /**
+   * Curated foute antwoorden voor de meerkeuze-variant — afleiders die ín de context
+   * passen (handmatig/Cowork samengesteld). Hebben voorrang boven auto-gegenereerde
+   * afleiders. 0 of 3 stuks; bij <3 vult de trainer aan uit de vak-woordenschat.
+   */
+  wrongAnswers?: string[];
+  /**
    * Hoe overhoord wordt:
    *  - "typen" (default): Stijn typt het antwoord; gescoord met `normalisatie`.
    *  - "kaart": flip-kaart met referentie-`afbeelding` (topografie zonder hotspots,
