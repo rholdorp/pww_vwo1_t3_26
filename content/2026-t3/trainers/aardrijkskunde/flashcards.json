@@ -6,6 +6,11 @@
       "id": "aardrijkskunde-h6-begrip-001",
       "vraag": "Luchtstreek waarin Europa grotendeels ligt; de temperaturen zijn er niet heel hoog en niet heel laag.",
       "antwoord": "gematigde zone",
+      "wrongAnswers": [
+        "tropische zone",
+        "poolzone",
+        "subtropen"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
@@ -15,6 +20,11 @@
       "id": "aardrijkskunde-h6-begrip-002",
       "vraag": "De ligging op hoge of lage breedte, die bepaalt hoe warm of koud het is (op hoge breedte kouder dan op lage breedte).",
       "antwoord": "breedteligging",
+      "wrongAnswers": [
+        "hoogteligging",
+        "lengteligging",
+        "kustligging"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
@@ -24,6 +34,11 @@
       "id": "aardrijkskunde-h6-begrip-003",
       "vraag": "Het warmere deel van de gematigde zone (Zuid-Europa).",
       "antwoord": "subtropen",
+      "wrongAnswers": [
+        "tropen",
+        "poolstreek",
+        "toendra"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
@@ -33,6 +48,11 @@
       "id": "aardrijkskunde-h6-begrip-004",
       "vraag": "Gebied (deel van Noord-Europa) waar het zelfs 's zomers zo koud is dat er geen boom kan groeien.",
       "antwoord": "poolstreek",
+      "wrongAnswers": [
+        "subtropen",
+        "gematigde zone",
+        "steppe"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p78.jpg",
@@ -42,6 +62,11 @@
       "id": "aardrijkskunde-h6-begrip-005",
       "vraag": "Verplaatsing van zeewater die ontstaat als de wind lang uit dezelfde richting waait; kan warm tropenwater naar de polen of koud poolwater naar warme streken brengen.",
       "antwoord": "zeestroom",
+      "wrongAnswers": [
+        "getijde",
+        "branding",
+        "aanlandige wind"
+      ],
       "acceptedAnswers": [
         "zeestromen"
       ],
@@ -54,6 +79,11 @@
       "id": "aardrijkskunde-h6-begrip-006",
       "vraag": "Warme zeestroom die warm water uit de Golf van Mexico naar de westkust van Europa brengt; erg belangrijk voor het klimaat in Europa.",
       "antwoord": "Golfstroom",
+      "wrongAnswers": [
+        "Humboldtstroom",
+        "Labradorstroom",
+        "Canarische stroom"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -63,6 +93,11 @@
       "id": "aardrijkskunde-h6-begrip-007",
       "vraag": "Wind die vanaf zee het land op waait; maakt het 's winters minder koud en 's zomers koeler langs de kust.",
       "antwoord": "aanlandige wind",
+      "wrongAnswers": [
+        "aflandige wind",
+        "passaatwind",
+        "stuwingswind"
+      ],
       "acceptedAnswers": [
         "zeewind"
       ],
@@ -75,6 +110,11 @@
       "id": "aardrijkskunde-h6-begrip-008",
       "vraag": "Breedtecirkel; ten noorden ervan komen de poolnacht en de middernachtzon voor (Hammerfest ligt er op 71° N.B. ten noorden van).",
       "antwoord": "poolcirkel",
+      "wrongAnswers": [
+        "evenaar",
+        "keerkring",
+        "nulmeridiaan"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -84,6 +124,11 @@
       "id": "aardrijkskunde-h6-begrip-009",
       "vraag": "Periode waarin de zon niet boven de horizon komt (in Hammerfest van 22 november tot en met 21 januari).",
       "antwoord": "poolnacht",
+      "wrongAnswers": [
+        "middernachtzon",
+        "poollicht",
+        "poolwinter"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -93,6 +138,11 @@
       "id": "aardrijkskunde-h6-begrip-010",
       "vraag": "Periode waarin de zon nooit ondergaat en het altijd daglicht is (van half mei tot eind juli).",
       "antwoord": "middernachtzon",
+      "wrongAnswers": [
+        "poolnacht",
+        "poollicht",
+        "poolzomer"
+      ],
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -102,6 +152,11 @@
       "id": "aardrijkskunde-h6-begrip-011",
       "vraag": "Gekleurde stroken licht aan de hemel bij de polen (ook noorderlicht of aurora borealis genoemd).",
       "antwoord": "poollicht",
+      "wrongAnswers": [
+        "middernachtzon",
+        "poolnacht",
+        "regenboog"
+      ],
       "acceptedAnswers": [
         "noorderlicht",
         "aurora borealis"
@@ -115,6 +170,11 @@
       "id": "aardrijkskunde-h6-begrip-012",
       "vraag": "De hoogteverschillen in een gebied (van vlak laagland tot de toppen van het hooggebergte).",
       "antwoord": "reliëf",
+      "wrongAnswers": [
+        "klimaat",
+        "vegetatie",
+        "breedteligging"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -124,6 +184,11 @@
       "id": "aardrijkskunde-h6-begrip-013",
       "vraag": "Hoog gebergte; het belangrijkste van Europa zijn de Alpen.",
       "antwoord": "hooggebergte",
+      "wrongAnswers": [
+        "middelgebergte",
+        "heuvelland",
+        "laagland"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -133,6 +198,11 @@
       "id": "aardrijkskunde-h6-begrip-014",
       "vraag": "Hoogtegordel op de bergtoppen die altijd met sneeuw en ijs bedekt is.",
       "antwoord": "eeuwige sneeuw",
+      "wrongAnswers": [
+        "boomgrens",
+        "gletsjer",
+        "regenschaduw"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -142,6 +212,11 @@
       "id": "aardrijkskunde-h6-begrip-015",
       "vraag": "IJsmassa (ijsvlakte) hoog in de bergen.",
       "antwoord": "gletsjer",
+      "wrongAnswers": [
+        "eeuwige sneeuw",
+        "ijsberg",
+        "toendra"
+      ],
       "acceptedAnswers": [
         "gletsjers"
       ],
@@ -154,6 +229,11 @@
       "id": "aardrijkskunde-h6-begrip-016",
       "vraag": "Lager gebergte, tussen hooggebergte en heuvelland in.",
       "antwoord": "middelgebergte",
+      "wrongAnswers": [
+        "hooggebergte",
+        "heuvelland",
+        "laagland"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -163,6 +243,11 @@
       "id": "aardrijkskunde-h6-begrip-017",
       "vraag": "Gebied met heuvels, lager dan een middelgebergte.",
       "antwoord": "heuvelland",
+      "wrongAnswers": [
+        "middelgebergte",
+        "laagland",
+        "hooggebergte"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -172,6 +257,11 @@
       "id": "aardrijkskunde-h6-begrip-018",
       "vraag": "Vlak, laaggelegen gebied (zoals Nederland).",
       "antwoord": "laagland",
+      "wrongAnswers": [
+        "heuvelland",
+        "middelgebergte",
+        "hooggebergte"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -181,6 +271,11 @@
       "id": "aardrijkskunde-h6-begrip-019",
       "vraag": "Gebied dat aan drie kanten door water omringd is; Europa is er één van het Euraziatische continent.",
       "antwoord": "schiereiland",
+      "wrongAnswers": [
+        "eiland",
+        "kustvlakte",
+        "delta"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -190,6 +285,11 @@
       "id": "aardrijkskunde-h6-begrip-020",
       "vraag": "Sterk ingesneden kust waar de zee via inhammen diep het land binnendringt; zorgt voor veel schiereilanden en eilanden.",
       "antwoord": "gelede kust",
+      "wrongAnswers": [
+        "rechte kust",
+        "steile kust",
+        "vlakke kust"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p80.jpg",
@@ -199,6 +299,11 @@
       "id": "aardrijkskunde-h6-begrip-021",
       "vraag": "Een gebergte dat twee verschillende klimaten van elkaar scheidt: aan beide kanten is een ander klimaat.",
       "antwoord": "klimaatscheiding",
+      "wrongAnswers": [
+        "regenschaduw",
+        "boomgrens",
+        "klimaatzone"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -208,6 +313,11 @@
       "id": "aardrijkskunde-h6-begrip-022",
       "vraag": "De daling van de temperatuur met de hoogte: bij elke 100 m stijging daalt de temperatuur met 0,6 °C.",
       "antwoord": "temperatuurgradiënt",
+      "wrongAnswers": [
+        "jaaramplitude",
+        "temperatuurschommeling",
+        "stuwingsregen"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -217,6 +327,11 @@
       "id": "aardrijkskunde-h6-begrip-023",
       "vraag": "Het gemiddelde weer in een groot gebied over een lange tijd (meestal dertig jaar), bepaald door temperatuur en neerslag.",
       "antwoord": "klimaat",
+      "wrongAnswers": [
+        "weer",
+        "seizoen",
+        "reliëf"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -226,6 +341,11 @@
       "id": "aardrijkskunde-h6-begrip-024",
       "vraag": "Neerslag die ontstaat doordat vochtige lucht tegen een gebergte omhoog wordt gestuwd.",
       "antwoord": "stuwingsregen",
+      "wrongAnswers": [
+        "stortregen",
+        "motregen",
+        "regenschaduw"
+      ],
       "acceptedAnswers": [
         "stuwingsregens"
       ],
@@ -238,6 +358,11 @@
       "id": "aardrijkskunde-h6-begrip-025",
       "vraag": "De vochtige kant van het gebergte, waar de stuwingsregens vallen.",
       "antwoord": "loefzijde",
+      "wrongAnswers": [
+        "lijzijde",
+        "regenschaduw",
+        "noordzijde"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -247,6 +372,11 @@
       "id": "aardrijkskunde-h6-begrip-026",
       "vraag": "De droge kant van het gebergte, waar veel minder neerslag valt.",
       "antwoord": "lijzijde",
+      "wrongAnswers": [
+        "loefzijde",
+        "stuwingszijde",
+        "zuidzijde"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -256,6 +386,11 @@
       "id": "aardrijkskunde-h6-begrip-027",
       "vraag": "Het droge gebied aan de lijzijde van een gebergte.",
       "antwoord": "regenschaduw",
+      "wrongAnswers": [
+        "loefzijde",
+        "stuwingsregen",
+        "steppe"
+      ],
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -265,6 +400,11 @@
       "id": "aardrijkskunde-h6-begrip-028",
       "vraag": "Klimaat met het hele jaar door neerslag en gematigde temperaturen (koel in de zomer, mild in de winter).",
       "antwoord": "zeeklimaat",
+      "wrongAnswers": [
+        "landklimaat",
+        "Middellandse Zeeklimaat",
+        "toendraklimaat"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
@@ -274,6 +414,11 @@
       "id": "aardrijkskunde-h6-begrip-029",
       "vraag": "Zeeklimaat van Zuid-Europa met hogere temperaturen en een droge zomerperiode.",
       "antwoord": "Middellandse Zeeklimaat",
+      "wrongAnswers": [
+        "zeeklimaat",
+        "landklimaat",
+        "droog klimaat"
+      ],
       "acceptedAnswers": [
         "mediterrane klimaat",
         "mediterraan klimaat",
@@ -288,6 +433,11 @@
       "id": "aardrijkskunde-h6-begrip-030",
       "vraag": "Klimaat waar jaarlijks nauwelijks neerslag valt; het landschap is er een steppe.",
       "antwoord": "droog klimaat",
+      "wrongAnswers": [
+        "zeeklimaat",
+        "landklimaat",
+        "toendraklimaat"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
@@ -297,6 +447,11 @@
       "id": "aardrijkskunde-h6-begrip-031",
       "vraag": "Droog landschap dat vooral begroeid is met grassen en lage struiken.",
       "antwoord": "steppe",
+      "wrongAnswers": [
+        "toendra",
+        "loofbos",
+        "naaldbos"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
@@ -306,6 +461,11 @@
       "id": "aardrijkskunde-h6-begrip-032",
       "vraag": "Bladverliezende bomen die kunnen groeien in het zeeklimaat (dankzij de milde winters).",
       "antwoord": "loofbomen",
+      "wrongAnswers": [
+        "naaldbomen",
+        "palmbomen",
+        "struiken"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p82.jpg",
@@ -315,6 +475,11 @@
       "id": "aardrijkskunde-h6-begrip-033",
       "vraag": "Klimaat van het binnenland met grote temperatuurverschillen; de gemiddelde temperatuur in de koudste maand is lager dan -3 °C.",
       "antwoord": "landklimaat",
+      "wrongAnswers": [
+        "zeeklimaat",
+        "Middellandse Zeeklimaat",
+        "toendraklimaat"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -324,6 +489,11 @@
       "id": "aardrijkskunde-h6-begrip-034",
       "vraag": "Het verschil tussen de gemiddelde temperatuur van de warmste en de koudste maand (groot bij een landklimaat).",
       "antwoord": "jaaramplitude",
+      "wrongAnswers": [
+        "temperatuurgradiënt",
+        "neerslagverschil",
+        "gemiddelde temperatuur"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -333,6 +503,11 @@
       "id": "aardrijkskunde-h6-begrip-035",
       "vraag": "Bomen die voornamelijk in het landklimaat groeien, omdat het er voor loofbomen te koud is.",
       "antwoord": "naaldbomen",
+      "wrongAnswers": [
+        "loofbomen",
+        "palmbomen",
+        "fruitbomen"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -342,6 +517,11 @@
       "id": "aardrijkskunde-h6-begrip-036",
       "vraag": "De grens waarboven het te koud is voor bomen om te groeien.",
       "antwoord": "boomgrens",
+      "wrongAnswers": [
+        "sneeuwgrens",
+        "poolcirkel",
+        "klimaatscheiding"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -351,6 +531,11 @@
       "id": "aardrijkskunde-h6-begrip-037",
       "vraag": "Koud klimaat waar in de korte zomer de temperatuur tussen 0 en 10 °C ligt; alleen grassen, mossen en lage struikjes groeien er.",
       "antwoord": "toendraklimaat",
+      "wrongAnswers": [
+        "landklimaat",
+        "zeeklimaat",
+        "hooggebergteklimaat"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -360,6 +545,11 @@
       "id": "aardrijkskunde-h6-begrip-038",
       "vraag": "Boomloze landschapszone in de poolstreken.",
       "antwoord": "toendra",
+      "wrongAnswers": [
+        "steppe",
+        "taiga",
+        "savanne"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -369,6 +559,11 @@
       "id": "aardrijkskunde-h6-begrip-039",
       "vraag": "Bijzonder koud klimaat in de hooggebergten; het hele jaar ijskoud met veel neerslag (sneeuw).",
       "antwoord": "hooggebergteklimaat",
+      "wrongAnswers": [
+        "toendraklimaat",
+        "landklimaat",
+        "poolklimaat"
+      ],
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -378,6 +573,11 @@
       "id": "aardrijkskunde-h6-feit-001",
       "vraag": "Met hoeveel graden daalt de temperatuur per 100 m stijging in een gebergte?",
       "antwoord": "0,6 °C",
+      "wrongAnswers": [
+        "0,1 °C",
+        "1 °C",
+        "6 °C"
+      ],
       "acceptedAnswers": [
         "0,6 graden",
         "0,6"
@@ -391,6 +591,11 @@
       "id": "aardrijkskunde-h6-feit-002",
       "vraag": "Wat is het belangrijkste hooggebergte van Europa, en wat is daar de hoogste berg?",
       "antwoord": "de Alpen; de Mont Blanc (4.808 m)",
+      "wrongAnswers": [
+        "de Pyreneeën; de Aneto",
+        "de Karpaten; de Gerlachovský štít",
+        "de Alpen; de Matterhorn"
+      ],
       "acceptedAnswers": [
         "Alpen, Mont Blanc",
         "Mont Blanc"
@@ -404,6 +609,11 @@
       "id": "aardrijkskunde-h5-begrip-001",
       "vraag": "Gebied met overeenkomstige cultuurkenmerken.",
       "antwoord": "cultuurgebied",
+      "wrongAnswers": [
+        "etnische groep",
+        "klimaatgebied",
+        "cultuurlandschap"
+      ],
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66.jpg",
@@ -413,6 +623,11 @@
       "id": "aardrijkskunde-h5-begrip-002",
       "vraag": "Kenmerk van een gebied waar veel verschillende culturen, talen en godsdiensten naast elkaar bestaan.",
       "antwoord": "multicultureel",
+      "wrongAnswers": [
+        "monocultureel",
+        "multinationaal",
+        "etnisch homogeen"
+      ],
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66.jpg",
@@ -422,6 +637,11 @@
       "id": "aardrijkskunde-h5-begrip-003",
       "vraag": "Bevolkingsgroep met een eigen cultuur (zoals de Chinezen in de kustplaatsen van Zuidoost-Azië).",
       "antwoord": "etnische groep",
+      "wrongAnswers": [
+        "cultuurgebied",
+        "kolonie",
+        "etnische zuivering"
+      ],
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -431,6 +651,11 @@
       "id": "aardrijkskunde-h5-begrip-004",
       "vraag": "Gebied in een ander werelddeel dat in het bezit is van (meestal) een Europees land.",
       "antwoord": "kolonie",
+      "wrongAnswers": [
+        "plantage",
+        "protectoraat",
+        "provincie"
+      ],
       "acceptedAnswers": [
         "koloniën"
       ],
@@ -443,6 +668,11 @@
       "id": "aardrijkskunde-h5-begrip-005",
       "vraag": "Uit de bodem gewonnen grondstoffen zoals goud, zilver, kolen en aardolie.",
       "antwoord": "delfstoffen",
+      "wrongAnswers": [
+        "fossielen",
+        "mineralen",
+        "grondstoffen"
+      ],
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -452,6 +682,11 @@
       "id": "aardrijkskunde-h5-begrip-006",
       "vraag": "Landbouwonderneming waar op grote schaal één gewas wordt verbouwd (zoals thee, rubber, tabak of bananen).",
       "antwoord": "plantage",
+      "wrongAnswers": [
+        "monocultuur",
+        "kolonie",
+        "akkerbouwbedrijf"
+      ],
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -461,6 +696,11 @@
       "id": "aardrijkskunde-h5-begrip-007",
       "vraag": "Het jaar na jaar op grote schaal verbouwen van één gewas op hetzelfde stuk grond.",
       "antwoord": "monocultuur",
+      "wrongAnswers": [
+        "plantage",
+        "vruchtwisseling",
+        "multicultuur"
+      ],
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -470,6 +710,11 @@
       "id": "aardrijkskunde-h5-begrip-008",
       "vraag": "Samenwerkingsverband van Zuidoost-Aziatische landen, in 1967 door vier staten opgericht; tien van de elf landen zijn lid (Oost-Timor niet).",
       "antwoord": "ASEAN",
+      "wrongAnswers": [
+        "EU",
+        "NAVO",
+        "OPEC"
+      ],
       "acceptedAnswers": [
         "Association of Southeast Asian Nations"
       ],
@@ -482,6 +727,11 @@
       "id": "aardrijkskunde-h5-feit-001",
       "vraag": "Uit hoeveel zelfstandige staten bestaat Zuidoost-Azië?",
       "antwoord": "elf",
+      "wrongAnswers": [
+        "tien",
+        "twaalf",
+        "negen"
+      ],
       "acceptedAnswers": [
         "11",
         "elf staten"
@@ -495,6 +745,11 @@
       "id": "aardrijkskunde-h5-topo-001",
       "vraag": "Welk land is donkerblauw gekleurd op de kaart?",
       "antwoord": "Myanmar",
+      "wrongAnswers": [
+        "Thailand",
+        "Laos",
+        "Vietnam"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -507,6 +762,11 @@
       "id": "aardrijkskunde-h5-topo-002",
       "vraag": "Welk land is oranje gekleurd op de kaart?",
       "antwoord": "Thailand",
+      "wrongAnswers": [
+        "Myanmar",
+        "Cambodja",
+        "Vietnam"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -519,6 +779,11 @@
       "id": "aardrijkskunde-h5-topo-003",
       "vraag": "Welk land is donkergroen gekleurd op de kaart?",
       "antwoord": "Laos",
+      "wrongAnswers": [
+        "Cambodja",
+        "Vietnam",
+        "Thailand"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -531,6 +796,11 @@
       "id": "aardrijkskunde-h5-topo-004",
       "vraag": "Welk land is geel gekleurd op de kaart?",
       "antwoord": "Vietnam",
+      "wrongAnswers": [
+        "Laos",
+        "Cambodja",
+        "Thailand"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -543,6 +813,11 @@
       "id": "aardrijkskunde-h5-topo-005",
       "vraag": "Welk land is paars gekleurd op de kaart?",
       "antwoord": "Cambodja",
+      "wrongAnswers": [
+        "Laos",
+        "Vietnam",
+        "Thailand"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -555,6 +830,11 @@
       "id": "aardrijkskunde-h5-topo-006",
       "vraag": "Welk land is lichtblauw gekleurd op de kaart (twee delen: schiereiland + noord-Borneo)?",
       "antwoord": "Maleisië",
+      "wrongAnswers": [
+        "Indonesië",
+        "Brunei",
+        "Filipijnen"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -567,6 +847,11 @@
       "id": "aardrijkskunde-h5-topo-007",
       "vraag": "Welke kleine eiland-stadstaat is de rode stip aan de zuidpunt van het Maleisisch schiereiland?",
       "antwoord": "Singapore",
+      "wrongAnswers": [
+        "Brunei",
+        "Maleisië",
+        "Oost-Timor"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -579,6 +864,11 @@
       "id": "aardrijkskunde-h5-topo-008",
       "vraag": "Welk klein grijs land ligt aan de noordkust van Borneo, omringd door het lichtblauwe land?",
       "antwoord": "Brunei",
+      "wrongAnswers": [
+        "Singapore",
+        "Maleisië",
+        "Oost-Timor"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -591,6 +881,11 @@
       "id": "aardrijkskunde-h5-topo-009",
       "vraag": "Welk land is lichtgroen gekleurd op de kaart (de grote eilandengroep)?",
       "antwoord": "Indonesië",
+      "wrongAnswers": [
+        "Maleisië",
+        "Filipijnen",
+        "Oost-Timor"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -603,6 +898,11 @@
       "id": "aardrijkskunde-h5-topo-010",
       "vraag": "Welk land is lichtpaars gekleurd op de kaart (de eilandengroep in het noordoosten)?",
       "antwoord": "Filipijnen",
+      "wrongAnswers": [
+        "Indonesië",
+        "Maleisië",
+        "Brunei"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -615,6 +915,11 @@
       "id": "aardrijkskunde-h5-topo-011",
       "vraag": "Welk klein bruin land ligt aan de oostkant van de lichtgroene eilandengroep?",
       "antwoord": "Oost-Timor",
+      "wrongAnswers": [
+        "Brunei",
+        "Indonesië",
+        "Singapore"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -627,6 +932,11 @@
       "id": "aardrijkskunde-h5-topo-012",
       "vraag": "Welke oceaan ligt ten westen en zuiden van Zuidoost-Azië?",
       "antwoord": "Indische Oceaan",
+      "wrongAnswers": [
+        "Grote Oceaan",
+        "Atlantische Oceaan",
+        "Noordelijke IJszee"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -639,6 +949,11 @@
       "id": "aardrijkskunde-h5-topo-013",
       "vraag": "Welke oceaan ligt ten oosten van Zuidoost-Azië (bij de Filipijnen)?",
       "antwoord": "Grote Oceaan",
+      "wrongAnswers": [
+        "Indische Oceaan",
+        "Atlantische Oceaan",
+        "Noordelijke IJszee"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
@@ -651,12 +966,17 @@
       "id": "aardrijkskunde-h5-topo-014",
       "vraag": "Welk land is rood gekleurd op de kaart?",
       "antwoord": "China",
+      "wrongAnswers": [
+        "Myanmar",
+        "Vietnam",
+        "India"
+      ],
       "modus": "typen",
       "normalisatie": "exact",
       "onderdeel": "topografie 5.2",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p66-topo.jpg",
-      "confidence": 0.95,
+      "confidence": 0.97,
       "afbeelding": "raw/aardrijkskunde/aardrijkskunde-h05-topo-gekleurd.png"
     }
   ]
