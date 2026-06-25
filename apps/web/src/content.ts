@@ -294,10 +294,13 @@ function typedFlashcard(k: FlashcardBestand["kaarten"][number], norm: Normalisat
   };
 }
 
-// Vakken waarvan de feitjes-flashcards (begrippen) als meerkeuze geoefend worden
+// Vakken waarvan de feitjes-flashcards (begrippen) áltijd als meerkeuze geoefend worden
 // (afspraak Ralph 2026-06-25). Afleiders = échte andere begrippen uit hetzelfde vak,
 // dus we verzinnen geen onjuiste "feiten".
 const MEERKEUZE_VAKKEN = new Set(["aardrijkskunde", "biologie"]);
+// Vakken waarvan elke begrippenkaart per beurt willekeurig open (typen) óf meerkeuze is
+// (afspraak Ralph 2026-06-25). De keuze valt per sessie (bij het opbouwen van de kaarten).
+const GEMENGD_VAKKEN = new Set(["geschiedenis"]);
 
 // Deterministische (op kaart-id geseede) shuffle, zodat de opties stabiel zijn —
 // niet bij elke render of sessie van plek/inhoud wisselen.
@@ -417,9 +420,17 @@ function buildRuw(): Blok[] {
       }
     } else if (file === "flashcards.json") {
       const b = data as FlashcardBestand;
-      // Meerkeuze-vakken: afleiders uit de hele vak-woordenschat (alle antwoorden).
+      // Meerkeuze: afleiders uit de hele vak-woordenschat (alle "begrip"-antwoorden,
+      // dus geen flip-kaarten). `meerkeuze` = altijd MC; `gemengd` = per beurt random.
       const meerkeuze = MEERKEUZE_VAKKEN.has(vak);
-      const pool = meerkeuze ? b.kaarten.map((k) => k.antwoord) : [];
+      const gemengd = GEMENGD_VAKKEN.has(vak);
+      const pool = meerkeuze || gemengd ? b.kaarten.filter((k) => k.modus !== "kaart").map((k) => k.antwoord) : [];
+      const bouwKaart = (k: FlashcardBestand["kaarten"][number]): Card => {
+        if (k.modus === "kaart") return typedFlashcard(k, b.normalisatie); // flip blijft flip
+        if (meerkeuze) return meerkeuzeFlashcard(k, pool);
+        if (gemengd) return Math.random() < 0.5 ? meerkeuzeFlashcard(k, pool) : typedFlashcard(k, b.normalisatie);
+        return typedFlashcard(k, b.normalisatie);
+      };
       for (const [onderdeel, kaarten] of groupBy(b.kaarten, (k) => k.onderdeel ?? `Hoofdstuk ${k.hoofdstuk}`)) {
         blokken.push({
           id: `${vak}/begrippen/${onderdeel}`,
@@ -429,8 +440,7 @@ function buildRuw(): Blok[] {
           soort: "begrippen",
           titel: onderdeel,
           ids: kaarten.map((k) => k.id),
-          bouwCards: () =>
-            kaarten.map((k) => (meerkeuze ? meerkeuzeFlashcard(k, pool) : typedFlashcard(k, b.normalisatie))),
+          bouwCards: () => kaarten.map(bouwKaart),
         });
       }
     } else if (file === "schrijfopdrachten.json") {
