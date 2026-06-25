@@ -101,6 +101,17 @@ export type Card =
       image?: string;
     }
   | {
+      kind: "keuze";
+      id: string;
+      prompt: string;
+      /** Optionele gedempte koptekst boven de prompt. */
+      subtitel?: string;
+      /** Antwoordopties (incl. het juiste); afleiders = échte andere begrippen van het vak. */
+      options: string[];
+      answer: string;
+      image?: string;
+    }
+  | {
       kind: "flip";
       id: string;
       front: string;
@@ -283,6 +294,62 @@ function typedFlashcard(k: FlashcardBestand["kaarten"][number], norm: Normalisat
   };
 }
 
+// Vakken waarvan de feitjes-flashcards (begrippen) als meerkeuze geoefend worden
+// (afspraak Ralph 2026-06-25). Afleiders = échte andere begrippen uit hetzelfde vak,
+// dus we verzinnen geen onjuiste "feiten".
+const MEERKEUZE_VAKKEN = new Set(["aardrijkskunde", "biologie"]);
+
+// Deterministische (op kaart-id geseede) shuffle, zodat de opties stabiel zijn —
+// niet bij elke render of sessie van plek/inhoud wisselen.
+function seedFromId(id: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+function seededShuffle<T>(arr: readonly T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed >>> 0;
+  const rnd = () => {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+const woordAantal = (s: string) => s.trim().split(/\s+/).length;
+
+/** Bouwt een meerkeuze-kaart: het juiste begrip + 3 afleiders (andere begrippen van het
+ * vak, bij voorkeur even lang qua woorden zodat het juiste antwoord niet opvalt). */
+function meerkeuzeFlashcard(k: FlashcardBestand["kaarten"][number], pool: string[]): Card {
+  const answer = k.antwoord;
+  const verboden = new Set([answer, ...(k.acceptedAnswers ?? [])].map((s) => s.toLowerCase()));
+  const kandidaten = [...new Set(pool)].filter((a) => !verboden.has(a.toLowerCase()));
+  const aw = woordAantal(answer);
+  const dichtbij = kandidaten.filter((a) => Math.abs(woordAantal(a) - aw) <= 1);
+  const bron = dichtbij.length >= 3 ? dichtbij : kandidaten;
+  const seed = seedFromId(k.id);
+  const afleiders = seededShuffle(bron, seed).slice(0, 3);
+  const options = seededShuffle([answer, ...afleiders], seed ^ 0x9e3779b9);
+  const isVraag = k.vraag.includes("?");
+  return {
+    kind: "keuze",
+    id: k.id,
+    prompt: k.vraag,
+    subtitel: isVraag ? undefined : "Welk begrip past bij deze omschrijving?",
+    options,
+    answer,
+    image: resolveImage(k.afbeelding),
+  };
+}
+
 function buildRuw(): Blok[] {
   const blokken: Blok[] = [];
 
@@ -350,6 +417,9 @@ function buildRuw(): Blok[] {
       }
     } else if (file === "flashcards.json") {
       const b = data as FlashcardBestand;
+      // Meerkeuze-vakken: afleiders uit de hele vak-woordenschat (alle antwoorden).
+      const meerkeuze = MEERKEUZE_VAKKEN.has(vak);
+      const pool = meerkeuze ? b.kaarten.map((k) => k.antwoord) : [];
       for (const [onderdeel, kaarten] of groupBy(b.kaarten, (k) => k.onderdeel ?? `Hoofdstuk ${k.hoofdstuk}`)) {
         blokken.push({
           id: `${vak}/begrippen/${onderdeel}`,
@@ -359,7 +429,8 @@ function buildRuw(): Blok[] {
           soort: "begrippen",
           titel: onderdeel,
           ids: kaarten.map((k) => k.id),
-          bouwCards: () => kaarten.map((k) => typedFlashcard(k, b.normalisatie)),
+          bouwCards: () =>
+            kaarten.map((k) => (meerkeuze ? meerkeuzeFlashcard(k, pool) : typedFlashcard(k, b.normalisatie))),
         });
       }
     } else if (file === "schrijfopdrachten.json") {

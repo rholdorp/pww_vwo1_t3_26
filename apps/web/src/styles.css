@@ -132,6 +132,12 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
 .uitslag.bijna { color: var(--bijna); }
 .juiste { margin: 4px 0 10px; }
 
+/* Meerkeuze (feitjes ak/biologie) */
+.keuze-opties { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.keuze-optie { width: 100%; flex: none; text-align: center; }
+/* Na het kiezen blijven de kleuren (goed/fout) goed leesbaar: niet dimmen. */
+.keuze-optie:disabled { opacity: 1; cursor: default; }
+
 .rubric { text-align: left; margin: 8px auto 12px; max-width: 420px; padding-left: 20px; }
 .rubric li { margin: 3px 0; }
 

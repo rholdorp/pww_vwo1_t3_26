@@ -783,6 +783,8 @@ function Trainer({
           />
         ) : card.kind === "hotspot" ? (
           <HotspotKaart key={card.id + card.richting + ":" + stap} card={card} kleur={kleur} onResultaat={volgende} />
+        ) : card.kind === "keuze" ? (
+          <KeuzeKaart key={card.id + ":" + stap} card={card} kleur={kleur} onResultaat={volgende} />
         ) : card.kind === "flip" ? (
           <FlipKaart card={card} kleur={kleur} onthuld={onthuld} onToon={() => setOnthuld(true)} onBeoordeel={volgende} />
         ) : card.kind === "teken" ? (
@@ -1050,7 +1052,7 @@ function LeerWeergave({
   const items = useMemo(
     () =>
       cards.flatMap((c): LeerItem[] =>
-        c.kind === "typed"
+        c.kind === "typed" || c.kind === "keuze"
           ? [{ id: c.id, term: c.answer, uitleg: c.prompt, image: c.image }]
           : c.kind === "flip"
             ? [{ id: c.id, term: c.front, uitleg: c.back, rubric: c.rubric, image: c.image }]
@@ -1340,6 +1342,58 @@ function TekenKaart({
       >
         Klaar — gedaan ✓
       </button>
+    </>
+  );
+}
+
+// Meerkeuze-kaart (feitjes ak/biologie): kies het juiste begrip uit 4 opties.
+// Direct nakijken, juiste optie groen / foute keuze rood, dan Volgende.
+function KeuzeKaart({
+  card,
+  kleur,
+  onResultaat,
+}: {
+  card: Extract<Card, { kind: "keuze" }>;
+  kleur: string;
+  onResultaat: (uitkomst: Uitkomst) => void;
+}) {
+  const [gekozen, setGekozen] = useState<string | null>(null);
+  const goed = gekozen === card.answer;
+  return (
+    <>
+      {card.subtitel && <div className="muted klein kaart-subtitel">{card.subtitel}</div>}
+      {card.image && <img className="kaart-beeld" src={card.image} alt="" />}
+      <div className="prompt">{card.prompt}</div>
+      <div className="keuze-opties">
+        {card.options.map((opt) => {
+          const juist = opt === card.answer;
+          const klasse = gekozen ? (juist ? "goed" : opt === gekozen ? "fout" : "") : "";
+          return (
+            <button
+              key={opt}
+              className={`knop keuze-optie ${klasse}`}
+              style={!gekozen ? { borderColor: kleur } : undefined}
+              disabled={!!gekozen}
+              onClick={() => setGekozen(opt)}
+            >
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+      {gekozen && (
+        <>
+          <div className={`uitslag ${goed ? "goed" : "fout"}`}>{goed ? "Goed! ✅" : "Helaas ❌"}</div>
+          {!goed && <div className="juiste">Juist: <b>{card.answer}</b></div>}
+          <button
+            className="knop primair"
+            style={{ background: `${kleur}22`, color: kleur, borderColor: kleur }}
+            onClick={() => onResultaat(goed ? "goed" : "fout")}
+          >
+            Volgende
+          </button>
+        </>
+      )}
     </>
   );
 }
