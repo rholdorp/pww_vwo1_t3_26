@@ -32,6 +32,8 @@ const cat2LocalKey = (s: string) => `pww-cat2:${s}`;
 const schemaPrefix = (s: string) => `pww-schema:${s}:`;
 // Handmatige afvink-items (offline werk: wiskunde-boekoefeningen, handvaardigheid).
 const afvinkLocalKey = (s: string) => `pww-afvink:${s}`;
+// Punten-vloer (high-water mark): hoogste ooit-behaalde totaal; oefenen kost nooit punten.
+const puntenVloerLocalKey = (s: string) => `pww-puntenvloer:${s}`;
 
 let timer: ReturnType<typeof setTimeout> | null = null;
 let pendingNaam: string | null = null;
@@ -61,6 +63,8 @@ interface ProgressDoc {
   dagschema?: Record<string, unknown>;
   /** Handmatige afvink-items: item-id → true (offline werk, dagdoel-bonus). */
   afvink?: Record<string, boolean>;
+  /** Punten-vloer: hoogste ooit-behaalde totaal (oefenen kost nooit punten). */
+  puntenVloer?: number;
   updated?: unknown;
 }
 
@@ -71,6 +75,7 @@ interface LocalState {
   cat2: Record<string, string>;
   dagschema: Record<string, unknown>;
   afvink: Record<string, boolean>;
+  puntenVloer: number;
 }
 
 function parse<T>(raw: string | null, fallback: T): T {
@@ -96,6 +101,7 @@ function readLocal(naam: string): LocalState {
     cat2: parse(localStorage.getItem(cat2LocalKey(s)), {} as Record<string, string>),
     dagschema,
     afvink: parse(localStorage.getItem(afvinkLocalKey(s)), {} as Record<string, boolean>),
+    puntenVloer: Number(localStorage.getItem(puntenVloerLocalKey(s)) ?? 0) || 0,
   };
 }
 
@@ -204,6 +210,13 @@ function writeLocal(naam: string, data: ProgressDoc): boolean {
     for (const [k, v] of Object.entries(data.afvink)) if (v) samen[k] = true;
     localStorage.setItem(afvinkLocalKey(s), JSON.stringify(samen));
   }
+  // puntenVloer: high-water mark → neem het maximum (een hogere ondergrens elders mag
+  // nooit verloren gaan; oefenen kost nooit punten).
+  if (typeof data.puntenVloer === "number") {
+    const lokaal = Number(localStorage.getItem(puntenVloerLocalKey(s)) ?? 0) || 0;
+    const samen = Math.max(lokaal, data.puntenVloer);
+    if (samen > lokaal) localStorage.setItem(puntenVloerLocalKey(s), String(samen));
+  }
   // dagschema: verleden = bevroren historie (dagdoel-bonus) → nooit aanraken. Vandaag +
   // toekomst = de cloud is leidend → altijd terugschrijven, zodat apparaten convergeren op
   // hetzelfde "vandaag"-schema (samen met de write-once in bewaarDagschema pusht geen enkel
@@ -224,7 +237,7 @@ function writeLocal(naam: string, data: ProgressDoc): boolean {
 
 /** Stabiele serialisatie van alle gesyncte velden (voor echo-detectie). */
 function serialize(d: Partial<LocalState>): string {
-  return [d.items ?? {}, d.schrijf ?? {}, d.resultaten ?? [], d.cat2 ?? {}, d.dagschema ?? {}, d.afvink ?? {}]
+  return [d.items ?? {}, d.schrijf ?? {}, d.resultaten ?? [], d.cat2 ?? {}, d.dagschema ?? {}, d.afvink ?? {}, d.puntenVloer ?? 0]
     .map((x) => JSON.stringify(x))
     .join("|");
 }
@@ -356,6 +369,7 @@ async function pushNow(s: string): Promise<void> {
     cat2: local.cat2,
     dagschema: local.dagschema,
     afvink: local.afvink,
+    puntenVloer: local.puntenVloer,
     updated: serverTimestamp(),
   };
   if (Object.keys(local.items).length > 0) payload.items = local.items;

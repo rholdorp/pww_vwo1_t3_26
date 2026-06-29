@@ -10,6 +10,16 @@
         "noemt de aanlandige wind / westenwind",
         "legt het verband: warme zeelucht wordt het land op gevoerd"
       ],
+      "modus": "mc",
+      "mc": {
+        "vraag": "Waarom is het in Noord-Europa minder koud dan je op die hoge breedte zou verwachten?",
+        "antwoord": "De warme Golfstroom voert warm water naar de westkust en de aanlandige westenwind blaast die warmere zeelucht het land op.",
+        "wrongAnswers": [
+          "Noord-Europa ligt dicht bij de evenaar, waar de zon het hele jaar hoog aan de hemel staat.",
+          "Een koude zeestroom uit de poolzee houdt de temperatuur juist constant hoog.",
+          "De hoge bergen houden alle koude wind tegen, zodat er warme woestijnlucht blijft hangen."
+        ]
+      },
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -24,6 +34,15 @@
         "zee matigt / land warmt en koelt snel(ler)",
         "concludeert: grotere temperatuurverschillen in het binnenland"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Landinwaarts neemt de matigende invloed van de zee af, en land warmt snel op en koelt snel af, dus zijn de verschillen groter.",
+        "wrongAnswers": [
+          "De zee versterkt juist de temperatuurverschillen, en die invloed reikt tot diep in het binnenland.",
+          "In het binnenland schijnt de zon altijd feller, waardoor het er zowel 's zomers als 's winters warmer is.",
+          "Aan de kust waait het zo hard dat het er het hele jaar door even koud blijft."
+        ]
+      },
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -37,6 +56,15 @@
         "poolnacht = zon komt niet boven de horizon (winter)",
         "middernachtzon = zon gaat nooit onder / altijd daglicht (zomer)"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Bij de poolnacht komt de zon in de winter niet boven de horizon; bij de middernachtzon gaat de zon in de zomer nooit onder.",
+        "wrongAnswers": [
+          "Bij de poolnacht gaat de zon nooit onder en bij de middernachtzon komt de zon niet boven de horizon.",
+          "De poolnacht is een nacht zonder maan en de middernachtzon is een extra felle zon rond het middaguur.",
+          "Beide komen alleen voor op de evenaar, waar dag en nacht altijd even lang zijn."
+        ]
+      },
       "onderdeel": "§6.1 Golfstroom",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p79.jpg",
@@ -51,6 +79,16 @@
         "loefzijde = nat, lijzijde = droog",
         "noemt de regenschaduw aan de lijzijde"
       ],
+      "modus": "mc",
+      "mc": {
+        "vraag": "Hoe zorgt een gebergte voor een natte loefzijde en een droge lijzijde (regenschaduw)?",
+        "antwoord": "Vochtige wind wordt tegen de loefzijde omhoog gestuwd en regent daar uit; over de top is de lucht droog, dus aan de lijzijde ligt de regenschaduw.",
+        "wrongAnswers": [
+          "De wind regent uit aan de lijzijde en bereikt de loefzijde droog, zodat daar de regenschaduw ligt.",
+          "Het gebergte warmt de lucht zo sterk op dat aan beide kanten evenveel neerslag valt.",
+          "De loefzijde is droog doordat de zon er fel op schijnt; de lijzijde blijft nat in de schaduw."
+        ]
+      },
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -65,6 +103,15 @@
         "gebergte werkt als klimaatscheiding / houdt vocht tegen",
         "Lillehammer = lijzijde/regenschaduw (droger en kouder)"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Bergen ligt op de loefzijde aan de kust (aanlandige wind + Golfstroom) en is nat en mild, terwijl het gebergte als klimaatscheiding werkt en Lillehammer aan de lijzijde in de regenschaduw droger en kouder maakt.",
+        "wrongAnswers": [
+          "Bergen ligt in het binnenland, waar het door het landklimaat juist natter en milder is dan aan de kust.",
+          "Lillehammer ligt op de loefzijde en vangt alle zeewind op, terwijl Bergen in de regenschaduw ligt.",
+          "Bergen ligt veel zuidelijker dan Lillehammer, zodat het verschil puur door de breedteligging komt."
+        ]
+      },
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -79,6 +126,15 @@
         "noemt 0,6 °C per 100 m",
         "noemt de term temperatuurgradiënt"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Het wordt kouder: per 100 m stijging daalt de temperatuur met ongeveer 0,6 °C (de temperatuurgradiënt).",
+        "wrongAnswers": [
+          "Het wordt warmer, omdat je dichter bij de zon komt: ongeveer 0,6 °C erbij per 100 m.",
+          "De temperatuur blijft gelijk, want de hoogte heeft geen invloed op het weer.",
+          "Het wordt kouder, met ongeveer 6 °C per 100 m stijging."
+        ]
+      },
       "onderdeel": "§6.2 Reliëf",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p81.jpg",
@@ -93,6 +149,16 @@
         "landklimaat = grote temperatuurverschillen / grote jaaramplitude, koudste maand < -3 °C",
         "noemt afnemende invloed van de zee in het binnenland"
       ],
+      "modus": "mc",
+      "mc": {
+        "vraag": "Wat is het verschil tussen een zeeklimaat en een landklimaat?",
+        "antwoord": "Een zeeklimaat heeft gematigde temperaturen en het hele jaar neerslag (kleine jaaramplitude); een landklimaat heeft grote temperatuurverschillen (grote jaaramplitude) en minder neerslag.",
+        "wrongAnswers": [
+          "Een zeeklimaat heeft grote temperatuurverschillen en droge zomers; een landklimaat is het hele jaar mild en nat.",
+          "Beide klimaten hebben dezelfde temperaturen, alleen valt er in een landklimaat meer neerslag.",
+          "Een zeeklimaat komt alleen in de bergen voor en een landklimaat alleen langs de kust."
+        ]
+      },
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -107,6 +173,15 @@
         "landklimaat heeft te koude winters → naaldbomen",
         "legt het verband met de wintertemperatuur"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Het zeeklimaat heeft milde winters waarin loofbomen kunnen groeien; in het landklimaat is de winter te koud voor loofbomen, dus groeien er vooral naaldbomen.",
+        "wrongAnswers": [
+          "Het landklimaat heeft mildere winters dan het zeeklimaat, daarom groeien daar de loofbomen.",
+          "Loofbomen hebben veel neerslag nodig en die valt alleen in het landklimaat.",
+          "In het zeeklimaat is de zomer te warm voor naaldbomen, dus die groeien alleen op de toendra."
+        ]
+      },
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -121,6 +196,16 @@
         "noemt landklimaat en droog klimaat",
         "noemt toendraklimaat en hooggebergteklimaat"
       ],
+      "modus": "mc",
+      "mc": {
+        "vraag": "Welke rij noemt zes klimaatgebieden van Europa?",
+        "antwoord": "Zeeklimaat, Middellandse Zeeklimaat, landklimaat, droog klimaat, toendraklimaat en hooggebergteklimaat.",
+        "wrongAnswers": [
+          "Zeeklimaat, woestijnklimaat, savanneklimaat, moessonklimaat, toendraklimaat en hooggebergteklimaat.",
+          "Tropisch klimaat, subtropisch klimaat, landklimaat, poolklimaat, steppeklimaat en bergklimaat.",
+          "Zeeklimaat, Middellandse Zeeklimaat, landklimaat, regenwoudklimaat, moessonklimaat en poolklimaat."
+        ]
+      },
       "onderdeel": "§6.3 Klimaat en vegetatie",
       "hoofdstuk": "6",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h06-p83.jpg",
@@ -135,6 +220,15 @@
         "noemt invloeden/migranten van buitenaf (bv. China, India, Arabische wereld, Europa)",
         "concludeert: veel volken/talen/godsdiensten → multicultureel"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Het gebied is over zee goed bereikbaar, waardoor er eeuwenlang volken en invloeden van buitenaf (China, India, de Arabische wereld, Europa) binnenkwamen: veel volken, talen en godsdiensten.",
+        "wrongAnswers": [
+          "Het gebied ligt geïsoleerd zonder havens, waardoor elk eiland zijn eigen taal en geloof ontwikkelde.",
+          "Eén machtig rijk verplichtte iedereen tot dezelfde taal en godsdienst, wat de variatie opleverde.",
+          "Door het droge woestijnklimaat trokken er alleen losse nomadenstammen rond."
+        ]
+      },
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -149,6 +243,15 @@
         "leverde grondstoffen (landbouwproducten en/of delfstoffen)",
         "noemt ook de afzetmarkt-functie"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Een kolonie is een gebied in een ander werelddeel in bezit van een (Europees) land; het leverde grondstoffen (landbouwproducten en delfstoffen) en was een afzetmarkt voor Europese producten.",
+        "wrongAnswers": [
+          "Een kolonie is een zelfstandig land dat Europa militair beschermde in ruil voor wapens.",
+          "Een kolonie is een handelsstad in Europa zelf waar grondstoffen aan boeren werden verkocht.",
+          "Een kolonie leverde vooral industrieproducten aan Europa en kocht daar grondstoffen terug."
+        ]
+      },
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -163,6 +266,15 @@
         "monocultuur = jaar na jaar hetzelfde gewas op dezelfde grond",
         "legt het verband tussen beide"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "Op een plantage wordt grootschalig één gewas geteeld, en als dat jaar na jaar op dezelfde grond gebeurt heet dat monocultuur — een plantage leidt dus tot monocultuur.",
+        "wrongAnswers": [
+          "Op een plantage worden juist veel verschillende gewassen door elkaar geteeld, wat monocultuur voorkomt.",
+          "Monocultuur betekent dat één boer alle plantages van een land bezit.",
+          "Een plantage is grond die braak ligt, en monocultuur is het bemesten ervan."
+        ]
+      },
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",
@@ -177,6 +289,15 @@
         "opgericht in 1967 / tien van de elf landen lid",
         "noemt dat Oost-Timor geen lid is"
       ],
+      "modus": "mc",
+      "mc": {
+        "antwoord": "ASEAN is het samenwerkingsverband van Zuidoost-Aziatische landen (opgericht in 1967); tien van de elf landen zijn lid en alleen Oost-Timor niet.",
+        "wrongAnswers": [
+          "ASEAN is een Europees handelsverbond, waarvan Oost-Timor het enige Aziatische lid is.",
+          "ASEAN is een militair bondgenootschap van alle elf landen, inclusief Oost-Timor.",
+          "ASEAN is een godsdienstige organisatie van moslimlanden, waarvan Singapore geen lid is."
+        ]
+      },
       "onderdeel": "§5.2 Cultuur Zuidoost-Azië",
       "hoofdstuk": "5",
       "bron": "raw/aardrijkskunde/aardrijkskunde-h05-p67.jpg",

@@ -10,6 +10,15 @@
         "noemt de eed/belofte van trouw van de leenman",
         "noemt de wederdienst (helpen besturen / in de oorlog)"
       ],
+      "modus": "beide",
+      "mc": {
+        "antwoord": "De koning/leenheer gaf grond (een leen) aan een leenman, die in ruil trouw zwoer en hielp bij het besturen en in de oorlog.",
+        "wrongAnswers": [
+          "Boeren kochten grond van de koning en werden zo zelf leenheer van de adel.",
+          "De paus verdeelde alle grond onder de bisschoppen, die daarvoor belasting betaalden.",
+          "De koning verkocht grond aan steden in ruil voor stadsrechten en soldaten."
+        ]
+      },
       "onderdeel": "§5.1 Karel de Grote",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p95.jpg",
@@ -24,6 +33,16 @@
         "noemt de invallers (Noormannen/Hongaren/Arabieren)",
         "noemt de verzwakkende koningsmacht / zelfstandige hertogen en graven"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Welke twee oorzaken zorgden ervoor dat het Frankische Rijk na Karel de Grote uiteenviel?",
+        "antwoord": "Erfenisruzies (in 843 werd het rijk in drieën verdeeld) en invallen van Noormannen, Hongaren en Arabieren terwijl de koningsmacht verzwakte.",
+        "wrongAnswers": [
+          "Een grote pestepidemie en de ontdekking van Amerika maakten het rijk arm.",
+          "De boeren kwamen in opstand en riepen samen één nieuw keizerrijk uit.",
+          "De steden werden zo machtig dat ze samen de koning afzetten."
+        ]
+      },
       "onderdeel": "§5.1 Karel de Grote",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p95.jpg",
@@ -38,6 +57,15 @@
         "noemt dat steden kleiner werden / mensen naar het platteland trokken",
         "concludeert: bijna iedereen leefde van de landbouw"
       ],
+      "modus": "beide",
+      "mc": {
+        "antwoord": "Na de Romeinse tijd viel de handel en nijverheid weg en werden steden kleiner; de meeste mensen trokken naar het platteland en gingen van de landbouw leven.",
+        "wrongAnswers": [
+          "Door een sterke groei van handel en steden ging juist iedereen in de stad werken.",
+          "Nieuwe machines maakten de landbouw zo makkelijk dat iedereen boer werd.",
+          "De koning verplichtte alle burgers per wet om boer te worden."
+        ]
+      },
       "onderdeel": "§5.2 Landbouwsamenleving",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p97.jpg",
@@ -52,6 +80,16 @@
         "noemt werken op de akkers van de heer",
         "noemt herendiensten (klussen)"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Welke drie plichten had een horige tegenover de heer van het domein?",
+        "antwoord": "Pacht betalen (deel van de oogst), een aantal dagen op de akkers van de heer werken en herendiensten doen.",
+        "wrongAnswers": [
+          "Belasting aan de koning betalen, in het leger dienen en de kerk onderhouden.",
+          "Stadsrechten kopen, tol betalen en lid worden van een gilde.",
+          "De heer grond in leen geven, hem trouw zweren en hem in de oorlog helpen."
+        ]
+      },
       "onderdeel": "§5.2 Landbouwsamenleving",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p98.jpg",
@@ -66,6 +104,16 @@
         "noemt dat alles op het domein zelf werd gemaakt/verbouwd",
         "geeft minstens één voorbeeld (molen, brouwerij, smederij, kerkje)"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Waarom was een domein zelfvoorzienend?",
+        "antwoord": "Doordat de handel was weggevallen, moest vrijwel alles op het domein zelf worden gemaakt en verbouwd (eigen molen, brouwerij, smederij, kerkje).",
+        "wrongAnswers": [
+          "Omdat de heer alle producten goedkoop in de stad kon kopen.",
+          "Omdat de koning elk domein van voedsel en spullen voorzag.",
+          "Omdat een domein zich juist op de teelt van één exportgewas richtte."
+        ]
+      },
       "onderdeel": "§5.2 Landbouwsamenleving",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p97.jpg",
@@ -80,6 +128,15 @@
         "noemt de steun van de bevolking en/of de bisschoppen",
         "legt het verband: koning regeert namens God → meer gezag"
       ],
+      "modus": "beide",
+      "mc": {
+        "antwoord": "Als christen kreeg Clovis steun van de christelijke bevolking en vooral van de machtige bisschoppen, die hielpen besturen en verkondigden dat de koning namens God regeerde.",
+        "wrongAnswers": [
+          "Door christen te worden kreeg Clovis steun van de paus om Rome te veroveren.",
+          "De bekering maakte de Franken moslim, waardoor ze zich bij de Arabieren aansloten.",
+          "Clovis verbood het christendom, waardoor de bevolking hem uit angst gehoorzaamde."
+        ]
+      },
       "onderdeel": "§5.3 De bekering van Clovis",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p102.jpg",
@@ -94,6 +151,16 @@
         "noemt de verzwakte tegenstanders (Byzantijnse en Perzische Rijk)",
         "legt verband met de snelle veroveringen"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Welke twee oorzaken verklaren waarom de Arabieren na Mohammeds dood snel grote gebieden veroverden?",
+        "antwoord": "Ze vochten fanatiek met snelle aanvallen (jihad-beloning), terwijl hun tegenstanders — het Byzantijnse en het Perzische Rijk — uitgeput en zwak waren.",
+        "wrongAnswers": [
+          "Ze hadden vuurwapens en kanonnen, terwijl hun tegenstanders alleen zwaarden hadden.",
+          "Ze sloten een bondgenootschap met de Noormannen en de Hongaren.",
+          "De veroverde volken bekeerden zich vrijwillig en gaven hun land zonder strijd weg."
+        ]
+      },
       "onderdeel": "§5.4 De islam",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p105.jpg",
@@ -108,6 +175,15 @@
         "noemt dat ze niet vervolgd werden",
         "noemt minstens één beperking (belasting / geen nieuwe gebedshuizen / geen wapens)"
       ],
+      "modus": "beide",
+      "mc": {
+        "antwoord": "Omdat zij net als moslims in één god geloofden en een heilig boek hadden; ze werden niet vervolgd, maar hadden wel minder rechten (extra belasting, geen nieuwe gebedshuizen, geen wapens).",
+        "wrongAnswers": [
+          "Omdat zij beloofden zich snel tot de islam te bekeren.",
+          "Omdat zij meer rechten kregen dan moslims, zolang ze meevochten in de jihad.",
+          "Omdat zij geen god vereerden en daarom ongevaarlijk werden gevonden."
+        ]
+      },
       "onderdeel": "§5.4 De islam",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
@@ -122,6 +198,15 @@
         "noemt overgenomen kennis (geneeskunde/wiskunde/sterrenkunde)",
         "noemt dat in West-Europa kennis verloren was gegaan"
       ],
+      "modus": "beide",
+      "mc": {
+        "antwoord": "Door hun veroveringen namen de Arabieren kennis over van Grieken, Perzen en Indiërs (geneeskunde, wiskunde, sterrenkunde), terwijl in West-Europa veel Klassieke kennis verloren was gegaan.",
+        "wrongAnswers": [
+          "Doordat West-Europa alle handel had stilgelegd en de Arabieren niets van anderen leerden.",
+          "Doordat de Arabieren als eersten de boekdrukkunst en de stoommachine uitvonden.",
+          "Doordat de Arabieren alle Europese universiteiten hadden overgenomen."
+        ]
+      },
       "onderdeel": "§5.4 De islam",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p106.jpg",
@@ -136,6 +221,16 @@
         "noemt dat niet iedereen meer boer hoefde te zijn / overschot verkopen",
         "concludeert: mensen naar de stad → steden groeien (verstedelijking)"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Hoe leidde betere landbouw vanaf de elfde eeuw tot verstedelijking?",
+        "antwoord": "Grotere oogsten (drieslagstelsel, meer grond, betere ploeg) maakten dat niet iedereen meer boer hoefde te zijn; mensen verkochten overschotten en trokken naar (nieuwe) steden.",
+        "wrongAnswers": [
+          "Mislukte oogsten dwongen iedereen om in de stad voedsel te gaan kopen.",
+          "De koning beval boeren om steden te bouwen op hun akkers.",
+          "Door de pest stierven zoveel boeren dat de overlevenden naar de stad vluchtten."
+        ]
+      },
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
@@ -150,6 +245,16 @@
         "noemt controle op lonen/prijzen/kwaliteit",
         "noemt een sociale taak (steun aan leden/nabestaanden)"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Welke taken had een ambachtsgilde?",
+        "antwoord": "Het regelde wie het beroep mocht uitoefenen (meester worden via een examen), bewaakte de lonen, prijzen en kwaliteit, en steunde leden en hun nabestaanden.",
+        "wrongAnswers": [
+          "Het bestuurde de hele stad en benoemde de koning.",
+          "Het inde belasting voor de heer en hield het leger op sterkte.",
+          "Het verdeelde de landbouwgrond onder de horigen van het domein."
+        ]
+      },
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p117.jpg",
@@ -164,6 +269,15 @@
         "noemt dat steden rijk waren / niet meer wilden gehoorzamen aan de heer",
         "noemt dat ze die rechten kochten (geld/belasting)"
       ],
+      "modus": "beide",
+      "mc": {
+        "antwoord": "Stadsrechten gaven een stad zelfbestuur (eigen regels en rechtspraak); rijke steden wilden niet meer aan hun heer gehoorzamen en kochten die rechten van hem, vaak voor geld of belasting.",
+        "wrongAnswers": [
+          "Stadsrechten verplichtten een stad juist om de heer in alles te gehoorzamen in ruil voor bescherming.",
+          "Stadsrechten gaven boeren het recht om gratis in de stad te wonen.",
+          "Stadsrechten waren regels van de paus over het bouwen van kerken."
+        ]
+      },
       "onderdeel": "§6.1 De middeleeuwse stad",
       "hoofdstuk": "6",
       "bron": "raw/geschiedenis/geschiedenis-h6-p118.jpg",
@@ -178,6 +292,16 @@
         "noemt 'hoe aan de informatie gekomen' (zelf erbij / tussenstappen)",
         "noemt 'bedoeling van de maker' (informeren/feiten vs overtuigen/mening)"
       ],
+      "modus": "beide",
+      "mc": {
+        "vraag": "Welke drie hulpvragen gebruik je om te bepalen hoe betrouwbaar een bron is?",
+        "antwoord": "Wanneer is de bron gemaakt? Hoe kwam de maker aan zijn informatie? Wat was zijn bedoeling (informeren of overtuigen)?",
+        "wrongAnswers": [
+          "Hoe mooi ziet de bron eruit, hoe lang is hij en in welke taal is hij geschreven?",
+          "Is de bron beroemd, staat hij in een schoolboek en heeft hij veel gekost?",
+          "Wie bezit de bron nu, waar ligt hij en hoe oud is het papier?"
+        ]
+      },
       "onderdeel": "Vaardigheid: betrouwbaarheid van bronnen",
       "hoofdstuk": "5",
       "bron": "raw/geschiedenis/geschiedenis-h5-p94.jpg",

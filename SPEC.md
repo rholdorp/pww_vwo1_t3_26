@@ -294,6 +294,8 @@ Stable IDs: `<vak>-h<hoofdstuk>-<onderdeel>-<n>` (bv. `frans-h5-vocab-012`). Ded
     ] }
     ```
     Tot de LLM-proxy er is: trainer toont deze in flashcard-modus (vraag → `modelAntwoord`, geen autoscore); de `rubric` ligt al vast voor latere LLM-beoordeling.
+
+    **Redeneer-mc (examenformat).** Voor vakken waar het examen (deels) meerkeuze is, krijgt een oefenvraag een `mc`-veld (`antwoord` = volledige verklaring + precies 3 `wrongAnswers` = plausibele misvattingen) en een `modus`: `"mc"` (bv. biologie/aardrijkskunde, puur mc) of `"beide"` (bv. geschiedenis, gemengd examen: eerst mc, dan de open verdieping). Afwezige `modus` = `"open"` (oud gedrag). `modelAntwoord`/`rubric` blijven altijd staan voor de validator. Reden: bij bio/ak is het examen uitsluitend mc, dus de open "welke elementen"-vorm is off-format; de redeneer-mc behoudt het toetsen van kruisverbanden in het juiste examenformat.
 - **Nederlands / Engels (Cat. 4)** — `teksten/<id>.md` (oefentekst) + `vragen/<id>.json` (meerkeuze + open met `modelAntwoord`).
 - **Gelabeld diagram (Cat. 1 met beeld-prompt)** — `<vak>/diagram.json`, een lijst diagrammen:
   ```json

@@ -243,6 +243,24 @@ export function zetAfvink(naam: string, id: string, waarde: boolean): void {
   pushSync?.(naam);
 }
 
+// ── Punten-vloer (high-water mark): punten mogen stijgen maar nooit dalen. ──────────
+// Oefenen mag NOOIT punten kosten (motivatie, P8). Mastery kan dalen na fouten in een
+// herhaling; de afgeleide puntenscore zou dan dalen. Daarom houden we het hoogste
+// ooit-behaalde totaal vast als ondergrens. Zie gamification.totaalPunten.
+const puntenVloerKey = (naam: string) => `pww-puntenvloer:${slug(naam)}`;
+
+export function laadPuntenVloer(naam: string): number {
+  const r = localStorage.getItem(puntenVloerKey(naam));
+  const n = r ? Number(r) : 0;
+  return Number.isFinite(n) ? n : 0;
+}
+/** Verhoog de vloer (alleen omhoog). Synct mee zodat de ondergrens cross-device geldt. */
+export function verhoogPuntenVloer(naam: string, n: number): void {
+  if (!Number.isFinite(n) || n <= laadPuntenVloer(naam)) return;
+  localStorage.setItem(puntenVloerKey(naam), String(Math.round(n)));
+  pushSync?.(naam);
+}
+
 /** Alle datums waarvoor een dagschema is bevroren (voor de dagdoel-bonus). */
 export function dagschemaDatums(naam: string): string[] {
   const prefix = `pww-schema:${slug(naam)}:`;

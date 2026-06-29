@@ -112,9 +112,31 @@ export interface FlashcardBestand {
 }
 
 /**
- * Eén open begripsvraag (Cat 3). Bestand: content/<editie>/trainers/<vak>/oefenvragen.json.
- * Tot de LLM-proxy er is, toont de trainer deze in flashcard-modus: vraag → modelAntwoord
- * (geen automatische beoordeling). De `rubric` is dan al vastgelegd voor latere LLM-scoring.
+ * Redeneer-meerkeuze-variant van een begripsvraag (Cat 3).
+ *
+ * Voor vakken waar het examen (deels) meerkeuze is — bv. biologie/aardrijkskunde puur mc,
+ * geschiedenis gemengd — wordt de vraag óók als enkel-juist-antwoord mc aangeboden. Het
+ * juiste alternatief is een volledige verklaring (examenformat); de afleiders zijn
+ * plausibele misvattingen die ín de stof passen. Net als bij `Flashcard.wrongAnswers`:
+ * precies 3 afleiders, handmatig/Cowork samengesteld.
+ */
+export interface OefenvraagMC {
+  /** Optionele mc-herformulering van de stam; default = `Oefenvraag.vraag`. */
+  vraag?: string;
+  /** Het juiste alternatief — één bondige, volledige verklaring. */
+  antwoord: string;
+  /** Precies 3 afleiders: plausibele misvattingen (mogen `antwoord` niet bevatten). */
+  wrongAnswers: string[];
+}
+
+/**
+ * Eén begripsvraag (Cat 3). Bestand: content/<editie>/trainers/<vak>/oefenvragen.json.
+ *
+ * Twee overhoorvormen, gestuurd door `modus`:
+ *  - open  (default): vraag → `modelAntwoord`, zelf nakijken (Cat 3-fallback, geen LLM nodig).
+ *  - mc:    toon de redeneer-mc uit `mc` (examenformat, bv. biologie/aardrijkskunde).
+ *  - beide: eerst mc, daarna de open verdieping (gemengd examen, bv. geschiedenis).
+ * `modelAntwoord`/`rubric` blijven altijd bewaard (validator + latere LLM-scoring).
  */
 export interface Oefenvraag {
   /** Stabiele id: <vak>-h<hoofdstuk>-<onderdeel>-<n>, bv. "ak-h6-vraag-003". */
@@ -125,6 +147,13 @@ export interface Oefenvraag {
   modelAntwoord: string;
   /** Beoordelingscriteria voor de latere LLM-rubric (compleetheid, kernbegrippen, verbanden). */
   rubric: string[];
+  /**
+   * Overhoormodus. Afwezig = "open" (oud gedrag, ongewijzigd).
+   * "mc"/"beide" vereisen een ingevuld `mc`-veld.
+   */
+  modus?: "open" | "mc" | "beide";
+  /** Redeneer-mc-variant; aanwezig bij `modus` "mc" of "beide". */
+  mc?: OefenvraagMC;
   /** Optioneel onderwerp/subkop. */
   onderdeel?: string;
   /** Optionele referentie-afbeelding (relatief t.o.v. editie-root). */

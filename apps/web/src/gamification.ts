@@ -5,7 +5,7 @@
 
 import { BLOKKEN, type Blok } from "./content";
 import { blokStatus, duurMin } from "./planner";
-import { slug, vandaagISO, laadDagschema, dagschemaDatums, onderdeelMastery, isAfgevinkt } from "./progress";
+import { slug, vandaagISO, laadDagschema, dagschemaDatums, onderdeelMastery, isAfgevinkt, laadPuntenVloer, verhoogPuntenVloer } from "./progress";
 
 // Lazy import (zoals progress.ts) zodat gamification geen statische Firebase-dependency
 // heeft. De resultaten-log is een bonus-bron (focus/streak) → moet mee gesynct worden.
@@ -227,8 +227,23 @@ export function streakDagen(naam: string): number {
   return streak;
 }
 
-/** Totaal aantal punten — pure afgeleide van huidige mastery + dagschema's + streak. */
+/**
+ * Totaal aantal punten. Afgeleid van huidige mastery + dagschema's + streak + focus,
+ * MAAR met een ondergrens: het hoogste ooit-behaalde totaal. Zo kost oefenen nooit
+ * punten (mastery — en dus de afgeleide score — kan dalen na fouten in een herhaling;
+ * dat mag Stijns puntentotaal niet omlaag halen, P8: motivatie). De vloer synct mee.
+ */
 export function totaalPunten(naam: string): number {
+  const berekend = berekenPunten(naam);
+  const vloer = laadPuntenVloer(naam);
+  if (berekend > vloer) {
+    verhoogPuntenVloer(naam, berekend);
+    return berekend;
+  }
+  return vloer;
+}
+
+function berekenPunten(naam: string): number {
   let p = 0;
   const perVak = new Map<string, string[]>();
   for (const b of BLOKKEN) {
