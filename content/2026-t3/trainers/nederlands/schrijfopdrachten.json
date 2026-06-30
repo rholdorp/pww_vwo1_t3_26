@@ -57,6 +57,84 @@
       ],
       "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal",
       "confidence": 0.6
+    },
+    {
+      "id": "nederlands-brief-004",
+      "titel": "Een brief aan Lieke (loyaliteitsconflict)",
+      "tekstfragment": "Je vriendin Lieke (13) stuurt je een lang bericht:\n\n«Ik weet echt niet meer wat ik moet doen en jij bent de enige aan wie ik dit durf te schrijven. Je weet dat ik al sinds groep 3 beste vriendinnen ben met Yara. Maar sinds dit jaar zit ik ook veel bij de groep van Fenna, en die zijn gewoon… leuker om mee te lachen. Laatst hoorde ik dat Fenna en de anderen Yara expres niet hadden uitgenodigd voor de bioscoop. Ik wist het, maar ik heb niks tegen Yara gezegd, want dan was Fenna vast boos op mij geworden. Nu doet Yara heel stil tegen me en ik voel me er rot over, maar ik wil mijn nieuwe vriendinnen ook niet kwijt. Ben ik nu een slechte vriendin? Wat zou jij doen?»",
+      "opdracht": "Schrijf een informele brief terug aan Lieke. Reageer eerlijk op haar verhaal: leef je in, maar geef ook je echte mening over hoe ze met Yara én met Fenna's groep omgaat. Help haar nadenken over wat ze nu het beste kan doen, zonder haar af te kraken. Houd de toon van een goede vriend(in): warm, maar eerlijk.",
+      "begeleid": true,
+      "stappen": [
+        { "sleutel": "aanhef", "label": "Aanhef", "hint": "Begin informeel en warm, bijvoorbeeld: “Lieve Lieke,” of “Hoi Lieke,”" },
+        { "sleutel": "opening", "label": "Inleiding", "hint": "Laat merken dat je haar hele bericht goed gelezen hebt en dat je snapt dat ze het je in vertrouwen vertelt. Zeg kort dat het een lastige situatie is." },
+        { "sleutel": "meeleven", "label": "Inleven", "hint": "Leef je in: leg uit waarom je begrijpt dat ze tussen Yara en Fenna's groep in zit en zich rot voelt. Veroordeel haar (nog) niet." },
+        { "sleutel": "eerlijk", "label": "Je eerlijke mening", "hint": "Geef nu je echte mening over het wegkijken bij Yara — eerlijk maar vriendelijk. Benoem wat je niet zo handig of niet eerlijk vond, zonder haar af te kraken." },
+        { "sleutel": "advies", "label": "Wat nu?", "hint": "Help haar concreet nadenken: wat zou ze tegen Yara kunnen zeggen, en hoe gaat ze om met Fenna's groep? Geef een idee of stel een vraag die haar verder helpt." },
+        { "sleutel": "slot", "label": "Afsluiting + groet", "hint": "Sluit bemoedigend af (je staat aan haar kant) en eindig met een informele groet en je naam." }
+      ],
+      "checklist": [
+        "Ik heb een informele aanhef en een groet aan het eind gebruikt.",
+        "Ik laat merken dat ik Liekes hele verhaal heb gelezen en leef me in haar lastige positie in.",
+        "Ik geef mijn eerlijke mening én blijf vriendelijk (ik kraak haar niet af).",
+        "Ik help haar concreet nadenken over wat ze kan doen, met Yara én met Fenna's groep.",
+        "Ik gebruik een persoonlijke, informele toon en houd die de hele brief vast.",
+        "De brief heeft een duidelijke opbouw (begin – midden – eind) en is langer dan een paar zinnen.",
+        "Ik heb op spelling, interpunctie en zinsbouw gelet."
+      ],
+      "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal, niveau: uitdagend",
+      "confidence": 0.6
+    },
+    {
+      "id": "nederlands-brief-005",
+      "titel": "Een brief aan Daan (twijfel en teleurstelling)",
+      "tekstfragment": "Je neef Daan (13) woont in een andere stad. Hij appt je dit:\n\n«Ik moet je iets vertellen waar ik nog met niemand over heb gepraat. Je weet dat ik al drie jaar op voetbal zit en dat ik er echt alles voor liet. Vorige maand zijn de teams opnieuw ingedeeld en ik mocht NIET naar de selectie, terwijl jongens die er minder voor doen dan ik wél doorgingen. De trainer zei iets over ‘inzet tijdens trainingen’, maar ik snap er niks van. Sindsdien heb ik geen zin meer om te gaan en heb ik vorige week zelfs een training overgeslagen en tegen mijn ouders gelogen dat ik ziek was. Een deel van mij wil gewoon stoppen, maar als ik stop heeft de trainer ‘gewonnen’ en mis ik mijn vrienden uit het team. Ik weet niet meer wat ik wil.»",
+      "opdracht": "Schrijf een informele brief aan Daan. Reageer op zowel zijn teleurstelling als op het feit dat hij een training oversloeg en daarover loog. Leef je in, maar wees ook een eerlijke neef/nicht die hem helpt nadenken in plaats van alleen maar gelijk te geven. Geef hem iets om over na te denken voordat hij beslist om te stoppen.",
+      "begeleid": true,
+      "stappen": [
+        { "sleutel": "aanhef", "label": "Aanhef", "hint": "Begin informeel, bijvoorbeeld: “Hé Daan,” of “Beste Daan,”" },
+        { "sleutel": "opening", "label": "Inleiding", "hint": "Laat merken dat je het bijzonder vindt dat hij dit met jou deelt en dat je zijn hele verhaal gelezen hebt." },
+        { "sleutel": "meeleven", "label": "Inleven", "hint": "Reageer eerst op zijn teleurstelling: laat zien dat je snapt hoe oneerlijk het voor hem voelt dat hij niet bij de selectie zit." },
+        { "sleutel": "eerlijk", "label": "Eerlijk over het overslaan en liegen", "hint": "Wees nu een eerlijke neef/nicht: ga rustig in op het overslaan van de training en het liegen tegen zijn ouders. Geef je mening zonder hem af te kraken." },
+        { "sleutel": "nadenken", "label": "Iets om over na te denken", "hint": "Help hem nadenken voordat hij stopt: stel een vraag of geef een idee (bijv. eerst praten met de trainer, of bedenken wat hij écht mist als hij stopt)." },
+        { "sleutel": "slot", "label": "Afsluiting + groet", "hint": "Sluit bemoedigend af en eindig met een informele groet en je naam." }
+      ],
+      "checklist": [
+        "Ik heb een informele aanhef en afsluiting met groet gebruikt.",
+        "Ik ga in op Daans teleurstelling over de selectie én op het overslaan en liegen.",
+        "Ik leef me in, maar geef ook eerlijk mijn kijk (ik papegaai niet alleen na wat hij wil horen).",
+        "Ik help hem nadenken over zijn keuze om te stoppen, met minstens één concreet idee of vraag.",
+        "Ik schrijf in een persoonlijke, informele toon en deel eventueel een eigen ervaring.",
+        "De brief is wat langer en heeft een logische, samenhangende opbouw.",
+        "Ik heb op spelling, interpunctie en zinsbouw gelet."
+      ],
+      "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal, niveau: uitdagend",
+      "confidence": 0.6
+    },
+    {
+      "id": "nederlands-brief-006",
+      "titel": "Een brief aan Sterre (een moeilijk besluit)",
+      "tekstfragment": "Je oude basisschoolvriendin Sterre (13) schrijft je een lange brief, want jullie zien elkaar bijna nooit meer sinds jullie naar verschillende middelbare scholen gingen:\n\n«Het is gek om je weer te schrijven na zo lang, maar ik moest aan je denken omdat jij altijd goed kon luisteren. Bij mij is er van alles veranderd. Mijn ouders willen volgend jaar verhuizen naar het buitenland voor het werk van mijn moeder. Ik mag zelf ‘meebeslissen’, zeggen ze, maar dat maakt het juist moeilijker. Aan de ene kant is het een avontuur en zou ik een nieuwe taal leren en alles opnieuw kunnen beginnen. Aan de andere kant laat ik dan alles achter wat ik ken, en ik ben net pas ergens echt mezelf gaan voelen. Mijn beste vriendin hier zegt dat ik gek ben als ik ga, maar zij heeft er natuurlijk ook belang bij dat ik blijf. Ik lig er ’s nachts wakker van. Hoe weet je nou of een grote keuze de juiste is?»",
+      "opdracht": "Schrijf een informele brief terug aan Sterre. Reageer op haar dilemma over de verhuizing en op haar laatste vraag (hoe weet je of een grote keuze de juiste is?). Erken dat er geen makkelijk goed antwoord is, weeg beide kanten af en help haar op weg zonder de beslissing voor haar te nemen. Schrijf warm en persoonlijk, zoals tegen een oude vriendin met wie je weer contact krijgt.",
+      "begeleid": true,
+      "stappen": [
+        { "sleutel": "aanhef", "label": "Aanhef", "hint": "Begin warm en informeel, bijvoorbeeld: “Lieve Sterre,” of “Hoi Sterre,”" },
+        { "sleutel": "opening", "label": "Inleiding", "hint": "Reageer erop dat jullie elkaar lang niet gesproken hebben en dat het leuk/bijzonder is om weer van haar te horen." },
+        { "sleutel": "meeleven", "label": "Inleven", "hint": "Laat merken dat je begrijpt hoe moeilijk haar dilemma is en dat ‘mogen meebeslissen’ het juist zwaarder maakt." },
+        { "sleutel": "afwegen", "label": "Beide kanten afwegen", "hint": "Weeg eerlijk beide kanten af: het avontuur en de nieuwe start tegenover alles achterlaten wat ze kent. Kies niet meteen één kant." },
+        { "sleutel": "slotvraag", "label": "Haar vraag beantwoorden", "hint": "Ga in op haar vraag ‘hoe weet je of een grote keuze de juiste is?’. Help haar op weg met een gedachte of vraag, maar neem de beslissing niet voor haar." },
+        { "sleutel": "slot", "label": "Afsluiting + groet", "hint": "Sluit warm af (bijv. dat ze altijd kan schrijven) en eindig met een informele groet en je naam." }
+      ],
+      "checklist": [
+        "Ik heb een informele, warme aanhef en een passende groet aan het eind gebruikt.",
+        "Ik reageer op het feit dat we elkaar lang niet gesproken hebben en op haar dilemma.",
+        "Ik weeg beide kanten van haar keuze af in plaats van meteen één kant te kiezen.",
+        "Ik ga in op haar slotvraag over het maken van een grote keuze.",
+        "Ik help haar op weg zonder de beslissing voor haar te nemen.",
+        "De brief is duidelijk langer en heeft een samenhangende opbouw met verbindingswoorden.",
+        "Ik heb op spelling, interpunctie en zinsbouw gelet."
+      ],
+      "bron": "gegenereerd voorbeeld (geen boekbron) — oefenmateriaal, niveau: uitdagend",
+      "confidence": 0.6
     }
   ]
 }
