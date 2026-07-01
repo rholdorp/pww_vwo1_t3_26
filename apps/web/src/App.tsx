@@ -23,6 +23,7 @@ import {
   kanLeren,
   SOORT_ICON,
   SCHRIJFOPDRACHTEN,
+  SAMENVATTINGEN,
   BLOKKEN,
   type Blok,
   type BlokSoort,
@@ -62,6 +63,7 @@ type Actief =
   | { type: "train"; blok: Blok; richting?: Richting }
   | { type: "leer"; blok: Blok }
   | { type: "schrijf"; opdracht: Schrijfopdracht }
+  | { type: "samenvatting"; vak: string }
   | null;
 
 /** Seconden → "m:ss". */
@@ -176,6 +178,8 @@ export default function App() {
             onExit={() => setActief(null)}
             onOefen={() => setActief({ type: "train", blok: actief.blok })}
           />
+        ) : actief.type === "samenvatting" ? (
+          <SamenvattingWeergave key={actief.vak} vak={actief.vak} onExit={() => setActief(null)} />
         ) : (
           <SchrijfTrainer key={actief.opdracht.id} naam={naam} opdracht={actief.opdracht} onExit={() => setActief(null)} />
         )}
@@ -192,7 +196,7 @@ export default function App() {
 
       {tab === "vandaag" && <Vandaag naam={naam} onStart={startBlok} onLeer={startLeer} onNaarOefenen={() => setTab("oefenen")} />}
       {tab === "kalender" && <Kalender naam={naam} onStart={startBlok} onLeer={startLeer} />}
-      {tab === "oefenen" && <Home naam={naam} onStart={startBlok} onLeer={startLeer} />}
+      {tab === "oefenen" && <Home naam={naam} onStart={startBlok} onLeer={startLeer} onSamenvatting={(vak) => setActief({ type: "samenvatting", vak })} />}
       {tab === "voortgang" && <Voortgang naam={naam} onLogout={logout} />}
 
       <nav className="bottomnav">
@@ -411,10 +415,12 @@ function Home({
   naam,
   onStart,
   onLeer,
+  onSamenvatting,
 }: {
   naam: string;
   onStart: (blok: Blok, richting?: Richting) => void;
   onLeer: (blok: Blok) => void;
+  onSamenvatting: (vak: string) => void;
 }) {
   const groepen = useMemo(() => vakGroepen(), []);
   const [gekozenVak, setGekozenVak] = useState<string | null>(null);
@@ -435,6 +441,15 @@ function Home({
           <span className="vak-stip" style={{ background: kleur, verticalAlign: "middle", marginRight: 8 }} />
           {vakLabel(g.vak)}
         </h1>
+        {SAMENVATTINGEN.has(g.vak) && (
+          <button
+            className="knop"
+            style={{ borderColor: kleur, color: kleur, marginBottom: 8 }}
+            onClick={() => onSamenvatting(g.vak)}
+          >
+            📖 Samenvatting lezen
+          </button>
+        )}
         {g.hoofdstukken.map((h) => {
           // Binnen een hoofdstuk de blokken per soort groeperen (volgorde al gesorteerd:
           // opgaven eerst, dan flashcards e.d.) en een sub-kopje tonen zodra er meer dan
@@ -1030,6 +1045,42 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
 // maar telt vanaf 2 minuten wel mee als sessie (streak + focus-bonus).
 
 type LeerItem = { id: string; term: string; uitleg: string; rubric?: string[]; image?: string };
+
+// Samenvatting (leeshulp): snel doorlezen vóór de toets. Géén trainer, telt niet voor
+// punten/mastery — de actieve trainers blijven de echte oefening (afspraak: geen
+// passieve leesschermen als vervanging; dit is een aanvulling voor last-minute herhaling).
+function SamenvattingWeergave({ vak, onExit }: { vak: string; onExit: () => void }) {
+  const secties = SAMENVATTINGEN.get(vak) ?? [];
+  const kleur = vakKleur(vak);
+  return (
+    <main className="lijst">
+      <div className="trainer-kop">
+        <span className="vak-stip" style={{ background: kleur }} />
+        <span className="muted klein">{vakLabel(vak)} · samenvatting</span>
+      </div>
+      <h1 style={{ color: kleur }}>Samenvatting</h1>
+      <p className="muted klein banner">📖 Snel doorlezen vóór de toets. Dit is een leeshulp — het telt niet mee voor je punten.</p>
+      {secties.map((s) => (
+        <div key={s.id} className="card">
+          <div className="card-titel" style={{ color: kleur }}>{s.titel}</div>
+          <ul className="samenvatting-lijst">
+            {s.punten.map((p, i) => (
+              <li key={i}>{p}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      <button
+        className="knop primair"
+        style={{ background: `${kleur}22`, color: kleur, borderColor: kleur, marginTop: 8 }}
+        onClick={onExit}
+      >
+        Klaar met lezen
+      </button>
+      <p className="muted klein voetnoot">⚠️ Controleer bij twijfel met je boek.</p>
+    </main>
+  );
+}
 
 function LeerWeergave({
   naam,

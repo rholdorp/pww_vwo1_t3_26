@@ -1,0 +1,68 @@
+{
+  "vak": "aardrijkskunde",
+  "secties": [
+    {
+      "id": "ak-sam-5.2",
+      "titel": "§5.2 Cultuur Zuidoost-Azië",
+      "punten": [
+        "Zuidoost-Azië bestaat uit 11 zelfstandige staten (veel eilanden en schiereilanden).",
+        "Cultuurgebied = gebied met overeenkomstige cultuurkenmerken. De regio is multicultureel: veel culturen, talen en godsdiensten naast elkaar.",
+        "Etnische groep = bevolkingsgroep met een eigen cultuur (bv. de Chinezen in de kustplaatsen).",
+        "Kolonie = gebied in een ander werelddeel dat in bezit is van (meestal) een Europees land; veel van Zuidoost-Azië was kolonie.",
+        "Delfstoffen = uit de bodem gewonnen grondstoffen (goud, zilver, kolen, aardolie).",
+        "Plantage = onderneming die op grote schaal één gewas verbouwt (thee, rubber, tabak, bananen). Monocultuur = jaar na jaar hetzelfde ene gewas op dezelfde grond.",
+        "ASEAN = samenwerkingsverband van Zuidoost-Aziatische landen (opgericht in 1967 door vier staten). 10 van de 11 landen zijn lid — Oost-Timor niet."
+      ]
+    },
+    {
+      "id": "ak-sam-topo",
+      "titel": "Topografie 5.2 — landen & oceanen",
+      "punten": [
+        "Op het vasteland: Myanmar, Thailand, Laos, Vietnam en Cambodja. China ligt er ten noorden van.",
+        "Maleisisch schiereiland + eilanden: Maleisië (twee delen: schiereiland + noord-Borneo), Singapore (kleine eiland-stadstaat op de zuidpunt), Brunei (klein land aan de noordkust van Borneo).",
+        "Grote eilandengroepen: Indonesië (de grote eilandengroep), Filipijnen (in het noordoosten), Oost-Timor (klein land aan de oostkant van Indonesië).",
+        "Oceanen: de Indische Oceaan ligt ten westen en zuiden; de Grote Oceaan ligt ten oosten (bij de Filipijnen)."
+      ]
+    },
+    {
+      "id": "ak-sam-6.1",
+      "titel": "§6.1 Golfstroom (ligging & klimaat)",
+      "punten": [
+        "Europa ligt grotendeels in de gematigde zone (niet heel warm, niet heel koud). De subtropen zijn het warmere deel (Zuid-Europa); de poolstreek is zo koud dat er geen bomen groeien.",
+        "Breedteligging bepaalt de temperatuur: op hoge breedte kouder, op lage breedte warmer.",
+        "Zeestroom = verplaatsing van zeewater doordat de wind lang uit dezelfde richting waait; brengt warm of koud water mee.",
+        "De Golfstroom is een warme zeestroom die warm water uit de Golf van Mexico naar West-Europa brengt → daardoor is het klimaat in Europa mild.",
+        "Aanlandige wind (zeewind) waait van zee naar land: 's winters minder koud, 's zomers koeler langs de kust.",
+        "Poolcirkel: ten noorden ervan komen de poolnacht (de zon komt niet op) en de middernachtzon (de zon gaat niet onder) voor.",
+        "Poollicht = gekleurde lichtstroken aan de hemel bij de polen (ook noorderlicht / aurora borealis)."
+      ]
+    },
+    {
+      "id": "ak-sam-6.2",
+      "titel": "§6.2 Reliëf",
+      "punten": [
+        "Reliëf = de hoogteverschillen in een gebied. Van laag naar hoog: laagland (zoals Nederland) → heuvelland → middelgebergte → hooggebergte.",
+        "Belangrijkste hooggebergte van Europa = de Alpen; de hoogste berg is de Mont Blanc (4.808 m).",
+        "Op de hoogste toppen ligt eeuwige sneeuw. Een gletsjer is een ijsmassa hoog in de bergen.",
+        "Schiereiland = gebied dat aan drie kanten door water omringd is (Europa is er één). Gelede kust = sterk ingesneden kust met veel inhammen → veel schiereilanden en eilanden.",
+        "Temperatuurgradiënt: per 100 m stijging daalt de temperatuur met 0,6 °C.",
+        "Een gebergte kan een klimaatscheiding zijn: aan beide kanten een ander klimaat.",
+        "Stuwingsregen: vochtige lucht wordt tegen het gebergte omhoog gestuwd en valt als regen aan de loefzijde (de natte kant). De lijzijde is de droge kant; daarachter ligt de regenschaduw (droog gebied)."
+      ]
+    },
+    {
+      "id": "ak-sam-6.3",
+      "titel": "§6.3 Klimaat en vegetatie",
+      "punten": [
+        "Klimaat = het gemiddelde weer over lange tijd (± 30 jaar), bepaald door temperatuur en neerslag.",
+        "Zeeklimaat: het hele jaar neerslag en gematigde temperaturen (koele zomer, milde winter) → loofbomen groeien er.",
+        "Middellandse Zeeklimaat (mediterraan): zeeklimaat van Zuid-Europa, warmer, met een droge zomer.",
+        "Landklimaat (binnenland): grote temperatuurverschillen; de koudste maand is kouder dan -3 °C. De jaaramplitude (verschil tussen warmste en koudste maand) is groot. Er groeien vooral naaldbomen (te koud voor loofbomen).",
+        "Droog klimaat: er valt nauwelijks neerslag → het landschap is een steppe (grassen en lage struiken).",
+        "Boomgrens = de grens waarboven het te koud is voor bomen om te groeien.",
+        "Toendraklimaat: koud, in de korte zomer 0–10 °C → een toendra (grassen, mossen en lage struikjes; boomloos).",
+        "Hooggebergteklimaat: het hele jaar ijskoud met veel neerslag (sneeuw)."
+      ]
+    }
+  ]
+}

@@ -132,6 +132,10 @@ h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: v
 .uitslag.bijna { color: var(--bijna); }
 .juiste { margin: 4px 0 10px; }
 
+/* Samenvatting (leeshulp) */
+.samenvatting-lijst { margin: 8px 0 2px; padding-left: 20px; }
+.samenvatting-lijst li { margin: 6px 0; line-height: 1.45; }
+
 /* Meerkeuze (feitjes ak/biologie) */
 .keuze-opties { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
 .keuze-optie { width: 100%; flex: none; text-align: center; }

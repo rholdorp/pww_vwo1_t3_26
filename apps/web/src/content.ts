@@ -210,6 +210,15 @@ export const SOORT_ICON: Record<BlokSoort, string> = {
 /** Schrijfopdrachten (Cat 4), opzoekbaar op id voor de schrijftrainer. */
 export const SCHRIJFOPDRACHTEN = new Map<string, Schrijfopdracht>();
 
+/** Leeshulp-samenvatting per onderdeel (géén getoetste trainer; snel doorlezen vóór de
+ *  toets). Los van BLOKKEN/mastery/punten. */
+export interface SamenvattingSectie {
+  id: string;
+  titel: string;
+  punten: string[];
+}
+export const SAMENVATTINGEN = new Map<string, SamenvattingSectie[]>();
+
 /** Eén oefen-eenheid: één onderdeel/paragraaf van één vak. */
 export interface Blok {
   id: string;
@@ -636,6 +645,10 @@ function buildRuw(): Blok[] {
           });
         }
       }
+    } else if (file === "samenvatting.json") {
+      // Leeshulp: géén blok/mastery/punten — apart opzoekbaar via SAMENVATTINGEN.
+      const b = data as { vak: string; secties: SamenvattingSectie[] };
+      SAMENVATTINGEN.set(vak, b.secties ?? []);
     }
   }
   return blokken;
