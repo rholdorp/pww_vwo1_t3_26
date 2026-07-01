@@ -1046,6 +1046,13 @@ function Cat2Trainer({ naam, blok, onExit }: { naam: string; blok: Blok; onExit:
 
 type LeerItem = { id: string; term: string; uitleg: string; rubric?: string[]; image?: string };
 
+// Maakt **...**-stukken vet (belangrijke termen in de samenvatting).
+function metVet(tekst: string): (string | JSX.Element)[] {
+  return tekst.split(/(\*\*[^*]+\*\*)/g).map((deel, i) =>
+    deel.startsWith("**") && deel.endsWith("**") ? <strong key={i}>{deel.slice(2, -2)}</strong> : deel,
+  );
+}
+
 // Samenvatting (leeshulp): snel doorlezen vóór de toets. Géén trainer, telt niet voor
 // punten/mastery — de actieve trainers blijven de echte oefening (afspraak: geen
 // passieve leesschermen als vervanging; dit is een aanvulling voor last-minute herhaling).
@@ -1065,7 +1072,7 @@ function SamenvattingWeergave({ vak, onExit }: { vak: string; onExit: () => void
           <div className="card-titel" style={{ color: kleur }}>{s.titel}</div>
           <ul className="samenvatting-lijst">
             {s.punten.map((p, i) => (
-              <li key={i}>{p}</li>
+              <li key={i}>{metVet(p)}</li>
             ))}
           </ul>
         </div>
